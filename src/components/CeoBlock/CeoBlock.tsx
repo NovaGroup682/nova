@@ -1,6 +1,6 @@
 import NextImage from 'next/image';
 
-import { Image, Stack, Text, VStack } from '@chakra-ui/react';
+import { Box, Stack, Text, VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
@@ -45,25 +45,29 @@ const CeoBlock = () => (
 
           {ceo.description}
         </Text>
-
-        <Image
-          px={{
-            base: '16px',
-            md: '60px'
-          }}
+        <Box
           h={{
             base: '320px',
             md: '420px'
           }}
           w='full'
-          as={NextImage}
-          style={{
-            objectFit: 'contain',
-            objectPosition: 'bottom'
+          px={{
+            base: '16px',
+            md: '60px'
           }}
-          src={ceo.img as unknown as string}
-          alt={ceo.label}
-        />
+          pos='relative'
+        >
+          <NextImage
+            fill
+            sizes='(max-width: 450px) 300px, 420px'
+            style={{
+              objectFit: 'contain',
+              objectPosition: 'bottom'
+            }}
+            src={ceo.img}
+            alt={ceo.label}
+          />
+        </Box>
       </VStack>
     ))}
   </Stack>

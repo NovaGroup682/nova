@@ -39,17 +39,18 @@ const NavigationBlock = () => (
         overflow='hidden'
       >
         <Link href={nav.path}>
-          <NextImage
-            sizes='(max-width: 450px) 400px, 500px'
-            style={{
-              width: '100%',
-              height: 500,
-              objectFit: 'cover',
-              objectPosition: 'bottom'
-            }}
-            src={nav.img as unknown as string}
-            alt={nav.title}
-          />
+          <Box position='relative' width='100%' height={500}>
+            <NextImage
+              sizes='(max-width: 450px) 400px, 500px'
+              fill
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'bottom'
+              }}
+              src={nav.img as unknown as string}
+              alt={nav.title}
+            />
+          </Box>
         </Link>
 
         <VStack

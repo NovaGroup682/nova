@@ -27,6 +27,7 @@ const CircleArrowButton = ({
     top='50%'
     alignContent='center'
     transform={isRight ? 'rotate(180deg)' : 'none'}
+    boxShadow='none'
   >
     <Box borderRadius='50%' bg='white' p={3}>
       <Arrow

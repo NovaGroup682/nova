@@ -1,6 +1,5 @@
 'use client';
 
-import ContactCover from '@assets/images/contact-cover.png';
 import Image from 'next/image';
 
 import {
@@ -25,7 +24,7 @@ const ContactBlock = () => {
     onOpen: onMouseEnter,
     onClose: onMouseLeave
   } = useDisclosure();
-  const isTouch = useIsTouchDevice();
+  const { isTouch } = useIsTouchDevice();
 
   return (
     <VStack
@@ -47,12 +46,11 @@ const ContactBlock = () => {
       <Image
         sizes='(max-width: 450px) 400px, 1000px'
         style={{
-          boxShadow: 'inset 0 -120px 120px -10px rgb(192 24 24 / 58%)',
-          // position: 'absolute',
-          objectFit: 'contain',
+          objectFit: 'cover',
           objectPosition: 'center'
         }}
-        src={ContactCover}
+        fill
+        src={content.main.contactBlock.contactCover}
         alt='contact cover'
       />
 

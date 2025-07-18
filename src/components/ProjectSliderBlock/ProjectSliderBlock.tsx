@@ -109,6 +109,7 @@ const ProjectSliderBlock = () => {
               // add navigation by click on project to project details
               // onClick={()=>console.log('click', currentIndex)}
               cursor='pointer'
+              position='relative'
             >
               <Image
                 src={slide.img}

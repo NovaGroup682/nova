@@ -5,7 +5,7 @@ import { ConfigType } from 'types';
 const config: ConfigType = {
   metadata: {
     favIcon: Favicon,
-    title: '',
+    title: 'Nova Group',
     description: ''
   },
   copyrightLabel: 'Nova Group'

@@ -1,4 +1,3 @@
-import MainBackground from '@assets/images/main.png';
 import Image from 'next/image';
 
 import { Box, Text, VStack } from '@chakra-ui/react';
@@ -26,7 +25,7 @@ const Home = () => (
       }}
     >
       <Image
-        src={MainBackground}
+        src={content.main.mainImgBg}
         alt='Background'
         fill
         style={{

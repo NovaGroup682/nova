@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Check from '@assets/icons/check.svg';
-import ContactCover from '@assets/images/contact-cover.png';
 import { phoneRegExp } from 'constant';
 import Image from 'next/image';
 
@@ -120,13 +119,14 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                 overflow='hidden'
               >
                 <Image
-                  sizes='(max-width: 450px) 400px, 1200px'
+                  sizes='(max-width: 450px) 400px, 1000px'
                   style={{
                     position: 'absolute',
                     objectFit: 'cover',
                     objectPosition: 'bottom'
                   }}
-                  src={ContactCover}
+                  fill
+                  src={content.main.contactBlock.contactCover}
                   alt='contact cover'
                 />
               </Box>

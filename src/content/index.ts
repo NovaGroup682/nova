@@ -1,19 +1,11 @@
 import Facebook from '@assets/icons/facebook.svg';
 import Instagram from '@assets/icons/instagram.svg';
 import VK from '@assets/icons/vk.svg';
-import ceo1 from '@assets/images/ceo/ceo-1.png';
-import ceo2 from '@assets/images/ceo/ceo-2.png';
-import navigation1 from '@assets/images/navigationBlock/navigation-1.png';
-import navigation2 from '@assets/images/navigationBlock/navigation-2.png';
-import navigation3 from '@assets/images/navigationBlock/navigation-3.png';
-import slider1 from '@assets/images/slider/slider-1.png';
-import slider2 from '@assets/images/slider/slider-2.png';
-import slider3 from '@assets/images/slider/slider-3.png';
-import slider4 from '@assets/images/slider/slider-4.png';
-import slider5 from '@assets/images/slider/slider-5.png';
 import { paths } from 'constant';
 
 import { SocialLinkTypes } from 'types';
+
+const googleLink = 'https://drive.google.com/uc?export=view&id=';
 
 const content = {
   common: {
@@ -48,6 +40,8 @@ const content = {
   },
   main: {
     mainTitle: `Проектируем и строим\nсовременные каменные дома\nв рамках вашего бюджета`,
+    mainImgBg: googleLink + '13fWS-8f6fz7XtLKNQevNU6ngufKVcJ2w',
+    mainPopupBg: googleLink + '1QPwqY11NsSoQecLmKIcvjdcMVV3oG3K-',
     slider: {
       titles: [
         'Nest House — простой путь к современному дому',
@@ -58,23 +52,23 @@ const content = {
       ],
       body: [
         {
-          img: slider1,
+          img: googleLink + '16gn47SIqnx5IQPyahdELi2VEMGKQwxOU',
           text: 'Мы создаём типовые решения, продуманные до мелочей. Стильная архитектура — без неопределённости и с понятным бюджетом.'
         },
         {
-          img: slider2,
+          img: googleLink + '1o2znAKwEo6M1egyEJjjUB6hDUltWNK4t',
           text: 'Созданы чтобы максимально эффективно использовать пространство, при этом учитывая такие факторы как: функциональность, естественное освещение и приватность.'
         },
         {
-          img: slider3,
+          img: googleLink + '1YTZychxBNGWExAo6FDdSG72gmUbO0fSU',
           text: 'Nest houses — это внимание к деталям во всём. Каждый дом — это чистая геометрия, правильный ритм окон и выверенные пропорции. Так создаются лаконичные пространства, которые вдохновляют и заряжают энергией каждый день.'
         },
         {
-          img: slider4,
+          img: googleLink + '1RqkXOP1SDWhp4Q4CPPpZvqvkKYIxy4Dy',
           text: 'Сочетание всех этих факторов делает каменные дома оптимальным выбором. Наши продуманные решения позволяют реализовать проект без лишних сложностей и с удовольствием жить в нём долгие годы.'
         },
         {
-          img: slider5,
+          img: googleLink + '1dprfixfL0MOgPugCva1kRyJyQjDAOafG',
           text: 'Благодаря нашему системному подходу мы оптимизировали стоимость строительства, сохранив лучшие архитектурные решения. Вы получаете стильный, продуманный дом с ощущением качества в каждой детали. Закажите проект в Nest House.'
         }
       ]
@@ -92,7 +86,7 @@ const content = {
         beds: 4,
         baths: 3,
 
-        img: 'https://drive.google.com/uc?export=view&id=1ycboXgZ0IIGf1yoFLNimRMomEpwyY03H'
+        img: googleLink + '1ycboXgZ0IIGf1yoFLNimRMomEpwyY03H'
       },
       {
         id: 'NOVA-2',
@@ -100,7 +94,7 @@ const content = {
         square: 222,
         beds: 4,
         baths: 3,
-        img: 'https://drive.google.com/uc?export=view&id=1VWZt3nX5-YdMM2ECixmH1lwzUkUdWWEE'
+        img: googleLink + '1VWZt3nX5-YdMM2ECixmH1lwzUkUdWWEE'
       },
       {
         id: 'NOVA-9',
@@ -108,7 +102,7 @@ const content = {
         square: 150,
         beds: 3,
         baths: 4,
-        img: 'https://drive.google.com/uc?export=view&id=15-Tt4ll9QwtmjvqYtNHtvhAtYcBqejW8'
+        img: googleLink + '15-Tt4ll9QwtmjvqYtNHtvhAtYcBqejW8'
       },
       {
         id: 'NOVA-5',
@@ -116,7 +110,7 @@ const content = {
         square: 150,
         beds: 4,
         baths: 4,
-        img: 'https://drive.google.com/uc?export=view&id=1hWcmfamPYnYSQ3K5X752-vT2gqMt8Emt'
+        img: googleLink + '1hWcmfamPYnYSQ3K5X752-vT2gqMt8Emt'
       }
     ],
     ceo: [
@@ -124,13 +118,13 @@ const content = {
         label: 'Зиновий Аксенцев - архитектор',
         description:
           'руководствуется принципами честности, ответственности и стремления к совершенству, обеспечивая высокое качество строительства и довольных клиентов.',
-        img: ceo1
+        img: googleLink + '1wHDzZ8WFSuevFO7-1XdXBUuRF9GojPwZ'
       },
       {
         label: 'Игорь Ильин - инженер-строитель',
         description:
           'руководствуется принципами честности, ответственности и стремления к совершенству, обеспечивая высокое качество строительства и довольных клиентов.',
-        img: ceo2
+        img: googleLink + '1n1ILMCpkDQUaT5uxkgOLkc_5KB0SzIG4'
       }
     ],
     navigationBlcok: [
@@ -138,13 +132,13 @@ const content = {
         title: 'Типовые проекты',
         description:
           'готовые решения, которые можно адаптировать под ваш участок.',
-        img: navigation1,
+        img: googleLink + '1wibx600imEROiiJz_EQY5MrMcC5s3OYz',
         path: paths.projects
       },
       {
         title: 'Индивидуальное проектирование',
         description: 'создаём дом с нуля под ваш стиль жизни и в рамах бюджета',
-        img: navigation2,
+        img: googleLink + '1O3mQI6NFlXK3TPQWT9x7tcLOY0CwhB4d',
         path: paths.design
       },
       {
@@ -154,7 +148,7 @@ const content = {
           'контроль на каждом этапе',
           'всегда на связи'
         ],
-        img: navigation3,
+        img: googleLink + '1MjE6ucharO37nISKHOBCCLY_5Wl0NyaL',
         path: paths.projects
       }
     ],
@@ -164,7 +158,8 @@ const content = {
       wrongNumber: 'Неправильно введен номер телефона',
       region: 'Регион строительства',
       yourName: 'Как мы можем к вам обращаться?',
-      phone: 'Телефон'
+      phone: 'Телефон',
+      contactCover: googleLink + '1_ka5s9bKYNeSIp4Q0HD4LXlh9x5hv-5S'
     }
   },
   contacts: {

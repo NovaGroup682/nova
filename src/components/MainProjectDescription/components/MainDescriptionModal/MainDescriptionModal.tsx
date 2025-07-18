@@ -163,8 +163,13 @@ const MainDescriptionModal = ({
                         base: 'auto',
                         md: '340px'
                       }}
+                      position='relative'
+                      overflow='hidden'
+                      borderRadius='2xl'
                     >
                       <Image
+                        fill
+                        sizes='(max-width: 450px) 300px, 480px'
                         style={{
                           objectFit: 'cover',
                           objectPosition: 'center',

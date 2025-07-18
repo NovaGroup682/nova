@@ -2,12 +2,13 @@
 
 import React, { useState } from 'react';
 import Xmark from '@assets/icons/xmark.svg';
-import MainPopupBackground from '@assets/images/main-popup-background.png';
 import Image from 'next/image';
 
 import { Box, useDisclosure } from '@chakra-ui/react';
 
 import { useIsTouchDevice } from 'hooks';
+
+import content from 'content';
 
 import { MainDescriptionModal } from './components';
 
@@ -16,7 +17,7 @@ const MainProjectDescription = () => {
 
   const { open, onOpen, onClose } = useDisclosure();
 
-  const isTouch = useIsTouchDevice();
+  const { isTouch } = useIsTouchDevice();
 
   return (
     <>
@@ -83,7 +84,7 @@ const MainProjectDescription = () => {
           </Box>
         </Box>
         <Image
-          src={MainPopupBackground}
+          src={content.main.mainPopupBg}
           alt='main popup background'
           fill
           style={{
