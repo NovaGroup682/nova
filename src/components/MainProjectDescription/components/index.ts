@@ -1,0 +1,1 @@
+export { MainDescriptionModal } from './MainDescriptionModal';
