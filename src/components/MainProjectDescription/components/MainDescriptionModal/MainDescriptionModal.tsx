@@ -160,7 +160,8 @@ const MainDescriptionModal = ({
                     <Box
                       w='full'
                       h={{
-                        base: 'auto',
+                        base: '200px',
+                        sm: '300px',
                         md: '340px'
                       }}
                       position='relative'

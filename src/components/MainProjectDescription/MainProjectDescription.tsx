@@ -23,6 +23,7 @@ const MainProjectDescription = () => {
     <>
       <Box
         position='absolute'
+        userSelect='none'
         right={{
           base: 0,
           md: '120px'

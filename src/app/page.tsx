@@ -74,6 +74,7 @@ const Home = () => (
           color='white'
           whiteSpace='pre-line'
           cursor='default'
+          userSelect='none'
         >
           {content.main.mainTitle}
         </Text>

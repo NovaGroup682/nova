@@ -7,9 +7,7 @@ import content from 'content';
 
 const NavigationBlock = () => (
   <Stack
-    w={{
-      md: 'full'
-    }}
+    w='full'
     flexDir={{
       base: 'column',
       md: 'row'
