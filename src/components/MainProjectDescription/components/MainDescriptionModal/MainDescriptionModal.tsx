@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { animate, motion, useMotionValue, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { Swiper as SwiperType } from 'swiper';
 import { Keyboard, Mousewheel } from 'swiper/modules';
@@ -47,6 +48,14 @@ const MainDescriptionModal = ({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen, onClose]);
+
+  const count = useMotionValue(currentIndex + 1);
+  const rounded = useTransform(count, (v) => Math.round(v));
+
+  useEffect(() => {
+    const controls = animate(count, currentIndex + 1, { duration: 0.6 });
+    return () => controls.stop();
+  }, [count, currentIndex]);
 
   return (
     <Show when={isOpen}>
@@ -129,6 +138,7 @@ const MainDescriptionModal = ({
                 ))}
 
                 <Text
+                  as='pre'
                   fontSize={24}
                   fontWeight={500}
                   lineHeight='36px'
@@ -137,7 +147,10 @@ const MainDescriptionModal = ({
                   alignSelf='center'
                   userSelect='none'
                 >
-                  {`${currentIndex + 1}/${content.main.slider.titles.length}`}
+                  <motion.span style={{ display: 'inline-block' }}>
+                    {rounded}
+                  </motion.span>
+                  {`/${content.main.slider.titles.length}`}
                 </Text>
               </Flex>
               <Swiper

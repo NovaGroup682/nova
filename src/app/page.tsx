@@ -5,6 +5,7 @@ import { Box, Text, VStack } from '@chakra-ui/react';
 import content from 'content';
 
 import {
+  AnimatedBlock,
   CeoBlock,
   ContactBlock,
   MainProjectDescription,
@@ -78,65 +79,81 @@ const Home = () => (
         >
           {content.main.mainTitle}
         </Text>
-
         <MainProjectDescription />
       </VStack>
 
-      <Text
-        as='h2'
-        color='gray.800'
-        mt='40px'
-        py='40px'
-        textAlign='center'
-        fontSize={{
-          base: '20px',
-          md: '34px'
-        }}
-        lineHeight={{
-          base: '30px',
-          md: '52px'
-        }}
-      >
-        {content.main.text1}
-      </Text>
-      <Text
-        as='h2'
-        color='gray.900'
-        textAlign='center'
-        fontSize={{
-          base: '20px',
-          md: '34px'
-        }}
-        lineHeight={{
-          base: '30px',
-          md: '52px'
-        }}
-        fontWeight={700}
-      >
-        {content.main.text2}
-      </Text>
-      <CeoBlock />
-      <ProjectSliderBlock />
-      <Text
-        as='h2'
-        color='gray.900'
-        textAlign='center'
-        fontSize={{
-          base: '20px',
-          md: '34px'
-        }}
-        lineHeight={{
-          base: '30px',
-          md: '52px'
-        }}
-        fontWeight={700}
-        whiteSpace='pre-line'
-        py={{ base: '10px', md: '20px' }}
-      >
-        {content.main.text3}
-      </Text>
-      <NavigationBlock />
-      <ContactBlock />
+      <AnimatedBlock delay={0.4}>
+        <Text
+          as='h2'
+          color='gray.800'
+          mt='40px'
+          py='40px'
+          textAlign='center'
+          fontSize={{
+            base: '20px',
+            md: '34px'
+          }}
+          lineHeight={{
+            base: '30px',
+            md: '52px'
+          }}
+        >
+          {content.main.text1}
+        </Text>
+      </AnimatedBlock>
+
+      <AnimatedBlock delay={0.5}>
+        <Text
+          as='h2'
+          color='gray.900'
+          textAlign='center'
+          fontSize={{
+            base: '20px',
+            md: '34px'
+          }}
+          lineHeight={{
+            base: '30px',
+            md: '52px'
+          }}
+          fontWeight={700}
+        >
+          {content.main.text2}
+        </Text>
+      </AnimatedBlock>
+      <AnimatedBlock delay={0.4}>
+        <CeoBlock />
+      </AnimatedBlock>
+      <AnimatedBlock delay={0.4}>
+        <ProjectSliderBlock />
+      </AnimatedBlock>
+
+      <AnimatedBlock delay={0.4}>
+        <Text
+          as='h2'
+          color='gray.900'
+          textAlign='center'
+          fontSize={{
+            base: '20px',
+            md: '34px'
+          }}
+          lineHeight={{
+            base: '30px',
+            md: '52px'
+          }}
+          fontWeight={700}
+          whiteSpace='pre-line'
+          py={{ base: '10px', md: '20px' }}
+        >
+          {content.main.text3}
+        </Text>
+      </AnimatedBlock>
+
+      <AnimatedBlock delay={0.4}>
+        <NavigationBlock />
+      </AnimatedBlock>
+      <AnimatedBlock delay={0.3}>
+        <ContactBlock />
+      </AnimatedBlock>
     </VStack>
   </VStack>
 );

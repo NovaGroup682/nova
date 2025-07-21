@@ -5,3 +5,4 @@ export { CeoBlock } from './CeoBlock';
 export { ContactBlock } from './ContactBlock';
 export { ProjectSliderBlock } from './ProjectSliderBlock';
 export { NavigationBlock } from './NavigationBlock';
+export { AnimatedBlock } from './AnimatedBlock';

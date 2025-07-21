@@ -16,10 +16,12 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "framer-motion": "^12.23.6",
     "next": "15.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.60.0",
+    "react-intersection-observer": "^9.16.0",
     "swiper": "^11.2.10"
   },
   "devDependencies": {

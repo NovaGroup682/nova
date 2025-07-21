@@ -8,7 +8,7 @@ const CeoBlock = () => (
   <Stack
     w={{
       base: 'calc(100% + 32px)',
-      md: '80%'
+      md: '100%'
     }}
     flexDir={{
       base: 'column',
