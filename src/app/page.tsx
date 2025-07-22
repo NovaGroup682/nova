@@ -1,11 +1,12 @@
 import Image from 'next/image';
 
-import { Box, Text, VStack } from '@chakra-ui/react';
+import { Box, For, Text, VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
 import {
   AnimatedBlock,
+  BlurText,
   CeoBlock,
   ContactBlock,
   MainProjectDescription,
@@ -57,32 +58,42 @@ const Home = () => (
         }}
         justifyContent='center'
         alignItems='left'
+        pb={{
+          base: '160px',
+          lg: 120
+        }}
       >
-        <Text
-          as='h1'
-          fontSize={{
-            base: '20px',
-            sm: '32px',
-            md: '42px',
-            lg: '56px',
-            xl: '72px'
-          }}
-          pb={{
-            base: '160px',
-            lg: 120
-          }}
-          fontWeight={600}
-          color='white'
-          whiteSpace='pre-line'
-          cursor='default'
-          userSelect='none'
-        >
-          {content.main.mainTitle}
-        </Text>
+        <For each={content.main.mainTitle}>
+          {(item) => (
+            <BlurText
+              key={item}
+              as='h1'
+              fontSize={{
+                base: '20px',
+                sm: '32px',
+                md: '42px',
+                lg: '56px',
+                xl: '72px'
+              }}
+              textAlign='left'
+              fontWeight={600}
+              color='white'
+              whiteSpace='pre-line'
+              cursor='default'
+              userSelect='none'
+              text={item}
+              delay={150}
+              animateBy='words'
+              direction='top'
+              className='text-2xl mb-8'
+            />
+          )}
+        </For>
+
         <MainProjectDescription />
       </VStack>
 
-      <AnimatedBlock delay={0.4}>
+      <AnimatedBlock delay={0.3}>
         <Text
           as='h2'
           color='gray.800'
@@ -120,14 +131,14 @@ const Home = () => (
           {content.main.text2}
         </Text>
       </AnimatedBlock>
-      <AnimatedBlock delay={0.4}>
+      <AnimatedBlock delay={0.3}>
         <CeoBlock />
       </AnimatedBlock>
-      <AnimatedBlock delay={0.4}>
+      <AnimatedBlock delay={0.3}>
         <ProjectSliderBlock />
       </AnimatedBlock>
 
-      <AnimatedBlock delay={0.4}>
+      <AnimatedBlock delay={0.3}>
         <Text
           as='h2'
           color='gray.900'
@@ -148,7 +159,7 @@ const Home = () => (
         </Text>
       </AnimatedBlock>
 
-      <AnimatedBlock delay={0.4}>
+      <AnimatedBlock delay={0.3}>
         <NavigationBlock />
       </AnimatedBlock>
       <AnimatedBlock delay={0.3}>

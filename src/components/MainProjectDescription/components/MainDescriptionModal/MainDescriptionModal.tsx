@@ -9,6 +9,7 @@ import { Box, Flex, Portal, Presence, Show, Text } from '@chakra-ui/react';
 
 import content from 'content';
 
+import { SplitText } from 'components/SplitText';
 import { CircleArrowButton } from 'ui';
 
 import 'swiper/css';
@@ -120,20 +121,22 @@ const MainDescriptionModal = ({
                     }}
                     animationDuration='slower'
                   >
-                    <Text
+                    <SplitText
                       fontSize={{
                         base: 22,
                         md: 30
                       }}
+                      splitType='words'
+                      delay={30}
                       fontWeight={500}
                       lineHeight={{
                         base: '26px',
                         md: '36px'
                       }}
                       minH='74px'
-                    >
-                      {title}
-                    </Text>
+                      textAlign='left'
+                      text={title}
+                    />
                   </Presence>
                 ))}
 

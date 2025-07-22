@@ -39,7 +39,11 @@ const content = {
     ]
   },
   main: {
-    mainTitle: `Проектируем и строим\nсовременные каменные дома\nв рамках вашего бюджета`,
+    mainTitle: [
+      'Проектируем и строим',
+      'современные каменные дома',
+      'в рамках вашего бюджета'
+    ],
     mainImgBg: googleLink + '13fWS-8f6fz7XtLKNQevNU6ngufKVcJ2w',
     mainPopupBg: googleLink + '1QPwqY11NsSoQecLmKIcvjdcMVV3oG3K-',
     slider: {
