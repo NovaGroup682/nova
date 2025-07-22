@@ -6,6 +6,8 @@ import { VStack } from '@chakra-ui/react';
 import { Footer, Header } from 'components';
 import Providers from './providers';
 
+import 'styles/global.css';
+
 const {
   metadata: { title, description, favIcon }
 } = config;

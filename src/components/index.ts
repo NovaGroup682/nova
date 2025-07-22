@@ -8,3 +8,4 @@ export { NavigationBlock } from './NavigationBlock';
 export { AnimatedBlock } from './AnimatedBlock';
 export { SplitText } from './SplitText';
 export { BlurText } from './BlurText';
+export { FadeContent } from './FadeContent';
