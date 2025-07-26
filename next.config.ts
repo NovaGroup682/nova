@@ -30,9 +30,15 @@ const nextConfig: NextConfig = {
     // Optimize cache for large assets
     config.cache = {
       ...config.cache,
-      type: 'filesystem',
+      type: process.env.NODE_ENV === 'development' ? 'memory' : 'filesystem',
       compression: 'gzip',
       maxMemoryGenerations: 1
+    };
+
+    // Suppress webpack cache warnings
+    config.infrastructureLogging = {
+      ...config.infrastructureLogging,
+      level: 'error'
     };
 
     return config;

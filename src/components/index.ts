@@ -9,3 +9,5 @@ export { AnimatedBlock } from './AnimatedBlock';
 export { SplitText } from './SplitText';
 export { BlurText } from './BlurText';
 export { FadeContent } from './FadeContent';
+export { ProjectsFilter } from './ProjectsFilter';
+export { ProjectsList } from './ProjectsList';

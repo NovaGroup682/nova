@@ -235,7 +235,7 @@ const ProjectSliderBlock = () => {
               fontWeight={600}
               whiteSpace='nowrap'
             >
-              {`${content.main.projectsSlider[currentIndex].square} m2`}
+              {`${content.main.projectsSlider[currentIndex].square} м`}&#178;
             </Text>
             <Box
               width={{

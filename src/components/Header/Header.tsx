@@ -25,19 +25,28 @@ const Header = () => {
       width='full'
       zIndex={20}
       py={{ base: 4, md: 6, xl: 8 }}
-      px={{ base: '16px', sm: '32px', md: '60px', lg: '64px' }}
-      justifyContent='space-between'
-      maxW='1400px'
-      bg={isMain ? 'transparent' : 'gray.800'}
+      justifyContent='center'
+      bg={isMain ? 'transparent' : 'gray.600'}
     >
-      <Logo />
+      <Flex
+        justifyContent='space-between'
+        maxW='1400px'
+        width='full'
+        px={{ base: '16px', sm: '32px', md: '60px', lg: '64px' }}
+      >
+        <Logo />
 
-      <Flex alignItems='center' gap={2} display={{ base: 'none', lg: 'flex' }}>
-        {content.header.headerBtns.map((btn) => (
-          <MenuButton key={btn.label} {...btn} />
-        ))}
+        <Flex
+          alignItems='center'
+          gap={2}
+          display={{ base: 'none', lg: 'flex' }}
+        >
+          {content.header.headerBtns.map((btn) => (
+            <MenuButton key={btn.label} {...btn} />
+          ))}
+        </Flex>
+        <MenuToogler />
       </Flex>
-      <MenuToogler />
     </Flex>
   );
 };
