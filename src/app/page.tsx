@@ -66,6 +66,7 @@ const Home = () => (
         <For each={content.main.mainTitle}>
           {(item) => (
             <BlurText
+              zIndex={2}
               key={item}
               as='h1'
               fontSize={{

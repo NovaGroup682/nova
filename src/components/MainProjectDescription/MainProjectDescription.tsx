@@ -32,10 +32,7 @@ const MainProjectDescription = () => {
         <Box
           position='absolute'
           userSelect='none'
-          right={{
-            base: 0,
-            md: '120px'
-          }}
+          right={0}
           bottom={70}
           w={{
             base: 'full',
@@ -48,7 +45,7 @@ const MainProjectDescription = () => {
           style={{
             transition: isTouch ? 'none' : 'width 0.3s ease, height 0.3s ease'
           }}
-          zIndex={isHovered ? 10 : 1}
+          zIndex={isHovered ? 99 : 1}
         >
           <Box position='relative' w='full' h='full'>
             <Box

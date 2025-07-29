@@ -22,23 +22,23 @@ export const SocialIcons = {
 
 export const PROJECT_SIZES = [
   {
-    label: 'xs',
+    label: '< 100',
     value: ProjectSize.xs
   },
   {
-    label: 's',
+    label: '100 - 125',
     value: ProjectSize.s
   },
   {
-    label: 'm',
+    label: '125 - 150',
     value: ProjectSize.m
   },
   {
-    label: 'l',
+    label: '150 - 200',
     value: ProjectSize.l
   },
   {
-    label: 'xl',
+    label: '> 200',
     value: ProjectSize.xl
   }
 ];

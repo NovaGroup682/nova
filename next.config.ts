@@ -28,12 +28,12 @@ const nextConfig: NextConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     // Optimize cache for large assets
-    config.cache = {
-      ...config.cache,
-      type: process.env.NODE_ENV === 'development' ? 'memory' : 'filesystem',
-      compression: 'gzip',
-      maxMemoryGenerations: 1
-    };
+    // config.cache = {
+    //   ...config.cache,
+    //   type: process.env.NODE_ENV === 'development' ? 'memory' : 'filesystem',
+    //   compression: 'gzip',
+    //   maxMemoryGenerations: 1
+    // };
 
     // Suppress webpack cache warnings
     config.infrastructureLogging = {

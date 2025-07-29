@@ -60,7 +60,7 @@ const Select = ({ list, onSelect, value }: ProjectsFilterProps) => {
           <ChakraSelect.Content>
             {collection.items.map((item) => (
               <ChakraSelect.Item item={item} key={item.value}>
-                {item.label}
+                {item.label} м&#178;
                 <ChakraSelect.ItemIndicator />
               </ChakraSelect.Item>
             ))}

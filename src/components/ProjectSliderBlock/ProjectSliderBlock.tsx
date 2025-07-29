@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Bath from '@assets/icons/bath.svg';
 import Bed from '@assets/icons/bed-front.svg';
-import House from '@assets/icons/house-blank.svg';
 import Square from '@assets/icons/square-dashed.svg';
 import { paths } from 'constant';
 import Image from 'next/image';
@@ -33,7 +32,8 @@ const ProjectSliderBlock = () => {
     () =>
       content.main.projectsSlider.map((item, idx) => ({
         id: item.id,
-        index: idx
+        index: idx,
+        Icon: item.icon
       })),
     []
   );
@@ -169,18 +169,7 @@ const ProjectSliderBlock = () => {
                 outlineWidth: 0
               }}
             >
-              <House fill='white' />
-              <Text
-                position='absolute'
-                left={0}
-                right={0}
-                top={currentIndex === item.index ? '11.5px' : '11.25px'}
-                fontSize={currentIndex === item.index ? '11px' : '10px'}
-                color='white'
-                fontWeight={600}
-              >
-                {item.index + 1}
-              </Text>
+              <item.Icon fill='white' />
             </IconButton>
           ))}
         </Flex>
