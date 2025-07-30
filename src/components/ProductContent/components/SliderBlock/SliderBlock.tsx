@@ -24,7 +24,6 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
 
   return (
     <VStack
-      my={8}
       position='relative'
       w='full'
       h={{
