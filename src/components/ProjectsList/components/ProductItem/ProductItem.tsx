@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import Square from '@assets/icons/square-dashed.svg';
 import Stairs from '@assets/icons/stairs.svg';
 import { GOOGLE_LINK } from 'constant';
@@ -10,6 +10,7 @@ import {
   Box,
   Collapsible,
   Flex,
+  Skeleton,
   Text,
   useDisclosure,
   VStack
@@ -24,12 +25,21 @@ interface ProductItemProps {
 }
 
 const ProductItem = ({ project }: ProductItemProps) => {
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const {
     open: isHovered,
     onOpen: onMouseEnter,
     onClose: onMouseLeave
   } = useDisclosure();
   const { isTouch } = useIsTouchDevice();
+
+  const handleImageLoad = () => {
+    setIsImageLoading(false);
+  };
+
+  const handleImageError = () => {
+    setIsImageLoading(false);
+  };
 
   return (
     <VStack
@@ -47,15 +57,31 @@ const ProductItem = ({ project }: ProductItemProps) => {
       }}
       transition='all 0.3s ease'
     >
+      {isImageLoading && (
+        <Skeleton
+          position='absolute'
+          top={0}
+          left={0}
+          w='full'
+          h='full'
+          borderRadius='5px'
+          bg='gray.100'
+        />
+      )}
+
       <Image
         sizes='(max-width: 450px) 400px, 600px'
         style={{
           objectFit: 'cover',
-          objectPosition: 'center'
+          objectPosition: 'center',
+          filter: isImageLoading ? 'blur(10px)' : 'none',
+          transition: 'filter 0.3s ease-in-out'
         }}
         fill
         src={GOOGLE_LINK + project.sliders[0]}
         alt='contact cover'
+        onLoad={handleImageLoad}
+        onError={handleImageError}
       />
 
       <VStack

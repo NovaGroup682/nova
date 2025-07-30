@@ -4,26 +4,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import SearchIcon from '@assets/icons/magnifying-glass.svg';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import {
-  Center,
-  Flex,
-  HStack,
-  IconButton,
-  Input,
-  useBreakpointValue
-} from '@chakra-ui/react';
+import { Center, HStack, Input } from '@chakra-ui/react';
 
 import { ProjectSearchKeys } from 'types';
 
-interface SearchInputProps {
-  placeholder?: string;
-  onSearch?: (value: string) => void;
-}
-
-const SearchInput = ({
-  placeholder = 'Поиск по имени',
-  onSearch
-}: SearchInputProps) => {
+const SearchInput = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -48,13 +33,11 @@ const SearchInput = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchValue(value);
-    onSearch?.(value);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Escape') {
       setSearchValue('');
-      onSearch?.('');
     }
   };
 
@@ -91,12 +74,12 @@ const SearchInput = ({
         minW='auto'
         mr={3}
       >
-        <SearchIcon />
+        <SearchIcon fill='gray.400' />
       </Center>
 
       <Input
         ref={inputRef}
-        placeholder={placeholder}
+        placeholder='Поиск по номеру проекта'
         value={searchValue}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
