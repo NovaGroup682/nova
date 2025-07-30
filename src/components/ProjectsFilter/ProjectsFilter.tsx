@@ -75,9 +75,11 @@ const ProjectsFilter = () => {
 
     let newFloors: number[];
     if (isExist) {
-      newFloors = floors.filter((item) => item !== floor);
+      // If clicking the same floor, clear the selection
+      newFloors = [];
     } else {
-      newFloors = [...floors, floor];
+      // If clicking a different floor, select only that floor
+      newFloors = [floor];
     }
 
     setFloors(newFloors);

@@ -5,6 +5,8 @@ import SearchIcon from '@assets/icons/magnifying-glass.svg';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import {
+  Center,
+  Flex,
   HStack,
   IconButton,
   Input,
@@ -24,14 +26,11 @@ const SearchInput = ({
 }: SearchInputProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [isExpanded, setIsExpanded] = useState(false);
+
   const [searchValue, setSearchValue] = useState(
     searchParams.get(ProjectSearchKeys.projectName) || ''
   );
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const isMobile = useBreakpointValue({ base: true, md: false });
-  const shouldAlwaysBeOpen = isMobile;
 
   const updateUrlWithDebounce = useCallback(
     (updater: (params: URLSearchParams) => void) => {
@@ -46,18 +45,6 @@ const SearchInput = ({
     [searchParams, router]
   );
 
-  const handleIconClick = () => {
-    if (!shouldAlwaysBeOpen) {
-      setIsExpanded(true);
-    }
-  };
-
-  const handleInputBlur = () => {
-    if (!shouldAlwaysBeOpen && !searchValue.trim()) {
-      setIsExpanded(false);
-    }
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchValue(value);
@@ -65,9 +52,8 @@ const SearchInput = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!shouldAlwaysBeOpen && e.key === 'Escape') {
+    if (e.key === 'Escape') {
       setSearchValue('');
-      setIsExpanded(false);
       onSearch?.('');
     }
   };
@@ -84,18 +70,6 @@ const SearchInput = ({
     return cleanup;
   }, [searchValue, updateUrlWithDebounce]);
 
-  useEffect(() => {
-    if (shouldAlwaysBeOpen) {
-      setIsExpanded(true);
-    }
-  }, [shouldAlwaysBeOpen]);
-
-  useEffect(() => {
-    if (isExpanded && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isExpanded]);
-
   return (
     <HStack
       gap={0}
@@ -103,30 +77,28 @@ const SearchInput = ({
       position='relative'
       w={{ base: 'full', md: 'auto' }}
     >
-      <IconButton
+      <Center
         aria-label='Search'
-        variant='ghost'
-        size='2xl'
-        onClick={handleIconClick}
+        width='25px'
+        height='25px'
         position='absolute'
         right={0}
         zIndex={2}
-        _hover={{ bg: 'transparent' }}
         transition='all 0.3s ease-in-out'
         bg='transparent'
         _active={{ bg: 'transparent' }}
-        display={shouldAlwaysBeOpen ? 'none' : 'flex'}
+        display='flex'
         minW='auto'
-        pr={2}
+        mr={3}
       >
         <SearchIcon />
-      </IconButton>
+      </Center>
+
       <Input
         ref={inputRef}
         placeholder={placeholder}
         value={searchValue}
         onChange={handleInputChange}
-        onBlur={handleInputBlur}
         onKeyDown={handleKeyDown}
         border='1px solid'
         _focus={{
@@ -139,13 +111,12 @@ const SearchInput = ({
         transition='all 0.3s ease-in-out'
         width={{
           base: 'full',
-          md: isExpanded ? '270px' : '0px'
+          md: '270px'
         }}
-        opacity={isExpanded ? 1 : 0}
-        transform={isExpanded ? 'translateX(0)' : 'translateX(100%)'}
+        transform='translateX(0)'
         overflow='hidden'
         pl='8px'
-        pr={isExpanded ? '0px' : '0px'}
+        pr='40px'
       />
     </HStack>
   );
