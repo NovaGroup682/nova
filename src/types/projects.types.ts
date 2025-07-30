@@ -23,5 +23,6 @@ export enum ProjectSearchKeys {
   area = 'area',
   floors = 'floors',
   minPrice = 'minPrice',
-  maxPrice = 'maxPrice'
+  maxPrice = 'maxPrice',
+  projectName = 'projectName'
 }

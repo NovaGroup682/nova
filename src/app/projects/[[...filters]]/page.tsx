@@ -1,10 +1,10 @@
 import projects from 'constant/projects';
 
-import { Box, Flex, Text, VStack } from '@chakra-ui/react';
+import { Flex, Text, VStack } from '@chakra-ui/react';
 
 import { ProjectSearchKeys } from 'types';
 
-import { ProjectsFilter, ProjectsList } from 'components';
+import { ProjectsFilter, ProjectsList, SearchInput } from 'components';
 
 const ProjectsPage = async ({
   searchParams
@@ -29,11 +29,20 @@ const ProjectsPage = async ({
         px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
         py={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
       >
-        <Flex w='full' justifyContent='space-between'>
+        <Flex
+          w='full'
+          justifyContent='space-between'
+          alignItems='center'
+          flexDir={{
+            base: 'column',
+            md: 'row'
+          }}
+          gap={4}
+        >
           <Text
             as='h2'
             fontSize={{
-              base: '20px',
+              base: '24px',
               md: '34px'
             }}
             lineHeight={{
@@ -43,7 +52,7 @@ const ProjectsPage = async ({
           >
             Проекты современных каменных домов
           </Text>
-          <Box />
+          <SearchInput />
         </Flex>
         <ProjectsFilter />
         <ProjectsList projects={projects} filters={filters} />

@@ -35,7 +35,10 @@ const Select = ({ list, onSelect, value }: ProjectsFilterProps) => {
     <ChakraSelect.Root
       collection={collection}
       width='full'
-      maxW='320px'
+      maxW={{
+        base: 'auto',
+        md: '320px'
+      }}
       onValueChange={onChange}
       value={value ? [value] : []}
     >
