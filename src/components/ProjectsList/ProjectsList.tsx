@@ -22,7 +22,14 @@ const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
           (project) =>
             !(filters.floors ?? []).length ||
             filters.floors.includes(String(project.floor))
-        ),
+        )
+        .filter((project) => {
+          // Filter by project name (case-insensitive partial match)
+          if (!filters.projectName) return true;
+          return project.name
+            .toLowerCase()
+            .includes(filters.projectName.toLowerCase());
+        }),
     [projects, filters]
   );
 
