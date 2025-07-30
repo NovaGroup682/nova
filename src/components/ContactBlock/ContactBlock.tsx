@@ -33,7 +33,7 @@ const ContactBlock = () => {
       w='full'
       h={{
         base: '150px',
-        md: '400px'
+        md: '500px'
       }}
       borderRadius='2xl'
       overflow='hidden'
@@ -61,7 +61,7 @@ const ContactBlock = () => {
         alignItems='center'
         justifyContent='flex-end'
         py={{ base: '16px', md: '32px' }}
-        boxShadow='inset 0px -140px 40px -20px rgba(0, 0, 0, 0.42)'
+        boxShadow='inset 0px -260px 40px -20px rgba(0, 0, 0, 0.42)'
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >

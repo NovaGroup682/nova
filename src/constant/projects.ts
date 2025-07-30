@@ -99,7 +99,11 @@ const projects: ProjectItemType[] = [
     floor: 1,
     projectPrice: 60000,
     price: 0,
-    sliders: ['1sa5wOmKi2jBayvi9xv5klAGrWqqQ83fe'],
+    sliders: [
+      '1sa5wOmKi2jBayvi9xv5klAGrWqqQ83fe',
+      '1YvZj7szaH5zrHVfFTVtrkVJEeG6QdTHF',
+      '1ZWAS21rea86aF7XCk-dXkM1uo8w3-9qx'
+    ],
     layouts: ['1gv5ZQYJEmks11QbVtTgWn1wE1wNbfiCF']
   },
   {
@@ -128,8 +132,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      '15-Tt4ll9QwtmjvqYtNHtvhAtYcBqejW8',
-      '1B81VcO8l1h0eXo3U4s2ZEiCliMRIuBT9'
+      '1Vy_xMJ03Y9J_fTun7IiUgDjCVlHY6C9r',
+      '1P1zmPIMR7QTPPTi5MpsjSnkEDsfa4Y8H'
     ],
     layouts: ['1zbULZkwa-NQUVgVRojiWdkDFefaEIl9N']
   },

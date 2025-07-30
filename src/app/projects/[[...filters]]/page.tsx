@@ -41,7 +41,7 @@ const ProjectsPage = async ({
               md: '52px'
             }}
           >
-            Проекты
+            Проекты современных каменных домов
           </Text>
           <Box />
         </Flex>

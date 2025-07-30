@@ -21,24 +21,24 @@ export const SocialIcons = {
 };
 
 export const PROJECT_SIZES = [
+  // {
+  //   label: '< 100',
+  //   value: ProjectSize.xs
+  // },
+  // {
+  //   label: '100 - 125',
+  //   value: ProjectSize.s
+  // },
   {
-    label: '< 100',
-    value: ProjectSize.xs
-  },
-  {
-    label: '100 - 125',
-    value: ProjectSize.s
-  },
-  {
-    label: '125 - 150',
+    label: '150 - 180',
     value: ProjectSize.m
   },
   {
-    label: '150 - 200',
+    label: '180 - 220',
     value: ProjectSize.l
   },
   {
-    label: '> 200',
+    label: '> 220',
     value: ProjectSize.xl
   }
 ];

@@ -29,7 +29,7 @@ const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
         md: 2,
         lg: 3
       }}
-      gap={4}
+      gap={2}
       w='full'
       mt={4}
     >

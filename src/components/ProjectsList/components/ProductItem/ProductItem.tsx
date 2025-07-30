@@ -37,11 +37,9 @@ const ProductItem = ({ project }: ProductItemProps) => {
       w='full'
       h={{
         base: '200px',
-        md: '300px',
-        lg: '250px',
-        xl: '350px'
+        md: '270px'
       }}
-      borderRadius='10px'
+      borderRadius='5px'
       overflow='hidden'
       justifyContent={{
         base: 'center',
