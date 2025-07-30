@@ -9,7 +9,7 @@ import { ProjectsFilter, ProjectsList } from 'components';
 const ProjectsPage = async ({
   searchParams
 }: {
-  searchParams: Promise<Record<keyof ProjectSearchKeys, string>>;
+  searchParams: Promise<Record<ProjectSearchKeys, string>>;
 }) => {
   const filters = await searchParams;
 
