@@ -34,12 +34,10 @@ const Select = ({ list, onSelect, value }: ProjectsFilterProps) => {
   return (
     <ChakraSelect.Root
       collection={collection}
-      width={{
-        base: 'full',
-        lg: '320px'
-      }}
+      width='full'
+      maxW='320px'
       onValueChange={onChange}
-      value={[value]}
+      value={value ? [value] : []}
     >
       <ChakraSelect.HiddenSelect />
       <ChakraSelect.Label fontSize={16}>Площадь, м&#178;</ChakraSelect.Label>

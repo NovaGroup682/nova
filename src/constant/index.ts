@@ -43,4 +43,6 @@ export const PROJECT_SIZES = [
   }
 ];
 
+export const PROJECT_FLOORS: number[] = [1, 2];
+
 export const GOOGLE_LINK = 'https://drive.google.com/uc?export=view&id=';

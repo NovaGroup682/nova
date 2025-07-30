@@ -100,7 +100,7 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      '1sa5wOmKi2jBayvi9xv5klAGrWqqQ83fe',
+      '18VSFdvZYZOyxvtpkq8CEElzkN0rl_yln',
       '1YvZj7szaH5zrHVfFTVtrkVJEeG6QdTHF',
       '1ZWAS21rea86aF7XCk-dXkM1uo8w3-9qx'
     ],

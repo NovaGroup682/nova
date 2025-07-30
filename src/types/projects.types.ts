@@ -19,9 +19,9 @@ export type ProjectItemType = {
   layouts: string[];
 };
 
-export interface ProjectSearchKeys {
-  area: 'area';
-  floors: 'floors';
-  priceMin: 'priceMin';
-  priceMax: 'priceMax';
+export enum ProjectSearchKeys {
+  area = 'area',
+  floors = 'floors',
+  minPrice = 'minPrice',
+  maxPrice = 'maxPrice'
 }

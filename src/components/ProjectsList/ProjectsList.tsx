@@ -10,15 +10,19 @@ import { ProductItem } from './components';
 
 interface ProjectsListProps {
   projects: ProjectItemType[];
-  filters: Record<keyof ProjectSearchKeys, string>;
+  filters: Record<ProjectSearchKeys, string>;
 }
 
 const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
   const list = useMemo(
     () =>
-      projects.filter(
-        (project) => !filters.area || project.areaType === filters.area
-      ),
+      projects
+        .filter((project) => !filters.area || project.areaType === filters.area)
+        .filter(
+          (project) =>
+            !(filters.floors ?? []).length ||
+            filters.floors.includes(String(project.floor))
+        ),
     [projects, filters]
   );
 
