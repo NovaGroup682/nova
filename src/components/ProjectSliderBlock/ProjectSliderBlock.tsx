@@ -5,7 +5,7 @@ import Bath from '@assets/icons/bath.svg';
 import Bed from '@assets/icons/bed-front.svg';
 import Square from '@assets/icons/square-dashed.svg';
 import { paths } from 'constant';
-import Image from 'next/image';
+import projects from 'constant/projects';
 import NextLink from 'next/link';
 import { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,7 +15,6 @@ import {
   Flex,
   Grid,
   GridItem,
-  IconButton,
   Link,
   Text,
   VStack
@@ -23,20 +22,22 @@ import {
 
 import content from 'content';
 
+import { SliderItem, SliderNavigation } from 'components/SliderContent';
+
 const ProjectSliderBlock = () => {
   const swiperRef = useRef<SwiperType>(null);
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  const idsList = useMemo(
+  const sliders = useMemo(
     () =>
-      content.main.projectsSlider.map((item, idx) => ({
-        id: item.id,
-        index: idx,
-        Icon: item.icon
-      })),
+      projects.filter((project) =>
+        content.main.projectsSliders.includes(project.id)
+      ),
     []
   );
+
+  const list = useMemo(() => sliders.map((item) => item.id), [sliders]);
 
   useEffect(() => {
     if (swiperRef.current && swiperRef.current.slideTo) {
@@ -96,84 +97,17 @@ const ProjectSliderBlock = () => {
         onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
         style={{ width: '100%' }}
       >
-        {content.main.projectsSlider.map((slide) => (
+        {sliders.map((slide) => (
           <SwiperSlide key={slide.id} style={{ width: '100%' }}>
-            <Box
-              h={{
-                base: 300,
-                md: 600,
-                lg: 800
-              }}
-              w='full'
-              boxShadow='inset 0px -140px 40px -20px rgba(0, 0, 0, 0.42)'
-              // add navigation by click on project to project details
-              // onClick={()=>console.log('click', currentIndex)}
-              cursor='pointer'
-              position='relative'
-            >
-              <Image
-                src={slide.img}
-                alt='Background'
-                fill
-                style={{
-                  objectFit: 'cover',
-                  objectPosition: 'center',
-                  zIndex: -1
-                }}
-                priority
-                sizes='(max-width: 450px) 400px, 1200px'
-                quality={75}
-              />
-            </Box>
+            <SliderItem src={slide.sliders[0]} />
           </SwiperSlide>
         ))}
       </Swiper>
-
-      <Flex
-        position='absolute'
-        w='full'
-        zIndex={10}
-        justifyContent='center'
-        top={{
-          base: '16px',
-          md: '32px'
-        }}
-      >
-        <Flex
-          position='absolute'
-          borderRadius='xl'
-          bg='gray.500'
-          gap={4}
-          px={4}
-          py={0}
-        >
-          {idsList.map((item) => (
-            <IconButton
-              key={`slider-btn-${item.index}`}
-              position='relative'
-              onClick={() => setCurrentIndex(item.index)}
-              minW='auto'
-              aria-label='Search database'
-              variant='outline'
-              size='lg'
-              border='none'
-              transform={currentIndex === item.index ? 'scale(1.5)' : 'inherit'}
-              transition='transform 0.3s ease'
-              _hover={{
-                bg: 'none',
-                '& svg, & p': {
-                  opacity: 0.5
-                }
-              }}
-              _focus={{
-                outlineWidth: 0
-              }}
-            >
-              <item.Icon fill='white' />
-            </IconButton>
-          ))}
-        </Flex>
-      </Flex>
+      <SliderNavigation
+        list={list}
+        currentSlide={currentIndex}
+        onClick={setCurrentIndex}
+      />
 
       <Grid
         templateColumns={{
@@ -224,7 +158,7 @@ const ProjectSliderBlock = () => {
               fontWeight={600}
               whiteSpace='nowrap'
             >
-              {`${content.main.projectsSlider[currentIndex].square} м`}&#178;
+              {`${sliders[currentIndex].area} м`}&#178;
             </Text>
             <Box
               width={{
@@ -241,7 +175,7 @@ const ProjectSliderBlock = () => {
               <Bed fill='white' />
             </Box>
             <Text color='white' fontSize={24} mx={3} fontWeight={600}>
-              {content.main.projectsSlider[currentIndex].beds}
+              {sliders[currentIndex].beds}
             </Text>
             <Box
               width={{
@@ -258,7 +192,7 @@ const ProjectSliderBlock = () => {
               <Bath fill='white' />
             </Box>
             <Text color='white' fontSize={24} mx={3} fontWeight={600}>
-              {content.main.projectsSlider[currentIndex].baths}
+              {sliders[currentIndex].baths}
             </Text>
           </Flex>
         </GridItem>
@@ -285,7 +219,7 @@ const ProjectSliderBlock = () => {
             fontWeight={600}
             textAlign={{ base: 'center', md: 'right' }}
           >
-            {content.main.projectsSlider[currentIndex].name}
+            {sliders[currentIndex].name}
           </Text>
         </GridItem>
       </Grid>

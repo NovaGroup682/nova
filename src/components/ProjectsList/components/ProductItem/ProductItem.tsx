@@ -3,8 +3,9 @@
 import { memo, useState } from 'react';
 import Square from '@assets/icons/square-dashed.svg';
 import Stairs from '@assets/icons/stairs.svg';
-import { GOOGLE_LINK } from 'constant';
+import { GOOGLE_LINK, paths } from 'constant';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import {
   Box,
@@ -42,145 +43,147 @@ const ProductItem = ({ project }: ProductItemProps) => {
   };
 
   return (
-    <VStack
-      position='relative'
-      w='full'
-      h={{
-        base: '200px',
-        md: '270px'
-      }}
-      borderRadius='5px'
-      overflow='hidden'
-      justifyContent={{
-        base: 'center',
-        md: 'flex-end'
-      }}
-      transition='all 0.3s ease'
-    >
-      {isImageLoading && (
-        <Skeleton
+    <Link href={`${paths.project}/${project.id}`}>
+      <VStack
+        position='relative'
+        w='full'
+        h={{
+          base: '200px',
+          md: '270px'
+        }}
+        borderRadius='5px'
+        overflow='hidden'
+        justifyContent={{
+          base: 'center',
+          md: 'flex-end'
+        }}
+        transition='all 0.3s ease'
+      >
+        {isImageLoading && (
+          <Skeleton
+            position='absolute'
+            top={0}
+            left={0}
+            w='full'
+            h='full'
+            borderRadius='5px'
+            bg='gray.100'
+          />
+        )}
+
+        <Image
+          sizes='(max-width: 450px) 270px, 400px'
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center',
+            filter: isImageLoading ? 'blur(10px)' : 'none',
+            transition: 'filter 0.3s ease-in-out'
+          }}
+          fill
+          src={GOOGLE_LINK + project.sliders[0]}
+          alt='contact cover'
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+        />
+
+        <VStack
           position='absolute'
-          top={0}
-          left={0}
           w='full'
           h='full'
-          borderRadius='5px'
-          bg='gray.100'
-        />
-      )}
+          alignItems='center'
+          justifyContent='flex-end'
+          cursor='pointer'
+          boxShadow='initial'
+          transition='box-shadow 0.5s ease'
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          _hover={{
+            boxShadow: 'inset 0px -100px 40px -20px rgba(0, 0, 0, 0.42)'
+          }}
+        >
+          {!isTouch && (
+            <Collapsible.Root unmountOnExit open={isHovered} cursor='default'>
+              <Collapsible.Content>
+                <Flex
+                  w='full'
+                  justifyContent={{ base: 'center', md: 'flex-start' }}
+                  alignItems='center'
+                  gap={1}
+                  pb={10}
+                >
+                  <Text
+                    color='white'
+                    fontSize={{
+                      base: '16px',
+                      md: '20px'
+                    }}
+                    mx={3}
+                    pr={3}
+                    fontWeight={600}
+                    textAlign={{ base: 'center', md: 'right' }}
+                  >
+                    {project.name}
+                  </Text>
 
-      <Image
-        sizes='(max-width: 450px) 400px, 600px'
-        style={{
-          objectFit: 'cover',
-          objectPosition: 'center',
-          filter: isImageLoading ? 'blur(10px)' : 'none',
-          transition: 'filter 0.3s ease-in-out'
-        }}
-        fill
-        src={GOOGLE_LINK + project.sliders[0]}
-        alt='contact cover'
-        onLoad={handleImageLoad}
-        onError={handleImageError}
-      />
+                  <Box
+                    width={{
+                      base: '20px',
+                      md: '20px',
+                      lg: '20px'
+                    }}
+                    height={{
+                      base: '20px',
+                      md: '20px',
+                      lg: '20px'
+                    }}
+                  >
+                    <Square fill='white' />
+                  </Box>
+                  <Text
+                    color='white'
+                    fontSize={{
+                      base: '16px',
+                      md: '20px'
+                    }}
+                    mr={3}
+                    fontWeight={600}
+                    whiteSpace='nowrap'
+                  >
+                    {`${project.area} м`}&#178;
+                  </Text>
 
-      <VStack
-        position='absolute'
-        w='full'
-        h='full'
-        alignItems='center'
-        justifyContent='flex-end'
-        cursor='pointer'
-        boxShadow='initial'
-        transition='box-shadow 0.5s ease'
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        _hover={{
-          boxShadow: 'inset 0px -100px 40px -20px rgba(0, 0, 0, 0.42)'
-        }}
-      >
-        {!isTouch && (
-          <Collapsible.Root unmountOnExit open={isHovered} cursor='default'>
-            <Collapsible.Content>
-              <Flex
-                w='full'
-                justifyContent={{ base: 'center', md: 'flex-start' }}
-                alignItems='center'
-                gap={1}
-                pb={10}
-              >
-                <Text
-                  color='white'
-                  fontSize={{
-                    base: '16px',
-                    md: '20px'
-                  }}
-                  mx={3}
-                  pr={3}
-                  fontWeight={600}
-                  textAlign={{ base: 'center', md: 'right' }}
-                >
-                  {project.name}
-                </Text>
-
-                <Box
-                  width={{
-                    base: '20px',
-                    md: '20px',
-                    lg: '20px'
-                  }}
-                  height={{
-                    base: '20px',
-                    md: '20px',
-                    lg: '20px'
-                  }}
-                >
-                  <Square fill='white' />
-                </Box>
-                <Text
-                  color='white'
-                  fontSize={{
-                    base: '16px',
-                    md: '20px'
-                  }}
-                  mr={3}
-                  fontWeight={600}
-                  whiteSpace='nowrap'
-                >
-                  {`${project.area} м`}&#178;
-                </Text>
-
-                <Box
-                  width={{
-                    base: '20px',
-                    md: '20px',
-                    lg: '20px'
-                  }}
-                  height={{
-                    base: '20px',
-                    md: '20px',
-                    lg: '20px'
-                  }}
-                >
-                  <Stairs fill='white' />
-                </Box>
-                <Text
-                  color='white'
-                  fontSize={{
-                    base: '16px',
-                    md: '20px'
-                  }}
-                  fontWeight={600}
-                  whiteSpace='nowrap'
-                >
-                  {project.floor}
-                </Text>
-              </Flex>
-            </Collapsible.Content>
-          </Collapsible.Root>
-        )}
+                  <Box
+                    width={{
+                      base: '20px',
+                      md: '20px',
+                      lg: '20px'
+                    }}
+                    height={{
+                      base: '20px',
+                      md: '20px',
+                      lg: '20px'
+                    }}
+                  >
+                    <Stairs fill='white' />
+                  </Box>
+                  <Text
+                    color='white'
+                    fontSize={{
+                      base: '16px',
+                      md: '20px'
+                    }}
+                    fontWeight={600}
+                    whiteSpace='nowrap'
+                  >
+                    {project.floor}
+                  </Text>
+                </Flex>
+              </Collapsible.Content>
+            </Collapsible.Root>
+          )}
+        </VStack>
       </VStack>
-    </VStack>
+    </Link>
   );
 };
 

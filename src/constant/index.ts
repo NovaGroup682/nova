@@ -7,6 +7,7 @@ import { ProjectSize, SocialLinkTypes } from 'types';
 export const paths = {
   main: '/',
   projects: '/projects',
+  project: '/project',
   design: '/design',
   supervision: '/supervision',
   contacts: '/contacts'

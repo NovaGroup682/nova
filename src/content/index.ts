@@ -1,9 +1,5 @@
 import Facebook from '@assets/icons/facebook.svg';
 import Instagram from '@assets/icons/instagram.svg';
-import Square1 from '@assets/icons/square-1.svg';
-import Square2 from '@assets/icons/square-2.svg';
-import Square3 from '@assets/icons/square-3.svg';
-import Square4 from '@assets/icons/square-4.svg';
 import VK from '@assets/icons/vk.svg';
 import { GOOGLE_LINK, paths } from 'constant';
 
@@ -84,44 +80,7 @@ const content = {
     text2:
       'Мы проектируем на базе продуманных типовых решений — с точным пониманием бюджета и финального результата. В итоге вы получаете стильный, современный дом — без компромиссов и лишних расходов.',
     text3: `Мы берем на себя самое сложное, чтобы вы\nполучили удовольствие от процесса`,
-    projectsSlider: [
-      {
-        id: 'NOVA-1',
-        name: 'NOVA 1',
-        square: 175,
-        beds: 4,
-        baths: 3,
-        icon: Square1,
-        img: GOOGLE_LINK + '1ycboXgZ0IIGf1yoFLNimRMomEpwyY03H'
-      },
-      {
-        id: 'NOVA-2',
-        name: 'NOVA 2',
-        square: 222,
-        beds: 4,
-        baths: 3,
-        icon: Square2,
-        img: GOOGLE_LINK + '1VWZt3nX5-YdMM2ECixmH1lwzUkUdWWEE'
-      },
-      {
-        id: 'NOVA-9',
-        name: 'NOVA 9',
-        square: 150,
-        beds: 3,
-        baths: 4,
-        icon: Square3,
-        img: GOOGLE_LINK + '15-Tt4ll9QwtmjvqYtNHtvhAtYcBqejW8'
-      },
-      {
-        id: 'NOVA-5',
-        name: 'NOVA 5',
-        square: 150,
-        beds: 4,
-        baths: 4,
-        icon: Square4,
-        img: GOOGLE_LINK + '1hWcmfamPYnYSQ3K5X752-vT2gqMt8Emt'
-      }
-    ],
+    projectsSliders: ['nova-1', 'nova-2', 'nova-9', 'nova-5'],
     ceo: [
       {
         label: 'Зиновий Аксенцев - архитектор',
