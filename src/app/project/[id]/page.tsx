@@ -1,8 +1,8 @@
 import projects from 'constant/projects';
 
-import { Flex, Text, VStack } from '@chakra-ui/react';
+import { Button, Flex, Text, VStack } from '@chakra-ui/react';
 
-import { SliderBlock } from 'components';
+import { ProjectLayouts, SliderBlock } from 'components';
 
 const ProjectsPage = async ({
   params
@@ -64,6 +64,43 @@ const ProjectsPage = async ({
           </Text>
         </Flex>
         <SliderBlock sliders={project?.sliders ?? []} />
+
+        <Flex
+          w='full'
+          justifyContent='space-between'
+          alignItems='center'
+          flexDir={{
+            base: 'column',
+            md: 'row'
+          }}
+          gap={4}
+          my={4}
+        >
+          <Text
+            fontWeight={400}
+            fontSize={{
+              base: '18px',
+              md: '24px'
+            }}
+          >
+            {`Общая площадь ${project?.area} м`}&#178;
+          </Text>
+          <Text
+            fontWeight={400}
+            fontSize={{
+              base: '18px',
+              md: '24px'
+            }}
+          >
+            {`Строительная площадь ${project?.constructionArea} м`}&#178;
+          </Text>
+
+          <Button size='2xl' px={12}>
+            Внести изменения в проект
+          </Button>
+        </Flex>
+
+        <ProjectLayouts plans={project?.layouts ?? []} />
       </VStack>
     </VStack>
   );

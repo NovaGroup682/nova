@@ -6,6 +6,14 @@ export enum ProjectSize {
   xl = 'xl'
 }
 
+export type LayoutsPlanType = {
+  img: string;
+  planWithArea: {
+    [key: number]: string;
+  };
+  totalArea: number;
+};
+
 export type ProjectItemType = {
   id: string;
   name: string;
@@ -18,7 +26,13 @@ export type ProjectItemType = {
   projectPrice: number;
   price: number;
   sliders: string[];
-  layouts: string[];
+  layouts: LayoutsPlanType[];
+  implementationCost: {
+    shell: number;
+    insulatedShell: number;
+    facade: number;
+    interiorFinishes: number;
+  };
 };
 
 export enum ProjectSearchKeys {
