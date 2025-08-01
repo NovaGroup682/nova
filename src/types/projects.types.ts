@@ -17,16 +17,18 @@ export type LayoutsPlanType = {
 export type ProjectItemType = {
   id: string;
   name: string;
-  area: number;
   beds: number;
   baths: number;
   areaType: ProjectSize;
-  constructionArea: number;
   floor: number;
   projectPrice: number;
   price: number;
   sliders: string[];
-  layouts: LayoutsPlanType[];
+  variants: {
+    area: number;
+    constructionArea: number;
+    layouts: LayoutsPlanType[];
+  }[];
   implementationCost: {
     shell: number;
     insulatedShell: number;

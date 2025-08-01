@@ -1,6 +1,6 @@
 import projects from 'constant/projects';
 
-import { Button, Flex, Text, VStack } from '@chakra-ui/react';
+import { Flex, Text, VStack } from '@chakra-ui/react';
 
 import { ProjectLayouts, SliderBlock } from 'components';
 
@@ -65,42 +65,15 @@ const ProjectsPage = async ({
         </Flex>
         <SliderBlock sliders={project?.sliders ?? []} />
 
-        <Flex
-          w='full'
-          justifyContent='space-between'
-          alignItems='center'
-          flexDir={{
-            base: 'column',
-            md: 'row'
-          }}
-          gap={4}
-          my={4}
-        >
-          <Text
-            fontWeight={400}
-            fontSize={{
-              base: '18px',
-              md: '24px'
-            }}
-          >
-            {`Общая площадь ${project?.area} м`}&#178;
-          </Text>
-          <Text
-            fontWeight={400}
-            fontSize={{
-              base: '18px',
-              md: '24px'
-            }}
-          >
-            {`Строительная площадь ${project?.constructionArea} м`}&#178;
-          </Text>
-
-          <Button size='2xl' px={12}>
-            Внести изменения в проект
-          </Button>
-        </Flex>
-
-        <ProjectLayouts plans={project?.layouts ?? []} />
+        {project?.variants.map((variant, idx) => (
+          <ProjectLayouts
+            key={`variant-${idx + 1}`}
+            label={project?.variants.length > 1 ? `Вариант ${idx + 1}` : ''}
+            area={variant.area}
+            constructionArea={variant.constructionArea}
+            plans={variant.layouts}
+          />
+        ))}
       </VStack>
     </VStack>
   );

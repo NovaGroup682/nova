@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Bath from '@assets/icons/bath.svg';
 import Bed from '@assets/icons/bed-front.svg';
-import Square from '@assets/icons/square-dashed.svg';
 import { paths } from 'constant';
 import projects from 'constant/projects';
 import NextLink from 'next/link';
@@ -137,29 +136,6 @@ const ProjectSliderBlock = () => {
             alignItems='center'
             gap={1}
           >
-            <Box
-              width={{
-                base: '20px',
-                md: '30px',
-                lg: '40px'
-              }}
-              height={{
-                base: '20px',
-                md: '30px',
-                lg: '40px'
-              }}
-            >
-              <Square fill='white' />
-            </Box>
-            <Text
-              color='white'
-              fontSize={24}
-              mx={3}
-              fontWeight={600}
-              whiteSpace='nowrap'
-            >
-              {`${sliders[currentIndex].area} м`}&#178;
-            </Text>
             <Box
               width={{
                 base: '20px',

@@ -34,6 +34,7 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
       borderRadius='2xl'
       overflow='hidden'
       justifyContent='space-between'
+      mb={4}
     >
       <Swiper
         slidesPerView={1}

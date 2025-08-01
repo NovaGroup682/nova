@@ -1,7 +1,6 @@
 'use client';
 
 import { memo, useState } from 'react';
-import Square from '@assets/icons/square-dashed.svg';
 import Stairs from '@assets/icons/stairs.svg';
 import { GOOGLE_LINK, paths } from 'constant';
 import Image from 'next/image';
@@ -125,7 +124,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
                     {project.name}
                   </Text>
 
-                  <Box
+                  {/* <Box
                     width={{
                       base: '20px',
                       md: '20px',
@@ -150,7 +149,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
                     whiteSpace='nowrap'
                   >
                     {`${project.area} м`}&#178;
-                  </Text>
+                  </Text> */}
 
                   <Box
                     width={{
