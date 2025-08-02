@@ -1,13 +1,11 @@
 'use client';
 
 import { memo, useState } from 'react';
-import Stairs from '@assets/icons/stairs.svg';
 import { GOOGLE_LINK, paths } from 'constant';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import {
-  Box,
   Collapsible,
   Flex,
   Skeleton,
@@ -17,6 +15,8 @@ import {
 } from '@chakra-ui/react';
 
 import { useIsTouchDevice } from 'hooks';
+
+import { formatCurrency } from 'helpers';
 
 import { ProjectItemType } from 'types';
 
@@ -124,20 +124,6 @@ const ProductItem = ({ project }: ProductItemProps) => {
                     {project.name}
                   </Text>
 
-                  {/* <Box
-                    width={{
-                      base: '20px',
-                      md: '20px',
-                      lg: '20px'
-                    }}
-                    height={{
-                      base: '20px',
-                      md: '20px',
-                      lg: '20px'
-                    }}
-                  >
-                    <Square fill='white' />
-                  </Box>
                   <Text
                     color='white'
                     fontSize={{
@@ -148,23 +134,9 @@ const ProductItem = ({ project }: ProductItemProps) => {
                     fontWeight={600}
                     whiteSpace='nowrap'
                   >
-                    {`${project.area} м`}&#178;
-                  </Text> */}
+                    {`${project.variants[0].area} м`}&#178;
+                  </Text>
 
-                  <Box
-                    width={{
-                      base: '20px',
-                      md: '20px',
-                      lg: '20px'
-                    }}
-                    height={{
-                      base: '20px',
-                      md: '20px',
-                      lg: '20px'
-                    }}
-                  >
-                    <Stairs fill='white' />
-                  </Box>
                   <Text
                     color='white'
                     fontSize={{
@@ -174,7 +146,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
                     fontWeight={600}
                     whiteSpace='nowrap'
                   >
-                    {project.floor}
+                    {formatCurrency(project.implementationCost.shell)}
                   </Text>
                 </Flex>
               </Collapsible.Content>
