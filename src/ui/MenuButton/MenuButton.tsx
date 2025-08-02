@@ -1,6 +1,6 @@
-import NextLink from 'next/link';
+import { Box, Text } from '@chakra-ui/react';
 
-import { Link, Text } from '@chakra-ui/react';
+import { ChakraNextLink } from 'ui/ChakraNextLink';
 
 interface MenuButton {
   label: string;
@@ -8,25 +8,59 @@ interface MenuButton {
 }
 
 const MenuButton = ({ label, href }: MenuButton) => (
-  <Link
-    px='24px'
-    py='16px'
-    borderRadius='10px'
-    bg='gray.200'
-    as={NextLink}
-    href={href}
+  <Box
+    position='relative'
+    display='inline-block'
+    //  px="24px"
+    height='24px'
     _hover={{
-      bg: 'gray.500',
-      textDecoration: 'none'
+      '& .underline': {
+        transform: 'scaleX(1)'
+      }
     }}
-    _focus={{
-      outlineWidth: 0
+    _active={{
+      '& .menu-text': {
+        color: 'gray.400'
+      },
+      '& .underline': {
+        bg: 'gray.400'
+      }
     }}
   >
-    <Text fontSize='16px' color='white' fontFamily='button' userSelect='none'>
-      {label}
-    </Text>
-  </Link>
+    <ChakraNextLink
+      href={href}
+      py='16px'
+      borderRadius='10px'
+      position='relative'
+      bg='transparent'
+      _focus={{ outlineWidth: 0 }}
+      _hover={{ textDecoration: 'none' }}
+    >
+      <Text
+        className='menu-text'
+        textTransform='uppercase'
+        fontSize='16px'
+        color='white'
+        userSelect='none'
+        lineHeight='16px'
+        _active={{ color: 'red.500' }}
+      >
+        {label}
+      </Text>
+    </ChakraNextLink>
+    <Box
+      className='underline'
+      position='absolute'
+      bottom='-2px'
+      left={0}
+      right={0}
+      height='2px'
+      bg='white'
+      transform='scaleX(0)'
+      transformOrigin='left'
+      transition='transform 0.5s ease'
+    />
+  </Box>
 );
 
 export default MenuButton;

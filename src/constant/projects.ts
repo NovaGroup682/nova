@@ -66,10 +66,10 @@ const projects: ProjectItemType[] = [
       '12wLLlkBGGwdzIFu6CEsoD-Ujz8N7mwiQ'
     ],
     implementationCost: {
-      "shell": 10660000,
-      "insulatedShell": 14880000,
-      "facade": 17350000,
-      "interiorFinishes": 23350000
+      shell: 10660000,
+      insulatedShell: 14880000,
+      facade: 17350000,
+      interiorFinishes: 23350000
     },
     variants: [
       {
@@ -176,7 +176,6 @@ const projects: ProjectItemType[] = [
       insulatedShell: 11700000,
       facade: 13600000,
       interiorFinishes: 18300000
-
     },
     variants: [
       {
@@ -365,8 +364,7 @@ const projects: ProjectItemType[] = [
               14: 'Детская спальня 1 13.36',
               15: 'Детская спальня 2 12.41',
               16: 'Терраса 20.14',
-              17: 'Навес для 2 авто 40.90',
-
+              17: 'Навес для 2 авто 40.90'
             },
             totalArea: 196.04
           }
@@ -412,7 +410,7 @@ const projects: ProjectItemType[] = [
               9: 'Топочная 10.75',
               10: 'Прихожая 11.04',
               11: 'Терраса 21.48',
-              12: 'Крыльцо 4.72',
+              12: 'Крыльцо 4.72'
             },
             totalArea: 176.15
           }

@@ -38,7 +38,7 @@ const Header = () => {
 
         <Flex
           alignItems='center'
-          gap={2}
+          gap='20px'
           display={{ base: 'none', lg: 'flex' }}
         >
           {content.header.headerBtns.map((btn) => (
