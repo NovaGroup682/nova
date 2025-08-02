@@ -32,19 +32,29 @@ const CeoBlock = () => (
         }}
         justifyContent='space-between'
       >
-        <Text
+        <VStack
+          w='full'
           pb={4}
           px={{
             base: '16px',
             md: '60px'
           }}
+          justifyContent='flex-start'
         >
-          <Text as='span' fontWeight='bold'>
+          <Text textAlign='left' w='full' fontWeight='bold'>
             {`${ceo.label}.`}
           </Text>
 
-          {ceo.description}
-        </Text>
+          <Text
+            fontSize='md'
+            color='gray.600'
+            lineHeight='1.6'
+            fontStyle='italic'
+          >
+            {ceo.description}
+          </Text>
+        </VStack>
+
         <Box
           h={{
             base: '320px',

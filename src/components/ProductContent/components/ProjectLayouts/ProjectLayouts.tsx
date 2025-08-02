@@ -67,6 +67,7 @@ const ProjectLayouts = ({
             base: 14,
             md: 16
           }}
+          color='gray.500'
         >
           {`Общая площадь ${area} м`}&#178;
         </Text>
@@ -75,6 +76,7 @@ const ProjectLayouts = ({
             base: 14,
             md: 16
           }}
+          color='gray.500'
         >
           {`Строительная площадь ${constructionArea} м`}&#178;
         </Text>
