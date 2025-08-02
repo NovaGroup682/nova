@@ -5,6 +5,7 @@ import { Flex, Text, VStack } from '@chakra-ui/react';
 import { formatCurrency } from 'helpers';
 
 import { ProjectLayouts, SliderBlock } from 'components';
+import { ProjectConfigurationsTable } from 'components/ProductContent/components/ProjectConfigurationsTable';
 
 const ProjectsPage = async ({
   params
@@ -79,6 +80,10 @@ const ProjectsPage = async ({
             plans={variant.layouts}
           />
         ))}
+
+        <ProjectConfigurationsTable
+          prices={Object.values(project?.implementationCost ?? '') ?? []}
+        />
       </VStack>
     </VStack>
   );

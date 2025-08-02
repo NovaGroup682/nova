@@ -130,6 +130,83 @@ const content = {
       contactCover: GOOGLE_LINK + '1_ka5s9bKYNeSIp4Q0HD4LXlh9x5hv-5S'
     }
   },
+  projectDetails: {
+    titlesRow: ['Коробка', 'Теплый контур', 'С фасадом', 'С отделкой'],
+    bodyRows: [
+      {
+        name: 'Фундамент',
+        included: {
+          Коробка: true,
+          'Теплый контур': true,
+          'С фасадом': true,
+          'С отделкой': true
+        }
+      },
+      {
+        name: 'Несущие стены',
+        included: {
+          Коробка: true,
+          'Теплый контур': true,
+          'С фасадом': true,
+          'С отделкой': true
+        }
+      },
+      {
+        name: 'Перегородки',
+        included: {
+          Коробка: false,
+          'Теплый контур': true,
+          'С фасадом': true,
+          'С отделкой': true
+        }
+      },
+      {
+        name: 'Отделка фасада',
+        included: {
+          Коробка: false,
+          'Теплый контур': false,
+          'С фасадом': true,
+          'С отделкой': true
+        }
+      },
+      {
+        name: 'Кровля',
+        included: {
+          Коробка: true,
+          'Теплый контур': true,
+          'С фасадом': true,
+          'С отделкой': true
+        }
+      },
+      {
+        name: 'Кровля',
+        included: {
+          Коробка: false,
+          'Теплый контур': true,
+          'С фасадом': true,
+          'С отделкой': true
+        }
+      },
+      {
+        name: 'Окна и двери',
+        included: {
+          Коробка: false,
+          'Теплый контур': true,
+          'С фасадом': true,
+          'С отделкой': true
+        }
+      },
+      {
+        name: 'Отделка WHITE BOX',
+        included: {
+          Коробка: false,
+          'Теплый контур': false,
+          'С фасадом': false,
+          'С отделкой': true
+        }
+      }
+    ]
+  },
   contacts: {
     email: 'vasha@pochta.ru',
     phone: '8 800 000 00 00',
