@@ -42,7 +42,6 @@ const ProjectConfigurationsTable = ({
         В стоимость входит
       </Text>
 
-      {/* Header Row for Configurations and Prices */}
       <Grid templateColumns={`1fr repeat(4, 1fr)`} gap={2} alignItems='center'>
         <GridItem>
           <Text fontWeight='bold' fontSize={{ base: 14, md: 16 }}>
@@ -58,7 +57,6 @@ const ProjectConfigurationsTable = ({
         ))}
       </Grid>
 
-      {/* Price Row - Clickable to expand/collapse */}
       <Grid
         templateColumns={`1fr repeat(4, 1fr)`}
         gap={2}
@@ -92,7 +90,6 @@ const ProjectConfigurationsTable = ({
         ))}
       </Grid>
 
-      {/* Animated Collapsible Content */}
       <Box
         overflow='hidden'
         maxHeight={isExpanded ? '1000px' : '0px'}
