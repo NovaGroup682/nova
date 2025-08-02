@@ -1,13 +1,13 @@
 'use client';
 
-import Arrow from '@assets/icons/arrow-left.svg';
 import { GOOGLE_LINK } from 'constant';
-import colors from 'constant/colors';
 import Image from 'next/image';
 
 import { Box, Flex, Stack, Text, VStack } from '@chakra-ui/react';
 
 import { LayoutsPlanType } from 'types';
+
+import { EditProjectButton } from '../EditProjectButton';
 
 interface ProjectLayoutsProps {
   label: string;
@@ -80,16 +80,7 @@ const ProjectLayouts = ({
         </Text>
       </Flex>
 
-      <Flex
-        fontSize={16}
-        alignItems='center'
-        color='gray.500'
-        gap={2}
-        cursor='pointer'
-      >
-        <Arrow fill={colors.gray[500].value} width={15} height={15} />
-        Внести изменения в проект
-      </Flex>
+      <EditProjectButton />
     </Flex>
 
     <Stack
