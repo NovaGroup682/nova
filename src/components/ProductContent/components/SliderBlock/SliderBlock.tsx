@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -16,11 +16,15 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
   const swiperRef = useRef<SwiperType>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  useEffect(() => {
-    if (swiperRef.current && swiperRef.current.slideTo) {
-      swiperRef.current.slideTo(currentIndex);
+  const handleSlideChange = (swiper: SwiperType) => {
+    setCurrentIndex(swiper.realIndex);
+  };
+
+  const handleNavigationClick = (index: number) => {
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(index);
     }
-  }, [currentIndex]);
+  };
 
   return (
     <VStack
@@ -45,7 +49,7 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
-        onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
+        onSlideChange={handleSlideChange}
         style={{ width: '100%' }}
       >
         {sliders.map((slide) => (
@@ -58,7 +62,7 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
       <SliderNavigation
         list={sliders}
         currentSlide={currentIndex}
-        onClick={setCurrentIndex}
+        onClick={handleNavigationClick}
       />
     </VStack>
   );
