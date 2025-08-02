@@ -3,5 +3,5 @@
  * @param amount - The amount to format
  * @returns Formatted string like "1 000 000 ₽"
  */
-export const formatCurrency = (amount: number): string =>
-  amount.toLocaleString('ru-RU') + ' ₽';
+export const formatCurrency = (amount?: number): string =>
+  amount ? amount.toLocaleString('ru-RU') + ' ₽' : '';

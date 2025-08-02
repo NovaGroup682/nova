@@ -118,7 +118,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
                     }}
                     mx={3}
                     pr={3}
-                    fontWeight={600}
+                    fontWeight='light'
                     textAlign={{ base: 'center', md: 'right' }}
                   >
                     {project.name}
@@ -131,7 +131,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
                       md: '20px'
                     }}
                     mr={3}
-                    fontWeight={600}
+                    fontWeight='light'
                     whiteSpace='nowrap'
                   >
                     {`${project.variants[0].area} м`}&#178;
@@ -143,7 +143,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
                       base: '16px',
                       md: '20px'
                     }}
-                    fontWeight={600}
+                    fontWeight='light'
                     whiteSpace='nowrap'
                   >
                     {formatCurrency(project.implementationCost.shell)}

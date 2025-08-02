@@ -2,6 +2,8 @@ import projects from 'constant/projects';
 
 import { Flex, Text, VStack } from '@chakra-ui/react';
 
+import { formatCurrency } from 'helpers';
+
 import { ProjectLayouts, SliderBlock } from 'components';
 
 const ProjectsPage = async ({
@@ -60,7 +62,10 @@ const ProjectsPage = async ({
               md: '24px'
             }}
           >
-            {`цена проекта  ${project?.projectPrice ?? ''} ₽`}
+            <Text as='span' color='gray.500' pr={2}>
+              цена проекта
+            </Text>
+            {formatCurrency(project?.projectPrice)}
           </Text>
         </Flex>
         <SliderBlock sliders={project?.sliders ?? []} />

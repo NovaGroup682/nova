@@ -41,12 +41,41 @@ const ProjectLayouts = ({
         base: 'column',
         md: 'row'
       }}
-      gap={4}
-      my={4}
+      gap={{
+        base: 2,
+        md: 4
+      }}
+      my={{
+        base: 0,
+        md: 4
+      }}
     >
-      <Flex alignItems='center' gap={4}>
-        <Text fontSize={16}>{`Общая площадь ${area} м`}&#178;</Text>
-        <Text fontSize={16}>
+      <Flex
+        alignItems='center'
+        gap={4}
+        justifyContent={{
+          base: 'flex-start',
+          md: 'flex-start'
+        }}
+        w={{
+          base: 'full',
+          md: 'auto'
+        }}
+      >
+        <Text
+          fontSize={{
+            base: 14,
+            md: 16
+          }}
+        >
+          {`Общая площадь ${area} м`}&#178;
+        </Text>
+        <Text
+          fontSize={{
+            base: 14,
+            md: 16
+          }}
+        >
           {`Строительная площадь ${constructionArea} м`}&#178;
         </Text>
       </Flex>
@@ -66,25 +95,54 @@ const ProjectLayouts = ({
     <Stack
       w='full'
       gap={4}
-      flexDirection={plans.length === 1 ? 'column' : 'row'}
+      flexDirection={{
+        base: 'column',
+        md: plans.length === 1 ? 'column' : 'row'
+      }}
     >
       {plans.map((plan, idx) => (
-        <VStack key={plan.img} w='full' gap={4}>
+        <Stack
+          key={plan.img}
+          w='full'
+          gap={4}
+          flexDirection={{
+            base: 'column',
+            md: 'column'
+          }}
+        >
           <Text
             fontWeight={400}
             fontSize={{
               base: '18px',
               md: '24px'
             }}
+            textAlign='center'
+            mt={{
+              base: 2,
+              md: 0
+            }}
           >
             {`План ${idx % 2 ? 'второго' : 'первого'} этажа`}
           </Text>
           <Flex
             w='full'
-            gap={8}
-            flexDirection={idx % 2 ? 'row-reverse' : 'row'}
+            gap={{
+              base: 2,
+              md: 8
+            }}
+            flexDirection={{
+              base: 'column',
+              md: idx % 2 ? 'row-reverse' : 'row'
+            }}
           >
-            <Box w='full' h={700} position='relative'>
+            <Box
+              w='full'
+              h={{
+                base: 400,
+                md: 700
+              }}
+              position='relative'
+            >
               <Image
                 src={GOOGLE_LINK + plan.img}
                 alt='Background'
@@ -108,7 +166,15 @@ const ProjectLayouts = ({
                     textAlign='left'
                   >
                     {Object.values(plan.planWithArea).map((li) => (
-                      <Box key={li} as='li' _marker={{ right: 1 }}>
+                      <Box
+                        ml={{
+                          base: '24px',
+                          md: 0
+                        }}
+                        key={li}
+                        as='li'
+                        _marker={{ right: 1 }}
+                      >
                         {li}
                       </Box>
                     ))}
@@ -117,7 +183,7 @@ const ProjectLayouts = ({
               </Box>
             )}
           </Flex>
-        </VStack>
+        </Stack>
       ))}
     </Stack>
   </VStack>
