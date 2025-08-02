@@ -14,7 +14,6 @@ const projects: ProjectItemType[] = [
       '1ycboXgZ0IIGf1yoFLNimRMomEpwyY03H',
       '1GgFDQgt3beqEYmR5gdO9sCpz8XjpB9Tf'
     ],
-
     implementationCost: {
       shell: 8950000,
       insulatedShell: 12600000,
@@ -67,10 +66,10 @@ const projects: ProjectItemType[] = [
       '12wLLlkBGGwdzIFu6CEsoD-Ujz8N7mwiQ'
     ],
     implementationCost: {
-      shell: 0,
-      insulatedShell: 0,
-      facade: 0,
-      interiorFinishes: 0
+      "shell": 10660000,
+      "insulatedShell": 14880000,
+      "facade": 17350000,
+      "interiorFinishes": 23350000
     },
     variants: [
       {
@@ -119,17 +118,17 @@ const projects: ProjectItemType[] = [
     baths: 0,
     areaType: ProjectSize.xl,
     floor: 2,
-    projectPrice: 0,
+    projectPrice: 60000,
     price: 0,
     sliders: [
       '1_XiWiGUCRPE6-QHGne1XIEgvwikJS9Wb',
       '1hRfWoGyoQUL3Iy62iwGxXGhAJ3GgV9ef'
     ],
     implementationCost: {
-      shell: 0,
-      insulatedShell: 0,
-      facade: 0,
-      interiorFinishes: 0
+      shell: 11100000,
+      insulatedShell: 15500000,
+      facade: 18050000,
+      interiorFinishes: 24300000
     },
     variants: [
       {
@@ -173,10 +172,11 @@ const projects: ProjectItemType[] = [
       '1L1H4iCMlVLXth1n1MfWk6pIuBAk7Zqhq'
     ],
     implementationCost: {
-      shell: 0,
-      insulatedShell: 0,
-      facade: 0,
-      interiorFinishes: 0
+      shell: 8400000,
+      insulatedShell: 11700000,
+      facade: 13600000,
+      interiorFinishes: 18300000
+
     },
     variants: [
       {
@@ -233,10 +233,10 @@ const projects: ProjectItemType[] = [
       '1A3X4R9eaIs5zuA53sXfXWpDfKA-mEIVj'
     ],
     implementationCost: {
-      shell: 0,
-      insulatedShell: 0,
-      facade: 0,
-      interiorFinishes: 0
+      shell: 8650000,
+      insulatedShell: 12100000,
+      facade: 14050000,
+      interiorFinishes: 18900000
     },
     variants: [
       {
@@ -290,10 +290,10 @@ const projects: ProjectItemType[] = [
       '1ZWAS21rea86aF7XCk-dXkM1uo8w3-9qx'
     ],
     implementationCost: {
-      shell: 0,
-      insulatedShell: 0,
-      facade: 0,
-      interiorFinishes: 0
+      shell: 11450000,
+      insulatedShell: 15950000,
+      facade: 18600000,
+      interiorFinishes: 25000000
     },
     variants: [
       {
@@ -336,10 +336,10 @@ const projects: ProjectItemType[] = [
       '1L1UW9Z58aIySsLJXW7s6VIV1tuFzN7jN'
     ],
     implementationCost: {
-      shell: 0,
-      insulatedShell: 0,
-      facade: 0,
-      interiorFinishes: 0
+      shell: 6900000,
+      insulatedShell: 9750000,
+      facade: 11200000,
+      interiorFinishes: 14450000
     },
     variants: [
       {
@@ -348,8 +348,27 @@ const projects: ProjectItemType[] = [
         layouts: [
           {
             img: '1rxhmPpbBDuMiTMOEdy0AIwYF-fC2waYR',
-            planWithArea: {},
-            totalArea: 0
+            planWithArea: {
+              1: 'Прихожая 4.24',
+              2: 'Гардероб при входе 2.79',
+              3: 'Постирочная 4.65',
+              4: 'Котельная 6.95',
+              5: 'Общий с/у 5.90',
+              6: 'Холл 4.99',
+              7: 'Кухня-гостиная-столовая 34.88',
+              8: 'Кинозал 10.53',
+              9: 'Кабинет 9.91',
+              10: 'Коридор 5.42',
+              11: 'Мастер спальня 12.41',
+              12: 'Мастер с/у 3.86',
+              13: 'Мастер гардеробная 3.25',
+              14: 'Детская спальня 1 13.36',
+              15: 'Детская спальня 2 12.41',
+              16: 'Терраса 20.14',
+              17: 'Навес для 2 авто 40.90',
+
+            },
+            totalArea: 196.04
           }
         ]
       }
@@ -369,10 +388,10 @@ const projects: ProjectItemType[] = [
       '1P1zmPIMR7QTPPTi5MpsjSnkEDsfa4Y8H'
     ],
     implementationCost: {
-      shell: 0,
-      insulatedShell: 0,
-      facade: 0,
-      interiorFinishes: 0
+      shell: 7650000,
+      insulatedShell: 10800000,
+      facade: 12450000,
+      interiorFinishes: 16050000
     },
     variants: [
       {
@@ -381,8 +400,21 @@ const projects: ProjectItemType[] = [
         layouts: [
           {
             img: '1zbULZkwa-NQUVgVRojiWdkDFefaEIl9N',
-            planWithArea: {},
-            totalArea: 0
+            planWithArea: {
+              1: 'Кухня-гостиная 47.51',
+              2: 'Спальня 19.80',
+              3: 'Спальня 15.40',
+              4: 'Спальня 15.44',
+              5: 'Гардероб 4.85',
+              6: 'С/у 4.95',
+              7: 'С/у 6.61',
+              8: 'Холл 13.60',
+              9: 'Топочная 10.75',
+              10: 'Прихожая 11.04',
+              11: 'Терраса 21.48',
+              12: 'Крыльцо 4.72',
+            },
+            totalArea: 176.15
           }
         ]
       }
@@ -395,17 +427,17 @@ const projects: ProjectItemType[] = [
     baths: 0,
     areaType: ProjectSize.xl,
     floor: 2,
-    projectPrice: 0,
+    projectPrice: 60000,
     price: 0,
     sliders: [
       '1UwQl4w3Phc1N0yQ636ALkkkSuS8hBWHD',
       '15imlmQBGnhCwo_FcXSXhyV2IfWfNcYvj'
     ],
     implementationCost: {
-      shell: 0,
-      insulatedShell: 0,
-      facade: 0,
-      interiorFinishes: 0
+      shell: 11950000,
+      insulatedShell: 14150000,
+      facade: 19350000,
+      interiorFinishes: 26050000
     },
     variants: [
       {
@@ -450,8 +482,8 @@ const projects: ProjectItemType[] = [
         ]
       },
       {
-        area: 248,
-        constructionArea: 307,
+        area: 258,
+        constructionArea: 328,
         layouts: [
           {
             img: '1SQL2MkJu3eTKF2eK_Ix7em0SPrBBB7Yl',

@@ -40,7 +40,7 @@ const CeoBlock = () => (
           }}
         >
           <Text as='span' fontWeight='bold'>
-            {`${ceo.label}, `}
+            {`${ceo.label}.`}
           </Text>
 
           {ceo.description}
