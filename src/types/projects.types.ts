@@ -17,6 +17,7 @@ export type LayoutsPlanType = {
 export type ProjectItemType = {
   id: string;
   name: string;
+  estimateFileLink?: string;
   beds: number;
   baths: number;
   areaType: ProjectSize;

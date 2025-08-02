@@ -44,13 +44,21 @@ const ProjectConfigurationsTable = ({
 
       <Grid templateColumns={`1fr repeat(4, 1fr)`} gap={2} alignItems='center'>
         <GridItem>
-          <Text fontWeight='bold' fontSize={{ base: 14, md: 16 }}>
+          <Text
+            fontWeight='bold'
+            fontSize={{ base: 14, md: 16 }}
+            color='gray.500'
+          >
             Комплектации
           </Text>
         </GridItem>
         {content.projectDetails.titlesRow.map((title) => (
           <GridItem key={title} textAlign='center'>
-            <Text fontWeight='bold' fontSize={{ base: 14, md: 16 }}>
+            <Text
+              fontWeight='bold'
+              fontSize={{ base: 14, md: 16 }}
+              color='gray.500'
+            >
               {title}
             </Text>
           </GridItem>
@@ -72,15 +80,19 @@ const ProjectConfigurationsTable = ({
         transition='background-color 0.2s ease-in-out'
       >
         <GridItem>
-          <Text fontWeight='bold' fontSize={{ base: 14, md: 16 }}>
+          <Text
+            fontWeight='bold'
+            fontSize={{ base: 14, md: 16 }}
+            color='gray.500'
+          >
             Цена
           </Text>
         </GridItem>
         {prices.map((price, index) => (
           <GridItem key={index} textAlign='center'>
             <Text
-              fontSize={{ base: 12, md: 16 }}
-              color='green.500'
+              fontSize={{ base: 12, md: 18 }}
+              color='black'
               fontWeight='semibold'
               whiteSpace='nowrap'
             >
@@ -119,9 +131,9 @@ const ProjectConfigurationsTable = ({
               {content.projectDetails.titlesRow.map((title, configIndex) => (
                 <GridItem key={configIndex} textAlign='center'>
                   {feature.included[title as keyof typeof feature.included] ? (
-                    <Icon as={CheckCircleIcon} color='green.500' w={5} h={5} />
+                    <Icon as={CheckCircleIcon} color='gray.500' w={5} h={5} />
                   ) : (
-                    <Icon as={CloseIcon} color='red.400' w={4} h={4} />
+                    <Icon as={CloseIcon} w={4} h={4} />
                   )}
                 </GridItem>
               ))}
@@ -130,7 +142,13 @@ const ProjectConfigurationsTable = ({
         </VStack>
       </Box>
 
-      <Button onClick={toggleExpanded} colorScheme='blue'>
+      <Button
+        onClick={toggleExpanded}
+        colorScheme='blue'
+        w='300px'
+        bg='#2d2d2d'
+        m='0 auto'
+      >
         {isExpanded ? 'Свернуть' : 'Показать все детали'}
       </Button>
     </VStack>

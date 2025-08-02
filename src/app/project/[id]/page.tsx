@@ -1,10 +1,10 @@
 import projects from 'constant/projects';
 
-import { Flex, Text, VStack } from '@chakra-ui/react';
+import { Flex, Show, Text, VStack } from '@chakra-ui/react';
 
 import { formatCurrency } from 'helpers';
 
-import { ProjectLayouts, SliderBlock } from 'components';
+import { DownloadButton, ProjectLayouts, SliderBlock } from 'components';
 import { ProjectConfigurationsTable } from 'components/ProductContent/components/ProjectConfigurationsTable';
 
 const ProjectsPage = async ({
@@ -80,6 +80,13 @@ const ProjectsPage = async ({
             plans={variant.layouts}
           />
         ))}
+
+        <Show when={project?.estimateFileLink}>
+          <DownloadButton
+            fileId={project?.estimateFileLink ?? ''}
+            fileName='project-documentation.pdf'
+          />
+        </Show>
 
         <ProjectConfigurationsTable
           prices={Object.values(project?.implementationCost ?? '') ?? []}

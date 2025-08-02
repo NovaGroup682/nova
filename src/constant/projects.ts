@@ -220,6 +220,7 @@ const projects: ProjectItemType[] = [
   {
     id: 'nova-5',
     name: 'Nova-5',
+    estimateFileLink: '1m3pvKIay3wpoIuL6_jG7K1KpQbL8Ogo5',
     beds: 4,
     baths: 4,
     areaType: ProjectSize.l,
