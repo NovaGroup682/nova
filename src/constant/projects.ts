@@ -347,7 +347,7 @@ const projects: ProjectItemType[] = [
         constructionArea: 177,
         layouts: [
           {
-            img: '1rxhmPpbBDuMiTMOEdy0AIwYF-fC2waYR',
+            img: '1Gml3dPk9aKQ0mFlEic6vyMDLs4zGwc27',
             planWithArea: {
               1: 'Прихожая 4.24',
               2: 'Гардероб при входе 2.79',
