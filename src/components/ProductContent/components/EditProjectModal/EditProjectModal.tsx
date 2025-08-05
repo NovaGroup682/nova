@@ -36,7 +36,10 @@ const EditProjectModal = ({
       isOpen={isOpen}
       onClose={onClose}
       minH={500}
-      maxW='auto'
+      maxW={{
+        md: 'auto',
+        lg: '1000px'
+      }}
       w={{
         base: 'full',
         md: '80%'
