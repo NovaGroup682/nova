@@ -3,7 +3,7 @@
 import { GOOGLE_LINK } from 'constant';
 import Image from 'next/image';
 
-import { Box, Flex, Stack, Text, VStack } from '@chakra-ui/react';
+import { AspectRatio, Flex, Stack, Text, VStack } from '@chakra-ui/react';
 
 import { LayoutsPlanType } from 'types';
 
@@ -92,16 +92,15 @@ const ProjectLayouts = ({
         base: 'column',
         md: plans.length === 1 ? 'column' : 'row'
       }}
+      maxW={plans.length === 1 ? '50%' : 'full'}
     >
       {plans.map((plan, idx) => (
         <Stack
           key={plan.img}
           w='full'
           gap={4}
-          flexDirection={{
-            base: 'column',
-            md: 'column'
-          }}
+          flexDirection='column'
+          justifyContent='center'
         >
           <Text
             fontWeight={400}
@@ -117,65 +116,20 @@ const ProjectLayouts = ({
           >
             {`План ${idx % 2 ? 'второго' : 'первого'} этажа`}
           </Text>
-          <Flex
-            w='full'
-            gap={{
-              base: 2,
-              md: 8
-            }}
-            flexDirection={{
-              base: 'column',
-              md: idx % 2 ? 'row-reverse' : 'row'
-            }}
-          >
-            <Box
-              w='full'
-              h={{
-                base: 400,
-                md: 700
+          <AspectRatio position='relative' ratio={4 / 5}>
+            <Image
+              src={GOOGLE_LINK + plan.img}
+              alt='Background'
+              fill
+              style={{
+                objectFit: 'contain',
+                objectPosition: idx % 2 ? 'center' : 'center'
               }}
-              position='relative'
-            >
-              <Image
-                src={GOOGLE_LINK + plan.img}
-                alt='Background'
-                fill
-                style={{
-                  objectFit: 'contain',
-                  objectPosition: idx % 2 ? 'right' : 'left'
-                }}
-                priority
-                sizes='(max-width: 450px) 400px, 1200px'
-                quality={75}
-              />
-            </Box>
-            {plans.length === 1 && (
-              <Box w='full' alignContent='center'>
-                <Flex justifyContent={idx % 2 ? 'flex-end' : 'flex-start'}>
-                  <Box
-                    as='ul'
-                    listStyleType='numeric'
-                    width='auto'
-                    textAlign='left'
-                  >
-                    {Object.values(plan.planWithArea).map((li) => (
-                      <Box
-                        ml={{
-                          base: '24px',
-                          md: 0
-                        }}
-                        key={li}
-                        as='li'
-                        _marker={{ right: 1 }}
-                      >
-                        {li}
-                      </Box>
-                    ))}
-                  </Box>
-                </Flex>
-              </Box>
-            )}
-          </Flex>
+              priority
+              sizes='(max-width: 450px) 400px, 1200px'
+              quality={75}
+            />
+          </AspectRatio>
         </Stack>
       ))}
     </Stack>
