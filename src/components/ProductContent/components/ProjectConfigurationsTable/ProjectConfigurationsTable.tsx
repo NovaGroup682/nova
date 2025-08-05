@@ -127,6 +127,9 @@ const ProjectConfigurationsTable = ({
                 <Text fontWeight='medium' fontSize={{ base: 13, md: 15 }}>
                   {feature.name}
                 </Text>
+                <Text fontSize={{ base: 12, md: 14 }} color='gray.400'>
+                  {feature.desciption}
+                </Text>
               </GridItem>
               {content.projectDetails.titlesRow.map((title, configIndex) => (
                 <GridItem key={configIndex} textAlign='center'>
