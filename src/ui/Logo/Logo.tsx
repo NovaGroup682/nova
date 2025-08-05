@@ -10,7 +10,6 @@ const Logo = () => (
     style={{
       alignContent: 'center',
       outline: 'none',
-      padding: '4px',
       cursor: 'pointer'
     }}
     onFocus={(e) => {

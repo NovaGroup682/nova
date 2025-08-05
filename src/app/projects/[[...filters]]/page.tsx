@@ -27,7 +27,8 @@ const ProjectsPage = async ({
         w='full'
         maxW='1440px'
         px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
-        py={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
+        pt={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
+        mb={4}
       >
         <Flex
           w='full'
@@ -55,8 +56,8 @@ const ProjectsPage = async ({
           <SearchInput />
         </Flex>
         <ProjectsFilter />
-        <ProjectsList projects={projects} filters={filters} />
       </VStack>
+      <ProjectsList projects={projects} filters={filters} />
     </VStack>
   );
 };

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import {
+  AspectRatio,
   Collapsible,
   Flex,
   Skeleton,
@@ -43,117 +44,115 @@ const ProductItem = ({ project }: ProductItemProps) => {
 
   return (
     <Link href={`${paths.project}/${project.id}`}>
-      <VStack
-        position='relative'
-        w='full'
-        h={{
-          base: '200px',
-          md: '270px'
-        }}
-        borderRadius='5px'
-        overflow='hidden'
-        justifyContent={{
-          base: 'center',
-          md: 'flex-end'
-        }}
-        transition='all 0.3s ease'
-      >
-        {isImageLoading && (
-          <Skeleton
-            position='absolute'
-            top={0}
-            left={0}
-            w='full'
-            h='full'
-            borderRadius='5px'
-            bg='gray.100'
-          />
-        )}
-
-        <Image
-          sizes='(max-width: 450px) 270px, 400px'
-          style={{
-            objectFit: 'cover',
-            objectPosition: 'center',
-            filter: isImageLoading ? 'blur(10px)' : 'none',
-            transition: 'filter 0.3s ease-in-out'
-          }}
-          fill
-          src={GOOGLE_LINK + project.sliders[0]}
-          alt='contact cover'
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-        />
-
+      <AspectRatio ratio={7 / 4}>
         <VStack
-          position='absolute'
+          position='relative'
           w='full'
           h='full'
-          alignItems='center'
-          justifyContent='flex-end'
-          cursor='pointer'
-          boxShadow='initial'
-          transition='box-shadow 0.5s ease'
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          _hover={{
-            boxShadow: 'inset 0px -100px 40px -20px rgba(0, 0, 0, 0.42)'
+          borderRadius='5px'
+          overflow='hidden'
+          justifyContent={{
+            base: 'center',
+            md: 'flex-end'
           }}
+          transition='all 0.3s ease'
         >
-          {!isTouch && (
-            <Collapsible.Root unmountOnExit open={isHovered} cursor='default'>
-              <Collapsible.Content>
-                <Flex
-                  w='full'
-                  justifyContent={{ base: 'center', md: 'flex-start' }}
-                  alignItems='center'
-                  gap={1}
-                  pb={10}
-                >
-                  <Text
-                    color='white'
-                    fontSize={{
-                      base: '16px',
-                      md: '20px'
-                    }}
-                    mx={3}
-                    pr={3}
-                    fontWeight='light'
-                    textAlign={{ base: 'center', md: 'right' }}
-                  >
-                    {project.name}
-                  </Text>
-
-                  <Text
-                    color='white'
-                    fontSize={{
-                      base: '16px',
-                      md: '20px'
-                    }}
-                    mr={3}
-                    fontWeight='light'
-                    whiteSpace='nowrap'
-                  >
-                    {`${project.variants[0].area} м`}&#178;
-                  </Text>
-
-                  <Text
-                    color='white'
-                    fontSize={{
-                      base: '16px',
-                      md: '20px'
-                    }}
-                    fontWeight='light'
-                    whiteSpace='nowrap'
-                  >
-                    {formatCurrency(project.implementationCost.shell)}
-                  </Text>
-                </Flex>
-              </Collapsible.Content>
-            </Collapsible.Root>
+          {isImageLoading && (
+            <Skeleton
+              position='absolute'
+              top={0}
+              left={0}
+              w='full'
+              h='full'
+              borderRadius='5px'
+            />
           )}
+
+          <Image
+            sizes='(max-width: 450px) 270px, (max-width: 900px) 500px, 700px'
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center',
+              filter: isImageLoading ? 'blur(10px)' : 'none',
+              transition: 'filter 0.3s ease-in-out'
+            }}
+            fill
+            src={GOOGLE_LINK + project.sliders[0]}
+            alt='contact cover'
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+          />
+
+          <VStack
+            position='absolute'
+            w='full'
+            h='full'
+            alignItems='center'
+            justifyContent='flex-end'
+            cursor='pointer'
+            boxShadow='initial'
+            transition='box-shadow 0.5s ease'
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            _hover={{
+              boxShadow: 'inset 0px -100px 40px -20px rgba(0, 0, 0, 0.42)'
+            }}
+          >
+            {!isTouch && (
+              <Collapsible.Root unmountOnExit open={isHovered} cursor='default'>
+                <Collapsible.Content>
+                  <Flex
+                    w='full'
+                    justifyContent={{ base: 'center', md: 'flex-start' }}
+                    alignItems='center'
+                    gap={1}
+                    pb={10}
+                  >
+                    <Text
+                      color='white'
+                      fontSize={{
+                        base: '16px',
+                        md: '20px'
+                      }}
+                      mx={3}
+                      pr={3}
+                      fontWeight='light'
+                      textAlign={{ base: 'center', md: 'right' }}
+                    >
+                      {project.name}
+                    </Text>
+
+                    <Text
+                      color='white'
+                      fontSize={{
+                        base: '16px',
+                        md: '20px'
+                      }}
+                      mr={3}
+                      fontWeight='light'
+                      whiteSpace='nowrap'
+                    >
+                      {`${project.variants[0].area} м`}&#178;
+                    </Text>
+
+                    <Text
+                      color='white'
+                      fontSize={{
+                        base: '16px',
+                        md: '20px'
+                      }}
+                      fontWeight='light'
+                      whiteSpace='nowrap'
+                    >
+                      {formatCurrency(project.implementationCost.shell)}
+                    </Text>
+                  </Flex>
+                </Collapsible.Content>
+              </Collapsible.Root>
+            )}
+          </VStack>
         </VStack>
-      </VStack>
+      </AspectRatio>
     </Link>
   );
 };
