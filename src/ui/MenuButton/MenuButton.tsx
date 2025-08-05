@@ -11,7 +11,6 @@ const MenuButton = ({ label, href }: MenuButton) => (
   <Box
     position='relative'
     display='inline-block'
-    //  px="24px"
     height='24px'
     _hover={{
       '& .underline': {

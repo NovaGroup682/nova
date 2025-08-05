@@ -3,13 +3,14 @@
 import { useEffect, useState } from 'react';
 import projects from 'constant/projects';
 
-import { Flex, Show, Text, VStack } from '@chakra-ui/react';
+import { Flex, Show, Text, useDisclosure, VStack } from '@chakra-ui/react';
 
 import { formatCurrency } from 'helpers';
 
 import { ProjectItemType, ProjectItemVariantType } from 'types';
 
 import {
+  EditProjectModal,
   EstimateDownloadButton,
   ProjectLayouts,
   SliderBlock
@@ -18,6 +19,7 @@ import { ProjectConfigurationsTable } from 'components/ProductContent/components
 
 const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const [project, setProject] = useState<ProjectItemType | null>(null);
+  const { open: isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     const loadProject = async () => {
@@ -91,6 +93,7 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
           (variant: ProjectItemVariantType, idx: number) => (
             <ProjectLayouts
               key={`variant-${idx + 1}`}
+              openModal={onOpen}
               label={project.variants.length > 1 ? `Вариант ${idx + 1}` : ''}
               area={variant.area}
               constructionArea={variant.constructionArea}
@@ -107,6 +110,7 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
       <Show when={project?.estimateFileLink}>
         <EstimateDownloadButton project={project} />
       </Show>
+      <EditProjectModal isOpen={isOpen} onClose={onClose} project={project} />
     </VStack>
   );
 };

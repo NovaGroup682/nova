@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { GOOGLE_LINK } from 'constant';
 import Image from 'next/image';
 
@@ -18,7 +18,6 @@ interface EstimateModalProps {
 }
 
 const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
-  const sliderRef = useRef<HTMLDivElement>(null);
   const [isImageLoading, setIsImageLoading] = useState(true);
 
   const handleImageLoad = () => {
@@ -28,27 +27,6 @@ const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
   const handleImageError = () => {
     setIsImageLoading(false);
   };
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        sliderRef.current &&
-        !sliderRef.current.contains(event.target as Node)
-      ) {
-        onClose();
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen, onClose]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} minH={500}>

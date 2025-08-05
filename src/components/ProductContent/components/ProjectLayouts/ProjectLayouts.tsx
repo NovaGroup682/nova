@@ -11,6 +11,7 @@ import { EditProjectButton } from '../EditProjectButton';
 
 interface ProjectLayoutsProps {
   label: string;
+  openModal: () => void;
   area: number;
   constructionArea: number;
   plans: LayoutsPlanType[];
@@ -18,6 +19,7 @@ interface ProjectLayoutsProps {
 
 const ProjectLayouts = ({
   label,
+  openModal,
   area,
   constructionArea,
   plans
@@ -82,7 +84,7 @@ const ProjectLayouts = ({
         </Text>
       </Flex>
 
-      <EditProjectButton />
+      <EditProjectButton onClick={openModal} />
     </Flex>
 
     <Stack
