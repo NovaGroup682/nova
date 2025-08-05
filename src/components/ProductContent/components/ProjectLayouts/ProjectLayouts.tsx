@@ -92,7 +92,10 @@ const ProjectLayouts = ({
         base: 'column',
         md: plans.length === 1 ? 'column' : 'row'
       }}
-      maxW={plans.length === 1 ? '50%' : 'full'}
+      maxW={{
+        base: 'full',
+        md: plans.length === 1 ? '50%' : 'full'
+      }}
     >
       {plans.map((plan, idx) => (
         <Stack

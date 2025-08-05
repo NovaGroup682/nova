@@ -1,20 +1,36 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import projects from 'constant/projects';
 
 import { Flex, Show, Text, VStack } from '@chakra-ui/react';
 
 import { formatCurrency } from 'helpers';
 
-import { DownloadButton, ProjectLayouts, SliderBlock } from 'components';
+import { ProjectItemType, ProjectItemVariantType } from 'types';
+
+import {
+  EstimateDownloadButton,
+  ProjectLayouts,
+  SliderBlock
+} from 'components';
 import { ProjectConfigurationsTable } from 'components/ProductContent/components/ProjectConfigurationsTable';
 
-const ProjectsPage = async ({
-  params
-}: {
-  params: Promise<{ id: string }>;
-}) => {
-  const { id } = await params;
+const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
+  const [project, setProject] = useState<ProjectItemType | null>(null);
 
-  const project = projects.find((item) => String(item.id) === id);
+  useEffect(() => {
+    const loadProject = async () => {
+      const { id } = await params;
+      const foundProject = projects.find((item) => String(item.id) === id);
+      setProject(foundProject as ProjectItemType);
+    };
+    loadProject();
+  }, [params]);
+
+  if (!project) {
+    return null;
+  }
 
   return (
     <VStack
@@ -69,29 +85,28 @@ const ProjectsPage = async ({
             {formatCurrency(project?.projectPrice)}
           </Text>
         </Flex>
-        <SliderBlock sliders={project?.sliders ?? []} />
+        <SliderBlock sliders={project.sliders} />
 
-        {project?.variants.map((variant, idx) => (
-          <ProjectLayouts
-            key={`variant-${idx + 1}`}
-            label={project?.variants.length > 1 ? `Вариант ${idx + 1}` : ''}
-            area={variant.area}
-            constructionArea={variant.constructionArea}
-            plans={variant.layouts}
-          />
-        ))}
-
-        <Show when={project?.estimateFileLink}>
-          <DownloadButton
-            fileId={project?.estimateFileLink ?? ''}
-            fileName='project-documentation.pdf'
-          />
-        </Show>
+        {project.variants.map(
+          (variant: ProjectItemVariantType, idx: number) => (
+            <ProjectLayouts
+              key={`variant-${idx + 1}`}
+              label={project.variants.length > 1 ? `Вариант ${idx + 1}` : ''}
+              area={variant.area}
+              constructionArea={variant.constructionArea}
+              plans={variant.layouts}
+            />
+          )
+        )}
 
         <ProjectConfigurationsTable
           prices={Object.values(project?.implementationCost ?? '') ?? []}
         />
       </VStack>
+
+      <Show when={project?.estimateFileLink}>
+        <EstimateDownloadButton project={project} />
+      </Show>
     </VStack>
   );
 };

@@ -1,0 +1,93 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { GOOGLE_LINK } from 'constant';
+import Image from 'next/image';
+
+import { AspectRatio, Text } from '@chakra-ui/react';
+
+import { ProjectItemType } from 'types';
+
+import { Modal } from 'ui';
+import { DownloadButton } from '../DownloadButton';
+
+interface EstimateModalProps {
+  project: ProjectItemType;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [isImageLoading, setIsImageLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setIsImageLoading(false);
+  };
+
+  const handleImageError = () => {
+    setIsImageLoading(false);
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        sliderRef.current &&
+        !sliderRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} minH={500}>
+      <AspectRatio ratio={7 / 4} w='full'>
+        <Image
+          sizes='(max-width: 450px) 270px, (max-width: 900px) 500px, 700px'
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center',
+            filter: isImageLoading ? 'blur(10px)' : 'none',
+            transition: 'filter 0.3s ease-in-out'
+          }}
+          fill
+          src={GOOGLE_LINK + project.sliders[0]}
+          alt='contact cover'
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+        />
+      </AspectRatio>
+
+      <Text
+        textAlign='center'
+        fontSize={{
+          base: 16,
+          md: 20
+        }}
+        px={4}
+      >
+        Внутри - полный росчёт стоимости строительство по этолом, с учётом
+        материалов и робот Вы срозу понимаете, во сколько обойдётся дом, и
+        можете трезво оценить бюджет - ещё до разговоро с менеджером.
+      </Text>
+
+      <DownloadButton
+        fileId={project?.estimateFileLink ?? ''}
+        fileName='project-documentation.pdf'
+      />
+    </Modal>
+  );
+};
+
+export default EstimateModal;

@@ -1,23 +1,8 @@
 'use client';
 
-import { keyframes } from '@emotion/react';
-import { Button, Flex, Text } from '@chakra-ui/react';
+import DownloadIcon from '@assets/icons/arrow-down-to-bracket.svg';
 
-// Define pulse animation keyframes
-const pulseAnimation = keyframes`
-  0% { 
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0.7);
-  }
-  70% { 
-    transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(66, 153, 225, 0);
-  }
-  100% { 
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0);
-  }
-`;
+import { Button } from '@chakra-ui/react';
 
 const DownloadButton = ({
   fileId,
@@ -48,46 +33,21 @@ const DownloadButton = ({
   };
 
   return (
-    <Flex
-      gap={4}
-      alignItems='center'
-      w='80%'
-      mt={5}
-      mb={{
-        base: 5,
-        md: 10
+    <Button
+      my={6}
+      onClick={handleDownload}
+      size='2xl'
+      bg='gray.500'
+      color='white'
+      _hover={{
+        bg: 'gray.600'
       }}
-      flexDirection={{
-        base: 'column',
-        md: 'row'
-      }}
+      transition='all 0.3s ease'
+      mr={2}
     >
-      <Button
-        onClick={handleDownload}
-        size='2xl'
-        animation={`${pulseAnimation} 2s infinite`}
-        bg='gray.500'
-        color='white'
-        _hover={{
-          bg: 'gray.600',
-          animation: 'none'
-        }}
-        transition='all 0.3s ease'
-        mr={2}
-      >
-        Смета в PDF - скачать
-      </Button>
-      <Text
-        textAlign={{
-          base: 'center',
-          md: 'left'
-        }}
-      >
-        Внутри - полный росчёт стоимости строительство по этолом, с учётом
-        материалов и робот Вы срозу понимаете, во сколько обойдётся дом, и
-        можете трезво оценить бюджет - ещё до разговоро с менеджером.
-      </Text>
-    </Flex>
+      Скачать Cмету
+      <DownloadIcon fill='white' />
+    </Button>
   );
 };
 

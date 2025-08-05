@@ -14,6 +14,12 @@ export type LayoutsPlanType = {
   totalArea: number;
 };
 
+export type ProjectItemVariantType = {
+  area: number;
+  constructionArea: number;
+  layouts: LayoutsPlanType[];
+};
+
 export type ProjectItemType = {
   id: string;
   name: string;
@@ -25,11 +31,7 @@ export type ProjectItemType = {
   projectPrice: number;
   price: number;
   sliders: string[];
-  variants: {
-    area: number;
-    constructionArea: number;
-    layouts: LayoutsPlanType[];
-  }[];
+  variants: ProjectItemVariantType[];
   implementationCost: {
     shell: number;
     insulatedShell: number;
