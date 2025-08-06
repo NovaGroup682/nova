@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import { Box } from '@chakra-ui/react';
+import { Box, Spinner } from '@chakra-ui/react';
 
 import { Modal } from 'ui';
 
@@ -21,10 +21,12 @@ const ImageModal = ({
   imageAlt
 }: ImageModalProps) => {
   const [isZoomed, setIsZoomed] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (isOpen) {
       setIsZoomed(false);
+      setIsLoading(true);
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -53,6 +55,14 @@ const ImageModal = ({
     setIsZoomed(!isZoomed);
   };
 
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
+  const handleImageError = () => {
+    setIsLoading(false);
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -63,12 +73,13 @@ const ImageModal = ({
       maxW='auto'
       bg='transparent'
       boxShadow='none'
+      aspectRatio={12 / 15}
+      h={{
+        base: isZoomed ? 'full' : 'auto',
+        md: '95vh'
+      }}
       w={{
         base: '100vw',
-        md: isZoomed ? 'full' : 'auto'
-      }}
-      h={{
-        base: '100vh',
         md: isZoomed ? 'full' : 'auto'
       }}
       overflow='scroll'
@@ -93,24 +104,36 @@ const ImageModal = ({
         justifyContent='center'
         cursor={isZoomed ? 'zoom-out' : 'zoom-in'}
         onClick={handleImageClick}
-        transformOrigin={{
-          base: 'left center',
-          md: 'top center'
-        }}
+        transformOrigin='center'
       >
+        {isLoading && (
+          <Box
+            position='absolute'
+            top='50%'
+            left='50%'
+            transform='translate(-50%, -50%)'
+            zIndex={1}
+          >
+            <Spinner color='white' size='xl' />
+          </Box>
+        )}
+
         <Image
           src={imageSrc}
           alt={imageAlt}
           fill
           style={{
-            // paddingLeft: 150,
             objectFit: 'contain',
-            objectPosition: 'left',
-            pointerEvents: 'none'
+            objectPosition: 'center',
+            pointerEvents: 'none',
+            opacity: isLoading ? 0 : 1,
+            transition: 'opacity 0.3s ease-in-out'
           }}
           priority
           sizes='90vw'
           quality={90}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
         />
       </Box>
     </Modal>
