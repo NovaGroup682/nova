@@ -6,17 +6,18 @@ import Bed from '@assets/icons/bed-front.svg';
 import { paths } from 'constant';
 import projects from 'constant/projects';
 import NextLink from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import {
+  AspectRatio,
   Box,
   Flex,
   Grid,
   GridItem,
   Link,
-  Text,
-  VStack
+  Text
 } from '@chakra-ui/react';
 
 import content from 'content';
@@ -25,6 +26,7 @@ import { SliderItem, SliderNavigation } from 'components/SliderContent';
 
 const ProjectSliderBlock = () => {
   const swiperRef = useRef<SwiperType>(null);
+  const router = useRouter();
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
@@ -70,147 +72,153 @@ const ProjectSliderBlock = () => {
     </Link>
   );
 
+  const onSliderClick = (id: string) => () =>
+    router.push(`${paths.project}/${id}`);
+
   return (
-    <VStack
+    <AspectRatio
+      display='flex'
+      flexDirection='column'
+      ratio={7 / 4}
       my={8}
-      position='relative'
+      h='full'
       w='full'
-      h={{
-        base: 300,
-        md: 600,
-        lg: 800
-      }}
       borderRadius='2xl'
       overflow='hidden'
       justifyContent='space-between'
     >
-      <Swiper
-        slidesPerView={1}
-        mousewheel={true}
-        keyboard={true}
-        loop
-        className='mySwiper'
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
-        onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
-        style={{ width: '100%' }}
-      >
-        {sliders.map((slide) => (
-          <SwiperSlide key={slide.id} style={{ width: '100%' }}>
-            <SliderItem src={slide.sliders[0]} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <SliderNavigation
-        list={list}
-        currentSlide={currentIndex}
-        onClick={setCurrentIndex}
-      />
-
-      <Grid
-        templateColumns={{
-          base: 'repeat(2, 1fr)',
-          lg: 'repeat(3, 1fr)'
-        }}
-        position='absolute'
-        w='full'
-        zIndex={10}
-        bottom={{
-          base: '16px',
-          md: '32px'
-        }}
-        justifyContent='flex-start'
-        px='32px'
-        alignItems='center'
-        gap={1}
-      >
-        <GridItem
-          colSpan={{ base: 2, md: 1 }}
-          textAlign='left'
-          userSelect='none'
+      <Box w='full' position='relative'>
+        <Swiper
+          slidesPerView={1}
+          mousewheel={true}
+          keyboard={true}
+          loop
+          className='mySwiper'
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
+          style={{ width: '100%' }}
         >
-          <Flex
-            w='full'
-            justifyContent={{ base: 'center', md: 'flex-start' }}
-            alignItems='center'
-            gap={1}
+          {sliders.map((slide) => (
+            <SwiperSlide key={slide.id} style={{ width: '100%' }}>
+              <SliderItem
+                src={slide.sliders[0]}
+                onClick={onSliderClick(slide.id)}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <SliderNavigation
+          list={list}
+          currentSlide={currentIndex}
+          onClick={setCurrentIndex}
+        />
+
+        <Grid
+          templateColumns={{
+            base: 'repeat(2, 1fr)',
+            lg: 'repeat(3, 1fr)'
+          }}
+          position='absolute'
+          w='full'
+          zIndex={10}
+          bottom={{
+            base: '16px',
+            md: '32px'
+          }}
+          justifyContent='flex-start'
+          px='32px'
+          alignItems='center'
+          gap={1}
+        >
+          <GridItem
+            colSpan={{ base: 2, md: 1 }}
+            textAlign='left'
+            userSelect='none'
           >
-            <Box
-              width={{
-                base: '20px',
-                md: '30px',
-                lg: '40px'
-              }}
-              height={{
-                base: '20px',
-                md: '30px',
-                lg: '40px'
-              }}
+            <Flex
+              w='full'
+              justifyContent={{ base: 'center', md: 'flex-start' }}
+              alignItems='center'
+              gap={1}
             >
-              <Bed fill='white' />
-            </Box>
-            <Text color='white' fontSize={24} mx={3} fontWeight={600}>
-              {sliders[currentIndex].beds}
-            </Text>
-            <Box
-              width={{
-                base: '20px',
-                md: '30px',
-                lg: '40px'
+              <Box
+                width={{
+                  base: '20px',
+                  md: '30px',
+                  lg: '40px'
+                }}
+                height={{
+                  base: '20px',
+                  md: '30px',
+                  lg: '40px'
+                }}
+              >
+                <Bed fill='white' />
+              </Box>
+              <Text color='white' fontSize={24} mx={3} fontWeight={600}>
+                {sliders[currentIndex].beds}
+              </Text>
+              <Box
+                width={{
+                  base: '20px',
+                  md: '30px',
+                  lg: '40px'
+                }}
+                height={{
+                  base: '20px',
+                  md: '30px',
+                  lg: '40px'
+                }}
+              >
+                <Bath fill='white' />
+              </Box>
+              <Text color='white' fontSize={24} mx={3} fontWeight={600}>
+                {sliders[currentIndex].baths}
+              </Text>
+            </Flex>
+          </GridItem>
+          <GridItem
+            colSpan={1}
+            margin='0 auto'
+            display={{ base: 'none', lg: 'grid' }}
+          >
+            {projectBtn()}
+          </GridItem>
+
+          <GridItem
+            colSpan={{ base: 2, md: 1 }}
+            textAlign={{ base: 'center', md: 'right' }}
+            userSelect='none'
+          >
+            <Text
+              color='white'
+              fontSize={{
+                base: '18px',
+                md: '24px'
               }}
-              height={{
-                base: '20px',
-                md: '30px',
-                lg: '40px'
-              }}
+              mx={3}
+              fontWeight={600}
+              textAlign={{ base: 'center', md: 'right' }}
             >
-              <Bath fill='white' />
-            </Box>
-            <Text color='white' fontSize={24} mx={3} fontWeight={600}>
-              {sliders[currentIndex].baths}
+              {sliders[currentIndex].name}
             </Text>
-          </Flex>
-        </GridItem>
-        <GridItem
-          colSpan={1}
-          margin='0 auto'
-          display={{ base: 'none', lg: 'grid' }}
+          </GridItem>
+        </Grid>
+
+        <Flex
+          position='absolute'
+          w='full'
+          zIndex={10}
+          bottom='100px'
+          justifyContent='center'
+          display={{ base: 'grid', lg: 'none' }}
         >
           {projectBtn()}
-        </GridItem>
-
-        <GridItem
-          colSpan={{ base: 2, md: 1 }}
-          textAlign={{ base: 'center', md: 'right' }}
-          userSelect='none'
-        >
-          <Text
-            color='white'
-            fontSize={{
-              base: '18px',
-              md: '24px'
-            }}
-            mx={3}
-            fontWeight={600}
-            textAlign={{ base: 'center', md: 'right' }}
-          >
-            {sliders[currentIndex].name}
-          </Text>
-        </GridItem>
-      </Grid>
-
-      <Flex
-        position='absolute'
-        w='full'
-        zIndex={10}
-        bottom='100px'
-        justifyContent='center'
-        display={{ base: 'grid', lg: 'none' }}
-      >
-        {projectBtn()}
-      </Flex>
-    </VStack>
+        </Flex>
+      </Box>
+    </AspectRatio>
   );
 };
 

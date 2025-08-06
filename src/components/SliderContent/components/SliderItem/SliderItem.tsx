@@ -5,16 +5,17 @@ import { AspectRatio } from '@chakra-ui/react';
 
 interface SliderItemProps {
   src: string;
-  // onClick: (num: number) => void;
+  onClick: () => void;
 }
 
-const SliderItem = ({ src }: SliderItemProps) => (
+const SliderItem = ({ src, onClick }: SliderItemProps) => (
   <AspectRatio
     ratio={7 / 4}
     w='full'
     boxShadow='inset 0px -140px 40px -20px rgba(0, 0, 0, 0.42)'
     cursor='pointer'
     position='relative'
+    onClick={onClick}
   >
     <Image
       src={GOOGLE_LINK + src}
