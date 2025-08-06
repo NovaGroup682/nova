@@ -1,16 +1,33 @@
 'use client';
 
 import { ReactNode, useEffect, useRef } from 'react';
+import CloseIcon from '@assets/icons/circle-xmark.svg';
 
-import { Box, Portal, Show, StackProps, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  IconButton,
+  Portal,
+  Show,
+  StackProps,
+  VStack
+} from '@chakra-ui/react';
 
 interface ModalProps extends StackProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  isScrollable?: boolean;
+  isDark?: boolean;
 }
 
-const Modal = ({ isOpen, onClose, children, ...styles }: ModalProps) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  children,
+  isScrollable,
+  isDark,
+  ...styles
+}: ModalProps) => {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,12 +62,14 @@ const Modal = ({ isOpen, onClose, children, ...styles }: ModalProps) => {
           w='100vw'
           h='100vh'
           backdropFilter='blur(0.5rem)'
+          bg={isDark ? 'rgba(0, 0, 0, 0.5)' : 'transparent'}
           zIndex='9999'
           display='flex'
           alignItems='center'
           justifyContent='center'
           cursor='pointer'
           animation='fade-in 0.3s ease-out'
+          overflowY={isScrollable ? 'scroll' : 'hidden'}
         >
           <VStack
             ref={sliderRef}
@@ -75,6 +94,21 @@ const Modal = ({ isOpen, onClose, children, ...styles }: ModalProps) => {
             {...styles}
           >
             {children}
+
+            <IconButton
+              display={{ base: 'flex', md: 'none' }}
+              aria-label='Close modal'
+              position='fixed'
+              right='40px'
+              top='40px'
+              bg='white'
+              color='white'
+              _hover={{ bg: 'rgba(255, 255, 255, 0.2)' }}
+              onClick={onClose}
+              zIndex={10001}
+            >
+              <CloseIcon fill='gray.400' />
+            </IconButton>
           </VStack>
         </Box>
       </Portal>
