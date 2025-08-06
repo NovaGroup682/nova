@@ -59,6 +59,7 @@ const ImageModal = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
+      isDark
       maxW='auto'
       bg='transparent'
       boxShadow='none'
@@ -71,26 +72,27 @@ const ImageModal = ({
         md: isZoomed ? 'full' : 'auto'
       }}
       overflow='scroll'
-      overflowY='scroll'
+      overscrollBehaviorX='none'
       borderRadius={0}
     >
       <Box
         position='relative'
-        w={{
-          base: 'full',
-          md: isZoomed ? '700px' : '600px'
-        }}
+        aspectRatio={12 / 15}
         h={{
           base: 'full',
-          md: isZoomed ? '950px' : '750px'
+          md: '95vh'
         }}
-        transform={isZoomed ? 'scale(1.5)' : 'scale(1)'}
-        transition='all 0.3s ease-out'
+        transform={isZoomed ? 'scale(2)' : 'scale(1)'}
+        transition='all 0.3s ease-in-out'
         display='flex'
         alignItems='center'
         justifyContent='center'
         cursor={isZoomed ? 'zoom-out' : 'zoom-in'}
         onClick={handleImageClick}
+        transformOrigin={{
+          base: 'left center',
+          md: 'top center'
+        }}
       >
         <Image
           src={imageSrc}
