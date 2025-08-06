@@ -140,6 +140,7 @@ const ProjectLayouts = ({
             <AspectRatio
               position='relative'
               ratio={4 / 5}
+              maxH='75vh'
               cursor='pointer'
               onClick={() =>
                 handleImageClick(
