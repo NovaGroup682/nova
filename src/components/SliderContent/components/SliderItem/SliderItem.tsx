@@ -5,7 +5,7 @@ import { AspectRatio } from '@chakra-ui/react';
 
 interface SliderItemProps {
   src: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const SliderItem = ({ src, onClick }: SliderItemProps) => (
