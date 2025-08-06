@@ -79,8 +79,12 @@ const ImageModal = ({
         position='relative'
         aspectRatio={12 / 15}
         h={{
-          base: 'full',
+          base: 'auto',
           md: '95vh'
+        }}
+        w={{
+          base: '100vw',
+          md: 'auto'
         }}
         transform={isZoomed ? 'scale(2)' : 'scale(1)'}
         transition='all 0.3s ease-in-out'
@@ -99,8 +103,9 @@ const ImageModal = ({
           alt={imageAlt}
           fill
           style={{
-            // paddingTop: isZoomed ? '150px' : 0,
+            // paddingLeft: 150,
             objectFit: 'contain',
+            objectPosition: 'left',
             pointerEvents: 'none'
           }}
           priority
