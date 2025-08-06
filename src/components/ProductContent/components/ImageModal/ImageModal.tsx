@@ -104,7 +104,10 @@ const ImageModal = ({
         justifyContent='center'
         cursor={isZoomed ? 'zoom-out' : 'zoom-in'}
         onClick={handleImageClick}
-        transformOrigin='center'
+        transformOrigin={{
+          base: 'left center',
+          md: 'top center'
+        }}
       >
         {isLoading && (
           <Box
