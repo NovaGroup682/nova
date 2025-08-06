@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { AspectRatio, Text } from '@chakra-ui/react';
 
 import { ProjectItemType } from 'types';
+import content from 'content';
 
 import { Modal } from 'ui';
 import { DownloadButton } from '../DownloadButton';
@@ -55,9 +56,7 @@ const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
         }}
         px={4}
       >
-        Внутри - полный росчёт стоимости строительство по этолом, с учётом
-        материалов и робот Вы срозу понимаете, во сколько обойдётся дом, и
-        можете трезво оценить бюджет - ещё до разговоро с менеджером.
+        {content.projectDetails.estimateModal.text}
       </Text>
 
       <DownloadButton

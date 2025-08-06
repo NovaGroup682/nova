@@ -6,10 +6,7 @@ import content from 'content';
 
 const CeoBlock = () => (
   <Stack
-    w={{
-      base: 'calc(100% + 32px)',
-      md: '100%'
-    }}
+    w='full'
     flexDir={{
       base: 'column',
       md: 'row'
