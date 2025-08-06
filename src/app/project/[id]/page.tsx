@@ -110,7 +110,7 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
       <Show when={project?.estimateFileLink}>
         <EstimateDownloadButton project={project} />
       </Show>
-      <EditProjectModal isOpen={isOpen} onClose={onClose} project={project} />
+      <EditProjectModal isOpen={isOpen} onClose={onClose} />
     </VStack>
   );
 };

@@ -1,120 +1,211 @@
 'use client';
 
-import { useState } from 'react';
-import { GOOGLE_LINK } from 'constant';
-import Image from 'next/image';
+import { Box, Flex, Link, Text } from '@chakra-ui/react';
 
-import { AspectRatio, Text } from '@chakra-ui/react';
-
-import { ProjectItemType } from 'types';
+import content from 'content';
 
 import { Modal } from 'ui';
 
 interface EditProjectModalProps {
-  project: ProjectItemType;
   isOpen: boolean;
   onClose: () => void;
 }
 
-const EditProjectModal = ({
-  project,
-  isOpen,
-  onClose
-}: EditProjectModalProps) => {
-  const [isImageLoading, setIsImageLoading] = useState(true);
-
-  const handleImageLoad = () => {
-    setIsImageLoading(false);
-  };
-
-  const handleImageError = () => {
-    setIsImageLoading(false);
-  };
-
-  return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      minH={500}
-      maxW={{
-        md: 'auto',
-        lg: '1000px'
+const EditProjectModal = ({ isOpen, onClose }: EditProjectModalProps) => (
+  <Modal
+    isOpen={isOpen}
+    onClose={onClose}
+    py={4}
+    maxW={{
+      md: 'auto',
+      lg: '1000px'
+    }}
+    w={{
+      base: 'full',
+      md: '80%'
+    }}
+    mx={4}
+    gap={2}
+  >
+    <Text
+      w='full'
+      textAlign='left'
+      fontSize={{
+        base: 16,
+        md: 20
       }}
-      w={{
-        base: 'full',
-        md: '80%'
+      px={{
+        base: 4,
+        md: 8
       }}
-      mx={4}
     >
-      <AspectRatio ratio={7 / 4} w='full'>
-        <Image
-          sizes='(max-width: 450px) 270px, (max-width: 900px) 500px, 700px'
-          style={{
-            objectFit: 'cover',
-            objectPosition: 'center',
-            filter: isImageLoading ? 'blur(10px)' : 'none',
-            transition: 'filter 0.3s ease-in-out'
+      {content.projectDetails.editModal.questionTitle}
+    </Text>
+    <Text
+      as='h3'
+      w='full'
+      textAlign='left'
+      fontSize={{
+        base: 14,
+        md: 16
+      }}
+      px={{
+        base: 4,
+        md: 8
+      }}
+      fontWeight='normal'
+      color='gray.500'
+      pb={2}
+    >
+      {content.projectDetails.editModal.answerTitle}
+    </Text>
+    <Text
+      as='h3'
+      w='full'
+      textAlign='left'
+      fontSize={{
+        base: 16,
+        md: 20
+      }}
+      lineHeight='14px'
+      px={{
+        base: 4,
+        md: 8
+      }}
+      whiteSpace='pre-line'
+    >
+      {content.projectDetails.editModal.toChangeTitle}
+    </Text>
+
+    <Box
+      as='ul'
+      listStyleType='circle'
+      w='full'
+      px={{
+        base: 4,
+        md: 8
+      }}
+      pb={2}
+      ml={10}
+    >
+      {content.projectDetails.editModal.changeVariants.map((li) => (
+        <Text
+          key={li}
+          as='li'
+          fontSize={{
+            base: 14,
+            md: 16
           }}
-          fill
-          src={GOOGLE_LINK + project.sliders[0]}
-          alt='contact cover'
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-        />
-      </AspectRatio>
+          textAlign='left'
+          color='gray.500'
+        >
+          {li}
+        </Text>
+      ))}
+    </Box>
 
-      <Text
-        textAlign='center'
-        fontSize={{
-          base: 14,
-          md: 16
-        }}
-        px={4}
-      >
-        Можно ли внести изменения в проект? Да, при покупке типового проекта вы
-        можете внести изменения. Сначала согласуем перечень корректировок с
-        архитектором, затем рассчитываем стоимость — она прибавляется к базовой
-        цене проекта. Также уточняем сроки выдачи обновлённой документации.
-      </Text>
-      <Text
-        textAlign='left'
-        fontSize={{
-          base: 14,
-          md: 16
-        }}
-        lineHeight='14px'
-        px={4}
-        py={2}
-        whiteSpace='pre-line'
-      >
-        {`
-        Что можно изменить:
-          \n— адаптация наружных стен под регион строительства 
-          \n— замена фасадных материалов — незначительные изменения планировки 
-          \n— добавление или перенос окна, проёма и т.п.
-        `}
-      </Text>
+    <Text
+      w='full'
+      textAlign='left'
+      fontSize={{
+        base: 14,
+        md: 16
+      }}
+      px={{
+        base: 4,
+        md: 8
+      }}
+      pb={4}
+      fontStyle='italic'
+    >
+      {content.projectDetails.editModal.description}
+    </Text>
 
-      <Text
-        textAlign='center'
+    <Box
+      position='relative'
+      display='inline-block'
+      height='24px'
+      _hover={{
+        '& .underline': {
+          transform: 'scaleX(1)'
+        }
+      }}
+      _active={{
+        '& .menu-text': {
+          color: 'gray.400'
+        },
+        '& .underline': {
+          bg: 'gray.400'
+        }
+      }}
+      mb={4}
+    >
+      <Link
+        href={`tel:${content.contacts.phone}`}
         fontSize={{
-          base: 14,
-          md: 16
+          base: '12px',
+          md: '14px'
         }}
-        px={4}
-        pb={2}
-        fontStyle='italic'
+        w='full'
+        py='16px'
+        borderRadius='10px'
+        position='relative'
+        bg='transparent'
+        _focus={{ outlineWidth: 0 }}
+        _hover={{ textDecoration: 'none' }}
       >
-        Наши проекты изначально сбалансированы по архитектуре, логике
-        планировки, стоимости реализации и адаптированы под стандартный участок.
-        Мы рекомендуем использовать их в базовой версии — так вы получаете
-        оптимальный результат без существенного увеличения бюджета на
-        реализацию. Глобальные изменения могут повлиять на целостность концепции
-        и потребуют серьёзной переработки. В таких случаях мы предлагаем
-        индивидуальное проектирование.
-      </Text>
-    </Modal>
-  );
-};
+        <Text
+          className='menu-text'
+          textTransform='uppercase'
+          fontSize='16px'
+          color='black'
+          userSelect='none'
+          lineHeight='16px'
+          _active={{ color: 'red.500' }}
+        >
+          {content.contacts.phone}
+        </Text>
+      </Link>
+      <Box
+        className='underline'
+        position='absolute'
+        bottom='-10px'
+        left={0}
+        right={0}
+        height='2px'
+        bg='black'
+        transform='scaleX(0)'
+        transformOrigin='left'
+        transition='transform 0.5s ease'
+      />
+    </Box>
+
+    <Flex gap={2}>
+      {content.contacts.socialLinks.map(({ link, alt, icon: Icon }) => (
+        <Link
+          key={alt}
+          href={link}
+          borderRadius='50%'
+          bg='gray.500'
+          w='40px'
+          h='40px'
+          alignItems='center'
+          justifyContent='center'
+          target='_blank'
+          transition='all 0.3s ease'
+          _hover={{
+            bg: 'gray.400',
+            transform: 'scale(1.1)',
+            '& svg': {
+              fill: 'white'
+            }
+          }}
+        >
+          <Icon fill='white' />
+        </Link>
+      ))}
+    </Flex>
+  </Modal>
+);
 
 export default EditProjectModal;

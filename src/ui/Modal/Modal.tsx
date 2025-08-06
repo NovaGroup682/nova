@@ -1,13 +1,8 @@
+'use client';
+
 import { ReactNode, useEffect, useRef } from 'react';
 
-import {
-  Box,
-  Portal,
-  Presence,
-  Show,
-  StackProps,
-  VStack
-} from '@chakra-ui/react';
+import { Box, Portal, Show, StackProps, VStack } from '@chakra-ui/react';
 
 interface ModalProps extends StackProps {
   isOpen: boolean;
@@ -41,52 +36,48 @@ const Modal = ({ isOpen, onClose, children, ...styles }: ModalProps) => {
 
   return (
     <Show when={isOpen}>
-      <Presence
-        present={isOpen}
-        animationName={{ _open: 'fade-in', _closed: 'fade-out' }}
-        animationDuration='moderate'
-      >
-        <Portal>
-          <Box
-            shadow='lg'
-            position='fixed'
-            top='0'
-            left='0'
-            w='100vw'
-            h='100vh'
-            backdropFilter='blur(0.5rem)'
-            zIndex='9999'
-            display='flex'
-            alignItems='center'
+      <Portal>
+        <Box
+          shadow='lg'
+          position='fixed'
+          top='0'
+          left='0'
+          w='100vw'
+          h='100vh'
+          backdropFilter='blur(0.5rem)'
+          zIndex='9999'
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+          cursor='pointer'
+          animation='fade-in 0.3s ease-out'
+        >
+          <VStack
+            ref={sliderRef}
+            bg='white'
+            borderRadius='2xl'
+            maxW={{
+              base: 'auto',
+              md: '600px'
+            }}
+            w={{
+              base: '90%',
+              md: '80%'
+            }}
+            boxShadow='lg'
+            cursor='default'
+            position='relative'
+            overflow='hidden'
             justifyContent='center'
-            cursor='pointer'
+            alignItems='center'
+            gap={6}
+            animation='fade-in 0.3s ease-out'
+            {...styles}
           >
-            <VStack
-              ref={sliderRef}
-              bg='white'
-              borderRadius='2xl'
-              maxW={{
-                base: 'auto',
-                md: '600px'
-              }}
-              w={{
-                base: '90%',
-                md: '80%'
-              }}
-              boxShadow='lg'
-              cursor='default'
-              position='relative'
-              overflow='hidden'
-              justifyContent='center'
-              alignItems='center'
-              gap={6}
-              {...styles}
-            >
-              {children}
-            </VStack>
-          </Box>
-        </Portal>
-      </Presence>
+            {children}
+          </VStack>
+        </Box>
+      </Portal>
     </Show>
   );
 };

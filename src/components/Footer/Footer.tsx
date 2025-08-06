@@ -133,9 +133,10 @@ const Footer = () => (
               alignItems='center'
               justifyContent='center'
               target='_blank'
-              transition='transform 0.3s ease'
+              transition='all 0.3s ease'
               _hover={{
                 bg: 'gray.400',
+                transform: 'scale(1.1)',
                 '& svg': {
                   fill: 'white'
                 }

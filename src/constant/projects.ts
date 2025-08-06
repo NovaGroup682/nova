@@ -26,7 +26,7 @@ const projects: ProjectItemType[] = [
         area: 175,
         layouts: [
           {
-            img: '1HR-v9KWXYMUyvmAcRz3eDNiy1jlDfchE',
+            img: '1UDPNpcGZZc_Kv9lPIF3ZL7Dh3i9WVaNR',
             planWithArea: {
               1: 'Крыльцо 6.5',
               2: 'Прихожая 6.5',
@@ -244,7 +244,7 @@ const projects: ProjectItemType[] = [
         constructionArea: 230,
         layouts: [
           {
-            img: '1MrM3CwCn-fTi-89Orp8to6n56LDOlWj1',
+            img: '1Dtof8FAF_-aob07CgruV_DcOUbpVsPM8',
             planWithArea: {
               1: 'Прихожая 6.95',
               2: 'Холл/лестница 12.50',
@@ -259,7 +259,7 @@ const projects: ProjectItemType[] = [
             totalArea: 105.66
           },
           {
-            img: '1pxJjGcl-T7itNUrpz8Yx0jVYaMSSA6nZ',
+            img: '1enmlj6-UjxPgzeZrBxJq0QABMIIQc9Dm',
             planWithArea: {
               1: 'Холл 12.16',
               2: 'Детская спальня 1 13.19',
