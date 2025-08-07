@@ -1,6 +1,6 @@
 'use client';
 
-import { paths } from 'constant';
+import { maxWidth, paths } from 'constant';
 import { usePathname } from 'next/navigation';
 
 import { Flex } from '@chakra-ui/react';
@@ -30,9 +30,9 @@ const Header = () => {
     >
       <Flex
         justifyContent='space-between'
-        maxW='1400px'
+        maxW={maxWidth}
         width='full'
-        px={{ base: '16px', sm: '32px', md: '60px', lg: '64px' }}
+        px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
       >
         <Logo />
 

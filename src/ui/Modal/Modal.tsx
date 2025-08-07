@@ -73,6 +73,7 @@ const Modal = ({
         >
           <VStack
             ref={sliderRef}
+            data-modal-content
             bg='white'
             borderRadius='2xl'
             maxW={{

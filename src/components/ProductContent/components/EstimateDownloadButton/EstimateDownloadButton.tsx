@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { maxWidth } from 'constant';
 
 import {
   Button as ChakraButton,
@@ -86,7 +87,7 @@ const EstimateDownloadButton = ({ project }: EstimateDownloadButtonProps) => {
           md: 'flex'
         }}
         top={0}
-        bg='white'
+        bg='#ffffffba'
         boxShadow='2xl'
         opacity={isStickyVisible ? 1 : 0}
         visibility={isStickyVisible ? 'visible' : 'hidden'}
@@ -97,7 +98,7 @@ const EstimateDownloadButton = ({ project }: EstimateDownloadButtonProps) => {
           alignItems='center'
           gap={3}
           w='full'
-          maxW='1440px'
+          maxW={maxWidth}
           justifyContent='space-between'
           px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
           py={4}

@@ -1,3 +1,4 @@
+import { maxWidth } from 'constant';
 import Image from 'next/image';
 
 import { Box, For, Text, VStack } from '@chakra-ui/react';
@@ -43,7 +44,7 @@ const Home = () => (
     <VStack
       gap={0}
       w='full'
-      maxW='1440px'
+      maxW={maxWidth}
       px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
     >
       <VStack
@@ -77,7 +78,7 @@ const Home = () => (
                 xl: '72px'
               }}
               textAlign='left'
-              fontWeight={600}
+              fontWeight={400}
               color='white'
               whiteSpace='pre-line'
               cursor='default'
@@ -87,6 +88,7 @@ const Home = () => (
               animateBy='words'
               direction='top'
               className='text-2xl mb-8'
+              letterSpacing='4px'
             />
           )}
         </For>
@@ -109,6 +111,7 @@ const Home = () => (
             base: '30px',
             md: '52px'
           }}
+          letterSpacing='1px'
         >
           {content.main.text1}
         </Text>
@@ -128,6 +131,7 @@ const Home = () => (
             md: '52px'
           }}
           fontWeight={700}
+          letterSpacing='2px'
         >
           {content.main.text2}
         </Text>

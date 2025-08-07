@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 import { Box, useDisclosure } from '@chakra-ui/react';
 
-import { useIsTouchDevice } from 'hooks';
+import { useIsTouchDevice, useScreenHeight } from 'hooks';
 
 import content from 'content';
 
@@ -19,6 +19,7 @@ const MainProjectDescription = () => {
   const { open, onOpen, onClose } = useDisclosure();
 
   const { isTouch } = useIsTouchDevice();
+  const { isSmallScreen } = useScreenHeight();
 
   return (
     <>
@@ -36,11 +37,11 @@ const MainProjectDescription = () => {
           bottom={70}
           w={{
             base: 'full',
-            md: isHovered && !isTouch ? 550 : 450
+            md: isSmallScreen ? 360 : isHovered && !isTouch ? 550 : 450
           }}
           h={{
             base: 240,
-            md: isHovered && !isTouch ? 370 : 300
+            md: isSmallScreen ? 240 : isHovered && !isTouch ? 370 : 300
           }}
           style={{
             transition: isTouch ? 'none' : 'width 0.3s ease, height 0.3s ease'

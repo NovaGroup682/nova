@@ -1,6 +1,6 @@
 'use client';
 
-import { paths } from 'constant';
+import { maxWidth, paths } from 'constant';
 import NextLink from 'next/link';
 
 import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
@@ -22,7 +22,7 @@ const Footer = () => (
   >
     <Flex
       gap={0}
-      maxW='1440px'
+      maxW={maxWidth}
       w='full'
       flexDirection={{
         base: 'column',
@@ -150,7 +150,7 @@ const Footer = () => (
     </Flex>
     <Box w='full' h='1px' bg={borderColor} />
     <Flex
-      maxW='1440px'
+      maxW={maxWidth}
       w='full'
       flexDirection={{
         base: 'column',

@@ -28,8 +28,22 @@ const ImageModal = ({
       setIsZoomed(false);
       setIsLoading(true);
       document.body.style.overflow = 'hidden';
+
+      // Reset scroll position when modal opens
+      setTimeout(() => {
+        const modalElement = document.querySelector('[data-modal-content]');
+        if (modalElement) {
+          modalElement.scrollTo(0, 0);
+        }
+        // Force scroll reset for mobile browsers
+        window.scrollTo(0, 0);
+      }, 100);
     } else {
       document.body.style.overflow = 'unset';
+      // Reset scroll when modal closes
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
     }
 
     return () => {
@@ -50,9 +64,32 @@ const ImageModal = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
+  // Handle scroll reset when zoom state changes
+  useEffect(() => {
+    if (!isZoomed) {
+      // Reset scroll when zooming out
+      const timer = setTimeout(() => {
+        const modalElement = document.querySelector('[data-modal-content]');
+        if (modalElement) {
+          modalElement.scrollTo(0, 0);
+        }
+        // Force scroll reset for mobile browsers
+        window.scrollTo(0, 0);
+        document.body.scrollTo(0, 0);
+      }, 350); // Wait for transition to complete
+
+      return () => clearTimeout(timer);
+    }
+  }, [isZoomed]);
+
   const handleImageClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsZoomed(!isZoomed);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    // Prevent default touch behavior that might interfere with zoom
+    e.preventDefault();
   };
 
   const handleImageLoad = () => {
@@ -84,7 +121,9 @@ const ImageModal = ({
       }}
       overflow='scroll'
       overscrollBehaviorX='none'
+      overscrollBehaviorY='none'
       borderRadius={0}
+      className='image-modal-container'
     >
       <Box
         position='relative'
@@ -104,6 +143,7 @@ const ImageModal = ({
         justifyContent='center'
         cursor={isZoomed ? 'zoom-out' : 'zoom-in'}
         onClick={handleImageClick}
+        onTouchStart={handleTouchStart}
         transformOrigin={{
           base: 'left center',
           md: 'top center'

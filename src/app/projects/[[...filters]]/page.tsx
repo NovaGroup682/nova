@@ -1,3 +1,4 @@
+import { maxWidth } from 'constant';
 import projects from 'constant/projects';
 
 import { Flex, Text, VStack } from '@chakra-ui/react';
@@ -25,7 +26,7 @@ const ProjectsPage = async ({
       <VStack
         gap={4}
         w='full'
-        maxW='1440px'
+        maxW={maxWidth}
         px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
         pt={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
         mb={4}

@@ -15,7 +15,7 @@ const EditProjectModal = ({ isOpen, onClose }: EditProjectModalProps) => (
   <Modal
     isOpen={isOpen}
     onClose={onClose}
-    py={4}
+    py={6}
     maxW={{
       md: 'auto',
       lg: '1000px'
@@ -55,7 +55,7 @@ const EditProjectModal = ({ isOpen, onClose }: EditProjectModalProps) => (
       }}
       fontWeight='normal'
       color='gray.500'
-      pb={2}
+      pb={4}
     >
       {content.projectDetails.editModal.answerTitle}
     </Text>
@@ -85,7 +85,7 @@ const EditProjectModal = ({ isOpen, onClose }: EditProjectModalProps) => (
         base: 4,
         md: 8
       }}
-      pb={2}
+      pb={4}
       ml={10}
     >
       {content.projectDetails.editModal.changeVariants.map((li) => (

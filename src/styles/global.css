@@ -105,3 +105,25 @@
 .pulse-red {
   animation: pulseRed 2s infinite;
 }
+
+/* Mobile scroll fix for image modal */
+.image-modal-container {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.image-modal-container::-webkit-scrollbar {
+  display: none;
+}
+
+.image-modal-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Prevent scroll position preservation on mobile */
+@media (max-width: 768px) {
+  .image-modal-container {
+    scroll-behavior: auto;
+  }
+}
