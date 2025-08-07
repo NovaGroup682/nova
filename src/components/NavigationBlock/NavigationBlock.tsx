@@ -18,12 +18,12 @@ const NavigationBlock = () => (
     }}
     my='40px'
   >
-    {content.main.navigationBlcok.map((nav) => (
+    {content.main.navigationBlcok.map((nav, idx) => (
       <Box
         key={nav.title}
         height={{
           base: 300,
-          md: 500
+          md: 700
         }}
         width='full'
         bg='gray.100'
@@ -36,35 +36,62 @@ const NavigationBlock = () => (
         position='relative'
         overflow='hidden'
       >
-        <Link href={nav.path}>
-          <Box position='relative' width='100%' height={500}>
-            <NextImage
-              sizes='(max-width: 450px) 400px, 500px'
-              fill
-              style={{
-                objectFit: 'cover',
-                objectPosition: 'bottom'
-              }}
-              src={nav.img as unknown as string}
-              alt={nav.title}
-            />
-          </Box>
-        </Link>
+        <Box position='relative' width='100%' height={700}>
+          <NextImage
+            sizes='(max-width: 450px) 400px, 700px'
+            fill
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'bottom'
+            }}
+            src={nav.img as unknown as string}
+            alt={nav.title}
+          />
+        </Box>
 
-        <VStack
-          position='absolute'
-          top={6}
-          left={6}
-          gap={0}
-          w='full'
-          justifyContent='flex-start'
-          alignItems='flex-start'
-        >
-          <Text fontWeight={600} color='white'>
-            {nav.title}
-          </Text>
-          <Text color='white'>{nav.description}</Text>
-        </VStack>
+        <Link href={nav.path}>
+          <VStack
+            position='absolute'
+            p={6}
+            top={0}
+            left={0}
+            // boxShadow='inset 0px -260px 40px -20px rgba(0, 0, 0, 0.42)'
+            bg='rgba(0, 0, 0, 0.3)'
+            gap={0}
+            w='full'
+            h='full'
+            justifyContent={idx % 2 ? 'flex-end' : 'flex-start'}
+            alignItems='flex-start'
+            whiteSpace='pre-line'
+          >
+            <Text fontWeight={600} color='white' fontSize={26}>
+              {nav.title}
+            </Text>
+            {Array.isArray(nav.description) ? (
+              <Box
+                as='ul'
+                listStyleType='disc'
+                listStylePosition='outside'
+                color='white'
+                pl={6}
+                w='full'
+                ml={4}
+              >
+                {nav.description.map((li) => (
+                  <Box as='li' key={li} mb={2} color='white'>
+                    <Text lineHeight='22px' fontSize={22} color='white'>
+                      {li}
+                    </Text>
+                  </Box>
+                ))}
+              </Box>
+            ) : (
+              <Text fontSize={22} color='white'>
+                {nav.description}
+              </Text>
+            )}
+          </VStack>
+        </Link>
       </Box>
     ))}
   </Stack>

@@ -98,14 +98,13 @@ const content = {
     navigationBlcok: [
       {
         title: 'Типовые проекты',
-        description:
-          'готовые решения, которые можно адаптировать под ваш участок.',
+        description: `готовые решения, которые можно\nадаптировать под ваш участок`,
         img: GOOGLE_LINK + '1wibx600imEROiiJz_EQY5MrMcC5s3OYz',
         path: paths.projects
       },
       {
         title: 'Индивидуальное проектирование',
-        description: 'создаём дом с нуля под ваш стиль жизни и в рамах бюджета',
+        description: `создаём дом с нуля под ваш стиль\nжизни и в рамах бюджета`,
         img: GOOGLE_LINK + '1O3mQI6NFlXK3TPQWT9x7tcLOY0CwhB4d',
         path: paths.design
       },
