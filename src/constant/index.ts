@@ -9,6 +9,7 @@ export const paths = {
   projects: '/projects',
   project: '/project',
   design: '/design',
+  services: '/services',
   supervision: '/supervision',
   contacts: '/contacts'
 };

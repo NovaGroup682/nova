@@ -27,8 +27,8 @@ const content = {
         href: paths.design
       },
       {
-        label: 'Авторский Надзор',
-        href: paths.projects
+        label: 'Услуги',
+        href: paths.services
       },
       {
         label: 'Контакты',
@@ -116,7 +116,7 @@ const content = {
           'всегда на связи'
         ],
         img: GOOGLE_LINK + '1MjE6ucharO37nISKHOBCCLY_5Wl0NyaL',
-        path: paths.projects
+        path: paths.services
       }
     ],
     contactBlock: {
