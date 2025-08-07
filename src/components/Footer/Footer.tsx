@@ -1,6 +1,6 @@
 'use client';
 
-import { maxWidth, paths } from 'constant';
+import { BASE_HORIZONTAL_PADINGS, maxWidth, paths } from 'constant';
 import NextLink from 'next/link';
 
 import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
@@ -35,7 +35,7 @@ const Footer = () => (
           md: '50%'
         }}
         justifyContent='space-between'
-        px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
+        px={BASE_HORIZONTAL_PADINGS}
         py={{ base: '16px', sm: '32px', md: '40px' }}
         borderRightWidth='0.5px'
         borderColor={borderColor}
@@ -76,7 +76,7 @@ const Footer = () => (
           md: '50%'
         }}
         justifyContent='space-between'
-        px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
+        px={BASE_HORIZONTAL_PADINGS}
         py={{ base: '16px', sm: '32px', md: '40px' }}
         borderLeftWidth='0.5px'
         borderColor={borderColor}
@@ -164,7 +164,7 @@ const Footer = () => (
         }}
         justifyContent='space-between'
         alignItems='center'
-        px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
+        px={BASE_HORIZONTAL_PADINGS}
         py={{ base: '16px', sm: '24px', md: '32px' }}
         borderRightWidth='0.5px'
         borderColor={borderColor}
@@ -209,7 +209,7 @@ const Footer = () => (
         }}
         justifyContent='space-between'
         alignItems='center'
-        px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
+        px={BASE_HORIZONTAL_PADINGS}
         pt={{ base: 0, sm: '24px', md: '32px' }}
         pb={{ base: '16px', sm: '24px', md: '32px' }}
         borderLeftWidth='0.5px'

@@ -1,6 +1,7 @@
 'use client';
 
 import { memo, useMemo } from 'react';
+import { BASE_HORIZONTAL_PADINGS } from 'constant';
 
 import { SimpleGrid } from '@chakra-ui/react';
 
@@ -43,7 +44,7 @@ const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
       gap={2}
       w='full'
       mt={4}
-      px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
+      px={BASE_HORIZONTAL_PADINGS}
       pb={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
     >
       {list.map((project) => (

@@ -2,6 +2,7 @@
 
 import Bars from '@assets/icons/bars.svg';
 import Xmark from '@assets/icons/circle-xmark.svg';
+import { BASE_HORIZONTAL_PADINGS } from 'constant';
 import NextLink from 'next/link';
 
 import {
@@ -35,7 +36,7 @@ const MenuToogler = () => {
           <Drawer.Backdrop />
           <Drawer.Positioner>
             <Drawer.Content
-              px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
+              px={BASE_HORIZONTAL_PADINGS}
               style={{
                 background: 'rgba(255, 255, 255, 0.3)',
                 backdropFilter: 'blur(5rem)'

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { maxWidth } from 'constant';
+import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
 
 import {
   Button as ChakraButton,
@@ -100,7 +100,7 @@ const EstimateDownloadButton = ({ project }: EstimateDownloadButtonProps) => {
           w='full'
           maxW={maxWidth}
           justifyContent='space-between'
-          px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
+          px={BASE_HORIZONTAL_PADINGS}
           py={4}
         >
           <Text

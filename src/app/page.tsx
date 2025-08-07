@@ -1,4 +1,4 @@
-import { maxWidth } from 'constant';
+import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
 import Image from 'next/image';
 
 import { Box, For, Text, VStack } from '@chakra-ui/react';
@@ -41,12 +41,7 @@ const Home = () => (
         quality={75}
       />
     </Box>
-    <VStack
-      gap={0}
-      w='full'
-      maxW={maxWidth}
-      px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
-    >
+    <VStack gap={0} w='full' maxW={maxWidth} px={BASE_HORIZONTAL_PADINGS}>
       <VStack
         w='full'
         flex={1}

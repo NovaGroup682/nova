@@ -50,3 +50,10 @@ export const PROJECT_FLOORS: number[] = [1, 2];
 export const GOOGLE_LINK = 'https://drive.google.com/uc?export=view&id=';
 
 export const maxWidth = 1920;
+
+export const BASE_HORIZONTAL_PADINGS = {
+  base: '16px',
+  sm: '32px',
+  md: '80px',
+  lg: '120px'
+};

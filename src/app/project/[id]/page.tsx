@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { maxWidth } from 'constant';
+import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
 import projects from 'constant/projects';
 
 import { Flex, Show, Text, useDisclosure, VStack } from '@chakra-ui/react';
@@ -48,7 +48,7 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
         gap={4}
         w='full'
         maxW={maxWidth}
-        px={{ base: '16px', sm: '32px', md: '60px', lg: '80px' }}
+        px={BASE_HORIZONTAL_PADINGS}
         py={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
       >
         <Flex
