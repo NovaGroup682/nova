@@ -17,6 +17,7 @@ const CeoBlock = () => (
   >
     {content.main.ceo.map((ceo) => (
       <VStack
+        w='50%'
         key={ceo.label}
         pt={{
           base: '16px',
