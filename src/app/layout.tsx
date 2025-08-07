@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 import { VStack } from '@chakra-ui/react';
 
-import { Footer, Header } from 'components';
+import { Footer, Header, ScrollToTopButton } from 'components';
 import Providers from './providers';
 
 import 'styles/global.css';
@@ -32,6 +32,7 @@ const RootLayout = ({
           {children}
         </VStack>
         <Footer />
+        <ScrollToTopButton />
       </Providers>
     </body>
   </html>

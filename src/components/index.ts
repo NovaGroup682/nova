@@ -12,5 +12,6 @@ export { FadeContent } from './FadeContent';
 export { ProjectsFilter } from './ProjectsFilter';
 export { ProjectsList } from './ProjectsList';
 export { default as SearchInput } from './SearchInput';
+export { ScrollToTopButton } from './ScrollToTopButton';
 export * from './ProductContent';
 export * from './SliderContent';
