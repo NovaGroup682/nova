@@ -1,36 +1,25 @@
-import Arrow from '@assets/icons/arrow-left.svg';
-import colors from 'constant/colors';
-
-import { Flex } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 
 interface EditProjectButtonProps {
   onClick?: () => void;
 }
 
 const EditProjectButton = ({ onClick }: EditProjectButtonProps) => (
-  <Flex
-    fontSize={16}
-    alignItems='center'
-    color='gray.500'
-    gap={2}
-    cursor='pointer'
+  <Button
     onClick={onClick}
+    size='2xl'
+    className='pulse-animation'
+    color='gray.500'
+    borderColor='gray.500'
     _hover={{
-      color: 'gray.600'
+      bg: 'gray.600'
     }}
-    transition='color 0.2s ease-in-out'
+    transition='all 0.3s ease'
+    mr={2}
+    bg='transparent'
   >
-    <Arrow
-      fill={colors.gray[500].value}
-      width={20}
-      height={20}
-      className='bouncingArrow'
-      style={{
-        transform: 'rotate(180deg)'
-      }}
-    />
     Внести изменения в проект
-  </Flex>
+  </Button>
 );
 
 export default EditProjectButton;

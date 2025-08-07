@@ -83,7 +83,7 @@ const ProjectLayouts = ({
           <Text
             fontSize={{
               base: 14,
-              md: 16
+              md: 18
             }}
             color='gray.500'
           >
@@ -92,7 +92,7 @@ const ProjectLayouts = ({
           <Text
             fontSize={{
               base: 14,
-              md: 16
+              md: 18
             }}
             color='gray.500'
           >
