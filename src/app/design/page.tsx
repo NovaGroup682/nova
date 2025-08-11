@@ -1,31 +1,30 @@
-import { Text, VStack } from '@chakra-ui/react';
+import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
+
+import { VStack } from '@chakra-ui/react';
+
+import content from 'content';
+
+import { ArchitecturalBlock } from 'components';
 
 const Design = () => (
   <VStack
     gap={0}
     w='full'
     position='relative'
-    justifyContent='center'
+    justifyContent='flex-start'
     alignItems='center'
     flex={1}
   >
-    <Text
-      as='h2'
-      color='gray.900'
-      textAlign='center'
-      fontSize={{
-        base: '20px',
-        md: '34px'
-      }}
-      lineHeight={{
-        base: '30px',
-        md: '52px'
-      }}
-      fontWeight={700}
-      whiteSpace='pre-line'
+    <VStack
+      gap={8}
+      w='full'
+      maxW={maxWidth}
+      px={BASE_HORIZONTAL_PADINGS}
+      py={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
     >
-      Проектирование
-    </Text>
+      <ArchitecturalBlock {...content.design.architecturalSection} />
+      <ArchitecturalBlock {...content.design.constructionSection} />
+    </VStack>
   </VStack>
 );
 

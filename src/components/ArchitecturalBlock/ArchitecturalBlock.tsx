@@ -1,0 +1,218 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+
+import { Box, Flex, Text, VStack } from '@chakra-ui/react';
+
+interface CarouselItem {
+  label: string;
+  description: string;
+  src: string;
+}
+
+interface ArchitecturalBlockProps {
+  title: string;
+  text1: string;
+  text2: string;
+  carousel: CarouselItem[];
+}
+
+const ArchitecturalBlock = ({
+  title,
+  text1,
+  text2,
+  carousel
+}: ArchitecturalBlockProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const scrollAccumulator = useRef(0);
+
+  useEffect(() => {
+    const handleWheelEvent = (e: WheelEvent) => {
+      if (isHovered) {
+        e.preventDefault();
+
+        scrollAccumulator.current += e.deltaY;
+
+        const scrollThreshold = 120;
+
+        if (Math.abs(scrollAccumulator.current) > scrollThreshold) {
+          if (scrollAccumulator.current > 0) {
+            setActiveIndex((prev) => (prev + 1) % carousel.length);
+          } else {
+            setActiveIndex(
+              (prev) => (prev - 1 + carousel.length) % carousel.length
+            );
+          }
+
+          scrollAccumulator.current = 0;
+        }
+      }
+    };
+
+    if (isHovered) {
+      document.addEventListener('wheel', handleWheelEvent, { passive: false });
+    } else {
+      document.removeEventListener('wheel', handleWheelEvent);
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.style.cursor = 'default';
+      }
+
+      scrollAccumulator.current = 0;
+    }
+
+    return () => {
+      document.removeEventListener('wheel', handleWheelEvent);
+    };
+  }, [isHovered, carousel.length]);
+
+  return (
+    <VStack w='full'>
+      <VStack gap={4} align='flex-start' h='full' mb={4}>
+        <Text
+          fontSize={{ base: '24px', md: '32px' }}
+          fontWeight='bold'
+          color='black'
+        >
+          {title}
+        </Text>
+
+        <Text
+          fontSize={{ base: '14px', md: '16px' }}
+          color='black'
+          opacity={0.8}
+          lineHeight='1.6'
+        >
+          {text1}
+        </Text>
+
+        <Text
+          fontSize={{ base: '14px', md: '16px' }}
+          color='black'
+          opacity={0.8}
+          lineHeight='1.6'
+        >
+          {text2}
+        </Text>
+      </VStack>
+      <Flex
+        w='full'
+        gap={8}
+        // overflow='hidden'
+        flexDirection={{
+          base: 'column',
+          md: 'row'
+        }}
+      >
+        {/* left */}
+        <Box
+          minW={{
+            base: 'auto',
+            md: '420px'
+          }}
+          w={{
+            base: 'full',
+            md: '35%'
+          }}
+          bg='black'
+          p={8}
+          position='relative'
+          borderRadius='12px'
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <VStack gap={6} align='flex-start' h='full'>
+            <Box
+              ref={scrollContainerRef}
+              flex={1}
+              overflowY='hidden'
+              w='full'
+              h='full'
+              css={{
+                '&::-webkit-scrollbar': {
+                  display: 'none'
+                }
+              }}
+            >
+              <VStack gap={2} align='center' pb={4} justifyContent='center'>
+                {carousel.map((item, index) => (
+                  <Box
+                    key={index}
+                    w='full'
+                    p={4}
+                    borderRadius='8px'
+                    cursor='pointer'
+                    transition='all 0.3s ease'
+                    onClick={() => setActiveIndex(index)}
+                    _hover={{
+                      '& p': {
+                        color: index === activeIndex ? 'white' : 'gray.500'
+                      }
+                    }}
+                  >
+                    <Text
+                      fontSize={{
+                        base: '16px',
+                        md: index === activeIndex ? '24px' : '18px'
+                      }}
+                      fontWeight='bold'
+                      color='white'
+                      textShadow={
+                        index === activeIndex
+                          ? '1px 1px 14px rgba(255, 255, 255, 0.75)'
+                          : 'none'
+                      }
+                      transition='all 0.3s ease'
+                    >
+                      {item.label}
+                    </Text>
+                  </Box>
+                ))}
+              </VStack>
+            </Box>
+          </VStack>
+        </Box>
+
+        {/* right */}
+        <Box
+          w={{
+            base: 'full',
+            md: '65%'
+          }}
+          // minH='400px'
+
+          // overflow='hidden'
+          // p={4}
+        >
+          <Box position='relative' w='full' h='full'>
+            <Image
+              src={carousel[activeIndex]?.src}
+              alt={carousel[activeIndex]?.label}
+              fill
+              priority
+              style={{
+                objectFit: 'none',
+                // objectPosition: 'top',
+                // boxShadow: 'inset 0px -100px 40px -20px rgba(0, 0, 0, 0.42)',
+                transition: 'opacity 0.3s ease'
+              }}
+              sizes='(max-width: 450px) 300px, 720px'
+            />
+          </Box>
+          <Text
+            fontSize={{ base: '16px', md: '18px' }}
+            color='black'
+            opacity={0.9}
+            textAlign='center'
+          >
+            {carousel[activeIndex]?.description}
+          </Text>
+        </Box>
+      </Flex>
+    </VStack>
+  );
+};
+
+export default ArchitecturalBlock;
