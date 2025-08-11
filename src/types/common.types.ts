@@ -1,5 +1,7 @@
 export enum SocialLinkTypes {
   Facebook,
   VK,
-  Instagram
+  Instagram,
+  Whatsapp,
+  Telegram
 }

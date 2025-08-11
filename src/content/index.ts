@@ -1,6 +1,8 @@
-import Facebook from '@assets/icons/facebook.svg';
+// import Facebook from '@assets/icons/facebook.svg';
 import Instagram from '@assets/icons/instagram.svg';
-import VK from '@assets/icons/vk.svg';
+// import VK from '@assets/icons/vk.svg';
+import Telegram from '@assets/icons/telegram.svg';
+import Whatsapp from '@assets/icons/whatsapp.svg';
 import { GOOGLE_LINK, paths } from 'constant';
 
 import { SocialLinkTypes } from 'types';
@@ -264,19 +266,20 @@ const content = {
     email: 'vasha@pochta.ru',
     phone: '8 800 000 00 00',
     address: 'Россия, г Москва , ул. Примерная 345',
+    coordinates: [55.755819, 37.617644],
     law: 'Сайт носит сугубо информационный характер и не является публичной офертой, определяемой Статьей 437 (2) ГК РФ',
     socialLinks: [
       {
-        type: SocialLinkTypes.Facebook,
-        link: 'https://www.facebook.com/?locale=ru_RU',
-        alt: 'Facebook',
-        icon: Facebook
+        type: SocialLinkTypes.Whatsapp,
+        link: 'https://www.whatsapp.com/',
+        alt: 'Whatsapp',
+        icon: Whatsapp
       },
       {
-        type: SocialLinkTypes.VK,
-        link: 'https://m.vk.com/',
-        alt: 'ВКонтакте',
-        icon: VK
+        type: SocialLinkTypes.Telegram,
+        link: 'https://web.telegram.org/k/',
+        alt: 'Telegram',
+        icon: Telegram
       },
       {
         type: SocialLinkTypes.Instagram,

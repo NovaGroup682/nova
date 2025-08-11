@@ -130,6 +130,7 @@ const Footer = () => (
               bg='white'
               w='40px'
               h='40px'
+              display='flex'
               alignItems='center'
               justifyContent='center'
               target='_blank'
@@ -138,11 +139,16 @@ const Footer = () => (
                 bg: 'gray.400',
                 transform: 'scale(1.1)',
                 '& svg': {
-                  fill: 'white'
+                  fill: 'black'
                 }
               }}
             >
-              <Icon />
+              <Icon
+                fill='black'
+                width={16}
+                height={16}
+                transform='scale(1.1)'
+              />
             </Link>
           ))}
         </Flex>
@@ -223,6 +229,10 @@ const Footer = () => (
           w='full'
           color='white'
           fontWeight='normal'
+          textAlign={{
+            base: 'center',
+            md: 'left'
+          }}
         >
           {content.contacts.law}
         </Text>
