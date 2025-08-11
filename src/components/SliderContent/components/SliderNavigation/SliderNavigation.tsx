@@ -27,7 +27,10 @@ const SliderNavigation = ({
       position='absolute'
       borderRadius='xl'
       bg='gray.500'
-      gap={4}
+      gap={{
+        base: 3,
+        md: 4
+      }}
       px={4}
       py={0}
     >
@@ -39,7 +42,10 @@ const SliderNavigation = ({
           minW='auto'
           aria-label='Search database'
           variant='outline'
-          size='lg'
+          size={{
+            base: 'sm',
+            md: 'lg'
+          }}
           border='none'
           transform={currentSlide === idx ? 'scale(1.5)' : 'inherit'}
           transition='transform 0.3s ease'

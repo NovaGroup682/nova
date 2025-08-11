@@ -5,6 +5,8 @@ import Telegram from '@assets/icons/telegram.svg';
 import Whatsapp from '@assets/icons/whatsapp.svg';
 import { GOOGLE_LINK, paths } from 'constant';
 
+import { getGoogleDriveDirectLink } from 'helpers';
+
 import { SocialLinkTypes } from 'types';
 
 const content = {
@@ -260,6 +262,135 @@ const content = {
       ],
       description:
         'Наши проекты изначально сбалансированы по архитектуре, логике планировки, стоимости реализации и адаптированы под стандартный участок. Мы рекомендуем использовать их в базовой версии - так вы получаете оптимальный результат без существенного увеличения бюджета на реализацию. Глобальные изменения могут повлиять на целостность концепции и потребуют серьёзной переработки. В таких случаях мы предлагаем индивидуальное проектирование.'
+    }
+  },
+  design: {
+    main: 'Индивидуальный проект - это решение под конкретный участок, образ жизни, бюджет и приоритеты.',
+    desciption:
+      'Мы подходим к проектированию системно: на выходе — современный, продуманный до мелочей дом, в котором сочетаются архитектура, логика и реалистичный бюджет.',
+    architecturalSection: {
+      title: 'Архитектурный раздел',
+      text1:
+        'Проект начинается с эскизной части. Мы анализируем участок, продумываем планировки, формируем фасады и общий образ дома. Уже на этом этапе становится понятно, как дом будет выглядеть, как он встанет на участок и сколько примерно обойдётся строительство.',
+      text2:
+        'Далее - рабочая часть: подготавливаем полный комплект архитектурных чертежей, необходимых для реализации проекта.',
+      carousel: [
+        {
+          label: 'Планировка',
+          description: 'Функциональная и продуманная планировка',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1saXi9OehgcgKNpng146_O5yFivttpcw6/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Организация участка',
+          description:
+            'Привязка дома к участку с продуманными сценариями использования',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1JwS7zUEqJTsLO0NprDdz4CDVfQRmvEt1/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Фасады',
+          description: 'Внешний облик дома с грамотно подобранными материалами',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1o9oeh0LG2ugXl0VtIFI_hUiDN_RtW7Ok/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Визуализации',
+          description:
+            'Реалистичная 3D-модель, которая помогает представить дом ещё до начала стройки',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1T0UQk1NqyiF9M7Ja_AcBIQtxss9bMBF0/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Разрезы',
+          description:
+            'Высотные отметки, уровни и принципиальные технические решения',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1T0UQk1NqyiF9M7Ja_AcBIQtxss9bMBF0/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Узлы',
+          description: 'Ключевые архитектурные решения',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1kYCU9wRcFvQdoqm2A_gw9ijIXsW3IDqw/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Ведомости',
+          description: 'Объёмы и площади всех материалов',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1jdAwtbVQAxuA9gcDWOBKpW6wABKrj5jS/view?usp=sharing'
+          )
+        }
+      ]
+    },
+    constructionSection: {
+      title: 'Конструктивный раздел',
+      text1:
+        'В этот раздел входят чертежи всех несущих конструкций: фундамента, стен, перекрытий и кровли.Он нужен, чтобы дом был прочным, устойчивым и соответствовал строительным нормам.',
+      text2:
+        'В проекте указываются размеры, армирование, узлы и другие важные детали — чтобы строителям было понятно, как строить, не пришлось додумывать на месте и удалось избежать ошибок.',
+      carousel: [
+        {
+          label: 'Моделирование',
+          description:
+            'Детальное моделирование здания для расчета нагрузок и объемов материалов.',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/123IQ0uHpjkWLTKucnb5h8Mjh4OY125ze/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Фундамент',
+          description: 'План фундамента с размерами, привязками и сечениями.',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/17bw-OVfqaBs8MDPTy0oeJZZDhOSEfrXB/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Вертикальные конструкции',
+          description:
+            'Железобетонные конструкции стен, колонн и пилонов со схемами армирования.',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1z0-Od1BZewaEPlMfG5T2xrjF9MaT6hdl/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Стены',
+          description:
+            'Подробный кладочный план с проёмами, размерами и 3D-схемами.',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1A55nT18_jWeqKvhRbzO1AlqjH6MkdvDk/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Перекрытия и покрытия',
+          description:
+            'Подробные опалубочные планы с размерами, привязкой отверстий, толщинами и схемой армирования.',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1G-bLOemgOhgP6YRU2kwWsPWs2GKeKSdt/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Лестница',
+          description:
+            'Детализированное армирование лестницы, узлы и спецификации.',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/1Wz4kIsu93apEX5LdpnYqwEM9jDwUieVX/view?usp=sharing'
+          )
+        },
+        {
+          label: 'Ведомости',
+          description: 'Объёмы и площади всех конструктивных материалов.',
+          src: getGoogleDriveDirectLink(
+            'https://drive.google.com/file/d/161X4Qbu_ESbb28QVxH86cZ9p8ZcHVNUS/view?usp=sharing'
+          )
+        }
+      ]
     }
   },
   contacts: {

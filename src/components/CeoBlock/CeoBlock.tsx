@@ -17,17 +17,17 @@ const CeoBlock = () => (
   >
     {content.main.ceo.map((ceo) => (
       <VStack
-        w='50%'
+        w={{
+          base: 'full',
+          md: '50%'
+        }}
         key={ceo.label}
         pt={{
           base: '16px',
           md: '65px'
         }}
         bg='gray.100'
-        borderRadius={{
-          base: 0,
-          sm: '16px'
-        }}
+        borderRadius='16px'
         justifyContent='space-between'
       >
         <VStack

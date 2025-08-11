@@ -133,7 +133,7 @@ const ProjectSliderBlock = () => {
           gap={1}
         >
           <GridItem
-            colSpan={{ base: 2, md: 1 }}
+            colSpan={{ base: 1, md: 1 }}
             textAlign='left'
             userSelect='none'
           >
@@ -188,7 +188,7 @@ const ProjectSliderBlock = () => {
           </GridItem>
 
           <GridItem
-            colSpan={{ base: 2, md: 1 }}
+            colSpan={{ base: 1, md: 1 }}
             textAlign={{ base: 'center', md: 'right' }}
             userSelect='none'
           >
@@ -211,7 +211,7 @@ const ProjectSliderBlock = () => {
           position='absolute'
           w='full'
           zIndex={10}
-          bottom='100px'
+          bottom='85px'
           justifyContent='center'
           display={{ base: 'grid', lg: 'none' }}
         >
