@@ -89,7 +89,7 @@ const ImagePopupButton = ({
               base: 15,
               md: isVideo ? -15 : -25
             }}
-            bg='white'
+            bg={isVideo ? 'gray.100' : 'white'}
             borderRadius='50%'
             width={{
               base: '70px',
@@ -113,8 +113,8 @@ const ImagePopupButton = ({
             {isVideo ? (
               <Video
                 fill='gray.500'
-                width='50px'
-                height='50px'
+                width='40px'
+                height='40px'
                 style={{
                   margin: '0 auto'
                 }}
@@ -142,7 +142,7 @@ const ImagePopupButton = ({
             borderRadius: '32px'
           }}
           priority
-          sizes='(max-width: 450px) 400px, 1200px'
+          sizes='(max-width: 450px) 300px, 450px'
           quality={75}
         />
       </Box>

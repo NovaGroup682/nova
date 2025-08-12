@@ -3,6 +3,7 @@ const colors = {
   white: { value: '#FFFFFF' },
   gray: {
     DEFAULT: { value: '#828a96' },
+    100: { value: '#f1f1f1' },
     200: { value: '#828a96' },
     500: { value: '#636363' },
     800: { value: '#6C6363' },

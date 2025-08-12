@@ -26,7 +26,8 @@ interface ArchitecturalBlockProps {
   src: string;
   text1: string;
   text2: string;
-  video?: string;
+  preview: string;
+  video: string;
   carousel: CarouselItem[];
 }
 
@@ -35,6 +36,7 @@ const ArchitecturalBlock = ({
   src,
   text1,
   text2,
+  preview,
   video,
   carousel
 }: ArchitecturalBlockProps) => {
@@ -145,7 +147,27 @@ const ArchitecturalBlock = ({
             {text2}
           </Text>
 
-          {/* Video Section */}
+          <Box h='250px' w='300px' position='relative' alignSelf='baseline'>
+            <ImagePopupButton
+              src={preview}
+              onOpen={openVideoModal}
+              isVideo
+              customWidth={{
+                base: 'calc(100% - 64px)',
+                sm: '240px',
+                hovered: '350px',
+                md: '300px'
+              }}
+              customHeight={{
+                base: '200px',
+                sm: '240px',
+                hovered: '250px',
+                md: '175px'
+              }}
+              bottom={8}
+              left={0}
+            />
+          </Box>
         </VStack>
 
         <AspectRatio
@@ -168,12 +190,12 @@ const ArchitecturalBlock = ({
                 transition: 'opacity 0.3s ease',
                 filter: isImageLoading ? 'blur(10px)' : 'none'
               }}
-              sizes='(max-width: 450px) 400px, 1400px'
+              sizes='(max-width: 450px) 400px, 600px'
               onLoad={() => setIsImageLoading(false)}
               onError={() => setIsImageLoading(false)}
             />
             <ImagePopupButton
-              src={src}
+              src={preview}
               onOpen={openVideoModal}
               isVideo
               customWidth={{
@@ -197,11 +219,15 @@ const ArchitecturalBlock = ({
 
       <Flex
         w='full'
-        gap={8}
+        maxH='700px'
+        gap={0}
         flexDirection={{
           base: 'column',
           md: 'row'
         }}
+        bg='gray.100'
+        borderRadius='12px'
+        justifyContent='space-between'
       >
         {/* left */}
         <Box
@@ -209,19 +235,22 @@ const ArchitecturalBlock = ({
             base: 'auto',
             md: '420px'
           }}
+          maxW='500px'
           w={{
             base: 'full',
-            md: '35%'
+            md: '50%'
           }}
-          bg='black'
-          p={8}
+          minH='500px'
+          py={8}
+          pl={8}
           position='relative'
-          borderRadius='12px'
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           <VStack gap={6} align='flex-start' h='full'>
             <Box
+              display='flex'
+              justifyContent='center'
               ref={scrollContainerRef}
               flex={1}
               overflowY='hidden'
@@ -233,20 +262,15 @@ const ArchitecturalBlock = ({
                 }
               }}
             >
-              <VStack gap={2} align='center' pb={4} justifyContent='center'>
+              <VStack gap={4} align='center' justifyContent='center'>
                 {carousel.map((item, index) => (
                   <Box
                     key={index}
                     w='full'
-                    p={4}
+                    pl={4}
                     cursor='pointer'
                     transition='all 0.3s ease'
                     onClick={() => setActiveIndex(index)}
-                    _hover={{
-                      '& p': {
-                        color: index === activeIndex ? 'white' : 'gray.500'
-                      }
-                    }}
                   >
                     <Text
                       fontSize={{
@@ -254,17 +278,36 @@ const ArchitecturalBlock = ({
                         md: index === activeIndex ? '24px' : '18px'
                       }}
                       fontWeight='bold'
-                      color='white'
+                      color='black'
                       textShadow={
                         index === activeIndex
-                          ? '1px 1px 14px rgba(255, 255, 255, 0.75)'
+                          ? '1px 1px 14px rgba(0,0,0, 0.25)'
                           : 'none'
                       }
                       transition='all 0.3s ease'
                       lineHeight='36px'
+                      _hover={{
+                        color: index === activeIndex ? 'black' : 'gray.200'
+                      }}
                     >
                       {item.label}
                     </Text>
+                    <Box
+                      h={index === activeIndex ? 'auto' : '0px'}
+                      maxH={index === activeIndex ? '100px' : '0px'}
+                      overflow='hidden'
+                      transition='all 1s ease-in-out'
+                    >
+                      <Text
+                        fontSize={{ base: '16px', md: '18px' }}
+                        color='gray.600'
+                        opacity={index === activeIndex ? 0.9 : 0}
+                        textAlign='left'
+                        transition='all 1s ease-in-out'
+                      >
+                        {item.description}
+                      </Text>
+                    </Box>
                   </Box>
                 ))}
               </VStack>
@@ -279,32 +322,32 @@ const ArchitecturalBlock = ({
             md: '65%'
           }}
           flexDirection='column'
+          justifyContent='center'
+          p={8}
         >
-          <Flex position='relative' w='full' flex={1} flexDirection='column'>
+          <AspectRatio
+            ratio={120 / 86}
+            position='relative'
+            flexDirection='column'
+            borderRadius='12px'
+            overflow='hidden'
+          >
             <Image
               src={carousel[activeIndex]?.src}
               alt={carousel[activeIndex]?.label}
               fill
               priority
               style={{
-                objectFit: 'none',
+                objectFit: 'contain',
+                objectPosition: 'right',
                 transition: 'opacity 0.3s ease',
                 filter: isImageLoading ? 'blur(10px)' : 'none'
               }}
-              sizes='(max-width: 450px) 300px, 720px'
+              sizes='(max-width: 450px) 300px, (max-width: 1200px) 720px, 1200px'
               onLoad={() => setIsImageLoading(false)}
               onError={() => setIsImageLoading(false)}
             />
-          </Flex>
-          <Text
-            fontSize={{ base: '16px', md: '18px' }}
-            color='black'
-            opacity={0.9}
-            textAlign='center'
-            pt={2}
-          >
-            {carousel[activeIndex]?.description}
-          </Text>
+          </AspectRatio>
         </Flex>
       </Flex>
 

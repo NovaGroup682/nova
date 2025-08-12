@@ -276,6 +276,9 @@ const content = {
       video: getGoogleDriveVideoEmbedLink(
         'https://drive.google.com/file/d/1NkohgTlsLE3w4U-4nMx4tsfwxNvlcyNW/view?usp=sharing'
       ),
+      preview: getGoogleDriveDirectLink(
+        'https://drive.google.com/file/d/13JXAB6qrF44Dx-W3VNDYF86jc-54ITw3/view?usp=sharing'
+      ),
       src: getGoogleDriveDirectLink(
         'https://drive.google.com/file/d/1bg8MK420HPS4NK5qEDtvXIFqD06gI90_/view?usp=sharing'
       ),
@@ -319,7 +322,7 @@ const content = {
           description:
             'Высотные отметки, уровни и принципиальные технические решения',
           src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1T0UQk1NqyiF9M7Ja_AcBIQtxss9bMBF0/view?usp=sharing'
+            'https://drive.google.com/file/d/1f3VtMj_tYN2gMKLastgybbhyipxlTPMZ/view?usp=sharing'
           )
         },
         {
@@ -343,11 +346,14 @@ const content = {
       video: getGoogleDriveVideoEmbedLink(
         'https://drive.google.com/file/d/1Aq7dLWYTgj36z9n79HhEfoWjjJJN2JRy/view?usp=sharing'
       ),
+      preview: getGoogleDriveDirectLink(
+        'https://drive.google.com/file/d/17eTZ6lRZRpxd7TSly-VjdGM_k2oAS_Hp/view?usp=sharing'
+      ),
       src: getGoogleDriveDirectLink(
-        'https://drive.google.com/file/d/1EjvmF0V0IDHVpsyiuXHOfMU4-VlAlqUH/view?usp=sharing'
+        'https://drive.google.com/file/d/1pW5WugiVKic5eWXk07dxhuAb7HGsZ5PK/view?usp=sharing'
       ),
       text1:
-        'В этот раздел входят чертежи всех несущих конструкций: фундамента, стен, перекрытий и кровли.Он нужен, чтобы дом был прочным, устойчивым и соответствовал строительным нормам.',
+        'В этот раздел входят чертежи всех несущих конструкций: фундамента, стен, перекрытий и кровли. Он нужен, чтобы дом был прочным, устойчивым и соответствовал строительным нормам.',
       text2:
         'В проекте указываются размеры, армирование, узлы и другие важные детали — чтобы строителям было понятно, как строить, не пришлось додумывать на месте и удалось избежать ошибок.',
       carousel: [

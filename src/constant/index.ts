@@ -54,6 +54,6 @@ export const maxWidth = 1920;
 export const BASE_HORIZONTAL_PADINGS = {
   base: '16px',
   sm: '32px',
-  md: '80px',
+  md: '60px',
   lg: '120px'
 };
