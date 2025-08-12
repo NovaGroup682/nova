@@ -268,9 +268,14 @@ const content = {
     }
   },
   design: {
-    main: 'Индивидуальный проект - это решение под конкретный участок, образ жизни, бюджет и приоритеты.',
+    main: 'Индивидуальное проектирование современных домов',
+    subTitle:
+      'Решение под конкретный участок, образ жизни, бюджет и приоритеты.',
     desciption:
       'Мы подходим к проектированию системно: на выходе — современный, продуманный до мелочей дом, в котором сочетаются архитектура, логика и реалистичный бюджет.',
+    mainImg: getGoogleDriveDirectLink(
+      'https://drive.google.com/file/d/175iLKt29yl8elGEjW4_IkwvDwAVqxZuc/view?usp=sharing'
+    ),
     architecturalSection: {
       title: 'Архитектурный раздел',
       video: getGoogleDriveVideoEmbedLink(

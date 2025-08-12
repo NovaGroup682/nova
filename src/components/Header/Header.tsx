@@ -12,7 +12,7 @@ import { Logo, MenuButton, MenuToogler } from 'ui';
 const Header = () => {
   const pathName = usePathname();
 
-  const isMain = pathName === paths.main;
+  const isMain = pathName === paths.main || pathName === paths.design;
 
   return (
     <Flex
