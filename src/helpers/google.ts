@@ -8,3 +8,12 @@ export const getGoogleDriveDirectLink = (url: string) => {
   const fileId = match[1];
   return GOOGLE_LINK + fileId;
 };
+
+export const getGoogleDriveVideoEmbedLink = (url: string) => {
+  const match = url.match(/\/d\/([^/]+)\//);
+  if (!match) {
+    throw new Error('Invalid Google Drive file URL');
+  }
+  const fileId = match[1];
+  return `https://drive.google.com/file/d/${fileId}/preview`;
+};

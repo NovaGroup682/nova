@@ -1,9 +1,19 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import CloseIcon from '@assets/icons/circle-xmark.svg';
 import Image from 'next/image';
 
-import { AspectRatio, Box, Flex, Text, VStack } from '@chakra-ui/react';
+import {
+  AspectRatio,
+  Box,
+  Flex,
+  IconButton,
+  Text,
+  VStack
+} from '@chakra-ui/react';
+
+import { Modal } from 'ui';
 
 interface CarouselItem {
   label: string;
@@ -16,6 +26,7 @@ interface ArchitecturalBlockProps {
   src: string;
   text1: string;
   text2: string;
+  video?: string;
   carousel: CarouselItem[];
 }
 
@@ -24,11 +35,13 @@ const ArchitecturalBlock = ({
   src,
   text1,
   text2,
+  video,
   carousel
 }: ArchitecturalBlockProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollAccumulator = useRef(0);
 
@@ -71,6 +84,14 @@ const ArchitecturalBlock = ({
     };
   }, [isHovered, carousel.length]);
 
+  const openVideoModal = () => {
+    setIsVideoModalOpen(true);
+  };
+
+  const closeVideoModal = () => {
+    setIsVideoModalOpen(false);
+  };
+
   return (
     <VStack w='full' gap={8}>
       <Text
@@ -89,14 +110,15 @@ const ArchitecturalBlock = ({
           base: 'column',
           md: 'row'
         }}
-        alignItems='center'
+        alignItems='flex-start'
       >
         <VStack
           w='full'
           h='full'
           p={4}
-          justifyContent='center'
+          justifyContent='flex-start'
           alignItems='center'
+          gap={6}
         >
           <Text
             fontSize={{ base: '20px', md: '22px' }}
@@ -123,7 +145,63 @@ const ArchitecturalBlock = ({
           >
             {text2}
           </Text>
+
+          {/* Video Section */}
+          {video && (
+            <Box
+              w='full'
+              maxW='400px'
+              cursor='pointer'
+              onClick={openVideoModal}
+              position='relative'
+              borderRadius='12px'
+              overflow='hidden'
+              _hover={{
+                transform: 'scale(1.02)',
+                '& .play-icon': {
+                  bg: 'rgba(0,0,0,0.8)'
+                }
+              }}
+              transition='all 0.3s ease'
+            >
+              <AspectRatio ratio={16 / 9}>
+                <Image
+                  src={src}
+                  alt='Video thumbnail'
+                  fill
+                  style={{
+                    objectFit: 'cover'
+                  }}
+                />
+              </AspectRatio>
+              <Box
+                position='absolute'
+                top='50%'
+                left='50%'
+                transform='translate(-50%, -50%)'
+                bg='rgba(0,0,0,0.6)'
+                borderRadius='50%'
+                w='60px'
+                h='60px'
+                display='flex'
+                alignItems='center'
+                justifyContent='center'
+                className='play-icon'
+                transition='all 0.3s ease'
+              >
+                <Box
+                  w='0'
+                  h='0'
+                  borderLeft='12px solid white'
+                  borderTop='8px solid transparent'
+                  borderBottom='8px solid transparent'
+                  ml='2px'
+                />
+              </Box>
+            </Box>
+          )}
         </VStack>
+
         <AspectRatio
           ratio={1}
           w='full'
@@ -261,6 +339,34 @@ const ArchitecturalBlock = ({
           </Text>
         </Flex>
       </Flex>
+
+      {/* Video Modal */}
+      {video && (
+        <Modal
+          isOpen={isVideoModalOpen}
+          onClose={closeVideoModal}
+          maxW='90vw'
+          maxH='80vh'
+        >
+          <Box position='relative' w='full' h='full'>
+            <IconButton
+              position='absolute'
+              top='-40px'
+              right='0'
+              bg='white'
+              color='black'
+              onClick={closeVideoModal}
+              aria-label='Close video'
+              _hover={{ bg: 'gray.100' }}
+            >
+              <CloseIcon />
+            </IconButton>
+            <AspectRatio ratio={16 / 9}>
+              <iframe src={video} allowFullScreen style={{ border: 'none' }} />
+            </AspectRatio>
+          </Box>
+        </Modal>
+      )}
     </VStack>
   );
 };
