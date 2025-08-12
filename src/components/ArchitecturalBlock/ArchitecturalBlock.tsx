@@ -13,7 +13,7 @@ import {
   VStack
 } from '@chakra-ui/react';
 
-import { Modal } from 'ui';
+import { ImagePopupButton, Modal } from 'ui';
 
 interface CarouselItem {
   label: string;
@@ -95,7 +95,7 @@ const ArchitecturalBlock = ({
   return (
     <VStack w='full' gap={8}>
       <Text
-        fontSize={{ base: '24px', md: '32px' }}
+        fontSize={{ base: '28px', md: '36px' }}
         w='full'
         fontWeight='bold'
         color='black'
@@ -110,120 +110,88 @@ const ArchitecturalBlock = ({
           base: 'column',
           md: 'row'
         }}
-        alignItems='flex-start'
       >
         <VStack
-          w='full'
-          h='full'
-          p={4}
-          justifyContent='flex-start'
+          // h='full'
+          justifyContent='center'
           alignItems='center'
           gap={6}
         >
           <Text
-            fontSize={{ base: '20px', md: '22px' }}
+            fontSize={{ base: '22px', md: '28px' }}
             color='gray.600'
             opacity={0.8}
             lineHeight='1.6'
             textAlign={{
               base: 'center',
-              md: 'right'
+              md: 'left'
             }}
+            letterSpacing='1px'
           >
             {text1}
           </Text>
 
           <Text
-            fontSize={{ base: '20px', md: '22px' }}
+            fontSize={{ base: '22px', md: '28px' }}
             color='gray.600'
             opacity={0.8}
             lineHeight='1.6'
             textAlign={{
               base: 'center',
-              md: 'right'
+              md: 'left'
             }}
+            letterSpacing='1px'
           >
             {text2}
           </Text>
 
           {/* Video Section */}
-          {video && (
-            <Box
-              w='full'
-              maxW='400px'
-              cursor='pointer'
-              onClick={openVideoModal}
-              position='relative'
-              borderRadius='12px'
-              overflow='hidden'
-              _hover={{
-                transform: 'scale(1.02)',
-                '& .play-icon': {
-                  bg: 'rgba(0,0,0,0.8)'
-                }
-              }}
-              transition='all 0.3s ease'
-            >
-              <AspectRatio ratio={16 / 9}>
-                <Image
-                  src={src}
-                  alt='Video thumbnail'
-                  fill
-                  style={{
-                    objectFit: 'cover'
-                  }}
-                />
-              </AspectRatio>
-              <Box
-                position='absolute'
-                top='50%'
-                left='50%'
-                transform='translate(-50%, -50%)'
-                bg='rgba(0,0,0,0.6)'
-                borderRadius='50%'
-                w='60px'
-                h='60px'
-                display='flex'
-                alignItems='center'
-                justifyContent='center'
-                className='play-icon'
-                transition='all 0.3s ease'
-              >
-                <Box
-                  w='0'
-                  h='0'
-                  borderLeft='12px solid white'
-                  borderTop='8px solid transparent'
-                  borderBottom='8px solid transparent'
-                  ml='2px'
-                />
-              </Box>
-            </Box>
-          )}
         </VStack>
 
         <AspectRatio
-          ratio={1}
+          ratio={2 / 3}
           w='full'
           position='relative'
-          maxH='50vh'
+          maxH='75vh'
+          minW='40%'
           borderRadius='12px'
           overflow='hidden'
         >
-          <Image
-            src={src}
-            alt={title}
-            fill
-            priority
-            style={{
-              objectFit: 'cover',
-              transition: 'opacity 0.3s ease',
-              filter: isImageLoading ? 'blur(10px)' : 'none'
-            }}
-            sizes='(max-width: 450px) 400px, 1400px'
-            onLoad={() => setIsImageLoading(false)}
-            onError={() => setIsImageLoading(false)}
-          />
+          <>
+            <Image
+              src={src}
+              alt={title}
+              fill
+              priority
+              style={{
+                objectFit: 'cover',
+                transition: 'opacity 0.3s ease',
+                filter: isImageLoading ? 'blur(10px)' : 'none'
+              }}
+              sizes='(max-width: 450px) 400px, 1400px'
+              onLoad={() => setIsImageLoading(false)}
+              onError={() => setIsImageLoading(false)}
+            />
+            <ImagePopupButton
+              src={src}
+              onOpen={openVideoModal}
+              isVideo
+              customWidth={{
+                base: 'calc(100% - 64px)',
+                sm: '240px',
+                hovered: '350px',
+                md: '300px'
+              }}
+              customHeight={{
+                base: '200px',
+                sm: '240px',
+                hovered: '250px',
+                md: '175px'
+              }}
+              bottom={8}
+              right={8}
+            />
+          </>
         </AspectRatio>
       </Flex>
 

@@ -274,10 +274,10 @@ const content = {
     architecturalSection: {
       title: 'Архитектурный раздел',
       video: getGoogleDriveVideoEmbedLink(
-        'https://drive.google.com/file/d/1Aq7dLWYTgj36z9n79HhEfoWjjJJN2JRy/view?usp=sharing'
+        'https://drive.google.com/file/d/1NkohgTlsLE3w4U-4nMx4tsfwxNvlcyNW/view?usp=sharing'
       ),
       src: getGoogleDriveDirectLink(
-        'https://drive.google.com/file/d/1Rhx2MArLm9_pb23yjQyc3Ct7wmLH8geB/view?usp=sharing'
+        'https://drive.google.com/file/d/1bg8MK420HPS4NK5qEDtvXIFqD06gI90_/view?usp=sharing'
       ),
       text1:
         'Проект начинается с эскизной части. Мы анализируем участок, продумываем планировки, формируем фасады и общий образ дома. Уже на этом этапе становится понятно, как дом будет выглядеть, как он встанет на участок и сколько примерно обойдётся строительство.',
@@ -341,10 +341,10 @@ const content = {
     constructionSection: {
       title: 'Конструктивный раздел',
       video: getGoogleDriveVideoEmbedLink(
-        'https://drive.google.com/file/d/1NkohgTlsLE3w4U-4nMx4tsfwxNvlcyNW/view?usp=sharing'
+        'https://drive.google.com/file/d/1Aq7dLWYTgj36z9n79HhEfoWjjJJN2JRy/view?usp=sharing'
       ),
       src: getGoogleDriveDirectLink(
-        'https://drive.google.com/file/d/1Y7pLWOCMu8MgBqZaR0pxhSQys_ZL2UTA/view?usp=sharing'
+        'https://drive.google.com/file/d/1EjvmF0V0IDHVpsyiuXHOfMU4-VlAlqUH/view?usp=sharing'
       ),
       text1:
         'В этот раздел входят чертежи всех несущих конструкций: фундамента, стен, перекрытий и кровли.Он нужен, чтобы дом был прочным, устойчивым и соответствовал строительным нормам.',
