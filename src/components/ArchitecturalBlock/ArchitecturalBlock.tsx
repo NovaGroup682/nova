@@ -13,6 +13,7 @@ interface CarouselItem {
 
 interface ArchitecturalBlockProps {
   title: string;
+  src: string;
   text1: string;
   text2: string;
   carousel: CarouselItem[];
@@ -20,6 +21,7 @@ interface ArchitecturalBlockProps {
 
 const ArchitecturalBlock = ({
   title,
+  src,
   text1,
   text2,
   carousel
@@ -70,38 +72,81 @@ const ArchitecturalBlock = ({
   }, [isHovered, carousel.length]);
 
   return (
-    <VStack w='full'>
-      <VStack gap={4} align='flex-start' h='full' mb={4}>
-        <Text
-          fontSize={{ base: '24px', md: '32px' }}
-          fontWeight='bold'
-          color='black'
-        >
-          {title}
-        </Text>
-
-        <Text
-          fontSize={{ base: '14px', md: '16px' }}
-          color='black'
-          opacity={0.8}
-          lineHeight='1.6'
-        >
-          {text1}
-        </Text>
-
-        <Text
-          fontSize={{ base: '14px', md: '16px' }}
-          color='black'
-          opacity={0.8}
-          lineHeight='1.6'
-        >
-          {text2}
-        </Text>
-      </VStack>
+    <VStack w='full' gap={8}>
+      <Text
+        fontSize={{ base: '24px', md: '32px' }}
+        w='full'
+        fontWeight='bold'
+        color='black'
+        textAlign='left'
+      >
+        {title}
+      </Text>
       <Flex
         w='full'
         gap={8}
-        // overflow='hidden'
+        flexDirection={{
+          base: 'column',
+          md: 'row'
+        }}
+      >
+        <VStack
+          gap={4}
+          align='flex-start'
+          w='full'
+          position='relative'
+          minH='75vh'
+          borderRadius='12px'
+          overflow='hidden'
+        >
+          <Image
+            src={src}
+            alt={title}
+            fill
+            priority
+            style={{
+              objectFit: 'cover',
+              transition: 'opacity 0.3s ease',
+              filter: isImageLoading ? 'blur(10px)' : 'none'
+            }}
+            sizes='(max-width: 450px) 400px, 1400px'
+            onLoad={() => setIsImageLoading(false)}
+            onError={() => setIsImageLoading(false)}
+          />
+          <VStack
+            position='absolute'
+            w='full'
+            h='full'
+            bg='rgba(0,0,0,0.5)'
+            p={4}
+            justifyContent='center'
+          >
+            <Text
+              fontSize={{ base: '20px', md: '22px' }}
+              color='white'
+              opacity={0.8}
+              lineHeight='1.6'
+              maxW='80%'
+            >
+              {text1}
+            </Text>
+
+            <Text
+              maxW='80%'
+              fontSize={{ base: '20px', md: '22px' }}
+              color='white'
+              opacity={0.8}
+              lineHeight='1.6'
+            >
+              {text2}
+            </Text>
+          </VStack>
+        </VStack>
+      </Flex>
+
+      <Flex
+        w='full'
+        gap={8}
         flexDirection={{
           base: 'column',
           md: 'row'
@@ -143,7 +188,6 @@ const ArchitecturalBlock = ({
                     key={index}
                     w='full'
                     p={4}
-                    borderRadius='8px'
                     cursor='pointer'
                     transition='all 0.3s ease'
                     onClick={() => setActiveIndex(index)}
