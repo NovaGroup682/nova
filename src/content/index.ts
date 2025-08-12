@@ -271,7 +271,7 @@ const content = {
     architecturalSection: {
       title: 'Архитектурный раздел',
       src: getGoogleDriveDirectLink(
-        'https://drive.google.com/file/d/1u4VJx-TJn57Wbq5L3oRF7RJzOiwwlTbG/view?usp=sharing'
+        'https://drive.google.com/file/d/1Rhx2MArLm9_pb23yjQyc3Ct7wmLH8geB/view?usp=sharing'
       ),
       text1:
         'Проект начинается с эскизной части. Мы анализируем участок, продумываем планировки, формируем фасады и общий образ дома. Уже на этом этапе становится понятно, как дом будет выглядеть, как он встанет на участок и сколько примерно обойдётся строительство.',
@@ -335,7 +335,7 @@ const content = {
     constructionSection: {
       title: 'Конструктивный раздел',
       src: getGoogleDriveDirectLink(
-        'https://drive.google.com/file/d/1tjqX42EwmJ3tFXW15JA6U9mvVRTLgJ9l/view?usp=sharing'
+        'https://drive.google.com/file/d/1Y7pLWOCMu8MgBqZaR0pxhSQys_ZL2UTA/view?usp=sharing'
       ),
       text1:
         'В этот раздел входят чертежи всех несущих конструкций: фундамента, стен, перекрытий и кровли.Он нужен, чтобы дом был прочным, устойчивым и соответствовал строительным нормам.',

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
-import { Box, Flex, Text, VStack } from '@chakra-ui/react';
+import { AspectRatio, Box, Flex, Text, VStack } from '@chakra-ui/react';
 
 interface CarouselItem {
   label: string;
@@ -89,13 +89,46 @@ const ArchitecturalBlock = ({
           base: 'column',
           md: 'row'
         }}
+        alignItems='center'
       >
         <VStack
-          gap={4}
-          align='flex-start'
+          w='full'
+          h='full'
+          p={4}
+          justifyContent='center'
+          alignItems='center'
+        >
+          <Text
+            fontSize={{ base: '20px', md: '22px' }}
+            color='gray.600'
+            opacity={0.8}
+            lineHeight='1.6'
+            textAlign={{
+              base: 'center',
+              md: 'right'
+            }}
+          >
+            {text1}
+          </Text>
+
+          <Text
+            fontSize={{ base: '20px', md: '22px' }}
+            color='gray.600'
+            opacity={0.8}
+            lineHeight='1.6'
+            textAlign={{
+              base: 'center',
+              md: 'right'
+            }}
+          >
+            {text2}
+          </Text>
+        </VStack>
+        <AspectRatio
+          ratio={1}
           w='full'
           position='relative'
-          minH='75vh'
+          maxH='50vh'
           borderRadius='12px'
           overflow='hidden'
         >
@@ -113,35 +146,7 @@ const ArchitecturalBlock = ({
             onLoad={() => setIsImageLoading(false)}
             onError={() => setIsImageLoading(false)}
           />
-          <VStack
-            position='absolute'
-            w='full'
-            h='full'
-            bg='rgba(0,0,0,0.5)'
-            p={4}
-            justifyContent='center'
-          >
-            <Text
-              fontSize={{ base: '20px', md: '22px' }}
-              color='white'
-              opacity={0.8}
-              lineHeight='1.6'
-              maxW='80%'
-            >
-              {text1}
-            </Text>
-
-            <Text
-              maxW='80%'
-              fontSize={{ base: '20px', md: '22px' }}
-              color='white'
-              opacity={0.8}
-              lineHeight='1.6'
-            >
-              {text2}
-            </Text>
-          </VStack>
-        </VStack>
+        </AspectRatio>
       </Flex>
 
       <Flex
