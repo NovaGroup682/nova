@@ -26,6 +26,7 @@ const ArchitecturalBlock = ({
 }: ArchitecturalBlockProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollAccumulator = useRef(0);
 
@@ -36,7 +37,7 @@ const ArchitecturalBlock = ({
 
         scrollAccumulator.current += e.deltaY;
 
-        const scrollThreshold = 120;
+        const scrollThreshold = 140;
 
         if (Math.abs(scrollAccumulator.current) > scrollThreshold) {
           if (scrollAccumulator.current > 0) {
@@ -176,17 +177,14 @@ const ArchitecturalBlock = ({
         </Box>
 
         {/* right */}
-        <Box
+        <Flex
           w={{
             base: 'full',
             md: '65%'
           }}
-          // minH='400px'
-
-          // overflow='hidden'
-          // p={4}
+          flexDirection='column'
         >
-          <Box position='relative' w='full' h='full'>
+          <Flex position='relative' w='full' flex={1} flexDirection='column'>
             <Image
               src={carousel[activeIndex]?.src}
               alt={carousel[activeIndex]?.label}
@@ -194,22 +192,24 @@ const ArchitecturalBlock = ({
               priority
               style={{
                 objectFit: 'none',
-                // objectPosition: 'top',
-                // boxShadow: 'inset 0px -100px 40px -20px rgba(0, 0, 0, 0.42)',
-                transition: 'opacity 0.3s ease'
+                transition: 'opacity 0.3s ease',
+                filter: isImageLoading ? 'blur(10px)' : 'none'
               }}
               sizes='(max-width: 450px) 300px, 720px'
+              onLoad={() => setIsImageLoading(false)}
+              onError={() => setIsImageLoading(false)}
             />
-          </Box>
+          </Flex>
           <Text
             fontSize={{ base: '16px', md: '18px' }}
             color='black'
             opacity={0.9}
             textAlign='center'
+            pt={2}
           >
             {carousel[activeIndex]?.description}
           </Text>
-        </Box>
+        </Flex>
       </Flex>
     </VStack>
   );
