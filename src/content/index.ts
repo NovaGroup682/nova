@@ -270,6 +270,7 @@ const content = {
       'Мы подходим к проектированию системно: на выходе — современный, продуманный до мелочей дом, в котором сочетаются архитектура, логика и реалистичный бюджет.',
     architecturalSection: {
       title: 'Архитектурный раздел',
+      video: getGoogleDriveDirectLink('https://drive.google.com/file/d/1Aq7dLWYTgj36z9n79HhEfoWjjJJN2JRy/view?usp=sharing'),
       src: getGoogleDriveDirectLink(
         'https://drive.google.com/file/d/1Rhx2MArLm9_pb23yjQyc3Ct7wmLH8geB/view?usp=sharing'
       ),
@@ -334,6 +335,7 @@ const content = {
     },
     constructionSection: {
       title: 'Конструктивный раздел',
+      video: getGoogleDriveDirectLink('https://drive.google.com/file/d/1NkohgTlsLE3w4U-4nMx4tsfwxNvlcyNW/view?usp=sharing'),
       src: getGoogleDriveDirectLink(
         'https://drive.google.com/file/d/1Y7pLWOCMu8MgBqZaR0pxhSQys_ZL2UTA/view?usp=sharing'
       ),

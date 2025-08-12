@@ -215,6 +215,7 @@ const ArchitecturalBlock = ({
                           : 'none'
                       }
                       transition='all 0.3s ease'
+                      lineHeight='36px'
                     >
                       {item.label}
                     </Text>
