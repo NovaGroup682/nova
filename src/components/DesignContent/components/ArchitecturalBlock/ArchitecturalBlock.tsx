@@ -56,13 +56,22 @@ const ArchitecturalBlock = ({
   };
 
   return (
-    <VStack w='full' gap={8}>
+    <VStack
+      w='full'
+      gap={{
+        base: 4,
+        md: 8
+      }}
+    >
       <Text
         fontSize={{ base: '28px', md: '36px' }}
         w='full'
         fontWeight='bold'
         color='black'
-        textAlign='left'
+        textAlign={{
+          base: 'center',
+          md: 'left'
+        }}
       >
         {title}
       </Text>

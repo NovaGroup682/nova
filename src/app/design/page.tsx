@@ -5,7 +5,7 @@ import { Box, Text, VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
-import { AnimatedBlock, ArchitecturalBlock } from 'components';
+import { AnimatedBlock, ArchitecturalBlock, DesignContact } from 'components';
 
 const Design = () => (
   <VStack
@@ -57,7 +57,7 @@ const Design = () => (
         left={0}
         w='full'
         h='full'
-        bg='linear-gradient(360deg, black, transparent)'
+        bg='linear-gradient(360deg, rgba(0, 0, 0, 0.6), transparent)'
         zIndex={0}
       />
 
@@ -66,7 +66,7 @@ const Design = () => (
         textAlign='center'
         color='white'
         zIndex={1}
-        maxW='800px'
+        maxW='1200px'
         px={4}
       >
         <AnimatedBlock delay={0.2}>
@@ -117,7 +117,10 @@ const Design = () => (
       </VStack>
     </VStack>
     <VStack
-      gap={8}
+      gap={{
+        base: 4,
+        md: 8
+      }}
       w='full'
       maxW={maxWidth}
       px={BASE_HORIZONTAL_PADINGS}
@@ -125,6 +128,7 @@ const Design = () => (
     >
       <ArchitecturalBlock {...content.design.architecturalSection} />
       <ArchitecturalBlock {...content.design.constructionSection} />
+      <DesignContact />
     </VStack>
   </VStack>
 );
