@@ -5,11 +5,7 @@ import { Box, Text, VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
-import {
-  AnimatedBlock,
-  ArchitecturalBlock,
-  DesignListCarousel
-} from 'components';
+import { AnimatedBlock, ArchitecturalBlock } from 'components';
 
 const Design = () => (
   <VStack
@@ -127,38 +123,6 @@ const Design = () => (
       px={BASE_HORIZONTAL_PADINGS}
       py={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
     >
-      {/* Sample design data */}
-      <DesignListCarousel
-        title='Наши проекты'
-        subtitle='Посмотрите на наши лучшие работы в области индивидуального проектирования'
-        data={[
-          {
-            id: '1',
-            title: 'Современный дом в стиле минимализм',
-            description:
-              'Проект одноэтажного дома с открытой планировкой и панорамными окнами',
-            image: content.design.architecturalSection.src,
-            category: 'Архитектурный'
-          },
-          {
-            id: '2',
-            title: 'Двухэтажный коттедж с мансардой',
-            description:
-              'Классический проект с современными решениями и продуманной планировкой',
-            image: content.design.constructionSection.src,
-            category: 'Конструктивный'
-          },
-          {
-            id: '3',
-            title: 'Экологичный дом из дерева',
-            description:
-              'Проект дома с использованием натуральных материалов и энергоэффективных технологий',
-            image: content.design.mainImg,
-            category: 'Архитектурный'
-          }
-        ]}
-      />
-
       <ArchitecturalBlock {...content.design.architecturalSection} />
       <ArchitecturalBlock {...content.design.constructionSection} />
     </VStack>
