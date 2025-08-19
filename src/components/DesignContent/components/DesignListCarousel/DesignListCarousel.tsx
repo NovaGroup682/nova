@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Autoplay, Pagination, Thumbs } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { AspectRatio, Box, Text, VStack } from '@chakra-ui/react';
@@ -29,10 +29,11 @@ const DesignListCarousel = ({ list = [] }: DesignListCarouselProps) => {
       <Box w='full' position='relative'>
         <Swiper
           spaceBetween='16px'
-          autoplay={{
-            disableOnInteraction: false
+          pagination={{
+            clickable: true,
+            dynamicBullets: true
           }}
-          modules={[Pagination, Autoplay, Thumbs]}
+          modules={[Pagination]}
           style={{
             borderRadius: '16px',
             overflow: 'hidden'

@@ -127,3 +127,24 @@
     scroll-behavior: auto;
   }
 }
+
+/* Swiper pagination styles */
+.swiper-pagination {
+  position: relative !important;
+  bottom: auto !important;
+  margin-top: 16px;
+}
+
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background-color: #d1d5db !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #000000 !important;
+}
