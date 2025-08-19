@@ -14,6 +14,6 @@ export { ProjectsList } from './ProjectsList';
 export { default as SearchInput } from './SearchInput';
 export { ScrollToTopButton } from './ScrollToTopButton';
 export { YandexMap } from './YandexMap';
-export { default as ArchitecturalBlock } from './ArchitecturalBlock';
+export * from './DesignContent';
 export * from './ProductContent';
 export * from './SliderContent';
