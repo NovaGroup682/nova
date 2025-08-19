@@ -14,9 +14,10 @@ import {
   VStack
 } from '@chakra-ui/react';
 
-import { ImagePopupButton, Modal } from 'ui';
+import { Modal } from 'ui';
 import { DesignAnimatedList } from '../DesignAnimatedList';
 import { DesignListCarousel } from '../DesignListCarousel';
+import { DesignVideoButton } from '../DesignVideoButton';
 
 interface CarouselItem {
   label: string;
@@ -117,27 +118,23 @@ const ArchitecturalBlock = ({
             {text2}
           </Text>
 
-          <Box h='250px' w='300px' position='relative' alignSelf='baseline'>
-            <ImagePopupButton
-              src={preview}
-              onOpen={openVideoModal}
-              isVideo
-              customWidth={{
-                base: 'calc(100% - 64px)',
-                sm: '240px',
-                hovered: '350px',
-                md: '300px'
-              }}
-              customHeight={{
-                base: '200px',
-                sm: '240px',
-                hovered: '250px',
-                md: '175px'
-              }}
-              bottom={8}
-              left={0}
-            />
-          </Box>
+          <Flex
+            w='full'
+            gap={{
+              base: 4,
+              md: 8
+            }}
+            alignItems={{
+              base: 'center',
+              lg: 'flex-start'
+            }}
+            justifyContent={{
+              base: 'center',
+              lg: 'flex-start'
+            }}
+          >
+            <DesignVideoButton src={preview} onOpen={openVideoModal} />
+          </Flex>
         </VStack>
 
         <AspectRatio
