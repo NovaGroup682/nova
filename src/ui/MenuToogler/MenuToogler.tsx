@@ -4,6 +4,7 @@ import Bars from '@assets/icons/bars.svg';
 import Xmark from '@assets/icons/circle-xmark.svg';
 import { BASE_HORIZONTAL_PADINGS } from 'constant';
 import NextLink from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import {
   Box,
@@ -23,6 +24,7 @@ import { Logo } from 'ui/Logo';
 
 const MenuToogler = () => {
   const { open: isOpen, onOpen, onClose } = useDisclosure();
+  const pathname = usePathname();
 
   return (
     <Flex display={{ base: 'flex', lg: 'none' }} alignItems='center'>
@@ -67,40 +69,43 @@ const MenuToogler = () => {
                   h='full'
                   justifyContent='center'
                 >
-                  {content.header.headerBtns.map((btn) => (
-                    <Link
-                      key={btn.label}
-                      as={NextLink}
-                      href={btn.href}
-                      onClick={onClose}
-                      _hover={{
-                        bg: 'gray.500',
-                        textDecoration: 'none'
-                      }}
-                      _focus={{
-                        outlineWidth: 0,
-                        '& p': {
-                          color: 'black'
-                        }
-                      }}
-                    >
-                      <Text
-                        w='full'
-                        textAlign={{
-                          base: 'left',
-                          md: 'right'
+                  {content.header.headerBtns.map((btn) => {
+                    const isActive = pathname === btn.href;
+                    return (
+                      <Link
+                        key={btn.label}
+                        as={NextLink}
+                        href={btn.href}
+                        onClick={onClose}
+                        _hover={{
+                          bg: 'gray.500',
+                          textDecoration: 'none'
                         }}
-                        color='white'
-                        fontWeight='600'
-                        fontSize={{
-                          base: '32px',
-                          md: '36px'
+                        _focus={{
+                          outlineWidth: 0,
+                          '& p': {
+                            color: 'black'
+                          }
                         }}
                       >
-                        {btn.label}
-                      </Text>
-                    </Link>
-                  ))}
+                        <Text
+                          w='full'
+                          textAlign={{
+                            base: 'left',
+                            md: 'right'
+                          }}
+                          color={isActive ? 'gray.600' : 'white'}
+                          fontWeight='600'
+                          fontSize={{
+                            base: '32px',
+                            md: '36px'
+                          }}
+                        >
+                          {btn.label}
+                        </Text>
+                      </Link>
+                    );
+                  })}
                 </VStack>
               </Drawer.Body>
               <Drawer.Footer justifyContent='flex-start' pb={8} px={0}>
