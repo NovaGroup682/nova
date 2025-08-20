@@ -215,6 +215,36 @@ const projects: ProjectItemType[] = [
     ]
   },
   {
+    id: 'nova-8',
+    name: 'Nova-8',
+    beds: 0,
+    baths: 0,
+    areaType: ProjectSize.m,
+    floor: 1,
+    projectPrice: 60000,
+    price: 0,
+    sliders: [
+      'https://drive.google.com/file/d/18VSFdvZYZOyxvtpkq8CEElzkN0rl_yln/view?usp=sharing',
+      'https://drive.google.com/file/d/1YvZj7szaH5zrHVfFTVtrkVJEeG6QdTHF/view?usp=sharing',
+      'https://drive.google.com/file/d/1ZWAS21rea86aF7XCk-dXkM1uo8w3-9qx/view?usp=sharing'
+    ],
+    implementationCost: {
+      shell: 0,
+      insulatedShell: 0,
+      facade: 0,
+      interiorFinishes: 0
+    },
+    variants: [
+      {
+        area: 151,
+        constructionArea: 0,
+        layouts: [
+          'https://drive.google.com/file/d/1kJwYAq4_q9JocfG0yMOKswu1rM0W0e6E/view?usp=sharing'
+        ]
+      }
+    ]
+  },
+  {
     id: 'nova-9',
     name: 'Nova-9',
     beds: 3,
