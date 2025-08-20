@@ -11,19 +11,22 @@ export const formatNumberWithSpaces = (value: string): string => {
 export const parseFormattedNumber = (value: string): string =>
   value.replace(/\s/g, '');
 
-export const validateMinimumValue = (value: string): boolean => {
+export const validateMinimumValue = (
+  value: string,
+  minValue: number
+): boolean => {
   const numericValue = parseInt(parseFormattedNumber(value), 10);
-  return !isNaN(numericValue) && numericValue >= 1000000;
+  return !isNaN(numericValue) && numericValue >= minValue;
 };
 
-export const isMinPriceValid = (price: string) => {
+export const isMinPriceValid = (price: string, minValue: number) => {
   if (!price) return true; // Allow empty values
-  return validateMinimumValue(price);
+  return validateMinimumValue(price, minValue);
 };
 
-export const isMaxPriceValid = (price: string) => {
+export const isMaxPriceValid = (price: string, minValue: number) => {
   if (!price) return true; // Allow empty values
-  return validateMinimumValue(price);
+  return validateMinimumValue(price, minValue);
 };
 
 export const isPriceValid = (min: string, max: string) => {

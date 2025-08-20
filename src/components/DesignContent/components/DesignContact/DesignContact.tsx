@@ -26,12 +26,12 @@ const DesignContact = () => {
         }}
         borderRadius='10px'
         fontFamily='body'
-        bg='gray.200'
-        color='white'
-        fontWeight='bold'
+        colorScheme='blue'
+        bg='#2d2d2d'
+        m='0 auto'
         onClick={onOpen}
         _hover={{
-          bg: 'gray.700',
+          bg: 'gray.600',
           color: 'white'
         }}
       >

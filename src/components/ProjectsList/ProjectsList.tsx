@@ -30,6 +30,21 @@ const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
           return project.name
             .toLowerCase()
             .includes(filters.projectName.toLowerCase());
+        })
+        .filter((project) => {
+          // Filter by price range (minPrice and maxPrice)
+          const shellPrice = project.implementationCost.shell;
+          const minPrice = filters.minPrice ? Number(filters.minPrice) : null;
+          const maxPrice = filters.maxPrice ? Number(filters.maxPrice) : null;
+
+          // Don't filter if minPrice doesn't exist
+          if (minPrice === null && maxPrice === null) return true;
+
+          // Check if shell price is within the range
+          const isAboveMin = minPrice === null || shellPrice >= minPrice;
+          const isBelowMax = maxPrice === null || shellPrice <= maxPrice;
+
+          return isAboveMin && isBelowMax;
         }),
     [projects, filters]
   );

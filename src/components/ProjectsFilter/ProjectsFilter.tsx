@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 
 import {
+  formatCurrency,
   formatNumberWithSpaces,
   isMaxPriceValid,
   isMinPriceValid,
@@ -27,7 +28,12 @@ import { ProjectSearchKeys, ProjectSize } from 'types';
 
 import { Select } from 'ui';
 
-const ProjectsFilter = () => {
+interface ProjectsFilterProps {
+  min: number;
+  max: number;
+}
+
+const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [area, setArea] = useState<ProjectSize | string>(
@@ -148,11 +154,11 @@ const ProjectsFilter = () => {
 
   const isMinPriceInvalid =
     (minPrice && maxPrice && !isPriceValid(minPrice, maxPrice)) ||
-    (minPrice && !isMinPriceValid(minPrice));
+    (minPrice && !isMinPriceValid(minPrice, min));
 
   const isMaxPriceInvalid =
     (minPrice && maxPrice && !isPriceValid(minPrice, maxPrice)) ||
-    (maxPrice && !isMaxPriceValid(maxPrice));
+    (maxPrice && !isMaxPriceValid(maxPrice, min));
 
   return (
     <Flex
@@ -200,7 +206,7 @@ const ProjectsFilter = () => {
           <Text fontSize={16}>Цена, ₽</Text>
           <Group>
             <Input
-              placeholder='1 000 000'
+              placeholder={formatCurrency(min)}
               value={minPrice}
               onChange={(e) => handleMinPriceChange(e.target.value)}
               borderColor={isMinPriceInvalid ? 'red.500' : undefined}
@@ -210,7 +216,7 @@ const ProjectsFilter = () => {
               }}
             />
             <Input
-              placeholder='25 100 000'
+              placeholder={formatCurrency(max)}
               value={maxPrice}
               onChange={(e) => handleMaxPriceChange(e.target.value)}
               borderColor={isMaxPriceInvalid ? 'red.500' : undefined}

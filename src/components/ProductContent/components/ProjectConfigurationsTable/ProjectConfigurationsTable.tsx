@@ -147,10 +147,24 @@ const ProjectConfigurationsTable = ({
 
       <Button
         onClick={toggleExpanded}
+        borderRadius='10px'
+        fontFamily='body'
         colorScheme='blue'
         w='300px'
         bg='#2d2d2d'
         m='0 auto'
+        px={{
+          base: '16px',
+          md: '32px'
+        }}
+        py={{
+          base: '16px',
+          md: '24px'
+        }}
+        _hover={{
+          bg: 'gray.600',
+          color: 'white'
+        }}
       >
         {isExpanded ? 'Свернуть' : 'Показать все детали'}
       </Button>

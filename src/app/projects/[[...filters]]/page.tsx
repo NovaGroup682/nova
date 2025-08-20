@@ -3,6 +3,8 @@ import projects from 'constant/projects';
 
 import { Flex, Text, VStack } from '@chakra-ui/react';
 
+import { getPriceRange } from 'helpers';
+
 import { ProjectSearchKeys } from 'types';
 
 import { ProjectsFilter, ProjectsList, SearchInput } from 'components';
@@ -13,6 +15,8 @@ const ProjectsPage = async ({
   searchParams: Promise<Record<ProjectSearchKeys, string>>;
 }) => {
   const filters = await searchParams;
+
+  const { maxPrice, minPrice } = getPriceRange(projects);
 
   return (
     <VStack
@@ -56,7 +60,7 @@ const ProjectsPage = async ({
           </Text>
           <SearchInput />
         </Flex>
-        <ProjectsFilter />
+        <ProjectsFilter min={minPrice} max={maxPrice} />
       </VStack>
       <ProjectsList projects={projects} filters={filters} />
     </VStack>
