@@ -29,21 +29,15 @@ const ImageModal = ({
       setIsLoading(true);
       document.body.style.overflow = 'hidden';
 
-      // Reset scroll position when modal opens
+      // Reset modal content scroll position when modal opens
       setTimeout(() => {
         const modalElement = document.querySelector('[data-modal-content]');
         if (modalElement) {
           modalElement.scrollTo(0, 0);
         }
-        // Force scroll reset for mobile browsers
-        window.scrollTo(0, 0);
       }, 100);
     } else {
       document.body.style.overflow = 'unset';
-      // Reset scroll when modal closes
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 100);
     }
 
     return () => {
@@ -67,15 +61,12 @@ const ImageModal = ({
   // Handle scroll reset when zoom state changes
   useEffect(() => {
     if (!isZoomed) {
-      // Reset scroll when zooming out
+      // Reset modal content scroll when zooming out
       const timer = setTimeout(() => {
         const modalElement = document.querySelector('[data-modal-content]');
         if (modalElement) {
           modalElement.scrollTo(0, 0);
         }
-        // Force scroll reset for mobile browsers
-        window.scrollTo(0, 0);
-        document.body.scrollTo(0, 0);
       }, 350); // Wait for transition to complete
 
       return () => clearTimeout(timer);
