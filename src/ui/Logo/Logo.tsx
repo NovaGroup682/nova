@@ -4,7 +4,11 @@ import Link from 'next/link';
 
 import { Box } from '@chakra-ui/react';
 
-const Logo = () => (
+interface LogoProps {
+  fill?: string;
+}
+
+const Logo = ({ fill = 'white' }: LogoProps) => (
   <Link
     href={paths.main}
     style={{
@@ -30,7 +34,7 @@ const Logo = () => (
       const svg = e.currentTarget.querySelector('svg');
       if (svg) {
         svg.style.transition = 'fill 0.4s ease-in-out';
-        svg.style.fill = 'white';
+        svg.style.fill = fill;
       }
     }}
   >
@@ -39,7 +43,7 @@ const Logo = () => (
       height={{ base: '56px', lg: '66px' }}
       position='relative'
     >
-      <LogoIcon fill='white' />
+      <LogoIcon fill={fill} />
     </Box>
   </Link>
 );

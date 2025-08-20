@@ -7,7 +7,7 @@ import content from 'content';
 
 import { AnimatedBlock, ArchitecturalBlock, DesignContact } from 'components';
 
-const Design = () => (
+const Design = async () => (
   <VStack
     gap={0}
     w='full'

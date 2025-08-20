@@ -50,9 +50,6 @@ const DesignListCarousel = ({ list = [] }: DesignListCarouselProps) => {
                 pt={4}
                 bg='gray.100'
                 borderRadius='12px'
-                // w='full'
-                // h={{ base: '300px', md: '500px', lg: '600px' }}
-                // position='relative'
               >
                 <AspectRatio
                   ratio={120 / 86}

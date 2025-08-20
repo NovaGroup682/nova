@@ -1,32 +1,37 @@
-import { Text, VStack } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 
-const Services = () => (
-  <VStack
-    gap={0}
-    w='full'
-    position='relative'
-    justifyContent='center'
-    alignItems='center'
-    flex={1}
-  >
-    <Text
-      as='h2'
-      color='gray.900'
-      textAlign='center'
-      fontSize={{
-        base: '20px',
-        md: '34px'
-      }}
-      lineHeight={{
-        base: '30px',
-        md: '52px'
-      }}
-      fontWeight={700}
-      whiteSpace='pre-line'
+import content from 'content';
+
+import { ServicesList } from 'components';
+
+const Services = async () => {
+  const services = content.services;
+
+  return (
+    <VStack
+      gap={0}
+      w='full'
+      position='relative'
+      justifyContent='flex-start'
+      alignItems='center'
+      flex={1}
     >
-      Услуги
-    </Text>
-  </VStack>
-);
+      <VStack
+        w='full'
+        h={{
+          base: 'calc(100vh - 88px)',
+          md: 'calc(100vh - 104px)',
+          lg: 'calc(100vh - 130px)'
+        }}
+        position='relative'
+        alignItems='center'
+        justifyContent='center'
+        overflow='hidden'
+      >
+        <ServicesList services={services} />
+      </VStack>
+    </VStack>
+  );
+};
 
 export default Services;
