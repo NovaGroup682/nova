@@ -5,7 +5,8 @@ export const formatNumberWithSpaces = (value: string): string => {
   const number = parseInt(numericValue, 10);
   if (isNaN(number)) return '';
 
-  return number.toLocaleString('ru-RU');
+  // Format with spaces every 3 digits from right to left
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 };
 
 export const parseFormattedNumber = (value: string): string =>

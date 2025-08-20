@@ -114,6 +114,20 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
     setMaxPrice(formattedValue);
   };
 
+  const handleMinPriceFocus = () => {
+    if (!minPrice) {
+      const formattedMinPrice = formatNumberWithSpaces(min.toString());
+      setMinPrice(formattedMinPrice);
+    }
+  };
+
+  const handleMaxPriceFocus = () => {
+    if (!maxPrice) {
+      const formattedMaxPrice = formatNumberWithSpaces(max.toString());
+      setMaxPrice(formattedMaxPrice);
+    }
+  };
+
   const handleResetFilters = () => {
     setArea('');
     setFloors([]);
@@ -210,6 +224,7 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
               placeholder={formatCurrency(min)}
               value={minPrice}
               onChange={(e) => handleMinPriceChange(e.target.value)}
+              onFocus={handleMinPriceFocus}
               borderColor={isMinPriceInvalid ? 'red.500' : undefined}
               _focus={{
                 borderColor: isMinPriceInvalid ? 'red.500' : undefined,
@@ -220,6 +235,7 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
               placeholder={formatCurrency(max)}
               value={maxPrice}
               onChange={(e) => handleMaxPriceChange(e.target.value)}
+              onFocus={handleMaxPriceFocus}
               borderColor={isMaxPriceInvalid ? 'red.500' : undefined}
               _focus={{
                 borderColor: isMaxPriceInvalid ? 'red.500' : undefined,
