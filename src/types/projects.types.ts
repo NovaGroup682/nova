@@ -6,18 +6,10 @@ export enum ProjectSize {
   xl = 'xl'
 }
 
-export type LayoutsPlanType = {
-  img: string;
-  planWithArea: {
-    [key: number]: string;
-  };
-  totalArea: number;
-};
-
 export type ProjectItemVariantType = {
   area: number;
   constructionArea: number;
-  layouts: LayoutsPlanType[];
+  layouts: string[];
 };
 
 export type ProjectItemType = {

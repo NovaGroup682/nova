@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { GOOGLE_LINK } from 'constant';
 import Image from 'next/image';
 
 import { AspectRatio, Text } from '@chakra-ui/react';
+
+import { getGoogleDriveDirectLink } from 'helpers';
 
 import { ProjectItemType } from 'types';
 import content from 'content';
@@ -41,7 +42,7 @@ const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
             transition: 'filter 0.3s ease-in-out'
           }}
           fill
-          src={GOOGLE_LINK + project.sliders[0]}
+          src={getGoogleDriveDirectLink(project.sliders[0])}
           alt='contact cover'
           onLoad={handleImageLoad}
           onError={handleImageError}

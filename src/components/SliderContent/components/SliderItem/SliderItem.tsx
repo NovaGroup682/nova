@@ -1,7 +1,8 @@
-import { GOOGLE_LINK } from 'constant';
 import Image from 'next/image';
 
 import { AspectRatio } from '@chakra-ui/react';
+
+import { getGoogleDriveDirectLink } from 'helpers';
 
 interface SliderItemProps {
   src: string;
@@ -18,7 +19,7 @@ const SliderItem = ({ src, onClick }: SliderItemProps) => (
     onClick={onClick}
   >
     <Image
-      src={GOOGLE_LINK + src}
+      src={getGoogleDriveDirectLink(src)}
       alt='Background'
       fill
       style={{
@@ -27,7 +28,7 @@ const SliderItem = ({ src, onClick }: SliderItemProps) => (
         zIndex: -1
       }}
       priority
-      sizes='(max-width: 450px) 400px, 1200px'
+      sizes='(max-width: 450px) 400px, (max-width: 900px) 900px, 1200px'
       quality={75}
     />
   </AspectRatio>

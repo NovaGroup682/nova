@@ -1,12 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { GOOGLE_LINK } from 'constant';
 import Image from 'next/image';
 
 import { AspectRatio, Flex, Stack, Text, VStack } from '@chakra-ui/react';
 
-import { LayoutsPlanType } from 'types';
+import { getGoogleDriveDirectLink } from 'helpers';
 
 import { EditProjectButton } from '../EditProjectButton';
 import { ImageModal } from '../ImageModal';
@@ -16,7 +15,7 @@ interface ProjectLayoutsProps {
   openModal: () => void;
   area: number;
   constructionArea: number;
-  plans: LayoutsPlanType[];
+  plans: string[];
 }
 
 const ProjectLayouts = ({
@@ -89,15 +88,17 @@ const ProjectLayouts = ({
           >
             {`Общая площадь ${area} м`}&#178;
           </Text>
-          <Text
-            fontSize={{
-              base: 14,
-              md: 18
-            }}
-            color='gray.500'
-          >
-            {`Строительная площадь ${constructionArea} м`}&#178;
-          </Text>
+          {constructionArea !== 0 && (
+            <Text
+              fontSize={{
+                base: 14,
+                md: 18
+              }}
+              color='gray.500'
+            >
+              {`Строительная площадь ${constructionArea} м`}&#178;
+            </Text>
+          )}
         </Flex>
 
         <EditProjectButton onClick={openModal} />
@@ -117,7 +118,7 @@ const ProjectLayouts = ({
       >
         {plans.map((plan, idx) => (
           <Stack
-            key={plan.img}
+            key={plan}
             w='full'
             gap={4}
             flexDirection='column'
@@ -144,7 +145,7 @@ const ProjectLayouts = ({
               cursor='pointer'
               onClick={() =>
                 handleImageClick(
-                  GOOGLE_LINK + plan.img,
+                  getGoogleDriveDirectLink(plan),
                   `План ${idx % 2 ? 'второго' : 'первого'} этажа`
                 )
               }
@@ -154,7 +155,7 @@ const ProjectLayouts = ({
               }}
             >
               <Image
-                src={GOOGLE_LINK + plan.img}
+                src={getGoogleDriveDirectLink(plan)}
                 alt='Background'
                 fill
                 style={{

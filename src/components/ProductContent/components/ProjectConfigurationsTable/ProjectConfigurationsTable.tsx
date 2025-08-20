@@ -92,11 +92,11 @@ const ProjectConfigurationsTable = ({
           <GridItem key={index} textAlign='center'>
             <Text
               fontSize={{ base: 12, md: 18 }}
-              color='black'
+              color={price === 0 ? 'gray.600' : 'black'}
               fontWeight='semibold'
               whiteSpace='nowrap'
             >
-              {formatCurrency(price)}
+              {price === 0 ? 'по запросу' : formatCurrency(price)}
             </Text>
           </GridItem>
         ))}

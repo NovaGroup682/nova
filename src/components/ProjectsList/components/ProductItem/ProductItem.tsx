@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useState } from 'react';
-import { GOOGLE_LINK, paths } from 'constant';
+import { paths } from 'constant';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -17,7 +17,7 @@ import {
 
 import { useIsTouchDevice } from 'hooks';
 
-import { formatCurrency } from 'helpers';
+import { formatCurrency, getGoogleDriveDirectLink } from 'helpers';
 
 import { ProjectItemType } from 'types';
 
@@ -77,7 +77,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
               transition: 'filter 0.3s ease-in-out'
             }}
             fill
-            src={GOOGLE_LINK + project.sliders[0]}
+            src={getGoogleDriveDirectLink(project.sliders[0])}
             alt='contact cover'
             onLoad={handleImageLoad}
             onError={handleImageError}
@@ -106,7 +106,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
                     justifyContent={{ base: 'center', md: 'flex-start' }}
                     alignItems='center'
                     gap={1}
-                    pb={10}
+                    pb={6}
                   >
                     <Text
                       color='white'
@@ -144,7 +144,9 @@ const ProductItem = ({ project }: ProductItemProps) => {
                       fontWeight='light'
                       whiteSpace='nowrap'
                     >
-                      {formatCurrency(project.implementationCost.shell)}
+                      {project.implementationCost.shell === 0
+                        ? 'по запросу'
+                        : formatCurrency(project.implementationCost.shell)}
                     </Text>
                   </Flex>
                 </Collapsible.Content>
