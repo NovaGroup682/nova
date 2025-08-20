@@ -125,6 +125,7 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
     params.delete(ProjectSearchKeys.floors);
     params.delete(ProjectSearchKeys.minPrice);
     params.delete(ProjectSearchKeys.maxPrice);
+    params.delete(ProjectSearchKeys.projectName);
 
     router.push(`${paths.projects}?${params.toString()}`);
   };
@@ -228,7 +229,11 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
           </Group>
         </VStack>
       </HStack>
-      {(floors.length || area || minPrice || maxPrice) && (
+      {(floors.length ||
+        area ||
+        minPrice ||
+        maxPrice ||
+        searchParams.get(ProjectSearchKeys.projectName)) && (
         <Button variant='ghost' onClick={handleResetFilters}>
           <Text fontSize={16}>Сбросить</Text>
           <Xmark width='30px' height='30px' />

@@ -15,6 +15,12 @@ const SearchInput = () => {
   const [searchValue, setSearchValue] = useState(
     searchParams.get(ProjectSearchKeys.projectName) || ''
   );
+
+  // Update searchValue when URL params change (e.g., when clear button is clicked)
+  useEffect(() => {
+    const projectNameFromUrl = searchParams.get(ProjectSearchKeys.projectName);
+    setSearchValue(projectNameFromUrl || '');
+  }, [searchParams]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const updateUrlWithDebounce = useCallback(
