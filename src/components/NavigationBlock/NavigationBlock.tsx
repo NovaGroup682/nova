@@ -55,7 +55,6 @@ const NavigationBlock = () => (
             p={6}
             top={0}
             left={0}
-            // boxShadow='inset 0px -260px 40px -20px rgba(0, 0, 0, 0.42)'
             bg='rgba(0, 0, 0, 0.3)'
             gap={0}
             w='full'
@@ -63,6 +62,11 @@ const NavigationBlock = () => (
             justifyContent={idx % 2 ? 'flex-end' : 'flex-start'}
             alignItems='flex-start'
             whiteSpace='pre-line'
+            transition='all 0.4s ease'
+            _hover={{
+              bg: 'rgba(0, 0, 0, 0.5)',
+              backdropFilter: 'blur(1px)'
+            }}
           >
             <Text fontWeight={600} color='white' fontSize={26}>
               {nav.title}
