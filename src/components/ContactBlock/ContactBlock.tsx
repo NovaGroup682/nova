@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 import {
   Box,
-  Button,
   Collapsible,
   Text,
   useDisclosure,
@@ -15,6 +14,7 @@ import { useIsTouchDevice } from 'hooks';
 
 import content from 'content';
 
+import { NavigationActionButton } from 'ui';
 import { ContactModal } from './components';
 
 const ContactBlock = () => {
@@ -82,28 +82,7 @@ const ContactBlock = () => {
             </Collapsible.Content>
           </Collapsible.Root>
         )}
-        <Button
-          px={{
-            base: '16px',
-            md: '32px'
-          }}
-          py={{
-            base: '16px',
-            md: '24px'
-          }}
-          borderRadius='10px'
-          fontFamily='body'
-          bg='white'
-          color='black'
-          fontWeight='bold'
-          onClick={onOpen}
-          _hover={{
-            bg: 'gray.700',
-            color: 'white'
-          }}
-        >
-          {content.common.call}
-        </Button>
+        <NavigationActionButton onClick={onOpen} label={content.common.call} />
       </VStack>
 
       <ContactModal isOpen={isOpen} onClose={onClose} />

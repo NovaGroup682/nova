@@ -80,7 +80,8 @@ const ProjectSliderBlock = () => {
       display='flex'
       flexDirection='column'
       ratio={7 / 4}
-      my={8}
+      mt={8}
+      mb={{ base: 4, md: 8 }}
       h='full'
       w='full'
       borderRadius='2xl'
@@ -118,7 +119,7 @@ const ProjectSliderBlock = () => {
         <Grid
           templateColumns={{
             base: 'repeat(2, 1fr)',
-            lg: 'repeat(3, 1fr)'
+            md: 'repeat(3, 1fr)'
           }}
           position='absolute'
           w='full'
@@ -182,7 +183,7 @@ const ProjectSliderBlock = () => {
           <GridItem
             colSpan={1}
             margin='0 auto'
-            display={{ base: 'none', lg: 'grid' }}
+            display={{ base: 'none', md: 'grid' }}
           >
             {projectBtn()}
           </GridItem>
@@ -206,17 +207,6 @@ const ProjectSliderBlock = () => {
             </Text>
           </GridItem>
         </Grid>
-
-        <Flex
-          position='absolute'
-          w='full'
-          zIndex={10}
-          bottom='85px'
-          justifyContent='center'
-          display={{ base: 'grid', lg: 'none' }}
-        >
-          {projectBtn()}
-        </Flex>
       </Box>
     </AspectRatio>
   );

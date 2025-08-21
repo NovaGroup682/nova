@@ -1,4 +1,4 @@
-import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
+import { BASE_HORIZONTAL_PADINGS, maxWidth, paths } from 'constant';
 import Image from 'next/image';
 
 import { Box, For, Text, VStack } from '@chakra-ui/react';
@@ -14,6 +14,7 @@ import {
   NavigationBlock,
   ProjectSliderBlock
 } from 'components';
+import { NavigationActionButton } from 'ui';
 
 const Home = () => (
   <VStack gap={0} w='full' position='relative'>
@@ -66,7 +67,7 @@ const Home = () => (
               key={item}
               as='h1'
               fontSize={{
-                base: '20px',
+                base: '26px',
                 sm: '32px',
                 md: '42px',
                 lg: '56px',
@@ -83,7 +84,10 @@ const Home = () => (
               animateBy='words'
               direction='top'
               className='text-2xl mb-8'
-              letterSpacing='4px'
+              letterSpacing={{
+                base: 0,
+                md: '4px'
+              }}
             />
           )}
         </For>
@@ -136,6 +140,14 @@ const Home = () => (
       </AnimatedBlock>
       <AnimatedBlock delay={0.3}>
         <ProjectSliderBlock />
+      </AnimatedBlock>
+      <AnimatedBlock delay={0.3}>
+        <NavigationActionButton
+          label={content.common.allProjects}
+          href={paths.projects}
+          textTransform='uppercase'
+          display={{ base: 'flex', md: 'none' }}
+        />
       </AnimatedBlock>
 
       <AnimatedBlock delay={0.3}>

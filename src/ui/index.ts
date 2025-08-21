@@ -8,3 +8,4 @@ export { ChakraNextLink } from './ChakraNextLink';
 export { Modal } from './Modal';
 export { Tooltip } from './Tooltip';
 export { ImagePopupButton } from './ImagePopupButton';
+export { NavigationActionButton } from './NavigationActionButton';
