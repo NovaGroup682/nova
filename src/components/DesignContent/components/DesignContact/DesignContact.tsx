@@ -12,7 +12,11 @@ const DesignContact = () => {
 
   return (
     <Box w='full' textAlign='center'>
-      <NavigationActionButton onClick={onOpen} label={content.common.call} />
+      <NavigationActionButton
+        onClick={onOpen}
+        label={content.common.call}
+        my={{ base: 4, md: 0 }}
+      />
 
       <ContactModal isOpen={isOpen} onClose={onClose} />
     </Box>

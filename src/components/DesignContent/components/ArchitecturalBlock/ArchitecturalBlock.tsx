@@ -145,6 +145,7 @@ const ArchitecturalBlock = ({
           minW='40%'
           borderRadius='12px'
           overflow='hidden'
+          display={{ base: 'none', md: 'block' }}
         >
           <Image
             src={src}
