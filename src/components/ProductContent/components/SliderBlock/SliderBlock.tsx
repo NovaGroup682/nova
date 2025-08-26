@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { AspectRatio, VStack } from '@chakra-ui/react';
+import { AspectRatio, Box, HStack, VStack } from '@chakra-ui/react';
 
 import { SliderItem, SliderNavigation } from 'components/SliderContent';
 
@@ -20,9 +20,15 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
     setCurrentIndex(swiper.realIndex);
   };
 
-  const handleNavigationClick = (index: number) => {
+  const onNextSlide = () => {
     if (swiperRef.current) {
-      swiperRef.current.slideTo(index);
+      swiperRef.current.slideNext();
+    }
+  };
+
+  const onPrevSlide = () => {
+    if (swiperRef.current) {
+      swiperRef.current.slidePrev();
     }
   };
 
@@ -56,11 +62,40 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
           ))}
         </Swiper>
 
-        <SliderNavigation
-          list={sliders}
-          currentSlide={currentIndex}
-          onClick={handleNavigationClick}
-        />
+        <SliderNavigation onNext={onNextSlide} onPrev={onPrevSlide} />
+
+        <Box
+          position='absolute'
+          bottom={{ base: '10px', md: '0px' }}
+          left='50%'
+          transform='translateX(-50%)'
+          display={{ base: 'flex', md: 'none' }}
+          zIndex={30}
+        >
+          <HStack gap={2}>
+            {sliders.map((_, index) => (
+              <Box
+                key={index}
+                w='8px'
+                h='8px'
+                borderRadius='full'
+                bg={index === currentIndex ? 'white' : 'rgba(255,255,255,0.5)'}
+                cursor='pointer'
+                transition='all 0.3s ease'
+                _hover={{
+                  bg:
+                    index === currentIndex ? 'white' : 'rgba(255,255,255,0.8)',
+                  transform: 'scale(1.2)'
+                }}
+                onClick={() => {
+                  if (swiperRef.current) {
+                    swiperRef.current.slideTo(index);
+                  }
+                }}
+              />
+            ))}
+          </HStack>
+        </Box>
       </VStack>
     </AspectRatio>
   );

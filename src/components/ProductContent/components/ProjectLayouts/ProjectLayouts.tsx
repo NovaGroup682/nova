@@ -14,7 +14,6 @@ interface ProjectLayoutsProps {
   label: string;
   openModal: () => void;
   area: number;
-  constructionArea: number;
   plans: string[];
 }
 
@@ -22,7 +21,6 @@ const ProjectLayouts = ({
   label,
   openModal,
   area,
-  constructionArea,
   plans
 }: ProjectLayoutsProps) => {
   const [selectedImage, setSelectedImage] = useState<{
@@ -88,17 +86,6 @@ const ProjectLayouts = ({
           >
             {`Общая площадь ${area} м`}&#178;
           </Text>
-          {constructionArea !== 0 && (
-            <Text
-              fontSize={{
-                base: 14,
-                md: 18
-              }}
-              color='gray.500'
-            >
-              {`Строительная площадь ${constructionArea} м`}&#178;
-            </Text>
-          )}
         </Flex>
       </Flex>
 

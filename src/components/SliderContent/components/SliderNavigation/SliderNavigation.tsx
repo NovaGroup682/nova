@@ -16,7 +16,10 @@ const SliderNavigation = ({ onNext, onPrev }: SliderNavigationProps) => (
       top={0}
       bottom={0}
       opacity={0}
-      w='220px'
+      w={{
+        base: '100px',
+        md: '220px'
+      }}
       display='flex'
       alignItems='center'
       justifyContent='flex-start'
@@ -38,7 +41,10 @@ const SliderNavigation = ({ onNext, onPrev }: SliderNavigationProps) => (
       right={0}
       top={0}
       bottom={0}
-      w='220px'
+      w={{
+        base: '100px',
+        md: '220px'
+      }}
       display='flex'
       alignItems='center'
       justifyContent='flex-end'

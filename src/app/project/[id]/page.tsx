@@ -96,7 +96,6 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
               openModal={onOpen}
               label={project.variants.length > 1 ? `Вариант ${idx + 1}` : ''}
               area={variant.area}
-              constructionArea={variant.constructionArea}
               plans={variant.layouts}
             />
           )

@@ -16,6 +16,7 @@ import {
   Flex,
   Grid,
   GridItem,
+  HStack,
   Link,
   Text
 } from '@chakra-ui/react';
@@ -70,6 +71,10 @@ const ProjectSliderBlock = () => {
     </Link>
   );
 
+  const handleSlideChange = (swiper: SwiperType) => {
+    setCurrentIndex(swiper.realIndex);
+  };
+
   const onSliderClick = (id: string) => () =>
     router.push(`${paths.project}/${id}`);
 
@@ -104,11 +109,14 @@ const ProjectSliderBlock = () => {
           mousewheel={true}
           keyboard={true}
           loop
+          speed={600}
+          effect='slide'
+          allowTouchMove={true}
           className='mySwiper'
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
+          onSlideChange={handleSlideChange}
           style={{ width: '100%' }}
         >
           {sliders.map((slide) => (
@@ -123,6 +131,38 @@ const ProjectSliderBlock = () => {
 
         <SliderNavigation onNext={onNextSlide} onPrev={onPrevSlide} />
 
+        <Box
+          position='absolute'
+          bottom={{ base: '10px', md: '0px' }}
+          left='50%'
+          transform='translateX(-50%)'
+          display={{ base: 'flex', md: 'none' }}
+          zIndex={30}
+        >
+          <HStack gap={2}>
+            {sliders.map((_, index) => (
+              <Box
+                key={index}
+                w='8px'
+                h='8px'
+                borderRadius='full'
+                bg={index === currentIndex ? 'white' : 'rgba(255,255,255,0.5)'}
+                cursor='pointer'
+                transition='all 0.3s ease'
+                _hover={{
+                  bg:
+                    index === currentIndex ? 'white' : 'rgba(255,255,255,0.8)',
+                  transform: 'scale(1.2)'
+                }}
+                onClick={() => {
+                  if (swiperRef.current) {
+                    swiperRef.current.slideTo(index);
+                  }
+                }}
+              />
+            ))}
+          </HStack>
+        </Box>
         <Grid
           templateColumns={{
             base: 'repeat(2, 1fr)',

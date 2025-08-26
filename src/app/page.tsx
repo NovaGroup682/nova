@@ -100,7 +100,10 @@ const Home = () => (
           as='h2'
           color='gray.800'
           mt='40px'
-          py='40px'
+          py={{
+            base: '20px',
+            md: '40px'
+          }}
           textAlign='center'
           fontSize={{
             base: '20px',
