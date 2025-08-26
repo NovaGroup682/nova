@@ -184,7 +184,7 @@ const Footer = () => (
           }}
         />
         <Link
-          href={paths.main}
+          href={paths.policy}
           as={NextLink}
           fontFamily='body'
           fontSize={{

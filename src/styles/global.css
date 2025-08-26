@@ -1,7 +1,7 @@
-.main-project-description{
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
+.main-project-description {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
 }
 
 /* Modal animations */
@@ -28,7 +28,11 @@
 }
 
 @keyframes bounceRight {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: rotate(180deg) translateX(0);
   }
   40% {
