@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import Bath from '@assets/icons/bath.svg';
 import Bed from '@assets/icons/bed-front.svg';
 import { paths } from 'constant';
@@ -38,12 +38,6 @@ const ProjectSliderBlock = () => {
       ),
     []
   );
-
-  useEffect(() => {
-    if (swiperRef.current && swiperRef.current.slideTo) {
-      swiperRef.current.slideTo(currentIndex);
-    }
-  }, [currentIndex]);
 
   const projectBtn = () => (
     <Link
@@ -109,8 +103,6 @@ const ProjectSliderBlock = () => {
           mousewheel={true}
           keyboard={true}
           loop
-          speed={600}
-          effect='slide'
           allowTouchMove={true}
           className='mySwiper'
           onSwiper={(swiper) => {
