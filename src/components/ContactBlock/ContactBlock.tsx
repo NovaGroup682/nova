@@ -5,6 +5,7 @@ import Image from 'next/image';
 import {
   Box,
   Collapsible,
+  StackProps,
   Text,
   useDisclosure,
   VStack
@@ -17,7 +18,7 @@ import content from 'content';
 import { NavigationActionButton } from 'ui';
 import { ContactModal } from './components';
 
-const ContactBlock = () => {
+const ContactBlock = ({ ...styles }: StackProps) => {
   const { open: isOpen, onOpen, onClose } = useDisclosure();
   const {
     open: isHovered,
@@ -42,6 +43,7 @@ const ContactBlock = () => {
         md: 'flex-end'
       }}
       transition='all 0.3s ease'
+      {...styles}
     >
       <Image
         sizes='(max-width: 450px) 400px, 1000px'
@@ -82,7 +84,11 @@ const ContactBlock = () => {
             </Collapsible.Content>
           </Collapsible.Root>
         )}
-        <NavigationActionButton onClick={onOpen} label={content.common.call} />
+        <NavigationActionButton
+          onClick={onOpen}
+          label={content.common.call}
+          isNegative
+        />
       </VStack>
 
       <ContactModal isOpen={isOpen} onClose={onClose} />

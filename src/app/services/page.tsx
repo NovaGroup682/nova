@@ -34,7 +34,7 @@ const Services = async () => {
         />
 
         <ServicesList services={services.servicesList} />
-        <ContactBlock />
+        <ContactBlock mb={{ base: 4, md: 0 }} />
       </VStack>
     </VStack>
   );

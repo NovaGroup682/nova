@@ -8,12 +8,14 @@ interface NavigationActionButton extends ButtonProps {
   label: string;
   href?: string;
   onClick?: () => void;
+  isNegative?: boolean;
 }
 
 const NavigationActionButton = ({
   onClick,
   label,
   href,
+  isNegative = false,
   ...styles
 }: NavigationActionButton) => {
   const router = useRouter();
@@ -24,7 +26,7 @@ const NavigationActionButton = ({
     <Button
       onClick={onNavigate}
       w={{
-        base: 'full',
+        base: isNegative ? '80%' : 'full',
         md: 300
       }}
       px={{
@@ -38,10 +40,11 @@ const NavigationActionButton = ({
       borderRadius='10px'
       fontFamily='body'
       colorScheme='blue'
-      bg='#2d2d2d'
+      bg={isNegative ? 'gray.100' : '#2d2d2d'}
+      color={isNegative ? 'black' : 'white'}
       m='0 auto'
       _hover={{
-        bg: 'gray.600',
+        bg: isNegative ? 'gray.200' : 'gray.600',
         color: 'white'
       }}
       {...styles}

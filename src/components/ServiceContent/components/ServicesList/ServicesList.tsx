@@ -73,13 +73,17 @@ const ServicesList = ({ services }: ServicesListProps) => {
   };
 
   return (
-    <Flex w='full' h='full' justifyContent='center' alignItems='center'>
-      <VStack
-        w='full'
-        // maxW='800px'
-        gap={4}
-        align='stretch'
-      >
+    <Flex
+      w='full'
+      h='full'
+      justifyContent='center'
+      alignItems='center'
+      my={{
+        base: 2,
+        md: 4
+      }}
+    >
+      <VStack w='full' gap={4} align='stretch'>
         <AnimatePresence>
           <motion.div
             variants={containerVariants}
@@ -109,8 +113,14 @@ const ServicesList = ({ services }: ServicesListProps) => {
                   {/* Header с label */}
                   <Box
                     w='full'
-                    px={6}
-                    pt={6}
+                    px={{
+                      base: 0,
+                      md: 6
+                    }}
+                    pt={{
+                      base: 0,
+                      md: 6
+                    }}
                     cursor='pointer'
                     onClick={() => toggleItem(index)}
                     transition='all 0.3s ease'
@@ -120,7 +130,10 @@ const ServicesList = ({ services }: ServicesListProps) => {
                         as='h2'
                         color='gray.900'
                         transition='all 0.3s ease'
-                        textAlign='center'
+                        textAlign={{
+                          base: 'left',
+                          md: 'center'
+                        }}
                         fontSize={{
                           base: '20px',
                           md: '34px'
