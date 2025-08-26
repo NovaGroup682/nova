@@ -4,7 +4,7 @@ import { Box, useDisclosure } from '@chakra-ui/react';
 
 import content from 'content';
 
-import { ContactModal } from 'components/ContactBlock/components';
+import { ContactModal } from 'components/ContactModal';
 import { NavigationActionButton } from 'ui';
 
 const DesignContact = () => {

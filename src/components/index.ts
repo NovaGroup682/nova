@@ -18,3 +18,4 @@ export * from './DesignContent';
 export * from './ProductContent';
 export * from './SliderContent';
 export * from './ServiceContent';
+export { ContactModal } from './ContactModal';

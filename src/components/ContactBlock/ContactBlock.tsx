@@ -16,7 +16,7 @@ import { useIsTouchDevice } from 'hooks';
 import content from 'content';
 
 import { NavigationActionButton } from 'ui';
-import { ContactModal } from './components';
+import { ContactModal } from '../ContactModal';
 
 const ContactBlock = ({ ...styles }: StackProps) => {
   const { open: isOpen, onOpen, onClose } = useDisclosure();
@@ -78,7 +78,7 @@ const ContactBlock = ({ ...styles }: StackProps) => {
                   whiteSpace='pre-line'
                   textAlign='center'
                 >
-                  {`Напишите нам если у вас остались вопросы,\nпоможем выбрать проект под ваш бюджет`}
+                  {content.main.contactBlock.helpText}
                 </Text>
               </Box>
             </Collapsible.Content>

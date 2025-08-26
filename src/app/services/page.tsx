@@ -5,7 +5,7 @@ import { AspectRatio, Flex, VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
-import { BlurText, ContactBlock, ServicesList } from 'components';
+import { BlurText, ContactUs, ServicesList } from 'components';
 
 const Services = async () => {
   const services = content.services;
@@ -57,7 +57,7 @@ const Services = async () => {
         <Flex
           w='full'
           gap={4}
-          mb={4}
+          mb={{ base: 0, md: 4 }}
           flexDirection={{
             base: 'column-reverse',
             lg: 'row'
@@ -89,16 +89,13 @@ const Services = async () => {
               style={{
                 objectFit: 'cover',
                 transition: 'opacity 0.3s ease'
-                // filter: isImageLoading ? 'blur(10px)' : 'none'
               }}
               sizes='(max-width: 450px) 400px, 700px'
-              // onLoad={() => setIsImageLoading(false)}
-              // onError={() => setIsImageLoading(false)}
             />
           </AspectRatio>
         </Flex>
 
-        <ContactBlock mb={{ base: 4, md: 0 }} />
+        <ContactUs />
       </VStack>
     </VStack>
   );
