@@ -1,18 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { BASE_HORIZONTAL_PADINGS } from 'constant';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { AspectRatio, Box, Flex, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, HStack, Text, VStack } from '@chakra-ui/react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1
+      staggerChildren: 0.1,
+      delayChildren: 0.05
     }
   }
 };
@@ -20,24 +19,35 @@ const containerVariants = {
 const itemVariants = {
   hidden: {
     opacity: 0,
-    x: 100,
-    scale: 0.8
+    y: -20,
+    scale: 0.95
   },
   visible: {
     opacity: 1,
-    x: 0,
+    y: 0,
     scale: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: 'easeOut' as const
     }
-  },
-  exit: {
+  }
+};
+
+const collapseVariants = {
+  collapsed: {
+    height: 0,
     opacity: 0,
-    x: -50,
-    scale: 0.8,
     transition: {
-      duration: 0.3
+      duration: 0.3,
+      ease: 'easeInOut' as const
+    }
+  },
+  expanded: {
+    height: 'auto',
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      ease: 'easeInOut' as const
     }
   }
 };
@@ -50,105 +60,145 @@ interface ServicesListProps {
 }
 
 const ServicesList = ({ services }: ServicesListProps) => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set([0])); // По умолчанию открыт первый элемент
+
+  const toggleItem = (index: number) => {
+    const newOpenItems = new Set(openItems);
+    if (newOpenItems.has(index)) {
+      newOpenItems.delete(index);
+    } else {
+      newOpenItems.add(index);
+    }
+    setOpenItems(newOpenItems);
+  };
 
   return (
-    <Flex
-      w='full'
-      h='full'
-      px={BASE_HORIZONTAL_PADINGS}
-      justifyContent='flex-end'
-      bg='linear-gradient(to left, #52525b 70%, transparent 60%)'
-      borderBottomWidth={2}
-      alignItems='center'
-    >
-      <AspectRatio
-        w='40%'
-        maxW='600px'
-        ratio={1 / 1}
-        bg='gray.200'
-        borderRadius='12px'
-      >
-        <VStack w='full' px={4}>
-          {services.map((service, index) => (
-            <Box
-              key={service.label}
-              w='full'
-              pl={4}
-              cursor='pointer'
-              transition='all 0.3s ease'
-              onClick={() => setActiveIndex(index)}
-            >
-              <Text
-                fontSize={{
-                  base: '16px',
-                  md: index === activeIndex ? '24px' : '18px'
-                }}
-                fontWeight='bold'
-                color={
-                  index === activeIndex ? 'white' : 'rgba(236, 236, 236, 1)'
-                }
-                textShadow={
-                  index === activeIndex
-                    ? '1px 1px 14px rgba(255, 255, 255, 0.25)'
-                    : 'none'
-                }
-                transition='all 0.3s ease'
-                lineHeight='36px'
-                _hover={{
-                  color: index === activeIndex ? 'white' : 'black'
-                }}
-              >
-                {service.label}
-              </Text>
-            </Box>
-          ))}
-        </VStack>
-      </AspectRatio>
+    <Flex w='full' h='full' justifyContent='center' alignItems='center'>
       <VStack
-        w='60%'
-        height='full'
-        px={4}
-        justifyContent='center'
-        alignItems='flex-end'
+        w='full'
+        // maxW='800px'
+        gap={4}
+        align='stretch'
       >
-        <AnimatePresence mode='wait'>
+        <AnimatePresence>
           <motion.div
-            key={activeIndex}
             variants={containerVariants}
             initial='hidden'
             animate='visible'
-            exit='hidden'
-            style={{
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end'
-            }}
+            style={{ width: '100%' }}
           >
-            {services[activeIndex].list.map((item) => (
+            {services.map((service, index) => (
               <motion.div
-                key={`${activeIndex}-${item}`}
+                key={service.label}
                 variants={itemVariants}
-                style={{ width: '100%' }}
+                style={{ width: '100%', marginBottom: '16px' }}
               >
-                <Text
-                  pl='20%'
-                  fontSize={{
-                    base: '16px',
-                    md: '24px'
-                  }}
-                  fontWeight='bold'
-                  color='white'
-                  textAlign='right'
+                <Box
+                  w='full'
+                  bg='white'
+                  borderRadius='12px'
+                  overflow='hidden'
                   transition='all 0.3s ease'
-                  lineHeight='36px'
                   _hover={{
-                    color: 'white'
+                    transform: 'translateY(-2px)',
+                    '& h2': {
+                      color: 'gray.500'
+                    }
                   }}
                 >
-                  {item}
-                </Text>
+                  {/* Header с label */}
+                  <Box
+                    w='full'
+                    px={6}
+                    pt={6}
+                    cursor='pointer'
+                    onClick={() => toggleItem(index)}
+                    transition='all 0.3s ease'
+                  >
+                    <HStack justify='space-between' align='center'>
+                      <Text
+                        as='h2'
+                        color='gray.900'
+                        transition='all 0.3s ease'
+                        textAlign='center'
+                        fontSize={{
+                          base: '20px',
+                          md: '34px'
+                        }}
+                        lineHeight={{
+                          base: '30px',
+                          md: '52px'
+                        }}
+                        fontWeight={700}
+                        letterSpacing='2px'
+                      >
+                        {service.label}
+                      </Text>
+                      <Box
+                        transform={
+                          openItems.has(index)
+                            ? 'rotate(180deg)'
+                            : 'rotate(0deg)'
+                        }
+                        transition='transform 0.3s ease'
+                        fontSize='20px'
+                        color='gray.600'
+                      >
+                        ▼
+                      </Box>
+                    </HStack>
+                  </Box>
+
+                  {/* Collapsible content с list */}
+                  <AnimatePresence>
+                    {openItems.has(index) && (
+                      <motion.div
+                        initial='collapsed'
+                        animate='expanded'
+                        exit='collapsed'
+                        variants={collapseVariants}
+                        style={{ overflow: 'hidden' }}
+                      >
+                        <Box bg='white' p={6}>
+                          <VStack gap={3} align='stretch'>
+                            {service.list.map((item, itemIndex) => (
+                              <motion.div
+                                key={`${index}-${itemIndex}`}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: itemIndex * 0.1 }}
+                              >
+                                <HStack align='flex-start' gap={3}>
+                                  <Box
+                                    w='6px'
+                                    h='6px'
+                                    borderRadius='50%'
+                                    bg='gray.400'
+                                    mt={3}
+                                    flexShrink={0}
+                                  />
+                                  <Text
+                                    cursor='default'
+                                    fontSize={{
+                                      base: '16px',
+                                      md: '18px'
+                                    }}
+                                    color='gray.700'
+                                    fontWeight='medium'
+                                    lineHeight='1.6'
+                                    transition='all 0.3s ease'
+                                  >
+                                    {item}
+                                  </Text>
+                                </HStack>
+                              </motion.div>
+                            ))}
+                          </VStack>
+                        </Box>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </Box>
               </motion.div>
             ))}
           </motion.div>

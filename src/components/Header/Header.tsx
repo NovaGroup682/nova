@@ -13,11 +13,7 @@ const Header = () => {
   const pathName = usePathname();
 
   const isMain = pathName === paths.main || pathName === paths.design;
-  const isService = pathName === paths.services;
 
-  const baseColor = isService
-    ? `linear-gradient(to left, #52525b 70%, transparent 60%)`
-    : 'gray.600';
   return (
     <Flex
       h={{
@@ -30,7 +26,7 @@ const Header = () => {
       zIndex={20}
       py={{ base: 4, md: 6, xl: 8 }}
       justifyContent='center'
-      bg={isMain ? 'transparent' : baseColor}
+      bg={isMain ? 'transparent' : 'gray.600'}
     >
       <Flex
         justifyContent='space-between'
@@ -38,7 +34,7 @@ const Header = () => {
         width='full'
         px={BASE_HORIZONTAL_PADINGS}
       >
-        <Logo fill={pathName === paths.services ? 'black' : 'white'} />
+        <Logo />
 
         <Flex
           alignItems='center'

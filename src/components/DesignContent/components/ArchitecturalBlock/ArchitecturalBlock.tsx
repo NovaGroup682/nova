@@ -84,12 +84,7 @@ const ArchitecturalBlock = ({
           md: 'row'
         }}
       >
-        <VStack
-          // h='full'
-          justifyContent='center'
-          alignItems='center'
-          gap={6}
-        >
+        <VStack justifyContent='center' alignItems='center' gap={6}>
           <Text
             fontSize={{ base: '22px', md: '28px' }}
             color='gray.600'

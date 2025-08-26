@@ -1,8 +1,10 @@
+import { BASE_HORIZONTAL_PADINGS } from 'constant';
+
 import { VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
-import { ServicesList } from 'components';
+import { MainView, ServicesList } from 'components';
 
 const Services = async () => {
   const services = content.services;
@@ -15,20 +17,23 @@ const Services = async () => {
       justifyContent='flex-start'
       alignItems='center'
       flex={1}
+      py={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
     >
       <VStack
         w='full'
-        h={{
-          base: 'calc(100vh - 88px)',
-          md: 'calc(100vh - 104px)',
-          lg: 'calc(100vh - 130px)'
-        }}
         position='relative'
         alignItems='center'
         justifyContent='center'
         overflow='hidden'
+        px={BASE_HORIZONTAL_PADINGS}
       >
-        <ServicesList services={services} />
+        <MainView
+          title={services.title}
+          description={services.description}
+          src={services.mainImg}
+        />
+
+        <ServicesList services={services.servicesList} />
       </VStack>
     </VStack>
   );
