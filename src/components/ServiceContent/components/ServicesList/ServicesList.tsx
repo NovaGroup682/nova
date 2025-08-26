@@ -130,10 +130,7 @@ const ServicesList = ({ services }: ServicesListProps) => {
                         as='h2'
                         color='gray.900'
                         transition='all 0.3s ease'
-                        textAlign={{
-                          base: 'left',
-                          md: 'center'
-                        }}
+                        textAlign='left'
                         fontSize={{
                           base: '20px',
                           md: '34px'
