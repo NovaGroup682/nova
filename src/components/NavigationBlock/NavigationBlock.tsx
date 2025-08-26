@@ -56,7 +56,10 @@ const NavigationBlock = () => (
             top={0}
             left={0}
             bg='rgba(0, 0, 0, 0.3)'
-            gap={0}
+            gap={{
+              base: 2,
+              md: 4
+            }}
             w='full'
             h='full'
             justifyContent={idx % 2 ? 'flex-end' : 'flex-start'}
@@ -68,7 +71,18 @@ const NavigationBlock = () => (
               backdropFilter: 'blur(1px)'
             }}
           >
-            <Text fontWeight={600} color='white' fontSize={26}>
+            <Text
+              fontWeight={600}
+              color='white'
+              fontSize={{
+                base: 22,
+                md: 26
+              }}
+              lineHeight={{
+                base: '24px',
+                md: '26px'
+              }}
+            >
               {nav.title}
             </Text>
             {Array.isArray(nav.description) ? (
@@ -77,20 +91,43 @@ const NavigationBlock = () => (
                 listStyleType='disc'
                 listStylePosition='outside'
                 color='white'
-                pl={6}
+                pl={{
+                  base: 4,
+                  md: 6
+                }}
                 w='full'
                 ml={4}
               >
                 {nav.description.map((li) => (
-                  <Box as='li' key={li} mb={2} color='white'>
-                    <Text lineHeight='22px' fontSize={22} color='white'>
+                  <Box as='li' key={li} mb={{ base: 1, md: 2 }} color='white'>
+                    <Text
+                      lineHeight={{
+                        base: '20px',
+                        md: '22px'
+                      }}
+                      fontSize={{
+                        base: 18,
+                        md: 22
+                      }}
+                      color='white'
+                    >
                       {li}
                     </Text>
                   </Box>
                 ))}
               </Box>
             ) : (
-              <Text fontSize={22} color='white'>
+              <Text
+                lineHeight={{
+                  base: '20px',
+                  md: '26px'
+                }}
+                fontSize={{
+                  base: 18,
+                  md: 22
+                }}
+                color='white'
+              >
                 {nav.description}
               </Text>
             )}
