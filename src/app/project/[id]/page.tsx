@@ -16,7 +16,6 @@ import {
   ProjectLayouts,
   SliderBlock
 } from 'components';
-import { ProjectConfigurationsTable } from 'components/ProductContent/components/ProjectConfigurationsTable';
 
 const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const [project, setProject] = useState<ProjectItemType | null>(null);
@@ -103,9 +102,10 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
           )
         )}
 
-        <ProjectConfigurationsTable
+        {/* Temporary removed */}
+        {/* <ProjectConfigurationsTable
           prices={Object.values(project?.implementationCost ?? '') ?? []}
-        />
+        /> */}
       </VStack>
 
       <Show when={project?.estimateFileLink}>

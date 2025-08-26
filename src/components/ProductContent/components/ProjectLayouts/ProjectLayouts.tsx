@@ -100,8 +100,6 @@ const ProjectLayouts = ({
             </Text>
           )}
         </Flex>
-
-        <EditProjectButton onClick={openModal} />
       </Flex>
 
       <Stack
@@ -170,6 +168,8 @@ const ProjectLayouts = ({
           </Stack>
         ))}
       </Stack>
+
+      <EditProjectButton onClick={openModal} />
 
       {selectedImage && (
         <ImageModal
