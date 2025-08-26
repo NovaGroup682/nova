@@ -1,69 +1,61 @@
-import { Flex, IconButton } from '@chakra-ui/react';
+import AngleLeft from '@assets/icons/angle-left.svg';
+import AngleRight from '@assets/icons/angle-right.svg';
 
-import { renderIcon } from 'helpers';
+import { Box } from '@chakra-ui/react';
 
 interface SliderNavigationProps {
-  list: string[];
-  currentSlide: number;
-  onClick: (num: number) => void;
+  onNext: () => void;
+  onPrev: () => void;
 }
 
-const SliderNavigation = ({
-  list,
-  currentSlide,
-  onClick
-}: SliderNavigationProps) => (
-  <Flex
-    position='absolute'
-    w='full'
-    zIndex={10}
-    justifyContent='center'
-    top={{
-      base: '16px',
-      md: '32px'
-    }}
-  >
-    <Flex
+const SliderNavigation = ({ onNext, onPrev }: SliderNavigationProps) => (
+  <>
+    <Box
       position='absolute'
-      borderRadius='xl'
-      bg='gray.500'
-      gap={{
-        base: 3,
-        md: 4
+      left={0}
+      top={0}
+      bottom={0}
+      opacity={0}
+      w='220px'
+      display='flex'
+      alignItems='center'
+      justifyContent='flex-start'
+      zIndex={20}
+      pl={4}
+      _hover={{
+        opacity: 1,
+        background: 'linear-gradient(to right, rgba(0,0,0,0.3), transparent)'
       }}
-      px={4}
-      py={0}
+      transition='all 0.3s ease'
+      cursor='pointer'
+      onClick={onPrev}
     >
-      {list.map((item, idx) => (
-        <IconButton
-          key={`slider-btn-${item}`}
-          position='relative'
-          onClick={() => onClick(idx)}
-          minW='auto'
-          aria-label='Search database'
-          variant='outline'
-          size={{
-            base: 'sm',
-            md: 'lg'
-          }}
-          border='none'
-          transform={currentSlide === idx ? 'scale(1.5)' : 'inherit'}
-          transition='transform 0.3s ease'
-          _hover={{
-            bg: 'none',
-            '& svg, & p': {
-              opacity: 0.5
-            }
-          }}
-          _focus={{
-            outlineWidth: 0
-          }}
-        >
-          {renderIcon(idx)}
-        </IconButton>
-      ))}
-    </Flex>
-  </Flex>
+      <AngleLeft width={60} height={60} fill='white' />
+    </Box>
+
+    <Box
+      position='absolute'
+      right={0}
+      top={0}
+      bottom={0}
+      w='220px'
+      display='flex'
+      alignItems='center'
+      justifyContent='flex-end'
+      pr={4}
+      zIndex={20}
+      opacity={0}
+      _hover={{
+        opacity: 1,
+        background: 'linear-gradient(to left, rgba(0,0,0,0.3), transparent)'
+      }}
+      transition='all 0.3s ease'
+      cursor='pointer'
+      onClick={onNext}
+    >
+      <AngleRight fill='white' width={60} height={60} />
+    </Box>
+  </>
 );
 
 export default SliderNavigation;

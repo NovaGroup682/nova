@@ -38,8 +38,6 @@ const ProjectSliderBlock = () => {
     []
   );
 
-  const list = useMemo(() => sliders.map((item) => item.id), [sliders]);
-
   useEffect(() => {
     if (swiperRef.current && swiperRef.current.slideTo) {
       swiperRef.current.slideTo(currentIndex);
@@ -74,6 +72,18 @@ const ProjectSliderBlock = () => {
 
   const onSliderClick = (id: string) => () =>
     router.push(`${paths.project}/${id}`);
+
+  const onNextSlide = () => {
+    if (swiperRef.current) {
+      swiperRef.current.slideNext();
+    }
+  };
+
+  const onPrevSlide = () => {
+    if (swiperRef.current) {
+      swiperRef.current.slidePrev();
+    }
+  };
 
   return (
     <AspectRatio
@@ -110,11 +120,8 @@ const ProjectSliderBlock = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <SliderNavigation
-          list={list}
-          currentSlide={currentIndex}
-          onClick={setCurrentIndex}
-        />
+
+        <SliderNavigation onNext={onNextSlide} onPrev={onPrevSlide} />
 
         <Grid
           templateColumns={{
