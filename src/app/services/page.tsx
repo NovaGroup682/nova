@@ -4,7 +4,7 @@ import { VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
-import { MainView, ServicesList } from 'components';
+import { ContactBlock, MainView, ServicesList } from 'components';
 
 const Services = async () => {
   const services = content.services;
@@ -34,6 +34,7 @@ const Services = async () => {
         />
 
         <ServicesList services={services.servicesList} />
+        <ContactBlock />
       </VStack>
     </VStack>
   );

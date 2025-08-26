@@ -84,12 +84,22 @@ const ArchitecturalBlock = ({
           md: 'row'
         }}
       >
-        <VStack justifyContent='center' alignItems='center' gap={6}>
+        <VStack
+          justifyContent='center'
+          alignItems='center'
+          gap={{
+            base: 4,
+            md: 6
+          }}
+        >
           <Text
-            fontSize={{ base: '22px', md: '28px' }}
+            fontSize={{ base: '18px', md: '28px' }}
             color='gray.600'
             opacity={0.8}
-            lineHeight='1.6'
+            lineHeight={{
+              base: '1.4',
+              md: '1.6'
+            }}
             textAlign={{
               base: 'center',
               md: 'left'
@@ -100,10 +110,13 @@ const ArchitecturalBlock = ({
           </Text>
 
           <Text
-            fontSize={{ base: '22px', md: '28px' }}
+            fontSize={{ base: '18px', md: '28px' }}
             color='gray.600'
             opacity={0.8}
-            lineHeight='1.6'
+            lineHeight={{
+              base: '1.4',
+              md: '1.6'
+            }}
             textAlign={{
               base: 'center',
               md: 'left'
