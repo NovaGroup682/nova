@@ -78,7 +78,7 @@ const Modal = ({
             borderRadius='2xl'
             maxW={{
               base: 'auto',
-              md: '600px'
+              md: '650px'
             }}
             w={{
               base: '90%',

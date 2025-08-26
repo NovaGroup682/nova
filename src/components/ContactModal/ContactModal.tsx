@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Check from '@assets/icons/check.svg';
 import { phoneRegExp } from 'constant';
+import { paths } from 'constant';
 import Image from 'next/image';
 
 import {
@@ -12,7 +13,9 @@ import {
   EmptyState,
   Field,
   Input,
+  Link,
   Stack,
+  Text,
   VStack
 } from '@chakra-ui/react';
 
@@ -24,6 +27,7 @@ interface FormValues {
   regionName: string;
   clientName: string;
   phone: string;
+  privacyPolicy: boolean;
 }
 
 interface ContactModalProps {
@@ -37,8 +41,16 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors }
-  } = useForm<FormValues>({ mode: 'onTouched' });
+  } = useForm<FormValues>({
+    mode: 'onTouched',
+    defaultValues: {
+      privacyPolicy: false
+    }
+  });
+
+  const privacyPolicyAccepted = watch('privacyPolicy');
 
   const onSubmit = handleSubmit(() => {
     setIsSuccess(true);
@@ -147,6 +159,38 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               />
             </Field.Root>
 
+            <Box w='full' pt={2}>
+              <Box display='flex' alignItems='flex-start' gap={2}>
+                <input
+                  type='checkbox'
+                  {...register('privacyPolicy', {
+                    required:
+                      'Необходимо согласие с политикой конфиденциальности'
+                  })}
+                  style={{ marginTop: '2px' }}
+                />
+                <Text fontSize='sm' color='gray.700'>
+                  Нажимая кнопку {content.main.contactBlock.send}, я соглашаюсь
+                  с{' '}
+                  <Link
+                    href={paths.policy}
+                    color='blue.600'
+                    textDecoration='underline'
+                    _hover={{ color: 'blue.700' }}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    политикой конфиденциальности
+                  </Link>
+                </Text>
+              </Box>
+              {errors.privacyPolicy && (
+                <Text fontSize='xs' color='red.500' mt={1}>
+                  {errors.privacyPolicy.message}
+                </Text>
+              )}
+            </Box>
+
             <Button
               mt={{
                 base: 3,
@@ -160,7 +204,9 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               color='white'
               fontWeight='bold'
               type='submit'
-              disabled={Object.values(errors).length > 0}
+              disabled={
+                Object.values(errors).length > 0 || !privacyPolicyAccepted
+              }
               _hover={{
                 bg: 'gray.700'
               }}
