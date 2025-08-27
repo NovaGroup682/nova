@@ -32,7 +32,7 @@ const ScrollToTopButton = () => {
   return (
     <AnimatePresence>
       {isVisible && (
-        <Box position='fixed' bottom='30px' right='30px' zIndex={1000}>
+        <Box position='fixed' bottom='106px' right='30px' zIndex={1000}>
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}

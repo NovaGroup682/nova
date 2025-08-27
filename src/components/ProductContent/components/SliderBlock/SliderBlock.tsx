@@ -95,6 +95,7 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
         overflow='hidden'
         justifyContent='space-between'
         mb={4}
+        bg='gray.100'
       >
         {!isSliderReady && <SliderLoader />}
 
@@ -122,10 +123,9 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
         {isSliderReady && sliders.length > 1 && (
           <Box
             position='absolute'
-            bottom={{ base: '10px', md: '0px' }}
+            bottom={{ base: '10px', md: '10px' }}
             left='50%'
             transform='translateX(-50%)'
-            display={{ base: 'flex', md: 'none' }}
             zIndex={30}
           >
             <HStack gap={2}>{navigationDots}</HStack>

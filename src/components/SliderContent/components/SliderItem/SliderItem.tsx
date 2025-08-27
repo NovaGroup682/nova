@@ -33,23 +33,17 @@ const SliderItem = ({ src, onClick }: SliderItemProps) => {
     <AspectRatio
       ratio={7 / 4}
       w='full'
-      boxShadow={{
-        base: 'inset 0px -90px 40px -20px rgba(0, 0, 0, 0.42)',
-        md: 'inset 0px -140px 40px -20px rgba(0, 0, 0, 0.42)'
-      }}
+      // boxShadow={{
+      //   base: 'inset 0px -90px 40px -20px rgba(0, 0, 0, 0.42)',
+      //   md: 'inset 0px -140px 40px -20px rgba(0, 0, 0, 0.42)'
+      // }}
       cursor='pointer'
       position='relative'
       onClick={onClick}
     >
       <>
         {isLoading && (
-          <Box
-            position='absolute'
-            top='50%'
-            left='50%'
-            transform='translate(-50%, -50%)'
-            zIndex={1}
-          >
+          <Box position='absolute' top='50%' left='50%' zIndex={1}>
             <Spinner color='gray.600' size='xl' />
           </Box>
         )}

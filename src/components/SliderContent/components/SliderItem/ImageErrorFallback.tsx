@@ -10,10 +10,6 @@ const ImageErrorFallback = ({
   subMessage = 'Попробуйте обновить страницу'
 }: ImageErrorFallbackProps) => (
   <Box
-    position='absolute'
-    top='50%'
-    left='50%'
-    transform='translate(-50%, -50%)'
     zIndex={10}
     display='flex'
     flexDirection='column'
