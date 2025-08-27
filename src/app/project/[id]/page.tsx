@@ -1,10 +1,7 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
 import projects from 'constant/projects';
 
-import { Flex, Show, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import { Flex, Show, Text, VStack } from '@chakra-ui/react';
 
 import { formatCurrency } from 'helpers';
 
@@ -12,27 +9,83 @@ import { ProjectItemType, ProjectItemVariantType } from 'types';
 
 import {
   ContactSection,
-  EditProjectModal,
   EstimateDownloadButton,
-  ProjectLayouts,
-  SliderBlock
+  ProjectLayouts
 } from 'components';
+import { SliderBlockWrapper } from 'components/ProductContent/components/SliderBlock';
 
-const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
-  const [project, setProject] = useState<ProjectItemType | null>(null);
-  const { open: isOpen, onOpen, onClose } = useDisclosure();
+const findProjectById = (id: string): ProjectItemType | null =>
+  projects.find((item) => String(item.id) === id) || null;
 
-  useEffect(() => {
-    const loadProject = async () => {
-      const { id } = await params;
-      const foundProject = projects.find((item) => String(item.id) === id);
-      setProject(foundProject as ProjectItemType);
-    };
-    loadProject();
-  }, [params]);
+export const generateMetadata = async ({
+  params
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const { id } = await params;
+  const project = findProjectById(id);
 
   if (!project) {
-    return null;
+    return {
+      title: 'Проект не найден | Nova Group',
+      description: 'Запрашиваемый проект не найден.'
+    };
+  }
+
+  return {
+    title: `${project.name} - Проект дома | Nova Group`,
+    description: `Проект дома ${project.name}. Площадь: ${project.variants[0]?.area}м². Цена: ${formatCurrency(project.projectPrice)}.`,
+    keywords: `проект дома, ${project.name}, строительство, архитектура, ${project.variants[0]?.area}м²`
+  };
+};
+
+export const generateStaticParams = async () =>
+  projects.map((project) => ({
+    id: String(project.id)
+  }));
+
+const ProjectPageContent = async ({
+  params
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const { id } = await params;
+  const project = findProjectById(id);
+
+  if (!project) {
+    return (
+      <VStack
+        gap={4}
+        w='full'
+        maxW={maxWidth}
+        px={BASE_HORIZONTAL_PADINGS}
+        py={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
+        justifyContent='center'
+        minH='50vh'
+      >
+        <Text
+          as='h1'
+          fontSize={{
+            base: '24px',
+            md: '34px'
+          }}
+          textAlign='center'
+          color='gray.500'
+        >
+          Проект не найден
+        </Text>
+        <Text
+          fontSize={{
+            base: '16px',
+            md: '18px'
+          }}
+          textAlign='center'
+          color='gray.400'
+        >
+          Запрашиваемый проект не существует или был удален.
+        </Text>
+      </VStack>
+    );
   }
 
   return (
@@ -62,7 +115,7 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
           gap={4}
         >
           <Text
-            as='h2'
+            as='h1'
             fontSize={{
               base: '24px',
               md: '34px'
@@ -72,7 +125,7 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
               md: '52px'
             }}
           >
-            {project?.name ?? ''}
+            {project.name}
           </Text>
 
           <Text
@@ -85,16 +138,16 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
             <Text as='span' color='gray.500' pr={2}>
               цена проекта
             </Text>
-            {formatCurrency(project?.projectPrice)}
+            {formatCurrency(project.projectPrice)}
           </Text>
         </Flex>
-        <SliderBlock sliders={project.sliders} />
+
+        <SliderBlockWrapper sliders={project.sliders} />
 
         {project.variants.map(
           (variant: ProjectItemVariantType, idx: number) => (
             <ProjectLayouts
               key={`variant-${idx + 1}`}
-              openModal={onOpen}
               label={project.variants.length > 1 ? `Вариант ${idx + 1}` : ''}
               area={variant.area}
               plans={variant.layouts}
@@ -112,9 +165,12 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
         <EstimateDownloadButton project={project} />
       </Show>
       <ContactSection />
-      <EditProjectModal isOpen={isOpen} onClose={onClose} />
     </VStack>
   );
 };
 
-export default ProjectsPage;
+const ProjectPage = async ({ params }: { params: Promise<{ id: string }> }) => (
+  <ProjectPageContent params={params} />
+);
+
+export default ProjectPage;

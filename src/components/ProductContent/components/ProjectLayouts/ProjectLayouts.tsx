@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Image from 'next/image';
 
 import { AspectRatio, Flex, Stack, Text, VStack } from '@chakra-ui/react';
@@ -12,14 +12,14 @@ import { ImageModal } from '../ImageModal';
 
 interface ProjectLayoutsProps {
   label: string;
-  openModal: () => void;
+  openModal?: () => void;
   area: number;
   plans: string[];
 }
 
 const ProjectLayouts = ({
   label,
-  openModal,
+  openModal: _openModal, // Префикс _ для неиспользуемой переменной
   area,
   plans
 }: ProjectLayoutsProps) => {
@@ -29,19 +29,22 @@ const ProjectLayouts = ({
     index: number;
   } | null>(null);
 
-  const handleImageClick = (
-    imageSrc: string,
-    imageAlt: string,
-    index: number
-  ) => {
-    setSelectedImage({ src: imageSrc, alt: imageAlt, index });
-  };
+  // Мемоизируем URL изображений
+  const imageUrls = useMemo(
+    () => plans.map((plan) => getGoogleDriveDirectLink(plan)),
+    [plans]
+  );
 
-  const handleCloseImageModal = () => {
+  const handleImageClick = useCallback(
+    (imageSrc: string, imageAlt: string, index: number) => {
+      setSelectedImage({ src: imageSrc, alt: imageAlt, index });
+    },
+    []
+  );
+
+  const handleCloseImageModal = useCallback(() => {
     setSelectedImage(null);
-  };
-
-  const imageUrls = plans.map((plan) => getGoogleDriveDirectLink(plan));
+  }, []);
 
   return (
     <VStack w='full' gap={2}>
@@ -164,7 +167,7 @@ const ProjectLayouts = ({
         ))}
       </Stack>
 
-      <EditProjectButton onClick={openModal} />
+      <EditProjectButton onClick={_openModal || (() => {})} />
 
       {selectedImage && (
         <ImageModal

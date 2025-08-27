@@ -1,2 +1,2 @@
 export { SliderNavigation } from './SliderNavigation';
-export { SliderItem } from './SliderItem';
+export { default as SliderItem } from './SliderItem';
