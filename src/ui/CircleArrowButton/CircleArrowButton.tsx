@@ -29,7 +29,18 @@ const CircleArrowButton = ({
     transform={isRight ? 'rotate(180deg)' : 'none'}
     boxShadow='none'
   >
-    <Box borderRadius='50%' bg='white' p={3}>
+    <Box
+      borderRadius='50%'
+      bg='white'
+      transition='all 0.3s ease'
+      _hover={{
+        bg: 'gray.600',
+        '& svg': {
+          fill: 'white'
+        }
+      }}
+      p={3}
+    >
       <Arrow
         fill='gray.500'
         width='50px'

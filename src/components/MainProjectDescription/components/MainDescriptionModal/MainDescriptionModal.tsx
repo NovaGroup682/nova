@@ -21,6 +21,8 @@ interface MainDescriptionModalProps {
   onClose: () => void;
 }
 
+const autoPlayInterval = 5000;
+
 const MainDescriptionModal = ({
   isOpen,
   onClose
@@ -28,6 +30,21 @@ const MainDescriptionModal = ({
   const sliderRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperType>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+  const [slideStartTime, setSlideStartTime] = useState<number>(Date.now());
+  const isManualNavigation = useRef<boolean>(false);
+
+  const slidesCount = content.main.slider.titles.length;
+
+  const handlePrevClick = () => {
+    isManualNavigation.current = true;
+    swiperRef.current?.slidePrev();
+  };
+
+  const handleNextClick = () => {
+    isManualNavigation.current = true;
+    swiperRef.current?.slideNext();
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -49,6 +66,48 @@ const MainDescriptionModal = ({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen, onClose]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const startAutoPlay = () => {
+      autoPlayRef.current = setInterval(() => {
+        if (swiperRef.current) {
+          swiperRef.current.slideNext();
+        }
+      }, autoPlayInterval);
+    };
+
+    const stopAutoPlay = () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+        autoPlayRef.current = null;
+      }
+    };
+
+    const handleUserInteraction = () => {
+      stopAutoPlay();
+      setTimeout(startAutoPlay, 3000);
+    };
+
+    const swiperElement = sliderRef.current?.querySelector('.swiper');
+    if (swiperElement) {
+      swiperElement.addEventListener('touchstart', handleUserInteraction);
+      swiperElement.addEventListener('mousedown', handleUserInteraction);
+      swiperElement.addEventListener('keydown', handleUserInteraction);
+    }
+
+    startAutoPlay();
+
+    return () => {
+      stopAutoPlay();
+      if (swiperElement) {
+        swiperElement.removeEventListener('touchstart', handleUserInteraction);
+        swiperElement.removeEventListener('mousedown', handleUserInteraction);
+        swiperElement.removeEventListener('keydown', handleUserInteraction);
+      }
+    };
+  }, [isOpen]);
 
   const count = useMotionValue(currentIndex + 1);
   const rounded = useTransform(count, (v) => Math.round(v));
@@ -98,9 +157,61 @@ const MainDescriptionModal = ({
               cursor='default'
               position='relative'
             >
-              <CircleArrowButton
-                onClick={() => swiperRef.current?.slidePrev()}
-              />
+              <Flex
+                position='absolute'
+                top='-32px'
+                left={0}
+                right={0}
+                margin='0 auto'
+                w='90%'
+                justifyContent='center'
+                gap={2}
+              >
+                {Array.from({ length: slidesCount }).map((_, index) => (
+                  <Box
+                    key={index}
+                    position='relative'
+                    w='full'
+                    h='4px'
+                    bg='gray.200'
+                    borderRadius='full'
+                    overflow='hidden'
+                  >
+                    {currentIndex === index && (
+                      <motion.div
+                        key={`progress-${currentIndex}-${slideStartTime}`}
+                        initial={{ width: 0 }}
+                        animate={{ width: '100%' }}
+                        transition={{
+                          duration: autoPlayInterval / 1000,
+                          ease: 'linear'
+                        }}
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          height: '100%',
+                          backgroundColor: 'white',
+                          borderRadius: 'inherit'
+                        }}
+                      />
+                    )}
+                    {currentIndex > index && (
+                      <Box
+                        position='absolute'
+                        top={0}
+                        left={0}
+                        w='full'
+                        h='full'
+                        bg='white'
+                        borderRadius='inherit'
+                      />
+                    )}
+                  </Box>
+                ))}
+              </Flex>
+
+              <CircleArrowButton onClick={handlePrevClick} />
               <Flex
                 w='full'
                 alignItems='center'
@@ -166,7 +277,25 @@ const MainDescriptionModal = ({
                 onSwiper={(swiper) => {
                   swiperRef.current = swiper;
                 }}
-                onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
+                onSlideChange={(swiper) => {
+                  setCurrentIndex(swiper.realIndex);
+                  if (isManualNavigation.current) {
+                    setSlideStartTime(Date.now());
+                    isManualNavigation.current = false;
+                  }
+
+                  if (autoPlayRef.current) {
+                    clearInterval(autoPlayRef.current);
+                    autoPlayRef.current = setInterval(() => {
+                      if (swiperRef.current) {
+                        swiperRef.current.slideNext();
+                      }
+                    }, autoPlayInterval);
+                  }
+                }}
+                onTouchStart={() => {
+                  isManualNavigation.current = true;
+                }}
               >
                 {content.main.slider.body.map((item, index) => (
                   <SwiperSlide
@@ -211,10 +340,7 @@ const MainDescriptionModal = ({
                 ))}
               </Swiper>
 
-              <CircleArrowButton
-                onClick={() => swiperRef.current?.slideNext()}
-                isRight
-              />
+              <CircleArrowButton onClick={handleNextClick} isRight />
             </Box>
           </Box>
         </Portal>
