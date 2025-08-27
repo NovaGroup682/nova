@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import { Box, Spinner } from '@chakra-ui/react';
+import { Box, Flex, Spinner } from '@chakra-ui/react';
 
+import { SliderNavigation } from 'components/SliderContent';
 import { Modal } from 'ui';
 
 interface ImageModalProps {
@@ -12,24 +13,47 @@ interface ImageModalProps {
   onClose: () => void;
   imageSrc: string;
   imageAlt: string;
+  images?: string[];
+  initialIndex?: number;
 }
 
 const ImageModal = ({
   isOpen,
   onClose,
   imageSrc,
-  imageAlt
+  imageAlt,
+  images = [],
+  initialIndex = 0
 }: ImageModalProps) => {
   const [isZoomed, setIsZoomed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+
+  const hasMultipleImages = images.length > 1;
+  const currentImageSrc = hasMultipleImages ? images[currentIndex] : imageSrc;
+  const currentImageAlt = hasMultipleImages
+    ? `${imageAlt} ${currentIndex + 1}`
+    : imageAlt;
+
+  const handlePrevious = useCallback(() => {
+    if (!hasMultipleImages) return;
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    setIsLoading(true);
+  }, [hasMultipleImages, images.length]);
+
+  const handleNext = useCallback(() => {
+    if (!hasMultipleImages) return;
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    setIsLoading(true);
+  }, [hasMultipleImages, images.length]);
 
   useEffect(() => {
     if (isOpen) {
       setIsZoomed(false);
       setIsLoading(true);
+      setCurrentIndex(initialIndex);
       document.body.style.overflow = 'hidden';
 
-      // Reset modal content scroll position when modal opens
       setTimeout(() => {
         const modalElement = document.querySelector('[data-modal-content]');
         if (modalElement) {
@@ -43,7 +67,7 @@ const ImageModal = ({
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen]);
+  }, [isOpen, initialIndex]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -51,23 +75,34 @@ const ImageModal = ({
 
       if (e.key === 'Escape') {
         onClose();
+      } else if (hasMultipleImages) {
+        if (e.key === 'ArrowLeft') {
+          handlePrevious();
+        } else if (e.key === 'ArrowRight') {
+          handleNext();
+        }
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [
+    isOpen,
+    onClose,
+    hasMultipleImages,
+    currentIndex,
+    handleNext,
+    handlePrevious
+  ]);
 
-  // Handle scroll reset when zoom state changes
   useEffect(() => {
     if (!isZoomed) {
-      // Reset modal content scroll when zooming out
       const timer = setTimeout(() => {
         const modalElement = document.querySelector('[data-modal-content]');
         if (modalElement) {
           modalElement.scrollTo(0, 0);
         }
-      }, 350); // Wait for transition to complete
+      }, 350);
 
       return () => clearTimeout(timer);
     }
@@ -79,7 +114,6 @@ const ImageModal = ({
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    // Prevent default touch behavior that might interfere with zoom
     e.preventDefault();
   };
 
@@ -153,8 +187,8 @@ const ImageModal = ({
         )}
 
         <Image
-          src={imageSrc}
-          alt={imageAlt}
+          src={currentImageSrc}
+          alt={currentImageAlt}
           fill
           style={{
             objectFit: 'contain',
@@ -169,6 +203,38 @@ const ImageModal = ({
           onLoad={handleImageLoad}
           onError={handleImageError}
         />
+
+        {hasMultipleImages && !isZoomed && (
+          <>
+            <SliderNavigation
+              onNext={(e) => {
+                if (e) e.stopPropagation();
+                handleNext();
+              }}
+              onPrev={(e) => {
+                if (e) e.stopPropagation();
+                handlePrevious();
+              }}
+            />
+
+            <Flex
+              position='absolute'
+              bottom={4}
+              left='50%'
+              transform='translateX(-50%)'
+              bg='rgba(0, 0, 0, 0.5)'
+              color='white'
+              px={3}
+              py={1}
+              borderRadius='full'
+              fontSize='sm'
+              fontWeight='medium'
+              zIndex={2}
+            >
+              {currentIndex + 1} / {images.length}
+            </Flex>
+          </>
+        )}
       </Box>
     </Modal>
   );

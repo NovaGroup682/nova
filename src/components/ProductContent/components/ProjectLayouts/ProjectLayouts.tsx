@@ -26,15 +26,22 @@ const ProjectLayouts = ({
   const [selectedImage, setSelectedImage] = useState<{
     src: string;
     alt: string;
+    index: number;
   } | null>(null);
 
-  const handleImageClick = (imageSrc: string, imageAlt: string) => {
-    setSelectedImage({ src: imageSrc, alt: imageAlt });
+  const handleImageClick = (
+    imageSrc: string,
+    imageAlt: string,
+    index: number
+  ) => {
+    setSelectedImage({ src: imageSrc, alt: imageAlt, index });
   };
 
   const handleCloseImageModal = () => {
     setSelectedImage(null);
   };
+
+  const imageUrls = plans.map((plan) => getGoogleDriveDirectLink(plan));
 
   return (
     <VStack w='full' gap={2}>
@@ -131,7 +138,8 @@ const ProjectLayouts = ({
               onClick={() =>
                 handleImageClick(
                   getGoogleDriveDirectLink(plan),
-                  `План ${idx % 2 ? 'второго' : 'первого'} этажа`
+                  `План ${idx % 2 ? 'второго' : 'первого'} этажа`,
+                  idx
                 )
               }
               transition='transform 0.3s ease'
@@ -164,6 +172,8 @@ const ProjectLayouts = ({
           onClose={handleCloseImageModal}
           imageSrc={selectedImage.src}
           imageAlt={selectedImage.alt}
+          images={imageUrls}
+          initialIndex={selectedImage.index}
         />
       )}
     </VStack>

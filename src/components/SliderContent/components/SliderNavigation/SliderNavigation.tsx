@@ -4,8 +4,8 @@ import AngleRight from '@assets/icons/angle-right.svg';
 import { Box } from '@chakra-ui/react';
 
 interface SliderNavigationProps {
-  onNext: () => void;
-  onPrev: () => void;
+  onNext: (e?: React.MouseEvent) => void;
+  onPrev: (e?: React.MouseEvent) => void;
 }
 
 const SliderNavigation = ({ onNext, onPrev }: SliderNavigationProps) => (
@@ -31,7 +31,10 @@ const SliderNavigation = ({ onNext, onPrev }: SliderNavigationProps) => (
       }}
       transition='all 0.3s ease'
       cursor='pointer'
-      onClick={onPrev}
+      onClick={(e) => {
+        e.stopPropagation();
+        onPrev(e);
+      }}
     >
       <AngleLeft width={60} height={60} fill='white' />
     </Box>
@@ -57,7 +60,10 @@ const SliderNavigation = ({ onNext, onPrev }: SliderNavigationProps) => (
       }}
       transition='all 0.3s ease'
       cursor='pointer'
-      onClick={onNext}
+      onClick={(e) => {
+        e.stopPropagation();
+        onNext(e);
+      }}
     >
       <AngleRight fill='white' width={60} height={60} />
     </Box>
