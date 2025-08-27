@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { maxWidth, paths, phoneRegExp } from 'constant';
+import { paths, phoneRegExp } from 'constant';
 
 import {
   Box,
