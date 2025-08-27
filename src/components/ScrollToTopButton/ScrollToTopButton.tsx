@@ -14,7 +14,6 @@ const ScrollToTopButton = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
 
-      // Show button when user scrolls down 100vh
       setIsVisible(scrollPosition > windowHeight);
     };
 

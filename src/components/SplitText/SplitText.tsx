@@ -160,9 +160,6 @@ const SplitText: React.FC<SplitTextProps> = ({
       ref={ref}
       className={`split-parent ${className}`}
       overflow='hidden'
-      // display='inline-block'
-      // whiteSpace='normal'
-      // wordWrap="break-word"
       textAlign={textAlign}
       {...styles}
     >

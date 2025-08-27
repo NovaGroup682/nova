@@ -58,14 +58,12 @@ const EstimateDownloadButton = ({ project }: EstimateDownloadButtonProps) => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
 
-      // Show sticky header when scrolling down more than 100px
       if (currentScrollY > 100) {
         setIsStickyVisible(true);
       } else {
         setIsStickyVisible(false);
       }
 
-      // Check if we're near the footer (within 200px of bottom)
       const distanceFromBottom =
         documentHeight - (currentScrollY + windowHeight);
       if (distanceFromBottom < 200) {

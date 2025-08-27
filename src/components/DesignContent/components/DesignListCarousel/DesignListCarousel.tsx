@@ -75,13 +75,7 @@ const DesignListCarousel = ({ list = [] }: DesignListCarouselProps) => {
                   />
                 </AspectRatio>
 
-                {/* Overlay */}
-                <Box
-                  // p={6}
-                  mt={2}
-                  color='black'
-                  textAlign='center'
-                >
+                <Box mt={2} color='black' textAlign='center'>
                   <Text
                     fontSize={{ base: '24px', md: '28px' }}
                     fontWeight='bold'

@@ -5,7 +5,6 @@ export const formatNumberWithSpaces = (value: string): string => {
   const number = parseInt(numericValue, 10);
   if (isNaN(number)) return '';
 
-  // Format with spaces every 3 digits from right to left
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 };
 
@@ -21,19 +20,19 @@ export const validateMinimumValue = (
 };
 
 export const isMinPriceValid = (price: string, minValue: number) => {
-  if (!price) return true; // Allow empty values
+  if (!price) return true;
   return validateMinimumValue(price, minValue);
 };
 
 export const isMaxPriceValid = (price: string, minValue: number) => {
-  if (!price) return true; // Allow empty values
+  if (!price) return true;
   return validateMinimumValue(price, minValue);
 };
 
 export const isPriceValid = (min: string, max: string) => {
-  if (!min || !max) return true; // Allow empty values
+  if (!min || !max) return true;
   const minNum = parseInt(parseFormattedNumber(min), 10);
   const maxNum = parseInt(parseFormattedNumber(max), 10);
-  if (isNaN(minNum) || isNaN(maxNum)) return true; // Allow non-numeric values during typing
+  if (isNaN(minNum) || isNaN(maxNum)) return true;
   return minNum <= maxNum;
 };

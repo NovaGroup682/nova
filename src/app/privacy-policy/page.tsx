@@ -1,3 +1,4 @@
+import config from 'config';
 import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
 
 import { Box, HStack, Link, Text, VStack } from '@chakra-ui/react';
@@ -9,7 +10,7 @@ import content from 'content';
 const renderText = (text: string) => {
   const processedText = renderTextWithLinks(
     text,
-    content.contacts.domen,
+    config.metadata.domen,
     content.contacts.email
   );
 
@@ -136,7 +137,7 @@ const Policy = () => (
               >
                 {renderTextWithLinks(
                   section.introText,
-                  content.contacts.domen,
+                  config.metadata.domen,
                   content.contacts.email
                 )}
               </Text>

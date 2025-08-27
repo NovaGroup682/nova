@@ -61,13 +61,12 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
 
         const newParamsString = params.toString();
 
-        // Проверяем, изменились ли параметры
         if (!hasUrlParamsChanged(searchParams, params)) {
-          return; // Не обновляем URL, если параметры не изменились
+          return;
         }
 
         router.push(`${paths.projects}?${newParamsString}`, { scroll: false });
-      }, 300); // Уменьшил до 300ms для лучшего UX
+      }, 500);
 
       return () => clearTimeout(timeoutId);
     },
@@ -82,9 +81,8 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
       const oldValue = searchParams.get(ProjectSearchKeys.area) || '';
       const newValue = selectedArea.toString();
 
-      // Проверяем, изменилось ли значение
       if (!hasValueChanged(oldValue, newValue)) {
-        return; // Не обновляем URL, если значение не изменилось
+        return;
       }
 
       if (selectedArea) {
@@ -104,10 +102,8 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
 
       let newFloors: number[];
       if (isExist) {
-        // If clicking the same floor, clear the selection
         newFloors = [];
       } else {
-        // If clicking a different floor, select only that floor
         newFloors = [floor];
       }
 
@@ -117,9 +113,8 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
       const oldValue = searchParams.get(ProjectSearchKeys.floors) || '';
       const newValue = newFloors.join(',');
 
-      // Проверяем, изменилось ли значение
       if (!hasValueChanged(oldValue, newValue)) {
-        return; // Не обновляем URL, если значение не изменилось
+        return;
       }
 
       if (newFloors.length > 0) {
@@ -134,14 +129,12 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
   );
 
   const handleMinPriceChange = useCallback((value: string) => {
-    // Only allow digits and spaces
     const cleanedValue = value.replace(/[^\d\s]/g, '');
     const formattedValue = formatNumberWithSpaces(cleanedValue);
     setMinPrice(formattedValue);
   }, []);
 
   const handleMaxPriceChange = useCallback((value: string) => {
-    // Only allow digits and spaces
     const cleanedValue = value.replace(/[^\d\s]/g, '');
     const formattedValue = formatNumberWithSpaces(cleanedValue);
     setMaxPrice(formattedValue);
@@ -177,9 +170,8 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
 
     const newParamsString = params.toString();
 
-    // Проверяем, изменились ли параметры
     if (!hasUrlParamsChanged(searchParams, params)) {
-      return; // Не обновляем URL, если параметры не изменились
+      return;
     }
 
     router.push(`${paths.projects}?${newParamsString}`, { scroll: false });
@@ -188,7 +180,6 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
   useEffect(() => {
     const cleanup = updateUrlWithDebounce((params) => {
       if (minPrice) {
-        // Always set minPrice if it has a value, regardless of validation
         params.set(ProjectSearchKeys.minPrice, parseFormattedNumber(minPrice));
       } else {
         params.delete(ProjectSearchKeys.minPrice);

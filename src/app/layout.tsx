@@ -14,13 +14,76 @@ import Providers from './providers';
 import 'styles/global.css';
 
 const {
-  metadata: { title, description, favIcon }
+  metadata: {
+    title,
+    description,
+    favIcon,
+    keywords,
+    ogTitle,
+    ogDescription,
+    ogImage,
+    ogType,
+    twitterCard,
+    canonical
+  }
 } = config;
 
 export const metadata: Metadata = {
   title,
   description,
-  icons: [{ rel: 'icon', url: favIcon.src }]
+  keywords,
+  authors: [{ name: 'Nova Group' }],
+  creator: 'Nova Group',
+  publisher: 'Nova Group',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false
+  },
+  metadataBase: new URL(config.metadata.domen),
+  alternates: {
+    canonical
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  },
+  openGraph: {
+    title: ogTitle,
+    description: ogDescription,
+    url: canonical,
+    siteName: 'Nova Group',
+    images: ogImage
+      ? [
+          {
+            url: ogImage,
+            width: 1200,
+            height: 630,
+            alt: 'Nova Group - Строительная компания'
+          }
+        ]
+      : [],
+    locale: 'ru_RU',
+    type: ogType || 'website'
+  },
+  twitter: {
+    card: twitterCard || 'summary_large_image',
+    title: ogTitle,
+    description: ogDescription,
+    images: ogImage ? [ogImage] : []
+  },
+  icons: [
+    { rel: 'icon', url: favIcon.src },
+    { rel: 'apple-touch-icon', url: '/assets/icons/apple-touch-icon.png' }
+  ],
+  manifest: '/manifest.json'
 };
 
 const RootLayout = ({
@@ -28,8 +91,7 @@ const RootLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => (
-  <html lang='en'>
-    <head title={title}></head>
+  <html lang='ru'>
     <body>
       <Providers>
         <Header />

@@ -10,13 +10,10 @@ export const useScreenHeight = () => {
       setIsSmallScreen(window.innerHeight < 800);
     };
 
-    // Check on mount
     checkScreenHeight();
 
-    // Add event listener for resize
     window.addEventListener('resize', checkScreenHeight);
 
-    // Cleanup
     return () => window.removeEventListener('resize', checkScreenHeight);
   }, []);
 

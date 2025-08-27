@@ -60,7 +60,7 @@ interface ServicesListProps {
 }
 
 const ServicesList = ({ services }: ServicesListProps) => {
-  const [openItems, setOpenItems] = useState<Set<number>>(new Set([0])); // По умолчанию открыт первый элемент
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set([0]));
 
   const toggleItem = (index: number) => {
     const newOpenItems = new Set(openItems);

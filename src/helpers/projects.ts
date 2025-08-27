@@ -12,7 +12,7 @@ export const getPriceRange = (projects: ProjectItemType[]) => {
 
   const shellPrices = projects
     .map((project) => project.implementationCost.shell)
-    .filter((price) => price > 0); // Skip 0 values
+    .filter((price) => price > 0);
 
   if (shellPrices.length === 0) {
     return { minPrice: 0, maxPrice: 0 };

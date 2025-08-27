@@ -1,10 +1,13 @@
+/* Оптимизированные глобальные стили */
+
+/* Основные стили */
 .main-project-description {
   position: absolute;
   bottom: 0px;
   width: 100%;
 }
 
-/* Modal animations */
+/* Оптимизированные анимации с will-change */
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -45,9 +48,10 @@
 
 .bouncingArrow {
   animation: bounceRight 1.2s ease-in-out infinite;
+  will-change: transform;
 }
 
-/* Pulse Animation Styles */
+/* Оптимизированные пульсации */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -65,13 +69,13 @@
 
 .pulse-animation {
   animation: pulse 2s infinite;
+  will-change: transform, box-shadow;
 }
 
 .pulse-animation:hover {
   animation: none;
 }
 
-/* Alternative pulse with different colors */
 @keyframes pulseGreen {
   0% {
     transform: scale(1);
@@ -89,6 +93,7 @@
 
 .pulse-green {
   animation: pulseGreen 2s infinite;
+  will-change: transform, box-shadow;
 }
 
 @keyframes pulseRed {
@@ -108,12 +113,14 @@
 
 .pulse-red {
   animation: pulseRed 2s infinite;
+  will-change: transform, box-shadow;
 }
 
-/* Mobile scroll fix for image modal */
+/* Оптимизация для мобильных устройств */
 .image-modal-container {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
+  will-change: scroll-position;
 }
 
 .image-modal-container::-webkit-scrollbar {
@@ -125,14 +132,19 @@
   scrollbar-width: none;
 }
 
-/* Prevent scroll position preservation on mobile */
+/* Оптимизация скролла для мобильных */
 @media (max-width: 768px) {
   .image-modal-container {
     scroll-behavior: auto;
   }
+
+  /* Оптимизация производительности для мобильных */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
-/* Swiper pagination styles */
+/* Оптимизированные стили Swiper */
 .swiper-pagination {
   position: relative !important;
   bottom: auto !important;
@@ -145,15 +157,16 @@
   background-color: #d1d5db !important;
   border-radius: 50% !important;
   cursor: pointer !important;
-  transition: all 0.3s ease !important;
+  transition: background-color 0.3s ease !important;
   opacity: 1 !important;
+  will-change: background-color;
 }
 
 .swiper-pagination-bullet-active {
   background-color: #000000 !important;
 }
 
-/* Autofill styles */
+/* Оптимизированные стили автозаполнения */
 .contact-input:-internal-autofill-selected {
   background-color: #52525b !important;
   color: white !important;
@@ -165,4 +178,54 @@
   color: white !important;
   -webkit-text-fill-color: white !important;
   -webkit-box-shadow: 0 0 0 1000px #52525b inset !important;
+}
+
+/* Дополнительные оптимизации производительности */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Оптимизация для изображений */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Оптимизация для анимаций */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Оптимизация для фокуса */
+*:focus {
+  outline: 2px solid #3182ce;
+  outline-offset: 2px;
+}
+
+/* Оптимизация для печати */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
 }

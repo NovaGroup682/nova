@@ -1,20 +1,69 @@
+import { lazy, Suspense } from 'react';
+import config from 'config';
 import { BASE_HORIZONTAL_PADINGS, maxWidth, paths } from 'constant';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 
-import { Box, For, Text, VStack } from '@chakra-ui/react';
+import { Box, For, Skeleton, Text, VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
 import {
   AnimatedBlock,
   BlurText,
-  CeoBlock,
   ContactBlock,
   MainProjectDescription,
-  NavigationBlock,
-  ProjectSliderBlock
+  NavigationBlock
 } from 'components';
 import { NavigationActionButton } from 'ui';
+
+export const metadata: Metadata = {
+  title: 'Nova Group - Главная | Строительная компания',
+  description: config.metadata.description,
+  keywords: config.metadata.keywords,
+  openGraph: {
+    title: 'Nova Group - Главная',
+    description:
+      'Проектирование, строительство и отделка жилых и коммерческих объектов',
+    url: config.metadata.domen,
+    siteName: 'Nova Group',
+    images: [
+      {
+        url: '/assets/logo.svg',
+        width: 1200,
+        height: 630,
+        alt: 'Nova Group - Главная страница'
+      }
+    ],
+    locale: 'ru_RU',
+    type: 'website'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nova Group - Главная',
+    description:
+      'Проектирование, строительство и отделка жилых и коммерческих объектов',
+    images: ['/assets/logo.svg']
+  },
+  alternates: {
+    canonical: config.metadata.domen
+  }
+};
+
+const LazyProjectSliderBlock = lazy(() =>
+  import('components/ProjectSliderBlock').then((module) => ({
+    default: module.ProjectSliderBlock
+  }))
+);
+const LazyCeoBlock = lazy(() =>
+  import('components/CeoBlock').then((module) => ({
+    default: module.CeoBlock
+  }))
+);
+
+const LazyComponent = ({ children }: { children: React.ReactNode }) => (
+  <Suspense fallback={<Skeleton height='400px' />}>{children}</Suspense>
+);
 
 const Home = () => (
   <VStack gap={0} w='full' position='relative'>
@@ -27,10 +76,11 @@ const Home = () => (
         md: -104,
         lg: -130
       }}
+      overflow='hidden'
     >
       <Image
         src={content.main.mainImgBg}
-        alt='Background'
+        alt='Nova Group - Фоновая иллюстрация'
         fill
         style={{
           objectFit: 'cover',
@@ -38,10 +88,13 @@ const Home = () => (
           zIndex: -1
         }}
         priority
-        sizes='(max-width: 450px) 400px, 1200px'
-        quality={75}
+        sizes='100vw'
+        quality={85}
+        placeholder='blur'
+        blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
       />
     </Box>
+
     <VStack gap={0} w='full' maxW={maxWidth} px={BASE_HORIZONTAL_PADINGS}>
       <VStack
         w='full'
@@ -138,12 +191,19 @@ const Home = () => (
           {content.main.text2}
         </Text>
       </AnimatedBlock>
-      <AnimatedBlock delay={0.3}>
-        <CeoBlock />
-      </AnimatedBlock>
-      <AnimatedBlock delay={0.3}>
-        <ProjectSliderBlock />
-      </AnimatedBlock>
+
+      <LazyComponent>
+        <AnimatedBlock delay={0.3}>
+          <LazyCeoBlock />
+        </AnimatedBlock>
+      </LazyComponent>
+
+      <LazyComponent>
+        <AnimatedBlock delay={0.3}>
+          <LazyProjectSliderBlock />
+        </AnimatedBlock>
+      </LazyComponent>
+
       <AnimatedBlock delay={0.3}>
         <NavigationActionButton
           label={content.common.allProjects}
@@ -177,6 +237,7 @@ const Home = () => (
       <AnimatedBlock delay={0.3}>
         <NavigationBlock />
       </AnimatedBlock>
+
       <AnimatedBlock delay={0.3}>
         <ContactBlock />
       </AnimatedBlock>

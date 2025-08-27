@@ -19,7 +19,7 @@ interface ProjectLayoutsProps {
 
 const ProjectLayouts = ({
   label,
-  openModal: _openModal, // Префикс _ для неиспользуемой переменной
+  openModal: _openModal,
   area,
   plans
 }: ProjectLayoutsProps) => {
@@ -29,7 +29,6 @@ const ProjectLayouts = ({
     index: number;
   } | null>(null);
 
-  // Мемоизируем URL изображений
   const imageUrls = useMemo(
     () => plans.map((plan) => getGoogleDriveDirectLink(plan)),
     [plans]
