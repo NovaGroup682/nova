@@ -11,6 +11,7 @@ import { formatCurrency } from 'helpers';
 import { ProjectItemType, ProjectItemVariantType } from 'types';
 
 import {
+  ContactSection,
   EditProjectModal,
   EstimateDownloadButton,
   ProjectLayouts,
@@ -110,6 +111,7 @@ const ProjectsPage = ({ params }: { params: Promise<{ id: string }> }) => {
       <Show when={project?.estimateFileLink}>
         <EstimateDownloadButton project={project} />
       </Show>
+      <ContactSection />
       <EditProjectModal isOpen={isOpen} onClose={onClose} />
     </VStack>
   );

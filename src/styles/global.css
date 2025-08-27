@@ -152,3 +152,17 @@
 .swiper-pagination-bullet-active {
   background-color: #000000 !important;
 }
+
+/* Autofill styles */
+.contact-input:-internal-autofill-selected {
+  background-color: #52525b !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.contact-input:-webkit-autofill {
+  background-color: #52525b !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0 1000px #52525b inset !important;
+}
