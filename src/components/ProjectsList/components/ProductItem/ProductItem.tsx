@@ -78,9 +78,12 @@ const ProductItem = ({ project }: ProductItemProps) => {
             }}
             fill
             src={getGoogleDriveDirectLink(project.sliders[0])}
-            alt='contact cover'
+            alt={`${project.name} - проект дома`}
             onLoad={handleImageLoad}
             onError={handleImageError}
+            loading='lazy'
+            priority={false}
+            quality={75}
           />
 
           <VStack

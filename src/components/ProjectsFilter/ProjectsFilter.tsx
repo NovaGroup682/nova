@@ -18,6 +18,8 @@ import {
 import {
   formatCurrency,
   formatNumberWithSpaces,
+  hasUrlParamsChanged,
+  hasValueChanged,
   isMaxPriceValid,
   isMinPriceValid,
   isPriceValid,
@@ -54,95 +56,134 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
     (updater: (params: URLSearchParams) => void) => {
       const timeoutId = setTimeout(() => {
         const params = new URLSearchParams(searchParams);
+
         updater(params);
-        router.push(`${paths.projects}?${params.toString()}`);
-      }, 500); // 500ms delay
+
+        const newParamsString = params.toString();
+
+        // Проверяем, изменились ли параметры
+        if (!hasUrlParamsChanged(searchParams, params)) {
+          return; // Не обновляем URL, если параметры не изменились
+        }
+
+        router.push(`${paths.projects}?${newParamsString}`, { scroll: false });
+      }, 300); // Уменьшил до 300ms для лучшего UX
 
       return () => clearTimeout(timeoutId);
     },
     [searchParams, router]
   );
 
-  const handleAreaSelect = (selectedArea: string | ProjectSize) => {
-    setArea(selectedArea);
+  const handleAreaSelect = useCallback(
+    (selectedArea: string | ProjectSize) => {
+      setArea(selectedArea);
 
-    const params = new URLSearchParams(searchParams);
-    if (selectedArea) {
-      params.set(ProjectSearchKeys.area, selectedArea.toString());
-    } else {
-      params.delete(ProjectSearchKeys.area);
-    }
+      const params = new URLSearchParams(searchParams);
+      const oldValue = searchParams.get(ProjectSearchKeys.area) || '';
+      const newValue = selectedArea.toString();
 
-    router.push(`${paths.projects}?${params.toString()}`);
-  };
+      // Проверяем, изменилось ли значение
+      if (!hasValueChanged(oldValue, newValue)) {
+        return; // Не обновляем URL, если значение не изменилось
+      }
 
-  const selectFlorFilter = (floor: number) => () => {
-    const isExist = floors.includes(floor);
+      if (selectedArea) {
+        params.set(ProjectSearchKeys.area, newValue);
+      } else {
+        params.delete(ProjectSearchKeys.area);
+      }
 
-    let newFloors: number[];
-    if (isExist) {
-      // If clicking the same floor, clear the selection
-      newFloors = [];
-    } else {
-      // If clicking a different floor, select only that floor
-      newFloors = [floor];
-    }
+      router.push(`${paths.projects}?${params.toString()}`, { scroll: false });
+    },
+    [searchParams, router]
+  );
 
-    setFloors(newFloors);
+  const selectFlorFilter = useCallback(
+    (floor: number) => () => {
+      const isExist = floors.includes(floor);
 
-    const params = new URLSearchParams(searchParams);
-    if (newFloors.length > 0) {
-      params.set(ProjectSearchKeys.floors, newFloors.join(','));
-    } else {
-      params.delete(ProjectSearchKeys.floors);
-    }
+      let newFloors: number[];
+      if (isExist) {
+        // If clicking the same floor, clear the selection
+        newFloors = [];
+      } else {
+        // If clicking a different floor, select only that floor
+        newFloors = [floor];
+      }
 
-    router.push(`${paths.projects}?${params.toString()}`);
-  };
+      setFloors(newFloors);
 
-  const handleMinPriceChange = (value: string) => {
+      const params = new URLSearchParams(searchParams);
+      const oldValue = searchParams.get(ProjectSearchKeys.floors) || '';
+      const newValue = newFloors.join(',');
+
+      // Проверяем, изменилось ли значение
+      if (!hasValueChanged(oldValue, newValue)) {
+        return; // Не обновляем URL, если значение не изменилось
+      }
+
+      if (newFloors.length > 0) {
+        params.set(ProjectSearchKeys.floors, newValue);
+      } else {
+        params.delete(ProjectSearchKeys.floors);
+      }
+
+      router.push(`${paths.projects}?${params.toString()}`, { scroll: false });
+    },
+    [floors, searchParams, router]
+  );
+
+  const handleMinPriceChange = useCallback((value: string) => {
     // Only allow digits and spaces
     const cleanedValue = value.replace(/[^\d\s]/g, '');
     const formattedValue = formatNumberWithSpaces(cleanedValue);
     setMinPrice(formattedValue);
-  };
+  }, []);
 
-  const handleMaxPriceChange = (value: string) => {
+  const handleMaxPriceChange = useCallback((value: string) => {
     // Only allow digits and spaces
     const cleanedValue = value.replace(/[^\d\s]/g, '');
     const formattedValue = formatNumberWithSpaces(cleanedValue);
     setMaxPrice(formattedValue);
-  };
+  }, []);
 
-  const handleMinPriceFocus = () => {
+  const handleMinPriceFocus = useCallback(() => {
     if (!minPrice) {
       const formattedMinPrice = formatNumberWithSpaces(min.toString());
       setMinPrice(formattedMinPrice);
     }
-  };
+  }, [minPrice, min]);
 
-  const handleMaxPriceFocus = () => {
+  const handleMaxPriceFocus = useCallback(() => {
     if (!maxPrice) {
       const formattedMaxPrice = formatNumberWithSpaces(max.toString());
       setMaxPrice(formattedMaxPrice);
     }
-  };
+  }, [maxPrice, max]);
 
-  const handleResetFilters = () => {
+  const handleResetFilters = useCallback(() => {
     setArea('');
     setFloors([]);
     setMinPrice('');
     setMaxPrice('');
 
     const params = new URLSearchParams(searchParams);
+
     params.delete(ProjectSearchKeys.area);
     params.delete(ProjectSearchKeys.floors);
     params.delete(ProjectSearchKeys.minPrice);
     params.delete(ProjectSearchKeys.maxPrice);
     params.delete(ProjectSearchKeys.projectName);
 
-    router.push(`${paths.projects}?${params.toString()}`);
-  };
+    const newParamsString = params.toString();
+
+    // Проверяем, изменились ли параметры
+    if (!hasUrlParamsChanged(searchParams, params)) {
+      return; // Не обновляем URL, если параметры не изменились
+    }
+
+    router.push(`${paths.projects}?${newParamsString}`, { scroll: false });
+  }, [searchParams, router]);
 
   useEffect(() => {
     const cleanup = updateUrlWithDebounce((params) => {

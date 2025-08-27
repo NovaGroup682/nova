@@ -1,10 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import SearchIcon from '@assets/icons/magnifying-glass.svg';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Center, HStack, Input } from '@chakra-ui/react';
+
+import { hasValueChanged } from 'helpers';
 
 import { ProjectSearchKeys } from 'types';
 
@@ -12,52 +14,75 @@ const SearchInput = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [searchValue, setSearchValue] = useState(
-    searchParams.get(ProjectSearchKeys.projectName) || ''
+  const currentProjectName = useMemo(
+    () => searchParams.get(ProjectSearchKeys.projectName) || '',
+    [searchParams]
   );
 
-  // Update searchValue when URL params change (e.g., when clear button is clicked)
+  const [searchValue, setSearchValue] = useState(currentProjectName);
+
   useEffect(() => {
-    const projectNameFromUrl = searchParams.get(ProjectSearchKeys.projectName);
-    setSearchValue(projectNameFromUrl || '');
-  }, [searchParams]);
+    setSearchValue(currentProjectName);
+  }, [currentProjectName]);
+
   const inputRef = useRef<HTMLInputElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const updateUrlWithDebounce = useCallback(
-    (updater: (params: URLSearchParams) => void) => {
-      const timeoutId = setTimeout(() => {
-        const params = new URLSearchParams(searchParams);
-        updater(params);
-        router.push(`?${params.toString()}`);
-      }, 500);
+    (value: string) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
 
-      return () => clearTimeout(timeoutId);
+      timeoutRef.current = setTimeout(() => {
+        const params = new URLSearchParams(searchParams);
+        const currentValue =
+          searchParams.get(ProjectSearchKeys.projectName) || '';
+        const newValue = value.trim();
+
+        if (!hasValueChanged(currentValue, newValue)) {
+          return;
+        }
+
+        if (newValue) {
+          params.set(ProjectSearchKeys.projectName, newValue);
+        } else {
+          params.delete(ProjectSearchKeys.projectName);
+        }
+
+        router.push(`?${params.toString()}`, { scroll: false });
+      }, 500);
     },
     [searchParams, router]
   );
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchValue(value);
-  };
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setSearchValue(value);
+      updateUrlWithDebounce(value);
+    },
+    [updateUrlWithDebounce]
+  );
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Escape') {
-      setSearchValue('');
-    }
-  };
-
-  // Debounced effect for searchValue
-  useEffect(() => {
-    const cleanup = updateUrlWithDebounce((params) => {
-      if (searchValue) {
-        params.set(ProjectSearchKeys.projectName, searchValue);
-      } else {
-        params.delete(ProjectSearchKeys.projectName);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Escape') {
+        setSearchValue('');
+        updateUrlWithDebounce('');
       }
-    });
-    return cleanup;
-  }, [searchValue, updateUrlWithDebounce]);
+    },
+    [updateUrlWithDebounce]
+  );
+
+  useEffect(
+    () => () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    },
+    []
+  );
 
   return (
     <HStack

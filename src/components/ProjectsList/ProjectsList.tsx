@@ -3,7 +3,7 @@
 import { memo, useMemo } from 'react';
 import { BASE_HORIZONTAL_PADINGS } from 'constant';
 
-import { SimpleGrid } from '@chakra-ui/react';
+import { Box, SimpleGrid } from '@chakra-ui/react';
 
 import { ProjectItemType, ProjectSearchKeys } from 'types';
 
@@ -15,57 +15,84 @@ interface ProjectsListProps {
 }
 
 const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
-  const list = useMemo(
+  const memoizedFilters = useMemo(() => filters, [filters]);
+
+  const filteredProjects = useMemo(
     () =>
-      projects
-        .filter((project) => !filters.area || project.areaType === filters.area)
-        .filter(
-          (project) =>
-            !(filters.floors ?? []).length ||
-            filters.floors.includes(String(project.floor))
-        )
-        .filter((project) => {
-          // Filter by project name (case-insensitive partial match)
-          if (!filters.projectName) return true;
-          return project.name
-            .toLowerCase()
-            .includes(filters.projectName.toLowerCase());
-        })
-        .filter((project) => {
-          // Filter by price range (minPrice and maxPrice)
-          const shellPrice = project.implementationCost.shell;
-          const minPrice = filters.minPrice ? Number(filters.minPrice) : null;
-          const maxPrice = filters.maxPrice ? Number(filters.maxPrice) : null;
+      projects.filter((project) => {
+        if (memoizedFilters.area && project.areaType !== memoizedFilters.area) {
+          return false;
+        }
 
-          // Don't filter if minPrice doesn't exist
-          if (minPrice === null && maxPrice === null) return true;
+        if (memoizedFilters.floors?.length) {
+          const projectFloor = String(project.floor);
+          if (!memoizedFilters.floors.includes(projectFloor)) {
+            return false;
+          }
+        }
 
-          // Check if shell price is within the range
-          const isAboveMin = minPrice === null || shellPrice >= minPrice;
-          const isBelowMax = maxPrice === null || shellPrice <= maxPrice;
+        if (memoizedFilters.projectName) {
+          const projectName = project.name.toLowerCase();
+          const searchName = memoizedFilters.projectName.toLowerCase();
+          if (!projectName.includes(searchName)) {
+            return false;
+          }
+        }
 
-          return isAboveMin && isBelowMax;
-        }),
-    [projects, filters]
+        const shellPrice = project.implementationCost.shell;
+        const minPrice = memoizedFilters.minPrice
+          ? Number(memoizedFilters.minPrice)
+          : null;
+        const maxPrice = memoizedFilters.maxPrice
+          ? Number(memoizedFilters.maxPrice)
+          : null;
+
+        if (minPrice !== null && shellPrice < minPrice) {
+          return false;
+        }
+
+        if (maxPrice !== null && shellPrice > maxPrice) {
+          return false;
+        }
+
+        return true;
+      }),
+    [projects, memoizedFilters]
   );
 
-  return (
-    <SimpleGrid
-      columns={{
-        base: 1,
-        md: 2,
-        lg: 3
-      }}
-      gap={2}
-      w='full'
-      mt={4}
-      px={BASE_HORIZONTAL_PADINGS}
-      pb={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
-    >
-      {list.map((project) => (
+  const projectItems = useMemo(
+    () =>
+      filteredProjects.map((project) => (
         <ProductItem project={project} key={project.id} />
-      ))}
-    </SimpleGrid>
+      )),
+    [filteredProjects]
+  );
+
+  const resultsCount = filteredProjects.length;
+
+  return (
+    <Box w='full'>
+      {memoizedFilters.projectName && (
+        <Box px={BASE_HORIZONTAL_PADINGS} mb={2} color='gray.600' fontSize='sm'>
+          Найдено проектов: {resultsCount}
+        </Box>
+      )}
+
+      <SimpleGrid
+        columns={{
+          base: 1,
+          md: 2,
+          lg: 3
+        }}
+        gap={2}
+        w='full'
+        mt={4}
+        px={BASE_HORIZONTAL_PADINGS}
+        pb={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
+      >
+        {projectItems}
+      </SimpleGrid>
+    </Box>
   );
 };
 

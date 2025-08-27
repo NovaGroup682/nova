@@ -9,14 +9,21 @@ import { ProjectSearchKeys } from 'types';
 
 import { ProjectsFilter, ProjectsList, SearchInput } from 'components';
 
+const { maxPrice, minPrice } = getPriceRange(projects);
+
+export const metadata = {
+  title: 'Проекты современных каменных домов | Nova Group',
+  description:
+    'Каталог проектов современных каменных домов. Выберите подходящий проект для строительства вашего дома.',
+  keywords: 'проекты домов, каменные дома, строительство, архитектура'
+};
+
 const ProjectsPage = async ({
   searchParams
 }: {
   searchParams: Promise<Record<ProjectSearchKeys, string>>;
 }) => {
   const filters = await searchParams;
-
-  const { maxPrice, minPrice } = getPriceRange(projects);
 
   return (
     <VStack
@@ -46,7 +53,7 @@ const ProjectsPage = async ({
           gap={4}
         >
           <Text
-            as='h2'
+            as='h1'
             fontSize={{
               base: '24px',
               md: '34px'
