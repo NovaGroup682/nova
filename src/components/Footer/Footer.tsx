@@ -64,6 +64,7 @@ const Footer = () => (
               _focus={{
                 outlineWidth: 0
               }}
+              transition='all 0.3s ease'
             >
               {btn.label}
             </Link>
@@ -136,10 +137,10 @@ const Footer = () => (
               target='_blank'
               transition='all 0.3s ease'
               _hover={{
-                bg: 'gray.400',
+                bg: 'gray.500',
                 transform: 'scale(1.1)',
                 '& svg': {
-                  fill: 'black'
+                  fill: 'white'
                 }
               }}
             >
@@ -204,6 +205,7 @@ const Footer = () => (
             outlineWidth: 0
           }}
           textAlign='right'
+          transition='all 0.3s ease'
         >
           {content.common.policy}
         </Link>
