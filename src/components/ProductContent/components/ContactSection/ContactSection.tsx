@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { paths, phoneRegExp } from 'constant';
+import { maxWidth, paths, phoneRegExp } from 'constant';
 
 import {
   Box,
@@ -65,7 +65,7 @@ const ContactSection = () => {
           md: '32px'
         }}
         onSubmit={onSubmit}
-        maxW={1200}
+        maxW={1400}
       >
         <Text
           color='white'
@@ -89,10 +89,7 @@ const ContactSection = () => {
         >
           <Field.Root invalid={!!errors.regionName}>
             <Input
-              fontSize={{
-                base: 20,
-                md: 24
-              }}
+              fontSize={18}
               size={{
                 base: 'xl',
                 md: '2xl'
@@ -121,10 +118,7 @@ const ContactSection = () => {
 
           <Field.Root invalid={!!errors.clientName}>
             <Input
-              fontSize={{
-                base: 20,
-                md: 24
-              }}
+              fontSize={18}
               size={{
                 base: 'xl',
                 md: '2xl'
@@ -153,10 +147,7 @@ const ContactSection = () => {
 
           <Field.Root invalid={!!errors.phone}>
             <Input
-              fontSize={{
-                base: 20,
-                md: 24
-              }}
+              fontSize={18}
               size={{
                 base: 'xl',
                 md: '2xl'
