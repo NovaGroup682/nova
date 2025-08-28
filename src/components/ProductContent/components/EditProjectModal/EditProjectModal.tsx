@@ -1,9 +1,10 @@
 'use client';
 
-import { Box, Flex, Link, Text } from '@chakra-ui/react';
+import { Box, Link, Text } from '@chakra-ui/react';
 
 import content from 'content';
 
+import SocialLinksBlock from 'components/SocialLinksBlock';
 import { Modal } from 'ui';
 
 interface EditProjectModalProps {
@@ -141,7 +142,7 @@ const EditProjectModal = ({ isOpen, onClose }: EditProjectModalProps) => (
       mb={4}
     >
       <Link
-        href={`tel:${content.contacts.phone}`}
+        href={`tel:${content.contacts.salesDepartmentPhone}`}
         fontSize={{
           base: '12px',
           md: '14px'
@@ -163,7 +164,7 @@ const EditProjectModal = ({ isOpen, onClose }: EditProjectModalProps) => (
           lineHeight='16px'
           _active={{ color: 'red.500' }}
         >
-          {content.contacts.phone}
+          {content.contacts.salesDepartmentPhone}
         </Text>
       </Link>
       <Box
@@ -180,31 +181,7 @@ const EditProjectModal = ({ isOpen, onClose }: EditProjectModalProps) => (
       />
     </Box>
 
-    <Flex gap={2}>
-      {content.contacts.socialLinks.map(({ link, alt, icon: Icon }) => (
-        <Link
-          key={alt}
-          href={link}
-          borderRadius='50%'
-          bg='gray.500'
-          w='40px'
-          h='40px'
-          alignItems='center'
-          justifyContent='center'
-          target='_blank'
-          transition='all 0.3s ease'
-          _hover={{
-            bg: 'gray.400',
-            transform: 'scale(1.1)',
-            '& svg': {
-              fill: 'white'
-            }
-          }}
-        >
-          <Icon fill='white' />
-        </Link>
-      ))}
-    </Flex>
+    <SocialLinksBlock />
   </Modal>
 );
 

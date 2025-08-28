@@ -12,7 +12,7 @@ const projects: ProjectItemType[] = [
     price: 0,
     sliders: [
       'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/nova1-1.jpg',
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/nova1-2.jpg',
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/nova1-2.jpg'
     ],
     implementationCost: {
       shell: 8950000,

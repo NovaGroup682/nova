@@ -15,6 +15,7 @@ const EditProjectButton = ({ onClick }: EditProjectButtonProps) => (
       bg: 'gray.600'
     }}
     transition='all 0.3s ease'
+    mt={4}
     mr={2}
     bg='transparent'
   >

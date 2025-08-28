@@ -84,7 +84,7 @@ const Footer = () => (
       >
         <VStack alignContent='center' justifyContent='flex-start'>
           <Link
-            href={`mailto:${content.contacts.email}`}
+            href={`mailto:${content.contacts.salesDepartmentEmail}`}
             fontSize={{
               base: '12px',
               md: '14px'
@@ -94,10 +94,10 @@ const Footer = () => (
             fontWeight='normal'
             _hover={{ textDecoration: 'underline' }}
           >
-            {content.contacts.email}
+            {content.contacts.salesDepartmentEmail}
           </Link>
           <Link
-            href={`tel:${content.contacts.phone}`}
+            href={`tel:${content.contacts.salesDepartmentPhone}`}
             fontSize={{
               base: '12px',
               md: '14px'
@@ -107,7 +107,7 @@ const Footer = () => (
             fontWeight='normal'
             _hover={{ textDecoration: 'underline' }}
           >
-            {content.contacts.phone}
+            {content.contacts.salesDepartmentPhone}
           </Link>
           <Text
             fontSize={{

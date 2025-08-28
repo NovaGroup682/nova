@@ -3,26 +3,30 @@
 import { useCallback, useMemo, useState } from 'react';
 import Image from 'next/image';
 
-import { AspectRatio, Flex, Stack, Text, VStack } from '@chakra-ui/react';
+import {
+  AspectRatio,
+  Flex,
+  Stack,
+  Text,
+  useDisclosure,
+  VStack
+} from '@chakra-ui/react';
 
 import { getGoogleDriveDirectLink } from 'helpers';
 
 import { EditProjectButton } from '../EditProjectButton';
+import { EditProjectModal } from '../EditProjectModal';
 import { ImageModal } from '../ImageModal';
 
 interface ProjectLayoutsProps {
   label: string;
-  openModal?: () => void;
   area: number;
   plans: string[];
 }
 
-const ProjectLayouts = ({
-  label,
-  openModal: _openModal,
-  area,
-  plans
-}: ProjectLayoutsProps) => {
+const ProjectLayouts = ({ label, area, plans }: ProjectLayoutsProps) => {
+  const { open: isOpen, onOpen, onClose } = useDisclosure();
+
   const [selectedImage, setSelectedImage] = useState<{
     src: string;
     alt: string;
@@ -166,7 +170,7 @@ const ProjectLayouts = ({
         ))}
       </Stack>
 
-      <EditProjectButton onClick={_openModal || (() => {})} />
+      <EditProjectButton onClick={onOpen} />
 
       {selectedImage && (
         <ImageModal
@@ -178,6 +182,7 @@ const ProjectLayouts = ({
           initialIndex={selectedImage.index}
         />
       )}
+      <EditProjectModal isOpen={isOpen} onClose={onClose} />
     </VStack>
   );
 };

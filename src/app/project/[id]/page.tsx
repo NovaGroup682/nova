@@ -154,7 +154,6 @@ const ProjectPageContent = async ({
             />
           )
         )}
-
         {/* Temporary removed */}
         {/* <ProjectConfigurationsTable
           prices={Object.values(project?.implementationCost ?? '') ?? []}
