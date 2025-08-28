@@ -46,7 +46,7 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
     () =>
       sliders.map((slide, index) => (
         <SwiperSlide key={`${slide}-${index}`} style={{ width: '100%' }}>
-          <SliderItem src={slide} />
+          <SliderItem src={slide} isFirst={index === 0} />
         </SwiperSlide>
       )),
     [sliders]

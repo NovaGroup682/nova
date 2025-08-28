@@ -17,7 +17,7 @@ import {
 
 import { useIsTouchDevice } from 'hooks';
 
-import { formatCurrency, getGoogleDriveDirectLink } from 'helpers';
+import { formatCurrency, getSafeImageUrl } from 'helpers';
 
 import { ProjectItemType } from 'types';
 
@@ -40,6 +40,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
 
   const handleImageError = () => {
     setIsImageLoading(false);
+    console.warn('Failed to load project image:', project.sliders[0]);
   };
 
   return (
@@ -69,7 +70,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
           )}
 
           <Image
-            sizes='(max-width: 450px) 270px, (max-width: 900px) 500px, 700px'
+            sizes='(max-width: 450px) 270px, 500px'
             style={{
               objectFit: 'cover',
               objectPosition: 'center',
@@ -77,7 +78,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
               transition: 'filter 0.3s ease-in-out'
             }}
             fill
-            src={getGoogleDriveDirectLink(project.sliders[0])}
+            src={getSafeImageUrl(project.sliders[0])}
             alt={`${project.name} - проект дома`}
             onLoad={handleImageLoad}
             onError={handleImageError}

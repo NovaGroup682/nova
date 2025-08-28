@@ -12,9 +12,10 @@ import ImageErrorFallback from './ImageErrorFallback';
 interface SliderItemProps {
   src: string;
   onClick?: () => void;
+  isFirst?: boolean;
 }
 
-const SliderItem = ({ src, onClick }: SliderItemProps) => {
+const SliderItem = ({ src, onClick, isFirst = false }: SliderItemProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
@@ -25,9 +26,17 @@ const SliderItem = ({ src, onClick }: SliderItemProps) => {
   const handleImageError = () => {
     setIsLoading(false);
     setHasError(true);
+    console.warn('Failed to load image:', src);
   };
 
-  const getImageSrc = () => getSafeImageUrl(src);
+  const getImageSrc = () => {
+    try {
+      return getSafeImageUrl(src);
+    } catch (error) {
+      console.error('Error processing image URL:', error);
+      return src;
+    }
+  };
 
   return (
     <AspectRatio
@@ -62,7 +71,7 @@ const SliderItem = ({ src, onClick }: SliderItemProps) => {
               opacity: isLoading ? 0 : 1,
               transition: 'opacity 0.3s ease-in-out'
             }}
-            priority
+            priority={isFirst}
             sizes='(max-width: 450px) 400px, (max-width: 900px) 900px, 1200px'
             quality={75}
             onLoad={handleImageLoad}

@@ -136,11 +136,12 @@ const ProjectSliderBlock = () => {
           onSlideChange={handleSlideChange}
           style={{ width: '100%' }}
         >
-          {sliders.map((slide) => (
+          {sliders.map((slide, index) => (
             <SwiperSlide key={slide.id} style={{ width: '100%' }}>
               <SliderItem
                 src={slide.sliders[0]}
                 onClick={onSliderClick(slide.id)}
+                isFirst={index === 0}
               />
             </SwiperSlide>
           ))}

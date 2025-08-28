@@ -5,7 +5,13 @@ export const getGoogleDriveDirectLink = (url: string): string => {
     throw new Error('Invalid URL provided');
   }
 
+  // Если URL уже в правильном формате, возвращаем его
   if (url.includes('drive.google.com/uc?export=view&id=')) {
+    return url;
+  }
+
+  // Если URL уже в формате usercontent.google.com, возвращаем его
+  if (url.includes('drive.usercontent.google.com')) {
     return url;
   }
 

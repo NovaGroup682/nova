@@ -16,12 +16,19 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'drive.google.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'drive.usercontent.google.com'
       }
     ],
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
   },
 
   compiler: {
@@ -60,31 +67,8 @@ const nextConfig: NextConfig = {
       };
     }
 
-    config.optimization = {
-      ...config.optimization,
-      splitChunks: {
-        chunks: 'all',
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all'
-          },
-          chakra: {
-            test: /[\\/]node_modules[\\/]@chakra-ui[\\/]/,
-            name: 'chakra',
-            chunks: 'all',
-            priority: 10
-          },
-          framer: {
-            test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
-            name: 'framer',
-            chunks: 'all',
-            priority: 10
-          }
-        }
-      }
-    };
+    // Отключаем разделение чанков для избежания проблем с CSS
+    config.optimization.splitChunks = false;
 
     config.infrastructureLogging = {
       ...config.infrastructureLogging,
@@ -99,10 +83,6 @@ const nextConfig: NextConfig = {
       {
         source: '/(.*)',
         headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
           {
             key: 'X-Frame-Options',
             value: 'DENY'
@@ -120,6 +100,41 @@ const nextConfig: NextConfig = {
       {
         source: '/assets/(.*)',
         headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      },
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      },
+      {
+        source: '/_next/static/css/(.*)',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'text/css; charset=utf-8'
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      },
+      {
+        source: '/_next/static/chunks/(.*)',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/javascript; charset=utf-8'
+          },
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable'
