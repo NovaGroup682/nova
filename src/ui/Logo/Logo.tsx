@@ -11,6 +11,7 @@ interface LogoProps {
 const Logo = ({ fill = 'white' }: LogoProps) => (
   <Link
     href={paths.main}
+    aria-label="Nova Group - Перейти на главную страницу"
     style={{
       alignContent: 'center',
       outline: 'none',
@@ -42,6 +43,8 @@ const Logo = ({ fill = 'white' }: LogoProps) => (
       width={{ base: '159px', lg: '209px' }}
       height={{ base: '56px', lg: '66px' }}
       position='relative'
+      role="img"
+      aria-label="Логотип Nova Group"
     >
       <LogoIcon fill={fill} />
     </Box>
