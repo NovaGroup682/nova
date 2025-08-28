@@ -5,7 +5,15 @@ import { Swiper as SwiperType } from 'swiper';
 import { Keyboard, Mousewheel } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Box, Flex, Portal, Presence, Show, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Portal,
+  Presence,
+  Show,
+  Text,
+  VStack
+} from '@chakra-ui/react';
 
 import content from 'content';
 
@@ -21,7 +29,7 @@ interface MainDescriptionModalProps {
   onClose: () => void;
 }
 
-const autoPlayInterval = 5000;
+const autoPlayInterval = 7500;
 
 const MainDescriptionModal = ({
   isOpen,
@@ -302,30 +310,108 @@ const MainDescriptionModal = ({
                     key={item.text}
                     style={{ width: '100%', padding: '0 8px' }}
                   >
-                    <Box
+                    <Flex
                       w='full'
                       h={{
-                        base: '200px',
+                        base: index === 3 ? 'auto' : '200px',
                         sm: '300px',
                         md: '340px'
                       }}
                       position='relative'
                       overflow='hidden'
                       borderRadius='2xl'
+                      bg='#f1f1f1'
+                      flexDirection={{
+                        base: 'column',
+                        md: 'row'
+                      }}
+                      p={{
+                        base: 4,
+                        md: 0
+                      }}
                     >
-                      <Image
-                        fill
-                        sizes='(max-width: 450px) 300px, 480px'
-                        style={{
-                          objectFit: 'cover',
-                          objectPosition: 'center',
-                          borderRadius: '2xl',
-                          overflow: 'hidden'
-                        }}
-                        src={item.img}
-                        alt={`slider-${index}`}
-                      />
-                    </Box>
+                      {index === 3 ? (
+                        <>
+                          <VStack
+                            w={{
+                              base: 'full',
+                              md: '50%'
+                            }}
+                            alignItems={{
+                              base: 'flex-start',
+                              md: 'center'
+                            }}
+                            justifyContent='center'
+                          >
+                            <Text
+                              color='black'
+                              fontSize={{
+                                base: 20,
+                                md: 24
+                              }}
+                            >
+                              Потому что это:
+                            </Text>
+                          </VStack>
+                          <VStack
+                            w={{
+                              base: 'full',
+                              md: '50%'
+                            }}
+                            as='ul'
+                            listStyleType='disc'
+                            listStylePosition='outside'
+                            color='gray.500'
+                            alignItems='flex-start'
+                            justifyContent='center'
+                            gap={{
+                              base: 0,
+                              md: 1
+                            }}
+                            pl={{
+                              base: 6,
+                              md: 0
+                            }}
+                          >
+                            {[
+                              'Надёжные',
+                              'Долговечные',
+                              'Энергоэффективные',
+                              'Хорошая шумоизоляция',
+                              'Пожаробезопасные',
+                              'Экологичные',
+                              'Ликвидные'
+                            ].map((item) => (
+                              <Box as='li' key={item}>
+                                <Text
+                                  color='gray.500'
+                                  textAlign='left'
+                                  fontSize={{
+                                    base: 16,
+                                    md: 20
+                                  }}
+                                >
+                                  {item}
+                                </Text>
+                              </Box>
+                            ))}
+                          </VStack>
+                        </>
+                      ) : (
+                        <Image
+                          fill
+                          sizes='(max-width: 450px) 300px, 480px'
+                          style={{
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            borderRadius: '2xl',
+                            overflow: 'hidden'
+                          }}
+                          src={item.img}
+                          alt={`slider-${index}`}
+                        />
+                      )}
+                    </Flex>
                     <Text
                       fontSize={{
                         base: 16,
