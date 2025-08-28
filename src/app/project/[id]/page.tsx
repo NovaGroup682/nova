@@ -8,6 +8,7 @@ import { formatCurrency } from 'helpers';
 import { ProjectItemType, ProjectItemVariantType } from 'types';
 
 import {
+  Breadcrump,
   ContactSection,
   EstimateDownloadButton,
   ProjectLayouts
@@ -104,6 +105,7 @@ const ProjectPageContent = async ({
         px={BASE_HORIZONTAL_PADINGS}
         py={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
       >
+        <Breadcrump name={project.name} />
         <Flex
           w='full'
           justifyContent='space-between'

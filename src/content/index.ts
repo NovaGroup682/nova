@@ -585,13 +585,13 @@ const content = {
     socialLinks: [
       {
         type: SocialLinkTypes.Telegram,
-        link: 'https://web.telegram.org/k/',
+        link: 'https://t.me/sk_novacia',
         alt: 'Telegram',
         icon: Telegram
       },
       {
         type: SocialLinkTypes.Instagram,
-        link: 'https://www.instagram.com/',
+        link: 'https://www.instagram.com/sk_novazia/',
         alt: 'Instagram',
         icon: Instagram
       },
