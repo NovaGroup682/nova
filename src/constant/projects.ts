@@ -11,8 +11,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/%D0%A1%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B8%CC%86%20%D1%801_1%20%282%29.png',
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/%D0%A1%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B8%CC%86%20%D1%802_2%20%282%29.png'
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/nova1-1.jpg',
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/nova1-2.jpg',
     ],
     implementationCost: {
       shell: 8950000,
@@ -42,8 +42,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/camera_1.png',
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/camera_2%20%284%29.png'
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/nova2-1.jpg',
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/nova2-2.jpg'
     ],
     implementationCost: {
       shell: 10660000,
@@ -133,9 +133,9 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1hWcmfamPYnYSQ3K5X752-vT2gqMt8Emt/view?usp=sharing',
-      'https://drive.google.com/file/d/1UlnT0ZGl2r-BGkf1-50jXJx80pUH35Vu/view?usp=sharing',
-      'https://drive.google.com/file/d/1A3X4R9eaIs5zuA53sXfXWpDfKA-mEIVj/view?usp=sharing'
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-5/nova5-1.jpg',
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-5/nova5-2.jpg',
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-5/nova5-3.jpg'
     ],
     implementationCost: {
       shell: 8650000,
@@ -148,8 +148,8 @@ const projects: ProjectItemType[] = [
         area: 180,
         constructionArea: 230,
         layouts: [
-          'https://drive.google.com/file/d/1Dtof8FAF_-aob07CgruV_DcOUbpVsPM8/view?usp=sharing',
-          'https://drive.google.com/file/d/1enmlj6-UjxPgzeZrBxJq0QABMIIQc9Dm/view?usp=sharing'
+          'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-5/nova5-floor-1.jpg',
+          'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-5/nova5-floor-2.jpg'
         ]
       }
     ]
