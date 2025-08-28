@@ -198,8 +198,8 @@ const ImageModal = ({
             transition: 'opacity 0.3s ease-in-out'
           }}
           priority
-          sizes='90vw'
-          quality={90}
+          sizes='1500px'
+          quality={100}
           onLoad={handleImageLoad}
           onError={handleImageError}
         />

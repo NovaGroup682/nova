@@ -23,7 +23,11 @@ const config: ConfigType = {
     robots: 'index, follow',
     canonical: 'https://ngnova.ru'
   },
-  copyrightLabel: 'Nova Group'
+  copyrightLabel: 'Nova Group',
+  storageId:
+    process.env.NODE_ENV === 'production'
+      ? '1ealqxles1vhjl4b'
+      : 'fzsvndvghhlh5mdb'
 };
 
 export default config;

@@ -72,7 +72,7 @@ const SliderItem = ({ src, onClick, isFirst = false }: SliderItemProps) => {
               transition: 'opacity 0.3s ease-in-out'
             }}
             priority={isFirst}
-            sizes='(max-width: 450px) 400px, (max-width: 900px) 900px, 1200px'
+            sizes='(max-width: 450px) 400px, (max-width: 900px) 1000px, 1500px'
             quality={75}
             onLoad={handleImageLoad}
             onError={handleImageError}

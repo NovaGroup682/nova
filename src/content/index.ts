@@ -2,6 +2,7 @@ import Instagram from '@assets/icons/instagram.svg';
 import Pinterest from '@assets/icons/pinterest.svg';
 import Telegram from '@assets/icons/telegram.svg';
 import Youtube from '@assets/icons/youtube.svg';
+import config from 'config';
 import { paths } from 'constant';
 
 import {
@@ -10,6 +11,8 @@ import {
 } from 'helpers/google';
 
 import { SocialLinkTypes } from 'types';
+
+const bodyLink = `https://${config.storageId}.public.blob.vercel-storage.com`;
 
 const content = {
   common: {
@@ -140,10 +143,8 @@ const content = {
       'современные каменные дома',
       'в рамках вашего бюджета'
     ],
-    mainImgBg:
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/main.png',
-    mainPopupBg:
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/main-popup-background.png',
+    mainImgBg: bodyLink + '/main_page/main.jpg',
+    mainPopupBg: bodyLink + '/main_page/main-popup-background.png',
     slider: {
       titles: [
         'Nova — простой путь к современному дому',
@@ -154,23 +155,23 @@ const content = {
       ],
       body: [
         {
-          img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/modal_slider/slider-1.png',
+          img: bodyLink + '/main_page/modal_slider/slider-1.png',
           text: 'Мы создаём типовые решения, продуманные до мелочей. Стильная архитектура — без неопределённости и с понятным бюджетом.'
         },
         {
-          img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/modal_slider/slider-2.png',
+          img: bodyLink + '/main_page/modal_slider/slider-2.png',
           text: 'Созданы чтобы максимально эффективно использовать пространство, при этом учитывая такие факторы как: функциональность, естественное освещение и приватность.'
         },
         {
-          img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/modal_slider/slider-3.png',
+          img: bodyLink + '/main_page/modal_slider/slider-3.png',
           text: 'Nova — это внимание к деталям во всём. Каждый дом — это чистая геометрия, правильный ритм окон и выверенные пропорции. Так создаются лаконичные пространства, которые вдохновляют и заряжают энергией каждый день.'
         },
         {
-          img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/modal_slider/slider-4.png',
+          img: bodyLink + '/main_page/modal_slider/slider-4.png',
           text: 'Сочетание всех этих факторов делает каменные дома оптимальным выбором. Наши продуманные решения позволяют реализовать проект без лишних сложностей и с удовольствием жить в нём долгие годы.'
         },
         {
-          img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/modal_slider/slider-5.png',
+          img: bodyLink + '/main_page/modal_slider/slider-5.png',
           text: 'Благодаря нашему системному подходу мы оптимизировали стоимость строительства, сохранив лучшие архитектурные решения. Вы получаете стильный, продуманный дом с ощущением качества в каждой детали. Закажите проект в Nova.'
         }
       ]
@@ -185,26 +186,26 @@ const content = {
         label: 'Зиновий Аксенцев - архитектор',
         description:
           'Главная цель наших проектов - чтобы их действительно строили. Я как архитектор отвечаю за то, чтобы проект был логичным, удобным и адаптированным под реалии рынка.',
-        img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/ceo/ceo-1.png'
+        img: bodyLink + '/main_page/ceo/ceo-1.png'
       },
       {
         label: 'Игорь Ильин - инженер-строитель',
         description:
           'Мы проектируем современные и функциональные дома с акцентом на реальную стоимость строительства. Не делаем «дорогих картинок» — проектируем так, чтобы дом был реализуемым, удобным и вписывался в бюджет клиента.',
-        img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/ceo/ceo-2.png'
+        img: bodyLink + '/main_page/ceo/ceo-2.png'
       }
     ],
     navigationBlcok: [
       {
         title: 'Типовые проекты',
         description: `готовые решения, которые можно\nадаптировать под ваш участок`,
-        img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/navigation_section/navigation-1.png',
+        img: bodyLink + '/main_page/navigation_section/navigation-1.png',
         path: paths.projects
       },
       {
         title: 'Индивидуальное проектирование',
         description: `создаём дом с нуля под ваш стиль\nжизни и в рамах бюджета`,
-        img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/navigation_section/navigation-2.png',
+        img: bodyLink + '/main_page/navigation_section/navigation-2.png',
         path: paths.design
       },
       {
@@ -214,7 +215,7 @@ const content = {
           'контроль на каждом этапе',
           'всегда на связи'
         ],
-        img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/navigation_section/navigation-3.png',
+        img: bodyLink + '/main_page/navigation_section/navigation-3.png',
         path: paths.services
       }
     ],
@@ -226,8 +227,7 @@ const content = {
       region: 'Регион строительства',
       yourName: 'Как мы можем к вам обращаться?',
       phone: 'Телефон',
-      contactCover:
-        'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/contact-cover.png'
+      contactCover: bodyLink + '/main_page/contact-cover.jpg'
     }
   },
   projectDetails: {

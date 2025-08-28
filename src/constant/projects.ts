@@ -1,4 +1,8 @@
+import config from 'config';
+
 import { ProjectItemType, ProjectSize } from 'types';
+
+const bodyLink = `https://${config.storageId}.public.blob.vercel-storage.com`;
 
 const projects: ProjectItemType[] = [
   {
@@ -11,8 +15,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/nova1-1.jpg',
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/nova1-2.jpg'
+      bodyLink + '/projects/nova-1/nova1-1.jpg',
+      bodyLink + '/projects/nova-1/nova1-2.jpg'
     ],
     implementationCost: {
       shell: 8950000,
@@ -25,7 +29,8 @@ const projects: ProjectItemType[] = [
         constructionArea: 216,
         area: 175,
         layouts: [
-          'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/%D0%9F%D0%BB%D0%B0%D0%BD%201%20%D1%8D%D1%82%D0%B0%D0%B6%D0%B0.jpg'
+          bodyLink +
+            '/projects/nova-1/%D0%9F%D0%BB%D0%B0%D0%BD%201%20%D1%8D%D1%82%D0%B0%D0%B6%D0%B0.jpg'
         ]
       }
     ]
@@ -42,8 +47,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/nova2-1.jpg',
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/nova2-2.jpg'
+      bodyLink + '/projects/nova-2/nova2-1.jpg',
+      bodyLink + '/projects/nova-2/nova2-2.jpg'
     ],
     implementationCost: {
       shell: 10660000,
@@ -56,8 +61,8 @@ const projects: ProjectItemType[] = [
         area: 222,
         constructionArea: 310,
         layouts: [
-          'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/%21CC%20%D1%81%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B8%CC%86%20240_1%20%D1%8D%D1%82%D0%B0%D0%B6.jpg',
-          'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/%21CC%20%D1%81%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B8%CC%86%20240_2%20%D1%8D%D1%82%D0%B0%D0%B6.jpg'
+          bodyLink + '/projects/nova-2/nova2-floor-1.jpg',
+          bodyLink + '/projects/nova-2/nova2-floor-2.jpg'
         ]
       }
     ]
@@ -72,8 +77,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1UwQl4w3Phc1N0yQ636ALkkkSuS8hBWHD/view?usp=sharing',
-      'https://drive.google.com/file/d/15imlmQBGnhCwo_FcXSXhyV2IfWfNcYvj/view?usp=sharing'
+      bodyLink + '/projects/nova-3/nova3-1.jpg',
+      bodyLink + '/projects/nova-3/nova3-2.jpg'
     ],
     implementationCost: {
       shell: 11100000,
@@ -86,8 +91,8 @@ const projects: ProjectItemType[] = [
         area: 231,
         constructionArea: 293,
         layouts: [
-          'https://drive.google.com/file/d/15SRhBRID08nRkmyQSnh5ltO9r8ISEx_Q/view?usp=sharing',
-          'https://drive.google.com/file/d/1TLEpbz1fdXHifEEvZXkJDaMXn9md_Za1/view?usp=sharing'
+          bodyLink + '/projects/nova-3/nova3-floor-1.jpg',
+          bodyLink + '/projects/nova-3/nova3-floor-2.jpg'
         ]
       }
     ]
@@ -102,8 +107,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/17wt7C9T_H5UpMARvHYkLSv5wSuyJ6dP5/view?usp=sharing',
-      'https://drive.google.com/file/d/1L1H4iCMlVLXth1n1MfWk6pIuBAk7Zqhq/view?usp=sharing'
+      bodyLink + '/projects/nova-4/nova4-1.jpg',
+      bodyLink + '/projects/nova-4/nova4-2.jpg'
     ],
     implementationCost: {
       shell: 8400000,
@@ -116,8 +121,8 @@ const projects: ProjectItemType[] = [
         area: 174,
         constructionArea: 230,
         layouts: [
-          'https://drive.google.com/file/d/1UCIWA9fS82fc-i2deEQO8l-LqOCJhpiO/view?usp=sharing',
-          'https://drive.google.com/file/d/1Hdrw2iYzTrBJ54WAhR6MJSc7X_PqTE7j/view?usp=sharing'
+          bodyLink + '/projects/nova-4/nova4-floor-1.jpg',
+          bodyLink + '/projects/nova-4/nova4-floor-2.jpg'
         ]
       }
     ]
@@ -133,9 +138,9 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-5/nova5-1.jpg',
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-5/nova5-2.jpg',
-      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-5/nova5-3.jpg'
+      bodyLink + '/projects/nova-5/nova5-1.jpg',
+      bodyLink + '/projects/nova-5/nova5-2.jpg',
+      bodyLink + '/projects/nova-5/nova5-3.jpg'
     ],
     implementationCost: {
       shell: 8650000,
@@ -148,8 +153,8 @@ const projects: ProjectItemType[] = [
         area: 180,
         constructionArea: 230,
         layouts: [
-          'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-5/nova5-floor-1.jpg',
-          'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-5/nova5-floor-2.jpg'
+          bodyLink + '/projects/nova-5/nova5-floor-1.jpg',
+          bodyLink + '/projects/nova-5/nova5-floor-2.jpg'
         ]
       }
     ]
@@ -164,8 +169,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1_XiWiGUCRPE6-QHGne1XIEgvwikJS9Wb/view?usp=sharing',
-      'https://drive.google.com/file/d/1hRfWoGyoQUL3Iy62iwGxXGhAJ3GgV9ef/view?usp=sharing'
+      bodyLink + '/projects/nova-6/nova6-1.jpg',
+      bodyLink + '/projects/nova-6/nova6-2.jpg'
     ],
     implementationCost: {
       shell: 11450000,
@@ -178,8 +183,8 @@ const projects: ProjectItemType[] = [
         area: 238,
         constructionArea: 311,
         layouts: [
-          'https://drive.google.com/file/d/1nDf_Yqjigep-J5IQvwWgSHQG80b_NDBl/view?usp=sharing',
-          'https://drive.google.com/file/d/1JkFDsZqddhejPgADr8_KE2A4LQPxRaj-/view?usp=sharing'
+          bodyLink + '/projects/nova-6/nova6-floor-1.jpg',
+          bodyLink + '/projects/nova-6/nova6-floor-2.jpg'
         ]
       }
     ]
@@ -194,9 +199,9 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1vePstUVyOXQHrMRVw2Mp10moaryiCB4c/view?usp=sharing',
-      'https://drive.google.com/file/d/1GuIzSDintZOThHJqli50m9YXEzMs-uuT/view?usp=sharing',
-      'https://drive.google.com/file/d/1L1UW9Z58aIySsLJXW7s6VIV1tuFzN7jN/view?usp=sharing'
+      bodyLink + '/projects/nova-7/nova7-1.jpg',
+      bodyLink + '/projects/nova-7/nova7-2.jpg',
+      bodyLink + '/projects/nova-7/nova7-3.jpg'
     ],
     implementationCost: {
       shell: 6900000,
@@ -208,9 +213,7 @@ const projects: ProjectItemType[] = [
       {
         area: 135,
         constructionArea: 177,
-        layouts: [
-          'https://drive.google.com/file/d/1exr-B2TYyFQK_QkprhRlN-y574-TxpBh/view?usp=sharing'
-        ]
+        layouts: [bodyLink + '/projects/nova-7/nova7-floor-1.jpg']
       }
     ]
   },
@@ -224,9 +227,9 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/18VSFdvZYZOyxvtpkq8CEElzkN0rl_yln/view?usp=sharing',
-      'https://drive.google.com/file/d/1YvZj7szaH5zrHVfFTVtrkVJEeG6QdTHF/view?usp=sharing',
-      'https://drive.google.com/file/d/1ZWAS21rea86aF7XCk-dXkM1uo8w3-9qx/view?usp=sharing'
+      bodyLink + '/projects/nova-8/nova8-1.jpg',
+      bodyLink + '/projects/nova-8/nova8-2.jpg',
+      bodyLink + '/projects/nova-8/nova8-3.jpg'
     ],
     implementationCost: {
       shell: 0,
@@ -238,9 +241,7 @@ const projects: ProjectItemType[] = [
       {
         area: 151,
         constructionArea: 0,
-        layouts: [
-          'https://drive.google.com/file/d/1kJwYAq4_q9JocfG0yMOKswu1rM0W0e6E/view?usp=sharing'
-        ]
+        layouts: [bodyLink + '/projects/nova-8/nova8-floor-1.jpg']
       }
     ]
   },
@@ -254,8 +255,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1P1zmPIMR7QTPPTi5MpsjSnkEDsfa4Y8H/view?usp=sharing',
-      'https://drive.google.com/file/d/1Vy_xMJ03Y9J_fTun7IiUgDjCVlHY6C9r/view?usp=sharing'
+      bodyLink + '/projects/nova-9/nova9-1.jpg',
+      bodyLink + '/projects/nova-9/nova9-2.jpg'
     ],
     implementationCost: {
       shell: 7650000,
@@ -267,9 +268,7 @@ const projects: ProjectItemType[] = [
       {
         area: 150,
         constructionArea: 184,
-        layouts: [
-          'https://drive.google.com/file/d/10sKcWfrNIpIFCcA1MJRCplpbI2y85oEj/view?usp=sharing'
-        ]
+        layouts: [bodyLink + '/projects/nova-9/nova9-floor-1.jpg']
       }
     ]
   },
@@ -283,8 +282,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1X65DCOWAbrJ3y5hHCIz6qjiMGTLDg3wP/view?usp=sharing',
-      'https://drive.google.com/file/d/1Gvx6AXhdkVF4FUlWY5FD6476bkmoHqgw/view?usp=sharing'
+      bodyLink + '/projects/nova-10/nova10-1.jpg',
+      bodyLink + '/projects/nova-10/nova10-2.jpg'
     ],
     implementationCost: {
       shell: 0,
@@ -297,8 +296,8 @@ const projects: ProjectItemType[] = [
         area: 160,
         constructionArea: 0,
         layouts: [
-          'https://drive.google.com/file/d/1kdrFMQy9ichWFL1Wel3VSY7Tkp8YmB_d/view?usp=sharing',
-          'https://drive.google.com/file/d/1hIThrXhTFz4xfN031RQ4B2T3k_OMKgTL/view?usp=sharing'
+          bodyLink + '/projects/nova-10/nova10-floor-1.jpg',
+          bodyLink + '/projects/nova-10/nova10-floor-2.jpg'
         ]
       }
     ]
@@ -313,8 +312,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1UWD6o2ZJe7_gKUCScQ4CQzB2w1lymRF6/view?usp=sharing',
-      'https://drive.google.com/file/d/1q1tgrNOjArztMA_7N20jvk1l5yzChHZF/view?usp=sharing'
+      bodyLink + '/projects/nova-11/nova11-1.jpg',
+      bodyLink + '/projects/nova-11/nova11-2.jpg'
     ],
     implementationCost: {
       shell: 0,
@@ -326,9 +325,7 @@ const projects: ProjectItemType[] = [
       {
         area: 160,
         constructionArea: 197,
-        layouts: [
-          'https://drive.google.com/file/d/1welZPMPR_yXh-7VjE2tPHJ9drG1gFDzC/view?usp=sharing'
-        ]
+        layouts: [bodyLink + '/projects/nova-11/nova11-floor-1.jpg']
       }
     ]
   },
@@ -342,8 +339,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/175iLKt29yl8elGEjW4_IkwvDwAVqxZuc/view?usp=sharing',
-      'https://drive.google.com/file/d/1cilXRwgIHiJx3IrU4qUXk9fGoEX9tfo1/view?usp=sharing'
+      bodyLink + '/projects/nova-86/nova86-1.jpg',
+      bodyLink + '/projects/nova-86/nova86-2.jpg'
     ],
     implementationCost: {
       shell: 11950000,
@@ -356,16 +353,16 @@ const projects: ProjectItemType[] = [
         area: 248,
         constructionArea: 307,
         layouts: [
-          'https://drive.google.com/file/d/19mQqG6aAOvvL5q19LO-ilbBjWxhcaFOx/view?usp=sharing',
-          'https://drive.google.com/file/d/1VRm2VPnD3xjAvI1LTtYclqplMorIaNoD/view?usp=sharing'
+          bodyLink + '/projects/nova-86/v1/nova86-floor-1-v1.jpg',
+          bodyLink + '/projects/nova-86/v1/nova86-floor-2-v1.jpg'
         ]
       },
       {
         area: 258,
         constructionArea: 328,
         layouts: [
-          'https://drive.google.com/file/d/1NSkmBH9xgkVrCsxPDpeBdZ-_fHUhhIyL/view?usp=sharing',
-          'https://drive.google.com/file/d/1hOA-uC9ni5wTtE2zPvb6sr6iYSy3b5GZ/view?usp=sharing'
+          bodyLink + '/projects/nova-86/v2/nova86-floor-1-v2.jpg',
+          bodyLink + '/projects/nova-86/v2/nova86-floor-2-v2.jpg'
         ]
       }
     ]
@@ -380,8 +377,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1F91DEWUx5MEPxTK9NwGymyYBZCQc45eG/view?usp=sharing',
-      'https://drive.google.com/file/d/1JkZ5NeIG9gCRGjbX5A7aURxZy1n4hOfw/view?usp=sharing'
+      bodyLink + '/projects/nova-97/nova97-1.jpg',
+      bodyLink + '/projects/nova-97/nova97-2.jpg'
     ],
     implementationCost: {
       shell: 0,
@@ -394,8 +391,8 @@ const projects: ProjectItemType[] = [
         area: 254,
         constructionArea: 0,
         layouts: [
-          'https://drive.google.com/file/d/1jj0m5VvBIq_8k6GxQ0VYaP6Jv4WfIBg2/view?usp=sharing',
-          'https://drive.google.com/file/d/1YQQyNy_5j09DhvLPL1kVxow-A-SgpEBP/view?usp=sharing'
+          bodyLink + '/projects/nova-97/nova97-floor-1.jpg',
+          bodyLink + '/projects/nova-97/nova97-floor-2.jpg'
         ]
       }
     ]
@@ -410,8 +407,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1k4Pi_ztg31qj_Dpv_x-gsJ9O163OM260/view?usp=sharing',
-      'https://drive.google.com/file/d/1P4fgBeLaipkRuXoE2aWNphoZJEx2l3gF/view?usp=sharing'
+      bodyLink + '/projects/nova-99/nova99-1.jpg',
+      bodyLink + '/projects/nova-99/nova99-2.jpg'
     ],
     implementationCost: {
       shell: 0,
@@ -424,8 +421,8 @@ const projects: ProjectItemType[] = [
         area: 308,
         constructionArea: 0,
         layouts: [
-          'https://drive.google.com/file/d/1t3QgsJylgraqH_4QmWb5GXihPtCQA2Zv/view?usp=sharing',
-          'https://drive.google.com/file/d/1B4cgQVlT-nLBO4wPZTA97MjmWysGzjP_/view?usp=sharing'
+          bodyLink + '/projects/nova-99/v1/nova99-floor-1-v1.jpg',
+          bodyLink + '/projects/nova-99/v1/nova99-floor-2-v1.jpg'
         ]
       }
     ]

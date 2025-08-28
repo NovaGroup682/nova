@@ -62,13 +62,13 @@
   ],
   "screenshots": [
     {
-      "src": "/assets/screenshots/desktop.png",
+      "src": "/assets/screenshots/desktop.jpg",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "/assets/screenshots/mobile.png",
+      "src": "/assets/screenshots/desktop.jpg",
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow"

@@ -163,7 +163,7 @@ const ProjectLayouts = ({ label, area, plans }: ProjectLayoutsProps) => {
                 }}
                 priority
                 sizes='(max-width: 450px) 400px, 1200px'
-                quality={75}
+                quality={100}
               />
             </AspectRatio>
           </Stack>

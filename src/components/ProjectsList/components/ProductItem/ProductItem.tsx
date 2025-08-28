@@ -82,8 +82,8 @@ const ProductItem = ({ project }: ProductItemProps) => {
             alt={`${project.name} - проект дома`}
             onLoad={handleImageLoad}
             onError={handleImageError}
-            loading='lazy'
-            priority={false}
+            loading={project.name === 'Nova-1' ? 'eager' : 'lazy'}
+            priority={project.name === 'Nova-1'}
             quality={75}
           />
 

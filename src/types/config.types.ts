@@ -30,4 +30,5 @@ export interface ConfigType {
     canonical?: string;
   };
   copyrightLabel: string;
+  storageId: string;
 }
