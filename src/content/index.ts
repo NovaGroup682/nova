@@ -140,8 +140,10 @@ const content = {
       'современные каменные дома',
       'в рамках вашего бюджета'
     ],
-    mainImgBg: GOOGLE_LINK + '13fWS-8f6fz7XtLKNQevNU6ngufKVcJ2w',
-    mainPopupBg: GOOGLE_LINK + '1QPwqY11NsSoQecLmKIcvjdcMVV3oG3K-',
+    mainImgBg:
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/main.png',
+    mainPopupBg:
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/main-popup-background.png',
     slider: {
       titles: [
         'Nova — простой путь к современному дому',
@@ -152,23 +154,23 @@ const content = {
       ],
       body: [
         {
-          img: GOOGLE_LINK + '16gn47SIqnx5IQPyahdELi2VEMGKQwxOU',
+          img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/modal_slider/slider-1.png',
           text: 'Мы создаём типовые решения, продуманные до мелочей. Стильная архитектура — без неопределённости и с понятным бюджетом.'
         },
         {
-          img: GOOGLE_LINK + '1o2znAKwEo6M1egyEJjjUB6hDUltWNK4t',
+          img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/modal_slider/slider-2.png',
           text: 'Созданы чтобы максимально эффективно использовать пространство, при этом учитывая такие факторы как: функциональность, естественное освещение и приватность.'
         },
         {
-          img: GOOGLE_LINK + '1YTZychxBNGWExAo6FDdSG72gmUbO0fSU',
+          img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/modal_slider/slider-3.png',
           text: 'Nova — это внимание к деталям во всём. Каждый дом — это чистая геометрия, правильный ритм окон и выверенные пропорции. Так создаются лаконичные пространства, которые вдохновляют и заряжают энергией каждый день.'
         },
         {
-          img: GOOGLE_LINK + '1RqkXOP1SDWhp4Q4CPPpZvqvkKYIxy4Dy',
+          img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/modal_slider/slider-4.png',
           text: 'Сочетание всех этих факторов делает каменные дома оптимальным выбором. Наши продуманные решения позволяют реализовать проект без лишних сложностей и с удовольствием жить в нём долгие годы.'
         },
         {
-          img: GOOGLE_LINK + '1dprfixfL0MOgPugCva1kRyJyQjDAOafG',
+          img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/modal_slider/slider-5.png',
           text: 'Благодаря нашему системному подходу мы оптимизировали стоимость строительства, сохранив лучшие архитектурные решения. Вы получаете стильный, продуманный дом с ощущением качества в каждой детали. Закажите проект в Nova.'
         }
       ]
@@ -183,26 +185,26 @@ const content = {
         label: 'Зиновий Аксенцев - архитектор',
         description:
           'Главная цель наших проектов - чтобы их действительно строили. Я как архитектор отвечаю за то, чтобы проект был логичным, удобным и адаптированным под реалии рынка.',
-        img: GOOGLE_LINK + '1wHDzZ8WFSuevFO7-1XdXBUuRF9GojPwZ'
+        img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/ceo/ceo-1.png'
       },
       {
         label: 'Игорь Ильин - инженер-строитель',
         description:
           'Мы проектируем современные и функциональные дома с акцентом на реальную стоимость строительства. Не делаем «дорогих картинок» — проектируем так, чтобы дом был реализуемым, удобным и вписывался в бюджет клиента.',
-        img: GOOGLE_LINK + '1n1ILMCpkDQUaT5uxkgOLkc_5KB0SzIG4'
+        img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/ceo/ceo-2.png'
       }
     ],
     navigationBlcok: [
       {
         title: 'Типовые проекты',
         description: `готовые решения, которые можно\nадаптировать под ваш участок`,
-        img: GOOGLE_LINK + '1wibx600imEROiiJz_EQY5MrMcC5s3OYz',
+        img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/navigation_section/navigation-1.png',
         path: paths.projects
       },
       {
         title: 'Индивидуальное проектирование',
         description: `создаём дом с нуля под ваш стиль\nжизни и в рамах бюджета`,
-        img: GOOGLE_LINK + '1O3mQI6NFlXK3TPQWT9x7tcLOY0CwhB4d',
+        img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/navigation_section/navigation-2.png',
         path: paths.design
       },
       {
@@ -212,7 +214,7 @@ const content = {
           'контроль на каждом этапе',
           'всегда на связи'
         ],
-        img: GOOGLE_LINK + '1MjE6ucharO37nISKHOBCCLY_5Wl0NyaL',
+        img: 'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/navigation_section/navigation-3.png',
         path: paths.services
       }
     ],
@@ -224,7 +226,8 @@ const content = {
       region: 'Регион строительства',
       yourName: 'Как мы можем к вам обращаться?',
       phone: 'Телефон',
-      contactCover: GOOGLE_LINK + '1_ka5s9bKYNeSIp4Q0HD4LXlh9x5hv-5S'
+      contactCover:
+        'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/main_page/contact-cover.png'
     }
   },
   projectDetails: {

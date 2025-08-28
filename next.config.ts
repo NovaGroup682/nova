@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'drive.google.com'
       },
+       {
+        protocol: 'https',
+        hostname: 'fzsvndvghhlh5mdb.public.blob.vercel-storage.com'
+      },
       {
         protocol: 'https',
         hostname: 'drive.usercontent.google.com'

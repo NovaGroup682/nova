@@ -11,8 +11,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1ycboXgZ0IIGf1yoFLNimRMomEpwyY03H/view?usp=sharing',
-      'https://drive.google.com/file/d/1GgFDQgt3beqEYmR5gdO9sCpz8XjpB9Tf/view?usp=sharing'
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/%D0%A1%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B8%CC%86%20%D1%801_1%20%282%29.png',
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/%D0%A1%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B8%CC%86%20%D1%802_2%20%282%29.png'
     ],
     implementationCost: {
       shell: 8950000,
@@ -25,7 +25,7 @@ const projects: ProjectItemType[] = [
         constructionArea: 216,
         area: 175,
         layouts: [
-          'https://drive.google.com/file/d/1UDPNpcGZZc_Kv9lPIF3ZL7Dh3i9WVaNR/view?usp=sharing'
+          'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-1/%D0%9F%D0%BB%D0%B0%D0%BD%201%20%D1%8D%D1%82%D0%B0%D0%B6%D0%B0.jpg'
         ]
       }
     ]
@@ -42,8 +42,8 @@ const projects: ProjectItemType[] = [
     projectPrice: 60000,
     price: 0,
     sliders: [
-      'https://drive.google.com/file/d/1VWZt3nX5-YdMM2ECixmH1lwzUkUdWWEE/view?usp=sharing',
-      'https://drive.google.com/file/d/12wLLlkBGGwdzIFu6CEsoD-Ujz8N7mwiQ/view?usp=sharing'
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/camera_1.png',
+      'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/camera_2%20%284%29.png'
     ],
     implementationCost: {
       shell: 10660000,
@@ -56,8 +56,8 @@ const projects: ProjectItemType[] = [
         area: 222,
         constructionArea: 310,
         layouts: [
-          'https://drive.google.com/file/d/1hGG5vOrTli9k6BrbTG6GL56Jc1DT5sRY/view?usp=sharing',
-          'https://drive.google.com/file/d/1TyqQ_rtIFOYiO0lP1EtVxAyy5FSJhjKg/view?usp=sharing'
+          'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/%21CC%20%D1%81%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B8%CC%86%20240_1%20%D1%8D%D1%82%D0%B0%D0%B6.jpg',
+          'https://fzsvndvghhlh5mdb.public.blob.vercel-storage.com/projects/nova-2/%21CC%20%D1%81%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B8%CC%86%20240_2%20%D1%8D%D1%82%D0%B0%D0%B6.jpg'
         ]
       }
     ]
