@@ -2,7 +2,7 @@ import Instagram from '@assets/icons/instagram.svg';
 import Pinterest from '@assets/icons/pinterest.svg';
 import Telegram from '@assets/icons/telegram.svg';
 import Youtube from '@assets/icons/youtube.svg';
-import { GOOGLE_LINK, paths } from 'constant';
+import { paths } from 'constant';
 
 import {
   getGoogleDriveDirectLink,
