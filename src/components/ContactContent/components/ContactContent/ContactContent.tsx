@@ -4,9 +4,9 @@ import Telegram from '@assets/icons/telegram.svg';
 import Whatsapp from '@assets/icons/whatsapp.svg';
 import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
 
-import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
+import { Flex, Link, Text, VStack } from '@chakra-ui/react';
 
-import { SocialLinksBlock, YandexMap } from 'components';
+import { SocialLinksBlock } from 'components';
 import { SocialButton } from 'ui';
 import { Map } from '../Map';
 

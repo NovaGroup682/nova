@@ -1,16 +1,8 @@
 'use client';
 
-import { ElementType } from 'react';
-import Telegram from '@assets/icons/telegram.svg';
-import Whatsapp from '@assets/icons/whatsapp.svg';
-import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
+import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 
-import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
-
-import { SocialLinkTypes } from 'types';
-
-import { SocialLinksBlock, YandexMap } from 'components';
-import { SocialButton } from 'ui';
+import { YandexMap } from 'components';
 
 interface MapProps {
   address: string;

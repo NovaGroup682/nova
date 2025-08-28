@@ -39,6 +39,31 @@ const ProjectSliderBlock = () => {
     []
   );
 
+  const navigationDots = useMemo(
+    () =>
+      sliders.map((_, index) => (
+        <Box
+          key={index}
+          w='8px'
+          h='8px'
+          borderRadius='full'
+          bg={index === currentIndex ? 'white' : 'rgba(255,255,255,0.5)'}
+          cursor='pointer'
+          transition='all 0.3s ease'
+          _hover={{
+            bg: index === currentIndex ? 'white' : 'rgba(255,255,255,0.8)',
+            transform: 'scale(1.2)'
+          }}
+          onClick={() => {
+            if (swiperRef.current) {
+              swiperRef.current.slideTo(index);
+            }
+          }}
+        />
+      )),
+    [sliders, currentIndex]
+  );
+
   const projectBtn = () => (
     <Link
       href={paths.projects}
@@ -246,6 +271,17 @@ const ProjectSliderBlock = () => {
             </Text>
           </GridItem>
         </Grid>
+        {sliders.length > 1 && (
+          <Box
+            position='absolute'
+            bottom={{ base: '10px', md: '10px' }}
+            left='50%'
+            transform='translateX(-50%)'
+            zIndex={30}
+          >
+            <HStack gap={2}>{navigationDots}</HStack>
+          </Box>
+        )}
       </Box>
     </AspectRatio>
   );
