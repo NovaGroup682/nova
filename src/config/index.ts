@@ -26,7 +26,7 @@ const config: ConfigType = {
   copyrightLabel: 'Nova Group',
   storageId:
     process.env.NODE_ENV === 'production'
-      ? '1ealqxles1vhjl4b'
+      ? 'rladuqqmnofx4wsc'
       : 'fzsvndvghhlh5mdb'
 };
 
