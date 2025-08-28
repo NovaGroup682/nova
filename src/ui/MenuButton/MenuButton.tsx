@@ -6,12 +6,12 @@ import { Box, Text } from '@chakra-ui/react';
 
 import { ChakraNextLink } from 'ui/ChakraNextLink';
 
-interface MenuButton {
+interface MenuButtonProps {
   label: string;
   href: string;
 }
 
-const MenuButton = ({ label, href }: MenuButton) => {
+const MenuButton = ({ label, href }: MenuButtonProps) => {
   const pathname = usePathname();
   const isActive = pathname === href;
 

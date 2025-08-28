@@ -187,6 +187,7 @@ const Home = () => (
           }}
           fontWeight={700}
           letterSpacing='2px'
+          whiteSpace='pre-line'
         >
           {content.main.text2}
         </Text>

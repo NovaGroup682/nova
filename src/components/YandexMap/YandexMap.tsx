@@ -11,16 +11,16 @@ import {
 
 import { Box } from '@chakra-ui/react';
 
-import content from 'content';
-
 interface YandexMapProps {
   address: string;
+  coordinates: number[];
   height?: string;
   width?: string;
 }
 
 const YandexMap = ({
   address,
+  coordinates,
   height = '300px',
   width = '100%'
 }: YandexMapProps) => (
@@ -34,7 +34,7 @@ const YandexMap = ({
     <YMaps>
       <Map
         defaultState={{
-          center: content.contacts.coordinates,
+          center: coordinates,
           zoom: 15
         }}
         width='100%'
@@ -44,7 +44,7 @@ const YandexMap = ({
         }}
       >
         <Placemark
-          geometry={content.contacts.coordinates}
+          geometry={coordinates}
           properties={{
             balloonContent: address
           }}

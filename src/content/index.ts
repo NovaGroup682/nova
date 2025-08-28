@@ -1,8 +1,7 @@
-// import Facebook from '@assets/icons/facebook.svg';
 import Instagram from '@assets/icons/instagram.svg';
-// import VK from '@assets/icons/vk.svg';
+import Pinterest from '@assets/icons/pinterest.svg';
 import Telegram from '@assets/icons/telegram.svg';
-import Whatsapp from '@assets/icons/whatsapp.svg';
+import Youtube from '@assets/icons/youtube.svg';
 import { GOOGLE_LINK, paths } from 'constant';
 
 import {
@@ -176,8 +175,7 @@ const content = {
     },
     text1:
       'Большинство индивидуальных проектов  не доходят до стройки без серьёзных упрощений — бюджет заказчика просто не совпадает с реальной стоимостью реализации.',
-    text2:
-      'Мы проектируем на базе продуманных типовых решений — с точным пониманием бюджета и финального результата. В итоге вы получаете стильный, современный дом — без компромиссов и лишних расходов.',
+    text2: `Мы проектируем на базе продуманных типовых решений— с точным пониманием бюджета и финального результата. В итоге вы получаете стильный,\nсовременный дом — без компромиссов и лишних расходов.`,
     text3: `Мы берем на себя самое сложное, чтобы вы\nполучили удовольствие от процесса`,
     projectsSliders: ['nova-1', 'nova-2', 'nova-9', 'nova-5'],
     ceo: [
@@ -573,17 +571,15 @@ const content = {
   contacts: {
     domen: 'https://ngnova.ru',
     email: 'vasha@pochta.ru',
+    salesDepartmentPhone: '+7 985 999-46-00',
+    salesDepartmentEmail: 'ng.nova@ya.ru',
+    supplyDepartmentEmail: 'snab.msn@ya.ru',
     phone: '8 800 000 00 00',
-    address: 'Россия, г Москва , ул. Примерная 345',
-    coordinates: [55.755819, 37.617644],
+    address:
+      'Россия, г Москва , Очаковское ш., д.34, БЦ West Park, 6 этаж, офис А 611',
+    coordinates: [55.686736, 37.440496],
     law: 'Сайт носит сугубо информационный характер и не является публичной офертой, определяемой Статьей 437 (2) ГК РФ',
     socialLinks: [
-      {
-        type: SocialLinkTypes.Whatsapp,
-        link: 'https://www.whatsapp.com/',
-        alt: 'Whatsapp',
-        icon: Whatsapp
-      },
       {
         type: SocialLinkTypes.Telegram,
         link: 'https://web.telegram.org/k/',
@@ -595,8 +591,28 @@ const content = {
         link: 'https://www.instagram.com/',
         alt: 'Instagram',
         icon: Instagram
+      },
+      {
+        type: SocialLinkTypes.Pinterest,
+        link: 'https://ru.pinterest.com/sk_novazia/',
+        alt: 'Pinterest',
+        icon: Pinterest
+      },
+      {
+        type: SocialLinkTypes.Youtube,
+        link: 'https://www.youtube.com/@sk_novazia/',
+        alt: 'Youtube',
+        icon: Youtube
       }
-    ]
+    ],
+    architecturalDepartment: {
+      telegram: 'https://t.me/TrippyGunner',
+      whatsapp: 'https://wa.me/351910934089'
+    },
+    constructionDepartment: {
+      telegram: 'https://t.me/NovaGrop',
+      whatsapp: 'https://wa.me/79859994600'
+    }
   }
 };
 

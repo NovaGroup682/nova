@@ -160,7 +160,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
             </Field.Root>
 
             <Box w='full' pt={2}>
-              <Box display='flex' alignItems='flex-start' gap={2}>
+              <Box display='flex' alignItems='center' gap={2}>
                 <input
                   type='checkbox'
                   {...register('privacyPolicy', {
@@ -185,7 +185,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                 </Text>
               </Box>
               {errors.privacyPolicy && (
-                <Text fontSize='xs' color='red.500' mt={1}>
+                <Text fontSize='xs' color='red.500' mt={1} pl={5}>
                   {errors.privacyPolicy.message}
                 </Text>
               )}

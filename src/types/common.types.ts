@@ -3,5 +3,7 @@ export enum SocialLinkTypes {
   VK,
   Instagram,
   Whatsapp,
-  Telegram
+  Telegram,
+  Pinterest,
+  Youtube
 }
