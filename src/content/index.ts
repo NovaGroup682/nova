@@ -5,10 +5,7 @@ import Youtube from '@assets/icons/youtube.svg';
 import config from 'config';
 import { paths } from 'constant';
 
-import {
-  getGoogleDriveDirectLink,
-  getGoogleDriveVideoEmbedLink
-} from 'helpers/google';
+import { getGoogleDriveVideoEmbedLink } from 'helpers/google';
 
 import { SocialLinkTypes } from 'types';
 
@@ -368,20 +365,14 @@ const content = {
       'Решение под конкретный участок, образ жизни, бюджет и приоритеты.',
     desciption:
       'Мы подходим к проектированию системно: на выходе — современный, продуманный до мелочей дом, в котором сочетаются архитектура, логика и реалистичный бюджет.',
-    mainImg: getGoogleDriveDirectLink(
-      'https://drive.google.com/file/d/175iLKt29yl8elGEjW4_IkwvDwAVqxZuc/view?usp=sharing'
-    ),
+    mainImg: bodyLink + '/design_page/main_background.jpg',
     architecturalSection: {
       title: 'Архитектурный раздел',
       video: getGoogleDriveVideoEmbedLink(
         'https://drive.google.com/file/d/1NkohgTlsLE3w4U-4nMx4tsfwxNvlcyNW/view?usp=sharing'
       ),
-      preview: getGoogleDriveDirectLink(
-        'https://drive.google.com/file/d/13JXAB6qrF44Dx-W3VNDYF86jc-54ITw3/view?usp=sharing'
-      ),
-      src: getGoogleDriveDirectLink(
-        'https://drive.google.com/file/d/1bg8MK420HPS4NK5qEDtvXIFqD06gI90_/view?usp=sharing'
-      ),
+      preview: bodyLink + '/design_page/architectural_section/video_cover.jpg',
+      src: bodyLink + '/design_page/architectural_section/section_cover.jpg',
       text1:
         'Проект начинается с эскизной части. Мы анализируем участок, продумываем планировки, формируем фасады и общий образ дома. Уже на этом этапе становится понятно, как дом будет выглядеть, как он встанет на участок и сколько примерно обойдётся строительство.',
       text2:
@@ -390,54 +381,40 @@ const content = {
         {
           label: 'Планировка',
           description: 'Функциональная и продуманная планировка',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1saXi9OehgcgKNpng146_O5yFivttpcw6/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/architectural_section/slide_1.jpg'
         },
         {
           label: 'Организация участка',
           description:
             'Привязка дома к участку с продуманными сценариями использования',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1JwS7zUEqJTsLO0NprDdz4CDVfQRmvEt1/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/architectural_section/slide_2.jpg'
         },
         {
           label: 'Фасады',
           description: 'Внешний облик дома с грамотно подобранными материалами',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1o9oeh0LG2ugXl0VtIFI_hUiDN_RtW7Ok/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/architectural_section/slide_3.jpg'
         },
         {
           label: 'Визуализации',
           description:
             'Реалистичная 3D-модель, которая помогает представить дом ещё до начала стройки',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1T0UQk1NqyiF9M7Ja_AcBIQtxss9bMBF0/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/architectural_section/slide_4.jpg'
         },
         {
           label: 'Разрезы',
           description:
             'Высотные отметки, уровни и принципиальные технические решения',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1f3VtMj_tYN2gMKLastgybbhyipxlTPMZ/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/architectural_section/slide_5.jpg'
         },
         {
           label: 'Узлы',
           description: 'Ключевые архитектурные решения',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1kYCU9wRcFvQdoqm2A_gw9ijIXsW3IDqw/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/architectural_section/slide_6.jpg'
         },
         {
           label: 'Ведомости',
           description: 'Объёмы и площади всех материалов',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1jdAwtbVQAxuA9gcDWOBKpW6wABKrj5jS/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/architectural_section/slide_7.jpg'
         }
       ]
     },
@@ -446,12 +423,8 @@ const content = {
       video: getGoogleDriveVideoEmbedLink(
         'https://drive.google.com/file/d/1Aq7dLWYTgj36z9n79HhEfoWjjJJN2JRy/view?usp=sharing'
       ),
-      preview: getGoogleDriveDirectLink(
-        'https://drive.google.com/file/d/17eTZ6lRZRpxd7TSly-VjdGM_k2oAS_Hp/view?usp=sharing'
-      ),
-      src: getGoogleDriveDirectLink(
-        'https://drive.google.com/file/d/1pW5WugiVKic5eWXk07dxhuAb7HGsZ5PK/view?usp=sharing'
-      ),
+      preview: bodyLink + '/design_page/construction_section/video_cover.jpg',
+      src: bodyLink + '/design_page/construction_section/section_cover.jpg',
       text1:
         'В этот раздел входят чертежи всех несущих конструкций: фундамента, стен, перекрытий и кровли. Он нужен, чтобы дом был прочным, устойчивым и соответствовал строительным нормам.',
       text2:
@@ -461,55 +434,41 @@ const content = {
           label: 'Моделирование',
           description:
             'Детальное моделирование здания для расчета нагрузок и объемов материалов.',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/123IQ0uHpjkWLTKucnb5h8Mjh4OY125ze/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/construction_section/slide_1.jpg'
         },
         {
           label: 'Фундамент',
           description: 'План фундамента с размерами, привязками и сечениями.',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/17bw-OVfqaBs8MDPTy0oeJZZDhOSEfrXB/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/construction_section/slide_2.jpg'
         },
         {
           label: 'Вертикальные конструкции',
           description:
             'Железобетонные конструкции стен, колонн и пилонов со схемами армирования.',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1z0-Od1BZewaEPlMfG5T2xrjF9MaT6hdl/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/construction_section/slide_3.jpg'
         },
         {
           label: 'Стены',
           description:
             'Подробный кладочный план с проёмами, размерами и 3D-схемами.',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1A55nT18_jWeqKvhRbzO1AlqjH6MkdvDk/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/construction_section/slide_4.jpg'
         },
         {
           label: 'Перекрытия и покрытия',
           description:
             'Подробные опалубочные планы с размерами, привязкой отверстий, толщинами и схемой армирования.',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1G-bLOemgOhgP6YRU2kwWsPWs2GKeKSdt/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/construction_section/slide_5.jpg'
         },
         {
           label: 'Лестница',
           description:
             'Детализированное армирование лестницы, узлы и спецификации.',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/1Wz4kIsu93apEX5LdpnYqwEM9jDwUieVX/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/construction_section/slide_6.jpg'
         },
         {
           label: 'Ведомости',
           description: 'Объёмы и площади всех конструктивных материалов.',
-          src: getGoogleDriveDirectLink(
-            'https://drive.google.com/file/d/161X4Qbu_ESbb28QVxH86cZ9p8ZcHVNUS/view?usp=sharing'
-          )
+          src: bodyLink + '/design_page/construction_section/slide_7.jpg'
         }
       ]
     }
@@ -517,9 +476,7 @@ const content = {
   services: {
     title: 'Услуги',
     description: '',
-    mainImg: getGoogleDriveDirectLink(
-      'https://drive.google.com/file/d/1R4zeJatlLnZ1Ft8-2ZqWzAmxvWsskOj5/view?usp=sharing'
-    ),
+    mainImg: bodyLink + '/services_page/main_img.jpg',
     servicesList: [
       {
         label: 'Продажа типовых проектов',

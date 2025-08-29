@@ -138,7 +138,7 @@ const Policy = () => (
                 {renderTextWithLinks(
                   section.introText,
                   config.metadata.domen,
-                  content.contacts.email
+                  content.contacts.salesDepartmentPhone
                 )}
               </Text>
             )}
