@@ -117,7 +117,10 @@ const Footer = () => (
             w='full'
             color='white'
             fontWeight='normal'
-            whiteSpace='nowrap'
+            whiteSpace={{
+              base: 'normal',
+              md: 'nowrap'
+            }}
           >
             {content.contacts.address}
           </Text>
