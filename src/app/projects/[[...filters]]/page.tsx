@@ -3,13 +3,9 @@ import projects from 'constant/projects';
 
 import { Flex, Text, VStack } from '@chakra-ui/react';
 
-import { getPriceRange } from 'helpers';
-
 import { ProjectSearchKeys } from 'types';
 
 import { ProjectsFilter, ProjectsList, SearchInput } from 'components';
-
-const { maxPrice, minPrice } = getPriceRange(projects);
 
 export const metadata = {
   title: 'Проекты современных каменных домов | Nova Group',
@@ -67,7 +63,7 @@ const ProjectsPage = async ({
           </Text>
           <SearchInput />
         </Flex>
-        <ProjectsFilter min={minPrice} max={maxPrice} />
+        <ProjectsFilter />
       </VStack>
       <ProjectsList projects={projects} filters={filters} />
     </VStack>

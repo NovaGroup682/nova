@@ -5,24 +5,11 @@ import Xmark from '@assets/icons/circle-xmark.svg';
 import { paths, PROJECT_FLOORS, PROJECT_SIZES } from 'constant';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import {
-  Button,
-  Flex,
-  Group,
-  HStack,
-  Input,
-  Text,
-  VStack
-} from '@chakra-ui/react';
+import { Button, Flex, HStack, Text, VStack } from '@chakra-ui/react';
 
 import {
-  formatCurrency,
-  formatNumberWithSpaces,
   hasUrlParamsChanged,
   hasValueChanged,
-  isMaxPriceValid,
-  isMinPriceValid,
-  isPriceValid,
   parseFormattedNumber
 } from 'helpers';
 
@@ -30,12 +17,12 @@ import { ProjectSearchKeys, ProjectSize } from 'types';
 
 import { Select } from 'ui';
 
-interface ProjectsFilterProps {
-  min: number;
-  max: number;
-}
+// interface ProjectsFilterProps {
+//   min: number;
+//   max: number;
+// }
 
-const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
+const ProjectsFilter = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [area, setArea] = useState<ProjectSize | string>(
@@ -128,31 +115,31 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
     [floors, searchParams, router]
   );
 
-  const handleMinPriceChange = useCallback((value: string) => {
-    const cleanedValue = value.replace(/[^\d\s]/g, '');
-    const formattedValue = formatNumberWithSpaces(cleanedValue);
-    setMinPrice(formattedValue);
-  }, []);
+  // const handleMinPriceChange = useCallback((value: string) => {
+  //   const cleanedValue = value.replace(/[^\d\s]/g, '');
+  //   const formattedValue = formatNumberWithSpaces(cleanedValue);
+  //   setMinPrice(formattedValue);
+  // }, []);
 
-  const handleMaxPriceChange = useCallback((value: string) => {
-    const cleanedValue = value.replace(/[^\d\s]/g, '');
-    const formattedValue = formatNumberWithSpaces(cleanedValue);
-    setMaxPrice(formattedValue);
-  }, []);
+  // const handleMaxPriceChange = useCallback((value: string) => {
+  //   const cleanedValue = value.replace(/[^\d\s]/g, '');
+  //   const formattedValue = formatNumberWithSpaces(cleanedValue);
+  //   setMaxPrice(formattedValue);
+  // }, []);
 
-  const handleMinPriceFocus = useCallback(() => {
-    if (!minPrice) {
-      const formattedMinPrice = formatNumberWithSpaces(min.toString());
-      setMinPrice(formattedMinPrice);
-    }
-  }, [minPrice, min]);
+  // const handleMinPriceFocus = useCallback(() => {
+  //   if (!minPrice) {
+  //     const formattedMinPrice = formatNumberWithSpaces(min.toString());
+  //     setMinPrice(formattedMinPrice);
+  //   }
+  // }, [minPrice, min]);
 
-  const handleMaxPriceFocus = useCallback(() => {
-    if (!maxPrice) {
-      const formattedMaxPrice = formatNumberWithSpaces(max.toString());
-      setMaxPrice(formattedMaxPrice);
-    }
-  }, [maxPrice, max]);
+  // const handleMaxPriceFocus = useCallback(() => {
+  //   if (!maxPrice) {
+  //     const formattedMaxPrice = formatNumberWithSpaces(max.toString());
+  //     setMaxPrice(formattedMaxPrice);
+  //   }
+  // }, [maxPrice, max]);
 
   const handleResetFilters = useCallback(() => {
     setArea('');
@@ -165,7 +152,7 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
     params.delete(ProjectSearchKeys.area);
     params.delete(ProjectSearchKeys.floors);
     params.delete(ProjectSearchKeys.minPrice);
-    params.delete(ProjectSearchKeys.maxPrice);
+    // params.delete(ProjectSearchKeys.maxPrice);
     params.delete(ProjectSearchKeys.projectName);
 
     const newParamsString = params.toString();
@@ -188,24 +175,24 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
     return cleanup;
   }, [minPrice, updateUrlWithDebounce]);
 
-  useEffect(() => {
-    const cleanup = updateUrlWithDebounce((params) => {
-      if (maxPrice) {
-        params.set(ProjectSearchKeys.maxPrice, parseFormattedNumber(maxPrice));
-      } else {
-        params.delete(ProjectSearchKeys.maxPrice);
-      }
-    });
-    return cleanup;
-  }, [maxPrice, updateUrlWithDebounce]);
+  // useEffect(() => {
+  //   const cleanup = updateUrlWithDebounce((params) => {
+  //     if (maxPrice) {
+  //       params.set(ProjectSearchKeys.maxPrice, parseFormattedNumber(maxPrice));
+  //     } else {
+  //       params.delete(ProjectSearchKeys.maxPrice);
+  //     }
+  //   });
+  //   return cleanup;
+  // }, [maxPrice, updateUrlWithDebounce]);
 
-  const isMinPriceInvalid =
-    (minPrice && maxPrice && !isPriceValid(minPrice, maxPrice)) ||
-    (minPrice && !isMinPriceValid(minPrice, min));
+  // const isMinPriceInvalid =
+  //   (minPrice && maxPrice && !isPriceValid(minPrice, maxPrice)) ||
+  //   (minPrice && !isMinPriceValid(minPrice, min));
 
-  const isMaxPriceInvalid =
-    (minPrice && maxPrice && !isPriceValid(minPrice, maxPrice)) ||
-    (maxPrice && !isMaxPriceValid(maxPrice, min));
+  // const isMaxPriceInvalid =
+  //   (minPrice && maxPrice && !isPriceValid(minPrice, maxPrice)) ||
+  //   (maxPrice && !isMaxPriceValid(maxPrice, min));
 
   return (
     <Flex
@@ -249,7 +236,7 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
           </Flex>
         </VStack>
 
-        <VStack alignItems='flex-start' gap={1}>
+        {/* <VStack alignItems='flex-start' gap={1}>
           <Text fontSize={16}>Цена, ₽</Text>
           <Group>
             <Input
@@ -275,7 +262,7 @@ const ProjectsFilter = ({ min, max }: ProjectsFilterProps) => {
               }}
             />
           </Group>
-        </VStack>
+        </VStack> */}
       </HStack>
       {(floors.length ||
         area ||
