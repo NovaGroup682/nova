@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { paths, phoneRegExp } from 'constant';
 
@@ -16,6 +16,8 @@ import {
   VStack
 } from '@chakra-ui/react';
 
+import { usePrivacyPolicyCookie } from 'hooks';
+
 import content from 'content';
 
 interface FormValues {
@@ -27,11 +29,15 @@ interface FormValues {
 
 const ContactSection = () => {
   const [_isSuccess, setIsSuccess] = useState<boolean>(false);
+  const { setAccepted, getCookie } = usePrivacyPolicyCookie();
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    setValue,
+    formState: { errors },
+    reset
   } = useForm<FormValues>({
     mode: 'onTouched',
     defaultValues: {
@@ -41,9 +47,44 @@ const ContactSection = () => {
 
   const privacyPolicyAccepted = watch('privacyPolicy');
 
+  const handlePrivacyPolicyChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const isChecked = e.target.checked;
+    setValue('privacyPolicy', isChecked);
+    setAccepted(isChecked);
+  };
+
   const onSubmit = handleSubmit(() => {
     setIsSuccess(true);
   });
+
+  useEffect(() => {
+    const accepted = getCookie();
+
+    if (accepted) {
+      setValue('privacyPolicy', true);
+
+      reset({
+        regionName: '',
+        clientName: '',
+        phone: '',
+        privacyPolicy: true
+      });
+    }
+  }, [getCookie, setValue, reset]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const accepted = getCookie();
+
+      if (accepted && !privacyPolicyAccepted) {
+        setValue('privacyPolicy', true);
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [getCookie, setValue, privacyPolicyAccepted]);
 
   return (
     <VStack
@@ -218,9 +259,8 @@ const ContactSection = () => {
           <Box display='flex' alignItems='center' gap={2} pb={5}>
             <input
               type='checkbox'
-              {...register('privacyPolicy', {
-                required: 'Необходимо согласие с политикой конфиденциальности'
-              })}
+              checked={privacyPolicyAccepted}
+              onChange={handlePrivacyPolicyChange}
               style={{ marginTop: '2px' }}
             />
             <Text
@@ -243,11 +283,6 @@ const ContactSection = () => {
               </Link>
             </Text>
           </Box>
-          {errors.privacyPolicy && (
-            <Text fontSize='xs' color='red.500' position='absolute' bottom={0}>
-              {errors.privacyPolicy.message}
-            </Text>
-          )}
         </Flex>
       </Box>
     </VStack>

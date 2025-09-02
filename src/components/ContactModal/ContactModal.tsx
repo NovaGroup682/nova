@@ -19,6 +19,8 @@ import {
   VStack
 } from '@chakra-ui/react';
 
+import { usePrivacyPolicyCookie } from 'hooks';
+
 import content from 'content';
 
 import { Modal } from 'ui';
@@ -37,11 +39,14 @@ interface ContactModalProps {
 
 const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const { setAccepted, getCookie } = usePrivacyPolicyCookie();
+
   const {
     register,
     handleSubmit,
     reset,
     watch,
+    setValue,
     formState: { errors }
   } = useForm<FormValues>({
     mode: 'onTouched',
@@ -52,9 +57,44 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
 
   const privacyPolicyAccepted = watch('privacyPolicy');
 
+  const handlePrivacyPolicyChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const isChecked = e.target.checked;
+    setValue('privacyPolicy', isChecked);
+    setAccepted(isChecked);
+  };
+
   const onSubmit = handleSubmit(() => {
     setIsSuccess(true);
   });
+
+  useEffect(() => {
+    const cookieValue = getCookie();
+
+    if (cookieValue) {
+      setValue('privacyPolicy', true);
+
+      reset({
+        regionName: '',
+        clientName: '',
+        phone: '',
+        privacyPolicy: true
+      });
+    }
+  }, [getCookie, setValue, reset]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const cookieValue = getCookie();
+      
+      if (cookieValue && !privacyPolicyAccepted) {
+        setValue('privacyPolicy', true);
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [getCookie, setValue, privacyPolicyAccepted]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -163,10 +203,8 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               <Box display='flex' alignItems='center' gap={2}>
                 <input
                   type='checkbox'
-                  {...register('privacyPolicy', {
-                    required:
-                      'Необходимо согласие с политикой конфиденциальности'
-                  })}
+                  checked={privacyPolicyAccepted}
+                  onChange={handlePrivacyPolicyChange}
                   style={{ marginTop: '2px' }}
                 />
                 <Text fontSize='sm' color='gray.700'>
@@ -181,14 +219,10 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                     rel='noopener noreferrer'
                   >
                     политикой конфиденциальности
-                  </Link>
+                  </Link>{' '}
+                  ({privacyPolicyAccepted ? 'true' : 'false'})
                 </Text>
               </Box>
-              {errors.privacyPolicy && (
-                <Text fontSize='xs' color='red.500' mt={1} pl={5}>
-                  {errors.privacyPolicy.message}
-                </Text>
-              )}
             </Box>
 
             <Button
