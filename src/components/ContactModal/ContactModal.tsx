@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Check from '@assets/icons/check.svg';
 import { phoneRegExp } from 'constant';
-import { paths } from 'constant';
 import Image from 'next/image';
 
 import {
@@ -13,9 +12,7 @@ import {
   EmptyState,
   Field,
   Input,
-  Link,
   Stack,
-  Text,
   VStack
 } from '@chakra-ui/react';
 
@@ -24,6 +21,7 @@ import { usePrivacyPolicyCookie } from 'hooks';
 import content from 'content';
 
 import { Modal } from 'ui';
+import { PrivacyPolicyCheckbox } from '../PrivacyPolicyCheckbox';
 
 interface FormValues {
   regionName: string;
@@ -57,10 +55,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
 
   const privacyPolicyAccepted = watch('privacyPolicy');
 
-  const handlePrivacyPolicyChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const isChecked = e.target.checked;
+  const handlePrivacyPolicyChange = (isChecked: boolean) => {
     setValue('privacyPolicy', isChecked);
     setAccepted(isChecked);
   };
@@ -87,7 +82,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       const cookieValue = getCookie();
-      
+
       if (cookieValue && !privacyPolicyAccepted) {
         setValue('privacyPolicy', true);
       }
@@ -200,29 +195,13 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
             </Field.Root>
 
             <Box w='full' pt={2}>
-              <Box display='flex' alignItems='center' gap={2}>
-                <input
-                  type='checkbox'
-                  checked={privacyPolicyAccepted}
-                  onChange={handlePrivacyPolicyChange}
-                  style={{ marginTop: '2px' }}
-                />
-                <Text fontSize='sm' color='gray.700'>
-                  Нажимая кнопку {content.main.contactBlock.send}, я соглашаюсь
-                  с{' '}
-                  <Link
-                    href={paths.policy}
-                    color='blue.600'
-                    textDecoration='underline'
-                    _hover={{ color: 'blue.700' }}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    политикой конфиденциальности
-                  </Link>{' '}
-                  ({privacyPolicyAccepted ? 'true' : 'false'})
-                </Text>
-              </Box>
+              <PrivacyPolicyCheckbox
+                value={privacyPolicyAccepted}
+                onChange={handlePrivacyPolicyChange}
+                color='gray.700'
+                linkColor='blue.600'
+                linkHoverColor='blue.700'
+              />
             </Box>
 
             <Button

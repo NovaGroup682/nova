@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { paths, phoneRegExp } from 'constant';
+import { phoneRegExp } from 'constant';
 
 import {
   Box,
@@ -10,7 +10,6 @@ import {
   Field,
   Flex,
   Input,
-  Link,
   Stack,
   Text,
   VStack
@@ -19,6 +18,8 @@ import {
 import { usePrivacyPolicyCookie } from 'hooks';
 
 import content from 'content';
+
+import { PrivacyPolicyCheckbox } from '../../../PrivacyPolicyCheckbox';
 
 interface FormValues {
   regionName: string;
@@ -47,10 +48,7 @@ const ContactSection = () => {
 
   const privacyPolicyAccepted = watch('privacyPolicy');
 
-  const handlePrivacyPolicyChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const isChecked = e.target.checked;
+  const handlePrivacyPolicyChange = (isChecked: boolean) => {
     setValue('privacyPolicy', isChecked);
     setAccepted(isChecked);
   };
@@ -256,32 +254,18 @@ const ContactSection = () => {
           flexDirection='column'
           position='relative'
         >
-          <Box display='flex' alignItems='center' gap={2} pb={5}>
-            <input
-              type='checkbox'
-              checked={privacyPolicyAccepted}
+          <Box pb={5}>
+            <PrivacyPolicyCheckbox
+              value={privacyPolicyAccepted}
               onChange={handlePrivacyPolicyChange}
-              style={{ marginTop: '2px' }}
-            />
-            <Text
               color='white'
               fontSize={{
                 base: 14,
                 md: 16
               }}
-            >
-              Нажимая кнопку {content.main.contactBlock.send}, я соглашаюсь с{' '}
-              <Link
-                href={paths.policy}
-                color='white'
-                textDecoration='underline'
-                _hover={{ color: 'blue.600' }}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                политикой конфиденциальности
-              </Link>
-            </Text>
+              linkColor='white'
+              linkHoverColor='blue.600'
+            />
           </Box>
         </Flex>
       </Box>
