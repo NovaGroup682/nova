@@ -16,30 +16,49 @@ export const usePrivacyPolicyCookie = () => {
     return value === 'true';
   }, []);
 
-  const setCookie = useCallback((value: boolean) => {
-    if (cookieValue === value) {
-      return;
-    }
+  const setCookie = useCallback(
+    (value: boolean) => {
+      if (cookieValue === value) {
+        return;
+      }
 
-    if (value) {
-      Cookies.set(PRIVACY_POLICY_COOKIE_NAME, 'true', {
-        expires: COOKIE_EXPIRY_DAYS,
-        sameSite: 'Lax'
-      });
-    } else {
-      Cookies.remove(PRIVACY_POLICY_COOKIE_NAME);
-    }
+      if (value) {
+        Cookies.set(PRIVACY_POLICY_COOKIE_NAME, 'true', {
+          expires: COOKIE_EXPIRY_DAYS,
+          sameSite: 'Lax'
+        });
+      } else {
+        Cookies.remove(PRIVACY_POLICY_COOKIE_NAME);
+      }
 
-    setCookieValue(value);
-  }, [cookieValue]);
+      setCookieValue(value);
+    },
+    [cookieValue]
+  );
 
   useEffect(() => {
     const cookieValue = getCookie();
     setCookieValue(cookieValue);
   }, [getCookie]);
 
+  useEffect(() => {
+    const checkCookie = () => {
+      const currentValue = getCookie();
+      if (currentValue !== cookieValue) {
+        setCookieValue(currentValue);
+      }
+    };
+
+    const interval = setInterval(checkCookie, 100);
+
+    return () => clearInterval(interval);
+  }, [getCookie, cookieValue]);
+
+  const isAccepted = getCookie();
+
   return {
     setAccepted: setCookie,
-    isAccepted: cookieValue
+    getCookie,
+    isAccepted
   };
 };
