@@ -1,42 +1,41 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 const PRIVACY_POLICY_COOKIE_NAME = 'privacy_policy_accepted';
 const COOKIE_EXPIRY_DAYS = 365;
 
 export const usePrivacyPolicyCookie = () => {
-  const setCookie = useCallback((value: boolean) => {
-    const expiryDate = new Date();
-    expiryDate.setDate(expiryDate.getDate() + COOKIE_EXPIRY_DAYS);
-
-    const cookieValue = `${PRIVACY_POLICY_COOKIE_NAME}=${value}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
-    document.cookie = cookieValue;
-  }, []);
+  const [cookieValue, setCookieValue] = useState<boolean>(false);
 
   const getCookie = useCallback((): boolean => {
     if (typeof document === 'undefined') return false;
 
-    const cookies = document.cookie.split(';');
-    const privacyPolicyCookie = cookies.find((cookie) =>
-      cookie.trim().startsWith(`${PRIVACY_POLICY_COOKIE_NAME}=`)
-    );
+    const value = Cookies.get(PRIVACY_POLICY_COOKIE_NAME);
+    return value === 'true';
+  }, []);
 
-    if (privacyPolicyCookie) {
-      const value = privacyPolicyCookie.split('=')[1];
-      return value === 'true';
+  const setCookie = useCallback((value: boolean) => {
+    if (value) {
+      Cookies.set(PRIVACY_POLICY_COOKIE_NAME, 'true', {
+        expires: COOKIE_EXPIRY_DAYS,
+        sameSite: 'Lax'
+      });
+    } else {
+      Cookies.remove(PRIVACY_POLICY_COOKIE_NAME);
     }
 
-    return false;
+    setCookieValue(value);
   }, []);
 
-  const removeCookie = useCallback(() => {
-    document.cookie = `${PRIVACY_POLICY_COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  }, []);
+  useEffect(() => {
+    const cookieValue = getCookie();
+    setCookieValue(cookieValue);
+  }, [getCookie]);
 
   return {
     setAccepted: setCookie,
-    removeCookie,
-    getCookie
+    isAccepted: cookieValue
   };
 };

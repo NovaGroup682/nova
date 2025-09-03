@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { phoneRegExp } from 'constant';
 
@@ -25,64 +25,32 @@ interface FormValues {
   regionName: string;
   clientName: string;
   phone: string;
-  privacyPolicy: boolean;
 }
 
 const ContactSection = () => {
   const [_isSuccess, setIsSuccess] = useState<boolean>(false);
-  const { setAccepted, getCookie } = usePrivacyPolicyCookie();
+  const { setAccepted, isAccepted } = usePrivacyPolicyCookie();
 
   const {
     register,
     handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-    reset
+    formState: { errors }
   } = useForm<FormValues>({
     mode: 'onTouched',
     defaultValues: {
-      privacyPolicy: false
+      regionName: '',
+      clientName: '',
+      phone: ''
     }
   });
 
-  const privacyPolicyAccepted = watch('privacyPolicy');
-
   const handlePrivacyPolicyChange = (isChecked: boolean) => {
-    setValue('privacyPolicy', isChecked);
     setAccepted(isChecked);
   };
 
   const onSubmit = handleSubmit(() => {
     setIsSuccess(true);
   });
-
-  useEffect(() => {
-    const accepted = getCookie();
-
-    if (accepted) {
-      setValue('privacyPolicy', true);
-
-      reset({
-        regionName: '',
-        clientName: '',
-        phone: '',
-        privacyPolicy: true
-      });
-    }
-  }, [getCookie, setValue, reset]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const accepted = getCookie();
-
-      if (accepted && !privacyPolicyAccepted) {
-        setValue('privacyPolicy', true);
-      }
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [getCookie, setValue, privacyPolicyAccepted]);
 
   return (
     <VStack
@@ -150,7 +118,7 @@ const ContactSection = () => {
                 borderColor: 'white'
               }}
               style={{
-                borderColor: watch('regionName') ? 'white' : undefined
+                borderColor: 'white'
               }}
             />
           </Field.Root>
@@ -179,7 +147,7 @@ const ContactSection = () => {
                 borderColor: 'white'
               }}
               style={{
-                borderColor: watch('clientName') ? 'white' : undefined
+                borderColor: 'white'
               }}
             />
           </Field.Root>
@@ -212,7 +180,7 @@ const ContactSection = () => {
                 borderColor: 'white'
               }}
               style={{
-                borderColor: watch('phone') ? 'white' : undefined
+                borderColor: 'white'
               }}
             />
           </Field.Root>
@@ -236,9 +204,7 @@ const ContactSection = () => {
               base: 'full',
               md: '250px'
             }}
-            disabled={
-              Object.values(errors).length > 0 || !privacyPolicyAccepted
-            }
+            disabled={Object.values(errors).length > 0 || !isAccepted}
             _hover={{
               bg: 'gray.300',
               color: 'black'
@@ -256,7 +222,7 @@ const ContactSection = () => {
         >
           <Box pb={5}>
             <PrivacyPolicyCheckbox
-              value={privacyPolicyAccepted}
+              value={isAccepted}
               onChange={handlePrivacyPolicyChange}
               color='white'
               fontSize={{

@@ -27,7 +27,6 @@ interface FormValues {
   regionName: string;
   clientName: string;
   phone: string;
-  privacyPolicy: boolean;
 }
 
 interface ContactModalProps {
@@ -37,59 +36,29 @@ interface ContactModalProps {
 
 const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  const { setAccepted, getCookie } = usePrivacyPolicyCookie();
+  const { setAccepted, isAccepted } = usePrivacyPolicyCookie();
 
   const {
     register,
     handleSubmit,
     reset,
-    watch,
-    setValue,
     formState: { errors }
   } = useForm<FormValues>({
     mode: 'onTouched',
     defaultValues: {
-      privacyPolicy: false
+      regionName: '',
+      clientName: '',
+      phone: ''
     }
   });
 
-  const privacyPolicyAccepted = watch('privacyPolicy');
-
   const handlePrivacyPolicyChange = (isChecked: boolean) => {
-    setValue('privacyPolicy', isChecked);
     setAccepted(isChecked);
   };
 
   const onSubmit = handleSubmit(() => {
     setIsSuccess(true);
   });
-
-  useEffect(() => {
-    const cookieValue = getCookie();
-
-    if (cookieValue) {
-      setValue('privacyPolicy', true);
-
-      reset({
-        regionName: '',
-        clientName: '',
-        phone: '',
-        privacyPolicy: true
-      });
-    }
-  }, [getCookie, setValue, reset]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const cookieValue = getCookie();
-
-      if (cookieValue && !privacyPolicyAccepted) {
-        setValue('privacyPolicy', true);
-      }
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [getCookie, setValue, privacyPolicyAccepted]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -196,7 +165,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
 
             <Box w='full' pt={2}>
               <PrivacyPolicyCheckbox
-                value={privacyPolicyAccepted}
+                value={isAccepted}
                 onChange={handlePrivacyPolicyChange}
                 color='gray.700'
                 linkColor='blue.600'
@@ -217,9 +186,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               color='white'
               fontWeight='bold'
               type='submit'
-              disabled={
-                Object.values(errors).length > 0 || !privacyPolicyAccepted
-              }
+              disabled={Object.values(errors).length > 0 || !isAccepted}
               _hover={{
                 bg: 'gray.700'
               }}
