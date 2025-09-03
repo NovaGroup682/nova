@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Check from '@assets/icons/check.svg';
 import { phoneRegExp } from 'constant';
@@ -200,4 +200,4 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   );
 };
 
-export default ContactModal;
+export default memo(ContactModal);

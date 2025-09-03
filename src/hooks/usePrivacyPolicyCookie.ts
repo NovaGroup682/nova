@@ -17,6 +17,10 @@ export const usePrivacyPolicyCookie = () => {
   }, []);
 
   const setCookie = useCallback((value: boolean) => {
+    if (cookieValue === value) {
+      return;
+    }
+
     if (value) {
       Cookies.set(PRIVACY_POLICY_COOKIE_NAME, 'true', {
         expires: COOKIE_EXPIRY_DAYS,
@@ -27,7 +31,7 @@ export const usePrivacyPolicyCookie = () => {
     }
 
     setCookieValue(value);
-  }, []);
+  }, [cookieValue]);
 
   useEffect(() => {
     const cookieValue = getCookie();
