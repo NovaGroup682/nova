@@ -3,6 +3,11 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   transpilePackages: ['framer-motion'],
 
+  env: {
+    EMAIL_USER: process.env.EMAIL_USER,
+    EMAIL_PASS: process.env.EMAIL_PASS,
+  },
+
   experimental: {
     optimizePackageImports: ['@chakra-ui/react', 'framer-motion']
   },

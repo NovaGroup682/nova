@@ -3,6 +3,7 @@
 import { memo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { phoneRegExp } from 'constant';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import {
   Box,
@@ -27,7 +28,11 @@ interface FormValues {
   phone: string;
 }
 
-const ContactSection = () => {
+interface ContactSectionProps {
+  projectName: string;
+}
+
+const ContactSection = ({ projectName }: ContactSectionProps) => {
   const [_isSuccess, setIsSuccess] = useState<boolean>(false);
   const { setAccepted, isAccepted } = usePrivacyPolicyCookie();
 
@@ -48,8 +53,31 @@ const ContactSection = () => {
     setAccepted(isChecked);
   };
 
-  const onSubmit = handleSubmit(() => {
-    setIsSuccess(true);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ...data,
+          subject: `Заявка со страницы проекта - ${projectName}`
+        })
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 5000);
+      } else {
+        console.error('Ошибка отправки формы');
+      }
+    } catch (error) {
+      console.error('Ошибка отправки формы:', error);
+    }
   });
 
   return (
@@ -213,6 +241,33 @@ const ContactSection = () => {
             {content.main.contactBlock.send}
           </Button>
         </Stack>
+
+        {/* Уведомление об успехе с анимацией */}
+        <AnimatePresence mode='wait'>
+          {_isSuccess && (
+            <motion.div
+              key='success'
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+            >
+              <Box
+                bg='green.500'
+                color='white'
+                p={4}
+                borderRadius='md'
+                textAlign='center'
+                mt={4}
+              >
+                <Text fontSize='16px' fontWeight='bold'>
+                  Спасибо! Мы скоро с вами свяжемся.
+                </Text>
+              </Box>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <Flex
           w='full'
           pt={4}

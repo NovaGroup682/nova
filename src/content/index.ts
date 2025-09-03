@@ -530,9 +530,10 @@ const content = {
   },
   contacts: {
     domen: 'https://ngnova.ru',
-    email: 'vasha@pochta.ru',
+    email: 'novagroup682@gmail.com',
     salesDepartmentPhone: '+7 985 999-46-00',
-    salesDepartmentEmail: 'ng.nova@ya.ru',
+    salesDepartmentEmail: 'nanipro25@gmail.com',
+    // salesDepartmentEmail: 'ng.nova@ya.ru',
     supplyDepartmentEmail: 'snab.msn@ya.ru',
     phone: '8 800 000 00 00',
     address:

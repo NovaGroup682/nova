@@ -11,7 +11,7 @@ const renderText = (text: string) => {
   const processedText = renderTextWithLinks(
     text,
     config.metadata.domen,
-    content.contacts.email
+    content.contacts.salesDepartmentEmail
   );
 
   if (processedText.includes('<strong>') || processedText.includes('<a ')) {

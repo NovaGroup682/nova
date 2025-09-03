@@ -165,7 +165,7 @@ const ProjectPageContent = async ({
       <Show when={project?.estimateFileLink}>
         <EstimateDownloadButton project={project} />
       </Show>
-      <ContactSection />
+      <ContactSection projectName={project.name} />
     </VStack>
   );
 };
