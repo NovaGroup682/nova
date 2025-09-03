@@ -67,7 +67,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   }, [isOpen, reset]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isDark>
       <Box
         w='full'
         position='relative'

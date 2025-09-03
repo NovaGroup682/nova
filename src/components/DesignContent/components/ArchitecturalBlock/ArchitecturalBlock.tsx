@@ -181,6 +181,7 @@ const ArchitecturalBlock = ({
       {/* Video Modal */}
       {video && (
         <Modal
+          isDark
           isOpen={isVideoModalOpen}
           onClose={closeVideoModal}
           maxW='90vw'

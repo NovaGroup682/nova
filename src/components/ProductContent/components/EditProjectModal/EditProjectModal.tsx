@@ -14,6 +14,7 @@ interface EditProjectModalProps {
 
 const EditProjectModal = ({ isOpen, onClose }: EditProjectModalProps) => (
   <Modal
+    isDark
     isOpen={isOpen}
     onClose={onClose}
     py={6}
