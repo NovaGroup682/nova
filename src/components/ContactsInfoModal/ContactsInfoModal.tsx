@@ -32,8 +32,8 @@ const ContactsInfoModal = ({ isOpen, onClose }: ContactsInfoModalProps) => {
         alignItems='center'
         justifyContent='center'
         zIndex={10}
-        bg='rgba(0, 0, 0, 0.5)'
-        backdropFilter='blur(4px)'
+        bg='rgba(255, 255, 255, 0.5)'
+        backdropFilter='blur(6px)'
       >
         <Flex
           gap={4}
@@ -43,18 +43,18 @@ const ContactsInfoModal = ({ isOpen, onClose }: ContactsInfoModalProps) => {
           alignItems='center'
           justifyContent='center'
         >
-          <Text fontSize='18px' fontWeight='bold' mb={4} color='white'>
+          <Text fontSize='18px' fontWeight='bold' mb={4} color='gray.500'>
             Согласие с политикой конфиденциальности
           </Text>
           <PrivacyPolicyCheckbox
             value={isAccepted}
             onChange={setAccepted}
-            color='white'
+            color='gray.500'
             fontSize={14}
-            linkColor='blue.300'
+            linkColor='black'
             linkHoverColor='blue.400'
           />
-          <Text fontSize='14px' color='white' mt={3}>
+          <Text fontSize='14px' color='gray.500' mt={3}>
             Для продолжения необходимо принять политику конфиденциальности
           </Text>
         </Flex>
