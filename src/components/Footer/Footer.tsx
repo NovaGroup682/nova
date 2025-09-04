@@ -5,6 +5,7 @@ import NextLink from 'next/link';
 
 import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
 
+import { SocialLinkTypes } from 'types';
 import content from 'content';
 
 import { CopyrightText, Logo } from 'ui';
@@ -126,35 +127,57 @@ const Footer = () => (
           </Text>
         </VStack>
         <Flex gap={2}>
-          {content.contacts.socialLinks.map(({ link, alt, icon: Icon }) => (
-            <Link
-              key={alt}
-              href={link}
-              borderRadius='50%'
-              bg='white'
-              w='40px'
-              h='40px'
-              display='flex'
-              alignItems='center'
-              justifyContent='center'
-              target='_blank'
-              transition='all 0.3s ease'
-              _hover={{
-                bg: 'gray.500',
-                transform: 'scale(1.1)',
-                '& svg': {
-                  fill: 'white'
-                }
-              }}
-            >
-              <Icon
-                fill='black'
-                width={16}
-                height={16}
-                transform='scale(1.1)'
-              />
-            </Link>
-          ))}
+          {content.contacts.socialLinks.map(
+            ({ link, alt, icon: Icon, type }) => (
+              <Link
+                key={alt}
+                href={link}
+                borderRadius='50%'
+                bg='white'
+                w='40px'
+                h='40px'
+                display='flex'
+                alignItems='center'
+                justifyContent='center'
+                target='_blank'
+                transition='all 0.3s ease'
+                position='relative'
+                _hover={{
+                  bg: 'gray.500',
+                  transform: 'scale(1.1)',
+                  '& svg': {
+                    fill: 'white'
+                  }
+                }}
+              >
+                <Icon
+                  fill='black'
+                  width={16}
+                  height={16}
+                  transform='scale(1.1)'
+                />
+                {type === SocialLinkTypes.Instagram && (
+                  <Text
+                    position='absolute'
+                    top='-5px'
+                    right='-2px'
+                    fontSize='18px'
+                    color='white'
+                    fontWeight='bold'
+                    borderRadius='50%'
+                    w='14px'
+                    h='14px'
+                    display='flex'
+                    alignItems='center'
+                    justifyContent='center'
+                    lineHeight='1'
+                  >
+                    *
+                  </Text>
+                )}
+              </Link>
+            )
+          )}
         </Flex>
       </Flex>
     </Flex>
@@ -225,6 +248,8 @@ const Footer = () => (
         pb={{ base: '16px', sm: '24px', md: '32px' }}
         borderLeftWidth='0.5px'
         borderColor={borderColor}
+        flexDirection='column'
+        gap={2}
       >
         <Text
           fontSize={{
@@ -240,6 +265,20 @@ const Footer = () => (
           }}
         >
           {content.contacts.law}
+        </Text>
+        <Text
+          fontSize={{
+            base: '10px'
+          }}
+          w='full'
+          color='white'
+          fontWeight='normal'
+          textAlign={{
+            base: 'center',
+            md: 'left'
+          }}
+        >
+          {content.contacts.instaLaw}
         </Text>
       </Flex>
     </Flex>

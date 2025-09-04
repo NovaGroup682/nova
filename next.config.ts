@@ -80,7 +80,6 @@ const nextConfig: NextConfig = {
       };
     }
 
-    // Отключаем разделение чанков для избежания проблем с CSS
     config.optimization.splitChunks = false;
 
     config.infrastructureLogging = {

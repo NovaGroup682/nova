@@ -83,7 +83,6 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
 
       setDisplayValue(formatted);
 
-      // Создаем новое событие с отформатированным значением
       const newEvent = {
         ...event,
         target: {

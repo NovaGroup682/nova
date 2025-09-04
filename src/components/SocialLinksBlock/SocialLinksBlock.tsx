@@ -6,7 +6,6 @@ import Pinterest from '@assets/icons/pinterest.svg';
 import Telegram from '@assets/icons/telegram.svg';
 import VK from '@assets/icons/vk.svg';
 import Whatsapp from '@assets/icons/whatsapp.svg';
-// Импортируем иконки
 import Youtube from '@assets/icons/youtube.svg';
 
 import { Flex } from '@chakra-ui/react';
@@ -15,8 +14,6 @@ import { SocialLinkTypes } from 'types';
 import content from 'content';
 
 import { SocialButton } from 'ui';
-
-// Маппинг типов социальных сетей к иконкам
 
 const socialLinks = content.contacts.socialLinks;
 const socialIcons = {
@@ -35,7 +32,7 @@ const SocialLinksBlock = () => (
       const Icon = socialIcons[type];
       if (!Icon) return null;
 
-      return <SocialButton key={alt} href={link} Icon={Icon} />;
+      return <SocialButton key={alt} href={link} Icon={Icon} type={type} />;
     })}
   </Flex>
 );

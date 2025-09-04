@@ -73,7 +73,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
 
       if (response.ok) {
         setIsSuccess(true);
-        // Автоматически скрываем уведомление через 5 секунд
+
         setTimeout(() => {
           setIsSuccess(false);
           onClose();
