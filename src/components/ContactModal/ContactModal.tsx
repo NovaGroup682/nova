@@ -3,7 +3,7 @@
 import { memo, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Check from '@assets/icons/check.svg';
-import { phoneRegExp } from 'constant';
+import { validatePhoneNumberCustom } from 'constant';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -21,6 +21,7 @@ import { usePrivacyPolicyCookie } from 'hooks';
 
 import content from 'content';
 
+import { PhoneInput } from 'ui';
 import { Modal } from 'ui';
 import { PrivacyPolicyCheckbox } from '../PrivacyPolicyCheckbox';
 
@@ -181,17 +182,14 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </Field.Root>
 
               <Field.Root invalid={!!errors.phone}>
-                <Input
+                <PhoneInput
                   placeholder={content.main.contactBlock.phone}
                   _placeholder={{
                     color: errors.phone ? 'red.500' : 'gray.600'
                   }}
                   {...register('phone', {
                     required: content.common.requiredField,
-                    pattern: {
-                      value: phoneRegExp,
-                      message: content.main.contactBlock.wrongNumber
-                    }
+                    validate: validatePhoneNumberCustom
                   })}
                   variant='flushed'
                 />

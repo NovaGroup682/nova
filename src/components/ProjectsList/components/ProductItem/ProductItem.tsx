@@ -17,7 +17,7 @@ import {
 
 import { useIsTouchDevice } from 'hooks';
 
-import { formatCurrency, getSafeImageUrl } from 'helpers';
+import { getSafeImageUrl } from 'helpers';
 
 import { ProjectItemType } from 'types';
 

@@ -15,7 +15,17 @@ export const paths = {
   policy: '/privacy-policy'
 };
 
-export const phoneRegExp = /^\+?[0-9]{7,15}$/;
+export const validatePhoneNumberCustom = (phone: string): boolean | string => {
+  if (!phone) return 'Телефон обязателен';
+  if (phone === '+7') return 'Введите номер телефона';
+
+  const cleanPhone = phone.replace(/\D/g, '');
+  if (cleanPhone.length !== 11)
+    return 'Номер телефона должен содержать 11 цифр';
+  if (!cleanPhone.startsWith('7')) return 'Номер должен начинаться с +7';
+
+  return true;
+};
 
 export const SocialIcons = {
   [SocialLinkTypes.Facebook]: Facebook,

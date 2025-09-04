@@ -2,7 +2,7 @@
 
 import { memo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { phoneRegExp } from 'constant';
+import { validatePhoneNumberCustom } from 'constant';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import {
@@ -20,6 +20,7 @@ import { usePrivacyPolicyCookie } from 'hooks';
 
 import content from 'content';
 
+import { PhoneInput } from 'ui';
 import { PrivacyPolicyCheckbox } from '../../../PrivacyPolicyCheckbox';
 
 interface FormValues {
@@ -181,7 +182,7 @@ const ContactSection = ({ projectName }: ContactSectionProps) => {
           </Field.Root>
 
           <Field.Root invalid={!!errors.phone}>
-            <Input
+            <PhoneInput
               fontSize={18}
               size={{
                 base: 'xl',
@@ -194,10 +195,7 @@ const ContactSection = ({ projectName }: ContactSectionProps) => {
               }}
               {...register('phone', {
                 required: content.common.requiredField,
-                pattern: {
-                  value: phoneRegExp,
-                  message: content.main.contactBlock.wrongNumber
-                }
+                validate: validatePhoneNumberCustom
               })}
               variant='outline'
               color='white'

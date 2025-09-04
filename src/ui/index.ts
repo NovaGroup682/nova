@@ -10,3 +10,4 @@ export { Tooltip } from './Tooltip';
 export { ImagePopupButton } from './ImagePopupButton';
 export { NavigationActionButton } from './NavigationActionButton';
 export { SocialButton } from './SocialButton';
+export { PhoneInput } from './PhoneInput';
