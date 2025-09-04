@@ -147,7 +147,7 @@ const ContactsInfoModal = ({ isOpen, onClose }: ContactsInfoModalProps) => {
               color='gray.700'
               mb={{ base: 0, md: 2 }}
             >
-              Элктронная почта
+              Электронная почта
             </Text>
             <Link
               href={`mailto:${content.contacts.salesDepartmentEmail}`}

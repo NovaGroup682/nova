@@ -139,7 +139,8 @@ const ProductItem = ({ project }: ProductItemProps) => {
                       {`${project.variants[0].area} м`}&#178;
                     </Text>
 
-                    <Text
+                    {/* temporary removed */}
+                    {/* <Text
                       color='white'
                       fontSize={{
                         base: '16px',
@@ -151,7 +152,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
                       {project.implementationCost.shell === 0
                         ? 'по запросу'
                         : formatCurrency(project.implementationCost.shell)}
-                    </Text>
+                    </Text> */}
                   </Flex>
                 </Collapsible.Content>
               </Collapsible.Root>
