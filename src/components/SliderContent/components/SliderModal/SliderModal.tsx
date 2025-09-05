@@ -1,14 +1,22 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
+import type { Swiper as SwiperType } from 'swiper';
+import { Keyboard, Navigation, Zoom } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Box, Flex, Spinner } from '@chakra-ui/react';
+import { Box, Flex, Spinner, useBreakpointValue } from '@chakra-ui/react';
 
 import { getSafeImageUrl } from 'helpers';
 
 import { Modal } from 'ui';
-import { SliderNavigation } from '../SliderNavigation';
+import { ImageZoom } from '../ImageZoom';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/zoom';
 
 interface SliderModalProps {
   isOpen: boolean;
@@ -23,122 +31,46 @@ const SliderModal = ({
   images = [],
   initialIndex = 0
 }: SliderModalProps) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
   const [isZoomed, setIsZoomed] = useState(false);
-  const touchStartRef = useRef<number | null>(null);
-  const touchEndRef = useRef<number | null>(null);
-  const mouseStartRef = useRef<number | null>(null);
-  const mouseEndRef = useRef<number | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const isMobile = useBreakpointValue({ base: true, lg: false }) ?? true;
 
   const hasMultipleImages = images.length > 1;
-  const currentImageSrc = images[currentIndex];
 
-  const handlePrevious = useCallback(() => {
-    if (!hasMultipleImages) return;
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-    setIsLoading(true);
-  }, [hasMultipleImages, images.length]);
+  const handleSlideChange = useCallback((swiper: SwiperType) => {
+    setCurrentIndex(swiper.activeIndex);
+  }, []);
 
-  const handleNext = useCallback(() => {
-    if (!hasMultipleImages) return;
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-    setIsLoading(true);
-  }, [hasMultipleImages, images.length]);
+  const handleImageLoad = useCallback((index: number) => {
+    setLoadedImages((prev) => new Set(prev).add(index));
+  }, []);
 
-  // Минимальное расстояние для свайпа
-  const minSwipeDistance = 50;
+  const handleImageError = useCallback((index: number) => {
+    setLoadedImages((prev) => new Set(prev).add(index));
+  }, []);
 
-  const onTouchStart = useCallback(
-    (e: React.TouchEvent) => {
-      if (isZoomed) return; // Не обрабатываем свайпы в режиме зума
-      touchEndRef.current = null;
-      touchStartRef.current = e.targetTouches[0].clientX;
-    },
-    [isZoomed]
-  );
+  const handleImageClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsZoomed(true);
+  }, []);
 
-  const onTouchMove = useCallback(
-    (e: React.TouchEvent) => {
-      if (isZoomed) return; // Не обрабатываем свайпы в режиме зума
-      touchEndRef.current = e.targetTouches[0].clientX;
-    },
-    [isZoomed]
-  );
-
-  const onTouchEnd = useCallback(() => {
-    if (isZoomed || !touchStartRef.current || !touchEndRef.current) return;
-
-    const distance = touchStartRef.current - touchEndRef.current;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe && hasMultipleImages) {
-      handleNext();
-    }
-    if (isRightSwipe && hasMultipleImages) {
-      handlePrevious();
-    }
-  }, [isZoomed, hasMultipleImages, handleNext, handlePrevious]);
-
-  // Обработчики мыши для десктопа
-  const onMouseDown = useCallback(
-    (e: React.MouseEvent) => {
-      if (isZoomed) return; // Не обрабатываем drag в режиме зума
-      setIsDragging(true);
-      mouseEndRef.current = null;
-      mouseStartRef.current = e.clientX;
-    },
-    [isZoomed]
-  );
-
-  const onMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!isDragging || isZoomed) return;
-      mouseEndRef.current = e.clientX;
-    },
-    [isDragging, isZoomed]
-  );
-
-  const onMouseUp = useCallback(() => {
-    if (
-      !isDragging ||
-      isZoomed ||
-      !mouseStartRef.current ||
-      !mouseEndRef.current
-    ) {
-      setIsDragging(false);
-      return;
-    }
-
-    const distance = mouseStartRef.current - mouseEndRef.current;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe && hasMultipleImages) {
-      handleNext();
-    }
-    if (isRightSwipe && hasMultipleImages) {
-      handlePrevious();
-    }
-
-    setIsDragging(false);
-  }, [isDragging, isZoomed, hasMultipleImages, handleNext, handlePrevious]);
+  const handleZoomClose = useCallback(() => {
+    setIsZoomed(false);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
-      setIsZoomed(false);
-      setIsLoading(true);
       setCurrentIndex(initialIndex);
+      setLoadedImages(new Set()); // Сбрасываем загруженные изображения
+      setIsZoomed(false); // Сбрасываем состояние зума
       document.body.style.overflow = 'hidden';
 
-      setTimeout(() => {
-        const modalElement = document.querySelector('[data-modal-content]');
-        if (modalElement) {
-          modalElement.scrollTo(0, 0);
-        }
-      }, 100);
+      // Инициализируем Swiper с правильным индексом
+      if (swiper && swiper.activeIndex !== initialIndex) {
+        swiper.slideTo(initialIndex, 0);
+      }
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -146,67 +78,44 @@ const SliderModal = ({
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, initialIndex]);
+  }, [isOpen, initialIndex, swiper]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
 
       if (e.key === 'Escape') {
-        onClose();
-      } else if (hasMultipleImages) {
+        if (isZoomed) {
+          setIsZoomed(false);
+        } else {
+          onClose();
+        }
+      } else if (hasMultipleImages && swiper && !isZoomed) {
         if (e.key === 'ArrowLeft') {
-          handlePrevious();
+          swiper.slidePrev();
         } else if (e.key === 'ArrowRight') {
-          handleNext();
+          swiper.slideNext();
         }
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose, hasMultipleImages, handleNext, handlePrevious]);
+  }, [isOpen, onClose, hasMultipleImages, swiper, isZoomed]);
 
-  useEffect(() => {
-    if (!isZoomed) {
-      const timer = setTimeout(() => {
-        const modalElement = document.querySelector('[data-modal-content]');
-        if (modalElement) {
-          modalElement.scrollTo(0, 0);
-        }
-      }, 350);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isZoomed]);
-
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
-
-  const handleImageError = () => {
-    setIsLoading(false);
-  };
-
-  const handleImageClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsZoomed(!isZoomed);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault();
-  };
-
-  const getImageSrc = () => {
+  const getImageSrc = (imageSrc: string) => {
     try {
-      return getSafeImageUrl(currentImageSrc);
+      return getSafeImageUrl(imageSrc);
     } catch (error) {
       console.error('Error processing image URL:', error);
-      return currentImageSrc;
+      return imageSrc;
     }
   };
 
   if (!isOpen || images.length === 0) return null;
+
+  // Пропорция 1920:1248
+  const aspectRatio = 1920 / 1248;
 
   return (
     <Modal
@@ -216,109 +125,125 @@ const SliderModal = ({
       maxW='auto'
       bg='transparent'
       boxShadow='none'
-      aspectRatio={7 / 4}
+      aspectRatio={aspectRatio}
       h={{
-        base: isZoomed ? 'full' : 'auto',
+        base: 'auto',
         md: '95vh'
       }}
       w={{
         base: '100vw',
-        md: isZoomed ? 'full' : 'auto'
+        md: 'auto'
       }}
-      overflow='scroll'
-      overscrollBehaviorX='none'
-      overscrollBehaviorY='none'
+      overflow='hidden'
       borderRadius={0}
       className='slider-modal-container'
     >
       <Box
         position='relative'
-        aspectRatio={7 / 4}
+        aspectRatio={aspectRatio}
         h={{
           base: '100%',
           md: '95vh'
         }}
-        transform={isZoomed ? 'scale(2)' : 'scale(1)'}
-        transition='all 0.3s ease-in-out'
-        display='flex'
-        alignItems='center'
-        justifyContent='center'
-        cursor={isZoomed ? 'zoom-out' : isDragging ? 'grabbing' : 'zoom-in'}
-        onClick={handleImageClick}
-        onTouchStart={isZoomed ? handleTouchStart : onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-        onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseUp}
-        transformOrigin={{
-          base: 'left center',
-          md: 'top center'
-        }}
+        w='100%'
       >
-        {isLoading && (
-          <Box
-            position='absolute'
-            top='50%'
-            left='50%'
-            transform='translate(-50%, -50%)'
-            zIndex={1}
-          >
-            <Spinner color='white' size='xl' />
-          </Box>
-        )}
-
-        <Image
-          src={getImageSrc()}
-          alt={`Slide ${currentIndex + 1}`}
-          fill
-          style={{
-            objectFit: 'contain',
-            objectPosition: 'center',
-            pointerEvents: 'none',
-            opacity: isLoading ? 0 : 1,
-            transition: 'opacity 0.3s ease-in-out'
+        <Swiper
+          modules={[Navigation, Keyboard, Zoom]}
+          navigation={hasMultipleImages}
+          keyboard={{
+            enabled: true
           }}
-          priority
-          sizes='100vw'
-          quality={100}
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-        />
+          zoom={{
+            maxRatio: 2,
+            minRatio: 1
+          }}
+          initialSlide={initialIndex}
+          onSwiper={setSwiper}
+          onSlideChange={handleSlideChange}
+          className='swiper-modal'
+          style={{
+            height: '100%',
+            width: '100%'
+          }}
+        >
+          {images.map((imageSrc, index) => {
+            const isImageLoaded = loadedImages.has(index);
+            const isCurrentSlide = index === currentIndex;
 
-        {hasMultipleImages && !isZoomed && (
-          <>
-            <SliderNavigation
-              onNext={(e) => {
-                if (e) e.stopPropagation();
-                handleNext();
-              }}
-              onPrev={(e) => {
-                if (e) e.stopPropagation();
-                handlePrevious();
-              }}
-            />
+            return (
+              <SwiperSlide key={index}>
+                <Box
+                  position='relative'
+                  w='100%'
+                  h='100%'
+                  display='flex'
+                  alignItems='center'
+                  justifyContent='center'
+                >
+                  {!isImageLoaded && isCurrentSlide && (
+                    <Box
+                      position='absolute'
+                      top='50%'
+                      left='50%'
+                      transform='translate(-50%, -50%)'
+                      zIndex={1}
+                    >
+                      <Spinner color='white' size='xl' />
+                    </Box>
+                  )}
 
-            <Flex
-              position='absolute'
-              bottom={4}
-              left='50%'
-              transform='translateX(-50%)'
-              bg='rgba(0, 0, 0, 0.5)'
-              color='white'
-              px={3}
-              py={1}
-              borderRadius='full'
-              fontSize='sm'
-              fontWeight='medium'
-              zIndex={2}
-            >
-              {currentIndex + 1} / {images.length}
-            </Flex>
-          </>
+                  <Image
+                    src={getImageSrc(imageSrc)}
+                    alt={`Slide ${index + 1}`}
+                    fill
+                    style={{
+                      objectFit: 'contain',
+                      objectPosition: 'center',
+                      opacity: isImageLoaded ? 1 : 0,
+                      transition: 'opacity 0.3s ease-in-out',
+                      cursor: 'zoom-in'
+                    }}
+                    priority={index === initialIndex}
+                    sizes='100vw'
+                    quality={100}
+                    onLoad={() => handleImageLoad(index)}
+                    onError={() => handleImageError(index)}
+                    onClick={handleImageClick}
+                  />
+                </Box>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+
+        {hasMultipleImages && (
+          <Flex
+            position='absolute'
+            bottom={4}
+            left='50%'
+            transform='translateX(-50%)'
+            bg='rgba(0, 0, 0, 0.5)'
+            color='white'
+            px={3}
+            py={1}
+            borderRadius='full'
+            fontSize='sm'
+            fontWeight='medium'
+            zIndex={10}
+          >
+            {currentIndex + 1} / {images.length}
+          </Flex>
         )}
       </Box>
+
+      {/* Компонент зума */}
+      <ImageZoom
+        isOpen={isZoomed}
+        onClose={handleZoomClose}
+        imageSrc={images[currentIndex]}
+        alt={`Zoomed slide ${currentIndex + 1}`}
+        isMobile={isMobile}
+      />
     </Modal>
   );
 };

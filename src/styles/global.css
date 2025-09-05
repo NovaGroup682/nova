@@ -166,6 +166,97 @@
   background-color: #000000 !important;
 }
 
+/* Стили для Swiper модального окна */
+.swiper-modal {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.swiper-modal .swiper-slide {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+.swiper-modal .swiper-button-next,
+.swiper-modal .swiper-button-prev {
+  color: white !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 50% !important;
+  width: 44px !important;
+  height: 44px !important;
+  margin-top: -22px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-modal .swiper-button-next:hover,
+.swiper-modal .swiper-button-prev:hover {
+  background: rgba(0, 0, 0, 0.7) !important;
+  transform: scale(1.1) !important;
+}
+
+.swiper-modal .swiper-button-next:after,
+.swiper-modal .swiper-button-prev:after {
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.swiper-modal .swiper-button-disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+/* Стили для зума в Swiper */
+.swiper-zoom-container {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.swiper-zoom-container > img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+/* Стили для модального зума */
+.slider-modal-zoom-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0, 0, 0, 0.95) !important;
+  overflow: auto !important;
+}
+
+.slider-modal-zoom-image-container {
+  position: relative !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+@media (min-width: 768px) {
+  .slider-modal-zoom-image-container {
+    width: 150% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+  }
+}
+
 /* Оптимизированные стили автозаполнения */
 .contact-input:-internal-autofill-selected {
   background-color: #52525b !important;
