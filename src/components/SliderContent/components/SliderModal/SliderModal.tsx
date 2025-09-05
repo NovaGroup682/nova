@@ -23,18 +23,21 @@ interface SliderModalProps {
   onClose: () => void;
   images: string[];
   initialIndex?: number;
+  aspectRatio: number;
 }
 
 const SliderModal = ({
   isOpen,
   onClose,
   images = [],
-  initialIndex = 0
+  initialIndex = 0,
+  aspectRatio
 }: SliderModalProps) => {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
   const [isZoomed, setIsZoomed] = useState(false);
+  const [hasDragged, setHasDragged] = useState(false);
   const isMobile = useBreakpointValue({ base: true, lg: false }) ?? true;
 
   const hasMultipleImages = images.length > 1;
@@ -51,10 +54,15 @@ const SliderModal = ({
     setLoadedImages((prev) => new Set(prev).add(index));
   }, []);
 
-  const handleImageClick = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsZoomed(true);
-  }, []);
+  const handleImageClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (!hasDragged) {
+        setIsZoomed(true);
+      }
+    },
+    [hasDragged]
+  );
 
   const handleZoomClose = useCallback(() => {
     setIsZoomed(false);
@@ -65,6 +73,7 @@ const SliderModal = ({
       setCurrentIndex(initialIndex);
       setLoadedImages(new Set()); // Сбрасываем загруженные изображения
       setIsZoomed(false); // Сбрасываем состояние зума
+      setHasDragged(false); // Сбрасываем состояние drag
       document.body.style.overflow = 'hidden';
 
       // Инициализируем Swiper с правильным индексом
@@ -103,6 +112,23 @@ const SliderModal = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose, hasMultipleImages, swiper, isZoomed]);
 
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (!isOpen) return;
+
+      // Предотвращаем закрытие модала при прокрутке колесиком
+      e.stopPropagation();
+    };
+
+    if (isOpen) {
+      document.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
+    return () => {
+      document.removeEventListener('wheel', handleWheel);
+    };
+  }, [isOpen]);
+
   const getImageSrc = (imageSrc: string) => {
     try {
       return getSafeImageUrl(imageSrc);
@@ -114,33 +140,26 @@ const SliderModal = ({
 
   if (!isOpen || images.length === 0) return null;
 
-  // Пропорция 1920:1248
-  const aspectRatio = 1920 / 1248;
-
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
       isDark
-      maxW='auto'
+      maxW={aspectRatio === 1920 / 1248 ? 'fit-content' : 'auto'}
       bg='transparent'
       boxShadow='none'
       aspectRatio={aspectRatio}
       h={{
-        base: 'auto',
+        base: '95vh',
         md: '95vh'
       }}
-      w={{
-        base: '100vw',
-        md: 'auto'
-      }}
+      w='100vw'
       overflow='hidden'
       borderRadius={0}
       className='slider-modal-container'
     >
       <Box
         position='relative'
-        aspectRatio={aspectRatio}
         h={{
           base: '100%',
           md: '95vh'
@@ -157,13 +176,19 @@ const SliderModal = ({
             maxRatio: 2,
             minRatio: 1
           }}
+          spaceBetween={8}
           initialSlide={initialIndex}
           onSwiper={setSwiper}
           onSlideChange={handleSlideChange}
+          onTouchStart={() => setHasDragged(false)}
+          onTouchMove={() => setHasDragged(true)}
+          onTouchEnd={() => setHasDragged(false)}
+          onSliderMove={() => setHasDragged(true)}
           className='swiper-modal'
           style={{
             height: '100%',
-            width: '100%'
+            width: '100%',
+            maxWidth: '100vw'
           }}
         >
           {images.map((imageSrc, index) => {
@@ -171,7 +196,7 @@ const SliderModal = ({
             const isCurrentSlide = index === currentIndex;
 
             return (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index} style={{ width: '100%' }}>
                 <Box
                   position='relative'
                   w='100%'
@@ -195,13 +220,16 @@ const SliderModal = ({
                   <Image
                     src={getImageSrc(imageSrc)}
                     alt={`Slide ${index + 1}`}
-                    fill
+                    width={1920}
+                    height={Math.round(1920 / aspectRatio)}
                     style={{
                       objectFit: 'contain',
                       objectPosition: 'center',
                       opacity: isImageLoaded ? 1 : 0,
                       transition: 'opacity 0.3s ease-in-out',
-                      cursor: 'zoom-in'
+                      cursor: 'zoom-in',
+                      width: '100%',
+                      height: '100%'
                     }}
                     priority={index === initialIndex}
                     sizes='100vw'

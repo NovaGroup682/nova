@@ -159,6 +159,7 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
         onClose={handleModalClose}
         images={sliders}
         initialIndex={modalInitialIndex}
+        aspectRatio={1920 / 1248}
       />
     </>
   );

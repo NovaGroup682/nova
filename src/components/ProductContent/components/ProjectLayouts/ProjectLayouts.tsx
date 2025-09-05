@@ -14,9 +14,9 @@ import {
 
 import { getGoogleDriveDirectLink } from 'helpers';
 
+import { SliderModal } from 'components/SliderContent';
 import { EditProjectButton } from '../EditProjectButton';
 import { EditProjectModal } from '../EditProjectModal';
-import { ImageModal } from '../ImageModal';
 
 interface ProjectLayoutsProps {
   label: string;
@@ -173,13 +173,12 @@ const ProjectLayouts = ({ label, area, plans }: ProjectLayoutsProps) => {
       <EditProjectButton onClick={onOpen} />
 
       {selectedImage && (
-        <ImageModal
+        <SliderModal
           isOpen={!!selectedImage}
           onClose={handleCloseImageModal}
-          imageSrc={selectedImage.src}
-          imageAlt={selectedImage.alt}
           images={imageUrls}
           initialIndex={selectedImage.index}
+          aspectRatio={4 / 5}
         />
       )}
       <EditProjectModal isOpen={isOpen} onClose={onClose} />

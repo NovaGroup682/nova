@@ -46,10 +46,6 @@ const ImageZoom = ({
     setHasDragged(false);
   }, [onClose]);
 
-  const handleZoomToggle = useCallback(() => {
-    handleZoomClose();
-  }, [handleZoomClose]);
-
   const handleImageClick = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -153,25 +149,12 @@ const ImageZoom = ({
       }
     };
 
-    const handleWheelEvent = (e: WheelEvent) => {
-      if (isOpen) {
-        e.preventDefault();
-        e.stopPropagation();
-        handleZoomToggle();
-      }
-    };
-
     document.addEventListener('keydown', handleKeyDown);
-
-    if (isOpen) {
-      document.addEventListener('wheel', handleWheelEvent, { passive: false });
-    }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('wheel', handleWheelEvent);
     };
-  }, [isOpen, handleZoomClose, handleZoomToggle]);
+  }, [isOpen, handleZoomClose]);
 
   const getImageSrc = (src: string) => {
     try {
@@ -225,7 +208,6 @@ const ImageZoom = ({
         justifyContent='center'
         onClick={(e) => e.stopPropagation()}
         cursor={isDragging ? 'grabbing' : 'grab'}
-        onWheel={handleZoomToggle}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -260,7 +242,7 @@ const ImageZoom = ({
               objectPosition: 'center',
               userSelect: 'none',
               pointerEvents: 'auto',
-              cursor: 'pointer'
+              cursor: isDragging ? 'grabbing' : 'grab'
             }}
             draggable={false}
             onClick={handleImageClick}
