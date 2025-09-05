@@ -39,44 +39,39 @@ const ImageZoom = ({
     }
   }, [isOpen, isMobile]);
 
-  const handleZoomToggle = useCallback(() => {
-    setZoomLevel((prev) => {
-      const newLevel = isMobile ? (prev === 3 ? 1 : 3) : prev === 2 ? 1 : 2;
+  const handleZoomClose = useCallback(() => {
+    onClose();
+    setPanX(0);
+    setPanY(0);
+    setHasDragged(false);
+  }, [onClose]);
 
-      if (newLevel === 1) {
-        setPanX(0);
-        setPanY(0);
-      }
-      return newLevel;
-    });
-  }, [isMobile]);
+  const handleZoomToggle = useCallback(() => {
+    handleZoomClose();
+  }, [handleZoomClose]);
 
   const handleImageClick = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
       if (!hasDragged) {
-        handleZoomToggle();
+        handleZoomClose();
       }
     },
-    [handleZoomToggle, hasDragged]
+    [handleZoomClose, hasDragged]
   );
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
-      const canDrag = isMobile ? zoomLevel > 1 : zoomLevel > 1;
-      if (canDrag) {
-        setIsDragging(true);
-        setHasDragged(false);
-        setDragStart({ x: e.clientX - panX, y: e.clientY - panY });
-      }
+      setIsDragging(true);
+      setHasDragged(false);
+      setDragStart({ x: e.clientX - panX, y: e.clientY - panY });
     },
-    [zoomLevel, panX, panY, isMobile]
+    [panX, panY]
   );
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
-      const canDrag = isMobile ? zoomLevel > 1 : zoomLevel > 1;
-      if (isDragging && canDrag) {
+      if (isDragging) {
         setHasDragged(true);
 
         const newPanX = e.clientX - dragStart.x;
@@ -106,8 +101,7 @@ const ImageZoom = ({
 
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
-      const canDrag = isMobile ? zoomLevel > 1 : zoomLevel > 1;
-      if (canDrag && e.touches.length === 1) {
+      if (e.touches.length === 1) {
         setIsDragging(true);
         setHasDragged(false);
         setDragStart({
@@ -116,13 +110,12 @@ const ImageZoom = ({
         });
       }
     },
-    [zoomLevel, panX, panY, isMobile]
+    [panX, panY]
   );
 
   const handleTouchMove = useCallback(
     (e: React.TouchEvent) => {
-      const canDrag = isMobile ? zoomLevel > 1 : zoomLevel > 1;
-      if (isDragging && canDrag && e.touches.length === 1) {
+      if (isDragging && e.touches.length === 1) {
         e.preventDefault();
         setHasDragged(true);
 
@@ -150,14 +143,6 @@ const ImageZoom = ({
   const handleTouchEnd = useCallback(() => {
     setIsDragging(false);
   }, []);
-
-  const handleZoomClose = useCallback(() => {
-    onClose();
-    setZoomLevel(1);
-    setPanX(0);
-    setPanY(0);
-    setHasDragged(false);
-  }, [onClose]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
