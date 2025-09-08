@@ -3,7 +3,7 @@
 import Telegram from '@assets/icons/telegram.svg';
 import Whatsapp from '@assets/icons/whatsapp.svg';
 
-import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 
 import { usePrivacyPolicyCookie } from 'hooks';
 
