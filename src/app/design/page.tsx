@@ -1,11 +1,15 @@
 import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
-import Image from 'next/image';
 
 import { Box, Text, VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
-import { AnimatedBlock, ArchitecturalBlock, DesignContact } from 'components';
+import {
+  AnimatedBlock,
+  ArchitecturalBlock,
+  BackgroundImageWithLoader,
+  DesignContact
+} from 'components';
 
 const Design = async () => (
   <VStack
@@ -16,7 +20,9 @@ const Design = async () => (
     alignItems='center'
     flex={1}
   >
-    <Box
+    <BackgroundImageWithLoader
+      src={content.design.mainImg}
+      alt='Услуги - Фоновая иллюстрация'
       position='absolute'
       w='full'
       h='100vh'
@@ -25,19 +31,11 @@ const Design = async () => (
         md: -104,
         lg: -130
       }}
-    >
-      <Image
-        src={content.design.mainImg}
-        alt='Design background'
-        fill
-        style={{
-          objectFit: 'cover',
-          objectPosition: 'center'
-        }}
-        priority
-        sizes='(max-width: 450px) 400px, 1200px'
-      />
-    </Box>
+      priority
+      sizes='(max-width: 450px) 400px, 1200px'
+      objectFit='cover'
+      objectPosition='center'
+    />
     <VStack
       w='full'
       px={BASE_HORIZONTAL_PADINGS}

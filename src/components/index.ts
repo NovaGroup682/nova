@@ -23,3 +23,4 @@ export { default as ContactsInfoModal } from './ContactsInfoModal';
 export { default as StickyContactButton } from './StickyContactButton';
 export { default as SocialLinksBlock } from './SocialLinksBlock';
 export { PrivacyPolicyCheckbox } from './PrivacyPolicyCheckbox';
+export { BackgroundImageWithLoader } from './BackgroundImageWithLoader';

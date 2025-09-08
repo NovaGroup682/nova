@@ -2,6 +2,7 @@
 
 import { memo, useState } from 'react';
 import { paths } from 'constant';
+import projects from 'constant/projects';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -82,9 +83,10 @@ const ProductItem = ({ project }: ProductItemProps) => {
             alt={`${project.name} - проект дома`}
             onLoad={handleImageLoad}
             onError={handleImageError}
-            loading={project.name === 'Nova-1' ? 'eager' : 'lazy'}
-            priority={project.name === 'Nova-1'}
-            quality={75}
+            loading={project.name === projects[0].name ? 'eager' : 'lazy'}
+            priority={project.name === projects[0].name}
+            placeholder='blur'
+            blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
           />
 
           <VStack

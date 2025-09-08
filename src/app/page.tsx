@@ -2,14 +2,14 @@ import { lazy, Suspense } from 'react';
 import config from 'config';
 import { BASE_HORIZONTAL_PADINGS, maxWidth, paths } from 'constant';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 
-import { Box, For, Skeleton, Text, VStack } from '@chakra-ui/react';
+import { For, Skeleton, Text, VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
 import {
   AnimatedBlock,
+  BackgroundImageWithLoader,
   BlurText,
   ContactBlock,
   MainProjectDescription,
@@ -67,7 +67,9 @@ const LazyComponent = ({ children }: { children: React.ReactNode }) => (
 
 const Home = () => (
   <VStack gap={0} w='full' position='relative'>
-    <Box
+    <BackgroundImageWithLoader
+      src={content.main.mainImgBg}
+      alt='Nova Group - Фоновая иллюстрация'
       position='absolute'
       w='full'
       h='100vh'
@@ -76,24 +78,11 @@ const Home = () => (
         md: -104,
         lg: -130
       }}
-      overflow='hidden'
-    >
-      <Image
-        src={content.main.mainImgBg}
-        alt='Nova Group - Фоновая иллюстрация'
-        fill
-        style={{
-          objectFit: 'cover',
-          objectPosition: 'right',
-          zIndex: -1
-        }}
-        priority
-        sizes='100vw'
-        quality={85}
-        placeholder='blur'
-        blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
-      />
-    </Box>
+      priority
+      sizes='100vw'
+      objectFit='cover'
+      objectPosition='right'
+    />
 
     <VStack gap={0} w='full' maxW={maxWidth} px={BASE_HORIZONTAL_PADINGS}>
       <VStack
