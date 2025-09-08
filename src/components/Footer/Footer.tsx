@@ -123,22 +123,25 @@ const Footer = () => (
             {content.contacts.salesDepartmentPhone}
           </Link>
           <Box>
-            {content.contacts.address.map(text => (<Text
-              fontSize={{
-                base: '12px',
-                md: '14px'
-              }}
-              lineHeight={{
-                base: '16px',
-                md: '18px'
-              }}
-              w='full'
-              color='white'
-              fontWeight='normal'
-              whiteSpace='normal'
-            >
-              {text}
-            </Text>))}
+            {content.contacts.address.map((text) => (
+              <Text
+                key={text}
+                fontSize={{
+                  base: '12px',
+                  md: '14px'
+                }}
+                lineHeight={{
+                  base: '16px',
+                  md: '18px'
+                }}
+                w='full'
+                color='white'
+                fontWeight='normal'
+                whiteSpace='normal'
+              >
+                {text}
+              </Text>
+            ))}
           </Box>
         </VStack>
         <Flex gap={2}>

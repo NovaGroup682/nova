@@ -11,9 +11,9 @@ import { SocialButton } from 'ui';
 import { Map } from '../Map';
 
 interface ContactContentProps {
+  email: string;
   address: string[];
   coordinates: number[];
-  salesDepartmentEmail: string;
   supplyDepartmentEmail: string;
   architecturalDepartment: {
     whatsapp: string;
@@ -26,9 +26,9 @@ interface ContactContentProps {
 }
 
 const ContactContent = ({
+  email,
   address,
   coordinates,
-  salesDepartmentEmail,
   supplyDepartmentEmail,
   architecturalDepartment,
   constructionDepartment
@@ -189,7 +189,7 @@ const ContactContent = ({
         >
           Отдел продаж:
         </Text>
-        <Link href={`mailto:${salesDepartmentEmail}`} w='full' cursor='pointer'>
+        <Link href={`mailto:${email}`} w='full' cursor='pointer'>
           <Text
             fontWeight={400}
             as='h3'
@@ -204,7 +204,7 @@ const ContactContent = ({
             }}
             whiteSpace='nowrap'
           >
-            {salesDepartmentEmail}
+            {email}
           </Text>
         </Link>
       </Flex>

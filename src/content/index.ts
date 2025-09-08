@@ -530,7 +530,7 @@ const content = {
   },
   contacts: {
     domen: 'https://ngnova.ru',
-    email: 'novagroup682@gmail.com',
+    email: 'some@gmail.com',
     salesDepartmentPhone: '+7 985 999-46-00',
     // salesDepartmentEmail: 'nanipro25@gmail.com', // test account
     salesDepartmentEmail: 'ng.nova@ya.ru',
