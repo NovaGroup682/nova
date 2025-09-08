@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import config from 'config';
 import type { Metadata } from 'next';
@@ -110,6 +111,7 @@ const RootLayout = ({
         <ScrollToTopButton />
         <StickyContactButton />
       </Providers>
+      <Analytics />
       <SpeedInsights />
     </body>
   </html>
