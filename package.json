@@ -16,6 +16,7 @@
     "@pbe/react-yandex-maps": "^1.2.5",
     "@types/js-cookie": "^3.0.6",
     "@types/nodemailer": "^7.0.1",
+    "@vercel/speed-insights": "^1.2.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.1",
