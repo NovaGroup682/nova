@@ -80,7 +80,7 @@ const ContactsInfoModal = ({ isOpen, onClose }: ContactsInfoModalProps) => {
           textAlign='center'
           w='full'
         >
-          Архитектурный отдел
+          Напишите нам
         </Text>
 
         <Flex w='full' justifyContent='center' flexDirection='row' gap={4}>
@@ -93,7 +93,7 @@ const ContactsInfoModal = ({ isOpen, onClose }: ContactsInfoModalProps) => {
             Icon={Telegram}
           />
         </Flex>
-        <Text
+        {/* <Text
           fontSize={{
             base: '24px',
             md: '28px'
@@ -169,7 +169,7 @@ const ContactsInfoModal = ({ isOpen, onClose }: ContactsInfoModalProps) => {
             href={content.contacts.constructionDepartment.telegram}
             Icon={Telegram}
           />
-        </Flex>
+        </Flex> */}
       </VStack>
     </Modal>
   );
