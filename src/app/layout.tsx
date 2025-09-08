@@ -38,8 +38,6 @@ export const metadata: Metadata = {
   applicationName: 'Nova Group',
   generator: 'Next.js',
   referrer: 'origin-when-cross-origin',
-  colorScheme: 'light',
-  themeColor: '#000000',
   formatDetection: {
     email: false,
     address: false,

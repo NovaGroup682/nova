@@ -49,7 +49,14 @@ const Contacts = () => (
     alignItems='center'
     flex={1}
   >
-    <ContactContent {...content.contacts} />
+    <ContactContent
+      email={content.contacts.email}
+      address={content.contacts.address}
+      coordinates={content.contacts.coordinates}
+      supplyDepartmentEmail={content.contacts.supplyDepartmentEmail}
+      architecturalDepartment={content.contacts.architecturalDepartment}
+      constructionDepartment={content.contacts.constructionDepartment}
+    />
   </VStack>
 );
 
