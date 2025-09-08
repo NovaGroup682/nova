@@ -13,10 +13,10 @@ const config: ConfigType = {
       'Nova Group - ведущая строительная компания. Проектирование, строительство и отделка жилых и коммерческих объектов. Качественные решения для вашего комфорта.',
     keywords:
       'строительная компания, проектирование, строительство, отделка, недвижимость, Nova Group',
-    ogTitle: 'Nova Group - Строительная компания',
+    ogTitle: 'Nova Group - Проектирование и строительство современных домов',
     ogDescription:
-      'Проектирование, строительство и отделка жилых и коммерческих объектов',
-    ogImage: '/assets/logo.svg',
+      'Строительная компания Nova Group. Проектируем и строим современные каменные дома в рамках вашего бюджета. Типовые решения с продуманной планировкой.',
+    ogImage: '/assets/images/main_page/main.jpg',
     ogType: 'website',
     twitterCard: 'summary_large_image',
     viewport: 'width=device-width, initial-scale=1',

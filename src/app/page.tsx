@@ -16,6 +16,11 @@ import {
   NavigationBlock
 } from 'components';
 import { NavigationActionButton } from 'ui';
+import {
+  faqStructuredData,
+  organizationStructuredData,
+  websiteStructuredData
+} from './structured-data';
 
 export const metadata: Metadata = {
   title: 'Nova Group - Главная | Строительная компания',
@@ -29,7 +34,7 @@ export const metadata: Metadata = {
     siteName: 'Nova Group',
     images: [
       {
-        url: '/assets/logo.svg',
+        url: '/assets/images/main_page/main.jpg',
         width: 1200,
         height: 630,
         alt: 'Nova Group - Главная страница'
@@ -43,7 +48,7 @@ export const metadata: Metadata = {
     title: 'Nova Group - Главная',
     description:
       'Проектирование, строительство и отделка жилых и коммерческих объектов',
-    images: ['/assets/logo.svg']
+    images: ['/assets/images/main_page/main.jpg']
   },
   alternates: {
     canonical: config.metadata.domen
@@ -66,173 +71,193 @@ const LazyComponent = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Home = () => (
-  <VStack gap={0} w='full' position='relative'>
-    <BackgroundImageWithLoader
-      src={content.main.mainImgBg}
-      alt='Nova Group - Фоновая иллюстрация'
-      position='absolute'
-      w='full'
-      h='100vh'
-      top={{
-        base: -88,
-        md: -104,
-        lg: -130
+  <>
+    <script
+      type='application/ld+json'
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(organizationStructuredData)
       }}
-      priority
-      sizes='100vw'
-      objectFit='cover'
-      objectPosition='right'
     />
-
-    <VStack gap={0} w='full' maxW={maxWidth} px={BASE_HORIZONTAL_PADINGS}>
-      <VStack
+    <script
+      type='application/ld+json'
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(websiteStructuredData)
+      }}
+    />
+    <script
+      type='application/ld+json'
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(faqStructuredData)
+      }}
+    />
+    <VStack gap={0} w='full' position='relative'>
+      <BackgroundImageWithLoader
+        src={content.main.mainImgBg}
+        alt='Nova Group - Фоновая иллюстрация'
+        position='absolute'
         w='full'
-        flex={1}
-        minH='100vh'
-        position='relative'
-        mt={{
+        h='100vh'
+        top={{
           base: -88,
           md: -104,
           lg: -130
         }}
-        justifyContent='center'
-        alignItems='left'
-        pb={{
-          base: '160px',
-          lg: 120
-        }}
-      >
-        <For each={content.main.mainTitle}>
-          {(item) => (
-            <BlurText
-              zIndex={2}
-              key={item}
-              as='h1'
-              fontSize={{
-                base: '26px',
-                sm: '32px',
-                md: '42px',
-                lg: '56px',
-                xl: '72px'
-              }}
-              textAlign='left'
-              fontWeight={400}
-              color='white'
-              whiteSpace='pre-line'
-              cursor='default'
-              userSelect='none'
-              text={item}
-              delay={150}
-              animateBy='words'
-              direction='top'
-              className='text-2xl mb-8'
-              letterSpacing={{
-                base: 0,
-                md: '4px'
-              }}
-            />
-          )}
-        </For>
+        priority
+        sizes='100vw'
+        objectFit='cover'
+        objectPosition='right'
+      />
 
-        <MainProjectDescription />
+      <VStack gap={0} w='full' maxW={maxWidth} px={BASE_HORIZONTAL_PADINGS}>
+        <VStack
+          w='full'
+          flex={1}
+          minH='100vh'
+          position='relative'
+          mt={{
+            base: -88,
+            md: -104,
+            lg: -130
+          }}
+          justifyContent='center'
+          alignItems='left'
+          pb={{
+            base: '160px',
+            lg: 120
+          }}
+        >
+          <For each={content.main.mainTitle}>
+            {(item) => (
+              <BlurText
+                zIndex={2}
+                key={item}
+                as='h1'
+                fontSize={{
+                  base: '26px',
+                  sm: '32px',
+                  md: '42px',
+                  lg: '56px',
+                  xl: '72px'
+                }}
+                textAlign='left'
+                fontWeight={400}
+                color='white'
+                whiteSpace='pre-line'
+                cursor='default'
+                userSelect='none'
+                text={item}
+                delay={150}
+                animateBy='words'
+                direction='top'
+                className='text-2xl mb-8'
+                letterSpacing={{
+                  base: 0,
+                  md: '4px'
+                }}
+              />
+            )}
+          </For>
+
+          <MainProjectDescription />
+        </VStack>
+
+        <AnimatedBlock delay={0.3}>
+          <Text
+            as='h2'
+            color='gray.800'
+            mt='40px'
+            py={{
+              base: '20px',
+              md: '40px'
+            }}
+            textAlign='center'
+            fontSize={{
+              base: '20px',
+              md: '34px'
+            }}
+            lineHeight={{
+              base: '30px',
+              md: '52px'
+            }}
+            letterSpacing='1px'
+          >
+            {content.main.text1}
+          </Text>
+        </AnimatedBlock>
+
+        <AnimatedBlock delay={0.5}>
+          <Text
+            as='h2'
+            color='gray.900'
+            textAlign='center'
+            fontSize={{
+              base: '20px',
+              md: '34px'
+            }}
+            lineHeight={{
+              base: '30px',
+              md: '52px'
+            }}
+            fontWeight={700}
+            letterSpacing='2px'
+            whiteSpace='pre-line'
+          >
+            {content.main.text2}
+          </Text>
+        </AnimatedBlock>
+
+        <LazyComponent>
+          <AnimatedBlock delay={0.3}>
+            <LazyCeoBlock />
+          </AnimatedBlock>
+        </LazyComponent>
+
+        <LazyComponent>
+          <AnimatedBlock delay={0.3}>
+            <LazyProjectSliderBlock />
+          </AnimatedBlock>
+        </LazyComponent>
+
+        <AnimatedBlock delay={0.3}>
+          <NavigationActionButton
+            label={content.common.allProjects}
+            href={paths.projects}
+            textTransform='uppercase'
+            display={{ base: 'flex', md: 'none' }}
+          />
+        </AnimatedBlock>
+
+        <AnimatedBlock delay={0.3}>
+          <Text
+            as='h2'
+            color='gray.900'
+            textAlign='center'
+            fontSize={{
+              base: '20px',
+              md: '34px'
+            }}
+            lineHeight={{
+              base: '30px',
+              md: '52px'
+            }}
+            fontWeight={700}
+            whiteSpace='pre-line'
+            py={{ base: '10px', md: '20px' }}
+          >
+            {content.main.text3}
+          </Text>
+        </AnimatedBlock>
+
+        <AnimatedBlock delay={0.3}>
+          <NavigationBlock />
+        </AnimatedBlock>
+
+        <AnimatedBlock delay={0.3}>
+          <ContactBlock />
+        </AnimatedBlock>
       </VStack>
-
-      <AnimatedBlock delay={0.3}>
-        <Text
-          as='h2'
-          color='gray.800'
-          mt='40px'
-          py={{
-            base: '20px',
-            md: '40px'
-          }}
-          textAlign='center'
-          fontSize={{
-            base: '20px',
-            md: '34px'
-          }}
-          lineHeight={{
-            base: '30px',
-            md: '52px'
-          }}
-          letterSpacing='1px'
-        >
-          {content.main.text1}
-        </Text>
-      </AnimatedBlock>
-
-      <AnimatedBlock delay={0.5}>
-        <Text
-          as='h2'
-          color='gray.900'
-          textAlign='center'
-          fontSize={{
-            base: '20px',
-            md: '34px'
-          }}
-          lineHeight={{
-            base: '30px',
-            md: '52px'
-          }}
-          fontWeight={700}
-          letterSpacing='2px'
-          whiteSpace='pre-line'
-        >
-          {content.main.text2}
-        </Text>
-      </AnimatedBlock>
-
-      <LazyComponent>
-        <AnimatedBlock delay={0.3}>
-          <LazyCeoBlock />
-        </AnimatedBlock>
-      </LazyComponent>
-
-      <LazyComponent>
-        <AnimatedBlock delay={0.3}>
-          <LazyProjectSliderBlock />
-        </AnimatedBlock>
-      </LazyComponent>
-
-      <AnimatedBlock delay={0.3}>
-        <NavigationActionButton
-          label={content.common.allProjects}
-          href={paths.projects}
-          textTransform='uppercase'
-          display={{ base: 'flex', md: 'none' }}
-        />
-      </AnimatedBlock>
-
-      <AnimatedBlock delay={0.3}>
-        <Text
-          as='h2'
-          color='gray.900'
-          textAlign='center'
-          fontSize={{
-            base: '20px',
-            md: '34px'
-          }}
-          lineHeight={{
-            base: '30px',
-            md: '52px'
-          }}
-          fontWeight={700}
-          whiteSpace='pre-line'
-          py={{ base: '10px', md: '20px' }}
-        >
-          {content.main.text3}
-        </Text>
-      </AnimatedBlock>
-
-      <AnimatedBlock delay={0.3}>
-        <NavigationBlock />
-      </AnimatedBlock>
-
-      <AnimatedBlock delay={0.3}>
-        <ContactBlock />
-      </AnimatedBlock>
     </VStack>
-  </VStack>
+  </>
 );
 
 export default Home;

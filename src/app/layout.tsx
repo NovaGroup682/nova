@@ -35,6 +35,11 @@ export const metadata: Metadata = {
   authors: [{ name: 'Nova Group' }],
   creator: 'Nova Group',
   publisher: 'Nova Group',
+  applicationName: 'Nova Group',
+  generator: 'Next.js',
+  referrer: 'origin-when-cross-origin',
+  colorScheme: 'light',
+  themeColor: '#000000',
   formatDetection: {
     email: false,
     address: false,
@@ -66,18 +71,22 @@ export const metadata: Metadata = {
             url: ogImage,
             width: 1200,
             height: 630,
-            alt: 'Nova Group - Строительная компания'
+            alt: 'Nova Group - Проектирование и строительство современных домов',
+            type: 'image/jpeg'
           }
         ]
       : [],
     locale: 'ru_RU',
-    type: ogType || 'website'
+    type: ogType || 'website',
+    countryName: 'Russia'
   },
   twitter: {
     card: twitterCard || 'summary_large_image',
     title: ogTitle,
     description: ogDescription,
-    images: ogImage ? [ogImage] : []
+    images: ogImage ? [ogImage] : [],
+    creator: '@novagroup',
+    site: '@novagroup'
   },
   icons: [
     { rel: 'icon', url: favIcon.src },

@@ -35,8 +35,32 @@ export const generateMetadata = async ({
 
   return {
     title: `${project.name} - Проект дома | Nova Group`,
-    description: `Проект дома ${project.name}. Площадь: ${project.variants[0]?.area}м². Цена: ${formatCurrency(project.projectPrice)}.`,
-    keywords: `проект дома, ${project.name}, строительство, архитектура, ${project.variants[0]?.area}м²`
+    description: `Проект дома ${project.name}. Площадь: ${project.variants[0]?.area}м². Цена: ${formatCurrency(project.projectPrice)}. Современный каменный дом с продуманной планировкой.`,
+    keywords: `проект дома, ${project.name}, строительство, архитектура, ${project.variants[0]?.area}м², каменный дом`,
+    openGraph: {
+      title: `Проект дома ${project.name} | Nova Group`,
+      description: `Проект дома ${project.name}. Площадь: ${project.variants[0]?.area}м². Цена: ${formatCurrency(project.projectPrice)}. Современный каменный дом с продуманной планировкой.`,
+      type: 'website',
+      url: `https://ngnova.ru/project/${id}`,
+      siteName: 'Nova Group',
+      images: [
+        {
+          url: project.sliders?.[0] || '/assets/images/main_page/main.jpg',
+          width: 1200,
+          height: 630,
+          alt: `Проект дома ${project.name} - Nova Group`,
+          type: 'image/jpeg'
+        }
+      ],
+      locale: 'ru_RU',
+      countryName: 'Russia'
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Проект дома ${project.name} | Nova Group`,
+      description: `Проект дома ${project.name}. Площадь: ${project.variants[0]?.area}м². Цена: ${formatCurrency(project.projectPrice)}.`,
+      images: [project.sliders?.[0] || '/assets/images/main_page/main.jpg']
+    }
   };
 };
 

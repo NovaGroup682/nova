@@ -11,7 +11,32 @@ export const metadata = {
   title: 'Проекты современных каменных домов | Nova Group',
   description:
     'Каталог проектов современных каменных домов. Выберите подходящий проект для строительства вашего дома.',
-  keywords: 'проекты домов, каменные дома, строительство, архитектура'
+  keywords: 'проекты домов, каменные дома, строительство, архитектура',
+  openGraph: {
+    title: 'Проекты домов | Nova Group',
+    description:
+      'Каталог проектов современных каменных домов от Nova Group. Типовые решения с продуманной планировкой и понятным бюджетом.',
+    type: 'website',
+    url: 'https://ngnova.ru/projects',
+    siteName: 'Nova Group',
+    images: [
+      {
+        url: '/assets/images/main_page/main.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Проекты домов Nova Group - Современные каменные дома',
+        type: 'image/jpeg'
+      }
+    ],
+    locale: 'ru_RU',
+    countryName: 'Russia'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Проекты домов | Nova Group',
+    description: 'Каталог проектов современных каменных домов от Nova Group',
+    images: ['/assets/images/main_page/main.jpg']
+  }
 };
 
 const ProjectsPage = async ({

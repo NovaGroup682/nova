@@ -1,4 +1,5 @@
 import { BASE_HORIZONTAL_PADINGS } from 'constant';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 
 import { AspectRatio, Flex, VStack } from '@chakra-ui/react';
@@ -6,6 +7,40 @@ import { AspectRatio, Flex, VStack } from '@chakra-ui/react';
 import content from 'content';
 
 import { BlurText, ContactUs, ServicesList } from 'components';
+
+export const metadata: Metadata = {
+  title: 'Услуги строительной компании | Nova Group',
+  description:
+    'Полный спектр строительных услуг: проектирование, строительство, отделка. Прозрачная смета, контроль качества, гарантия на работы.',
+  keywords:
+    'строительные услуги, проектирование, строительство, отделка, смета, гарантия, Nova Group',
+  openGraph: {
+    title: 'Услуги строительной компании | Nova Group',
+    description:
+      'Полный спектр строительных услуг: проектирование, строительство, отделка. Прозрачная смета, контроль качества, гарантия на работы.',
+    type: 'website',
+    url: 'https://ngnova.ru/services',
+    siteName: 'Nova Group',
+    images: [
+      {
+        url: '/assets/images/services_page/main_img.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Услуги строительной компании Nova Group',
+        type: 'image/jpeg'
+      }
+    ],
+    locale: 'ru_RU',
+    countryName: 'Russia'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Услуги строительной компании | Nova Group',
+    description:
+      'Полный спектр строительных услуг: проектирование, строительство, отделка. Прозрачная смета, контроль качества, гарантия на работы.',
+    images: ['/assets/images/services_page/main_img.jpg']
+  }
+};
 
 const Services = async () => {
   const services = content.services;

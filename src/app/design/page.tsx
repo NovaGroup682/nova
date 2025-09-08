@@ -1,4 +1,5 @@
 import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
+import type { Metadata } from 'next';
 
 import { Box, Text, VStack } from '@chakra-ui/react';
 
@@ -10,6 +11,40 @@ import {
   BackgroundImageWithLoader,
   DesignContact
 } from 'components';
+
+export const metadata: Metadata = {
+  title: 'Индивидуальное проектирование домов | Nova Group',
+  description:
+    'Индивидуальное проектирование современных домов. Создаем дом с нуля под ваш стиль жизни, участок и бюджет. Полный комплект документации.',
+  keywords:
+    'индивидуальное проектирование, архитектурный проект, строительство, дом на заказ, Nova Group',
+  openGraph: {
+    title: 'Индивидуальное проектирование домов | Nova Group',
+    description:
+      'Индивидуальное проектирование современных домов. Создаем дом с нуля под ваш стиль жизни, участок и бюджет.',
+    type: 'website',
+    url: 'https://ngnova.ru/design',
+    siteName: 'Nova Group',
+    images: [
+      {
+        url: '/assets/images/design_page/main_background.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Индивидуальное проектирование домов - Nova Group',
+        type: 'image/jpeg'
+      }
+    ],
+    locale: 'ru_RU',
+    countryName: 'Russia'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Индивидуальное проектирование домов | Nova Group',
+    description:
+      'Индивидуальное проектирование современных домов. Создаем дом с нуля под ваш стиль жизни, участок и бюджет.',
+    images: ['/assets/images/design_page/main_background.jpg']
+  }
+};
 
 const Design = async () => (
   <VStack
