@@ -1,8 +1,6 @@
-import config from 'config';
-
 import { ProjectItemType, ProjectSize } from 'types';
 
-const bodyLink = `https://${config.storageId}.public.blob.vercel-storage.com`;
+const bodyLink = `/assets/images`;
 
 const projects: ProjectItemType[] = [
   {

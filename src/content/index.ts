@@ -2,14 +2,13 @@ import Instagram from '@assets/icons/instagram.svg';
 import Pinterest from '@assets/icons/pinterest.svg';
 import Telegram from '@assets/icons/telegram.svg';
 import Youtube from '@assets/icons/youtube.svg';
-import config from 'config';
 import { paths } from 'constant';
 
 import { getGoogleDriveVideoEmbedLink } from 'helpers/google';
 
 import { SocialLinkTypes } from 'types';
 
-const bodyLink = `https://${config.storageId}.public.blob.vercel-storage.com`;
+const bodyLink = `/assets/images`;
 
 const content = {
   common: {
