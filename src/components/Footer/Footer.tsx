@@ -36,7 +36,13 @@ const Footer = () => (
           md: '50%'
         }}
         justifyContent='space-between'
-        px={BASE_HORIZONTAL_PADINGS}
+        pl={BASE_HORIZONTAL_PADINGS}
+        pr={{
+          base: '16px',
+          sm: '32px',
+          md: '30px',
+          lg: '80px'
+        }}
         py={{ base: '16px', sm: '32px', md: '40px' }}
         borderRightWidth='0.5px'
         borderColor={borderColor}
@@ -78,7 +84,13 @@ const Footer = () => (
           md: '50%'
         }}
         justifyContent='space-between'
-        px={BASE_HORIZONTAL_PADINGS}
+        pr={BASE_HORIZONTAL_PADINGS}
+        pl={{
+          base: '16px',
+          sm: '32px',
+          md: '30px',
+          lg: '80px'
+        }}
         py={{ base: '16px', sm: '32px', md: '40px' }}
         borderLeftWidth='0.5px'
         borderColor={borderColor}
@@ -110,21 +122,24 @@ const Footer = () => (
           >
             {content.contacts.salesDepartmentPhone}
           </Link>
-          <Text
-            fontSize={{
-              base: '12px',
-              md: '14px'
-            }}
-            w='full'
-            color='white'
-            fontWeight='normal'
-            whiteSpace={{
-              base: 'normal',
-              md: 'nowrap'
-            }}
-          >
-            {content.contacts.address}
-          </Text>
+          <Box>
+            {content.contacts.address.map(text => (<Text
+              fontSize={{
+                base: '12px',
+                md: '14px'
+              }}
+              lineHeight={{
+                base: '16px',
+                md: '18px'
+              }}
+              w='full'
+              color='white'
+              fontWeight='normal'
+              whiteSpace='normal'
+            >
+              {text}
+            </Text>))}
+          </Box>
         </VStack>
         <Flex gap={2}>
           {content.contacts.socialLinks.map(
@@ -197,7 +212,13 @@ const Footer = () => (
         }}
         justifyContent='space-between'
         alignItems='center'
-        px={BASE_HORIZONTAL_PADINGS}
+        pl={BASE_HORIZONTAL_PADINGS}
+        pr={{
+          base: '16px',
+          sm: '32px',
+          md: '30px',
+          lg: '80px'
+        }}
         py={{ base: '16px', sm: '24px', md: '32px' }}
         borderRightWidth='0.5px'
         borderColor={borderColor}
@@ -243,7 +264,13 @@ const Footer = () => (
         }}
         justifyContent='space-between'
         alignItems='center'
-        px={BASE_HORIZONTAL_PADINGS}
+        pr={BASE_HORIZONTAL_PADINGS}
+        pl={{
+          base: '16px',
+          sm: '32px',
+          md: '30px',
+          lg: '80px'
+        }}
         pt={{ base: 0, sm: '24px', md: '32px' }}
         pb={{ base: '16px', sm: '24px', md: '32px' }}
         borderLeftWidth='0.5px'

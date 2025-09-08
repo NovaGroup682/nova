@@ -536,8 +536,11 @@ const content = {
     salesDepartmentEmail: 'ng.nova@ya.ru',
     supplyDepartmentEmail: 'snab.msn@ya.ru',
     phone: '8 800 000 00 00',
-    address:
-      'Россия, г Москва , Очаковское ш., д.34, БЦ West Park, 6 этаж, офис А 611',
+    address: [
+      'Россия, г Москва',
+      'Очаковское ш., д.34',
+      'БЦ West Park, 6 этаж, офис А 611'
+    ],
     coordinates: [55.686736, 37.440496],
     law: 'Сайт носит сугубо информационный характер и не является публичной офертой, определяемой Статьей 437 (2) ГК РФ',
     instaLaw:

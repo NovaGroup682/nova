@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect, useRef } from 'react';
-import CloseIcon from '@assets/icons/circle-xmark.svg';
+import CloseIcon from '@assets/icons/xmark.svg';
 
 import {
   Box,
@@ -18,6 +18,7 @@ interface ModalProps extends StackProps {
   children: ReactNode;
   isScrollable?: boolean;
   isDark?: boolean;
+  isCloseBtnShow?: boolean;
 }
 
 const Modal = ({
@@ -26,6 +27,7 @@ const Modal = ({
   children,
   isScrollable,
   isDark,
+  isCloseBtnShow = false,
   ...styles
 }: ModalProps) => {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -97,8 +99,9 @@ const Modal = ({
             {children}
 
             <IconButton
-              display={{ base: 'flex', md: 'none' }}
+              display={{ base: 'flex', md: isCloseBtnShow ? 'flex' : 'none' }}
               aria-label='Close modal'
+              borderRadius='50%'
               position='fixed'
               right='40px'
               top='40px'

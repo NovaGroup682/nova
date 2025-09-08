@@ -12,7 +12,7 @@ import {
 import { Box } from '@chakra-ui/react';
 
 interface YandexMapProps {
-  address: string;
+  address: string[];
   coordinates: number[];
   height?: string;
   width?: string;

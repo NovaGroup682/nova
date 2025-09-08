@@ -5,7 +5,7 @@ import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 import { YandexMap } from 'components';
 
 interface MapProps {
-  address: string;
+  address: string[];
   coordinates: number[];
 }
 

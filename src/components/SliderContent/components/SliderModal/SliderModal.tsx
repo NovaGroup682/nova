@@ -142,6 +142,7 @@ const SliderModal = ({
 
   return (
     <Modal
+      isCloseBtnShow
       isOpen={isOpen}
       onClose={onClose}
       isDark

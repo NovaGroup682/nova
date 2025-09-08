@@ -11,7 +11,7 @@ import { SocialButton } from 'ui';
 import { Map } from '../Map';
 
 interface ContactContentProps {
-  address: string;
+  address: string[];
   coordinates: number[];
   salesDepartmentEmail: string;
   supplyDepartmentEmail: string;
