@@ -529,9 +529,8 @@ const content = {
   },
   contacts: {
     domen: 'https://ngnova.ru',
-    email: 'some@gmail.com',
+    email: 'nova_homes@mail.ru',
     salesDepartmentPhone: '+7 985 999-46-00',
-    // salesDepartmentEmail: 'nanipro25@gmail.com', // test account
     salesDepartmentEmail: 'ng.nova@ya.ru',
     supplyDepartmentEmail: 'snab.msn@ya.ru',
     phone: '8 800 000 00 00',
