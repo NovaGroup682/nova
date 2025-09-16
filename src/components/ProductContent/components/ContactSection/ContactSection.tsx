@@ -234,7 +234,9 @@ const ContactSection = ({ projectName }: ContactSectionProps) => {
               base: 'full',
               md: '250px'
             }}
-            disabled={Object.values(errors).length > 0 || !isAccepted || isLoading}
+            disabled={
+              Object.values(errors).length > 0 || !isAccepted || isLoading
+            }
             loading={isLoading}
             loadingText='Отправка...'
             _hover={{
