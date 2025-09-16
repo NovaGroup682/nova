@@ -1,11 +1,13 @@
 'use client';
 
-import { Box, Link, Text } from '@chakra-ui/react';
+import Telegram from '@assets/icons/telegram.svg';
+import Whatsapp from '@assets/icons/whatsapp.svg';
+
+import { Box, Flex, Text } from '@chakra-ui/react';
 
 import content from 'content';
 
-import SocialLinksBlock from 'components/SocialLinksBlock';
-import { Modal } from 'ui';
+import { Modal, SocialButton } from 'ui';
 
 interface EditProjectModalProps {
   isOpen: boolean;
@@ -142,32 +144,6 @@ const EditProjectModal = ({ isOpen, onClose }: EditProjectModalProps) => (
       }}
       mb={4}
     >
-      <Link
-        href={`tel:${content.contacts.salesDepartmentPhone}`}
-        fontSize={{
-          base: '12px',
-          md: '14px'
-        }}
-        w='full'
-        py='16px'
-        borderRadius='10px'
-        position='relative'
-        bg='transparent'
-        _focus={{ outlineWidth: 0 }}
-        _hover={{ textDecoration: 'none' }}
-      >
-        <Text
-          className='menu-text'
-          textTransform='uppercase'
-          fontSize='16px'
-          color='black'
-          userSelect='none'
-          lineHeight='16px'
-          _active={{ color: 'red.500' }}
-        >
-          {content.contacts.salesDepartmentPhone}
-        </Text>
-      </Link>
       <Box
         className='underline'
         position='absolute'
@@ -182,7 +158,16 @@ const EditProjectModal = ({ isOpen, onClose }: EditProjectModalProps) => (
       />
     </Box>
 
-    <SocialLinksBlock />
+    <Flex w='full' justifyContent='center' flexDirection='row' gap={4}>
+      <SocialButton
+        href={content.contacts.architecturalDepartment.whatsapp}
+        Icon={Whatsapp}
+      />
+      <SocialButton
+        href={content.contacts.architecturalDepartment.telegram}
+        Icon={Telegram}
+      />
+    </Flex>
   </Modal>
 );
 
