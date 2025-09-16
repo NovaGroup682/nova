@@ -26,10 +26,7 @@ const projects: ProjectItemType[] = [
       {
         constructionArea: 216,
         area: 175,
-        layouts: [
-          bodyLink +
-            '/projects/nova-1/%D0%9F%D0%BB%D0%B0%D0%BD%201%20%D1%8D%D1%82%D0%B0%D0%B6%D0%B0.jpg'
-        ]
+        layouts: [bodyLink + '/projects/nova-1/nova1-floor-1.jpg']
       }
     ]
   },
