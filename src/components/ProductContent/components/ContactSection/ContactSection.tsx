@@ -35,6 +35,7 @@ interface ContactSectionProps {
 
 const ContactSection = ({ projectName }: ContactSectionProps) => {
   const [_isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { setAccepted, isAccepted } = usePrivacyPolicyCookie();
 
   const {
@@ -55,6 +56,7 @@ const ContactSection = ({ projectName }: ContactSectionProps) => {
   };
 
   const onSubmit = handleSubmit(async (data) => {
+    setIsLoading(true);
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -78,6 +80,8 @@ const ContactSection = ({ projectName }: ContactSectionProps) => {
       }
     } catch (error) {
       console.error('Ошибка отправки формы:', error);
+    } finally {
+      setIsLoading(false);
     }
   });
 
@@ -230,7 +234,9 @@ const ContactSection = ({ projectName }: ContactSectionProps) => {
               base: 'full',
               md: '250px'
             }}
-            disabled={Object.values(errors).length > 0 || !isAccepted}
+            disabled={Object.values(errors).length > 0 || !isAccepted || isLoading}
+            loading={isLoading}
+            loadingText='Отправка...'
             _hover={{
               bg: 'gray.300',
               color: 'black'
@@ -240,7 +246,6 @@ const ContactSection = ({ projectName }: ContactSectionProps) => {
           </Button>
         </Stack>
 
-        {/* Уведомление об успехе с анимацией */}
         <AnimatePresence mode='wait'>
           {_isSuccess && (
             <motion.div
