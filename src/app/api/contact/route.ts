@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
 
     const mailOptions = {
       from: `"Nova Group" <${process.env.EMAIL_USER}>`,
-      to: content.contacts.salesDepartmentEmail,
+      to: content.contacts.email,
       subject: subject,
       html: `
         <h2>Новая заявка с сайта</h2>
