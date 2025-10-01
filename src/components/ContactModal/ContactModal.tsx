@@ -29,6 +29,7 @@ interface FormValues {
   regionName: string;
   clientName: string;
   phone: string;
+  website?: string;
 }
 
 interface ContactModalProps {
@@ -50,7 +51,8 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     defaultValues: {
       regionName: '',
       clientName: '',
-      phone: ''
+      phone: '',
+      website: ''
     }
   });
 
@@ -194,6 +196,19 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                   variant='flushed'
                 />
               </Field.Root>
+
+              <Input
+                type='text'
+                style={{
+                  position: 'absolute',
+                  left: '-9999px',
+                  opacity: 0,
+                  pointerEvents: 'none'
+                }}
+                {...register('website')}
+                autoComplete='off'
+                tabIndex={-1}
+              />
 
               <Box w='full' pt={2}>
                 <PrivacyPolicyCheckbox

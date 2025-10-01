@@ -27,6 +27,7 @@ interface FormValues {
   regionName: string;
   clientName: string;
   phone: string;
+  website?: string;
 }
 
 interface ContactSectionProps {
@@ -47,7 +48,8 @@ const ContactSection = ({ projectName }: ContactSectionProps) => {
     defaultValues: {
       regionName: '',
       clientName: '',
-      phone: ''
+      phone: '',
+      website: ''
     }
   });
 
@@ -214,6 +216,19 @@ const ContactSection = ({ projectName }: ContactSectionProps) => {
               }}
             />
           </Field.Root>
+
+          <Input
+            type='text'
+            style={{
+              position: 'absolute',
+              left: '-9999px',
+              opacity: 0,
+              pointerEvents: 'none'
+            }}
+            {...register('website')}
+            autoComplete='off'
+            tabIndex={-1}
+          />
 
           <Button
             px='24px'
