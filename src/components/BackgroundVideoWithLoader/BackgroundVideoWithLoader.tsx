@@ -31,21 +31,50 @@ const BackgroundVideoWithLoader = ({
   const [hasImageError, setHasImageError] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleVideoLoad = () => {
     setVideoLoaded(true);
     setShowVideo(true);
+    setVideoProgress(100);
   };
 
   const handleVideoError = () => {
     setVideoLoaded(false);
     setShowVideo(false);
+    setVideoProgress(0);
   };
 
   const handleVideoCanPlay = () => {
     setVideoLoaded(true);
     setShowVideo(true);
+    setVideoProgress(100);
+  };
+
+  const handleVideoProgress = () => {
+    const video = videoRef.current;
+
+    if (video) {
+      if (video.buffered.length > 0) {
+        const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+        const duration = video.duration;
+        if (duration > 0) {
+          const progress = (bufferedEnd / duration) * 100;
+          setVideoProgress(Math.min(progress, 100));
+        }
+      } else if (video.readyState >= 1) {
+        setVideoProgress(10);
+      }
+    }
+  };
+
+  const handleVideoLoadStart = () => {
+    setVideoProgress(5);
+  };
+
+  const handleVideoLoadedMetadata = () => {
+    setVideoProgress(20);
   };
 
   const handleImageLoad = () => {
@@ -120,6 +149,26 @@ const BackgroundVideoWithLoader = ({
         />
       )}
 
+      {videoSrc && !videoLoaded && (
+        <Box
+          position='absolute'
+          bottom={0}
+          left={0}
+          width='100%'
+          height='14px'
+          bg='rgba(255, 255, 255, 0.3)'
+          zIndex={2}
+        >
+          <Box
+            height='100%'
+            width={`${videoProgress}%`}
+            bg='white'
+            opacity={0.1}
+            transition='width 0.3s ease-in-out'
+          />
+        </Box>
+      )}
+
       {videoSrc && (
         <video
           ref={videoRef}
@@ -128,7 +177,7 @@ const BackgroundVideoWithLoader = ({
           muted
           loop
           playsInline
-          preload='metadata'
+          preload='auto'
           style={{
             position: 'absolute',
             top: 0,
@@ -143,8 +192,9 @@ const BackgroundVideoWithLoader = ({
           onLoadedData={handleVideoLoad}
           onCanPlay={handleVideoCanPlay}
           onError={handleVideoError}
-          onLoadStart={() => {}}
-          onLoadedMetadata={() => {}}
+          onLoadStart={handleVideoLoadStart}
+          onLoadedMetadata={handleVideoLoadedMetadata}
+          onProgress={handleVideoProgress}
         />
       )}
 
