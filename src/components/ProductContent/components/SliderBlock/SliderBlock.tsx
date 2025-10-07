@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useMemo, useRef, useState } from 'react';
+import { PROJECT_ASPECT_RATIO } from 'constant';
 import { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -98,7 +99,7 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
 
   if (!hasImages) {
     return (
-      <AspectRatio ratio={7 / 4} w='full'>
+      <AspectRatio ratio={PROJECT_ASPECT_RATIO} w='full'>
         <NoImagesFallback />
       </AspectRatio>
     );
@@ -106,7 +107,7 @@ const SliderBlock = ({ sliders }: SliderBlockProps) => {
 
   return (
     <>
-      <AspectRatio ratio={7 / 4} w='full'>
+      <AspectRatio ratio={PROJECT_ASPECT_RATIO} w='full'>
         <VStack
           position='relative'
           w='full'

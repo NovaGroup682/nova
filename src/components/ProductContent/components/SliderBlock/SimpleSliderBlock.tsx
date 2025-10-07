@@ -1,3 +1,5 @@
+import { PROJECT_ASPECT_RATIO } from 'constant';
+
 import { AspectRatio, Box, Image, Text, VStack } from '@chakra-ui/react';
 
 import { getSafeImageUrl } from 'helpers';
@@ -11,7 +13,7 @@ const SimpleSliderBlock = ({ sliders }: SimpleSliderBlockProps) => {
 
   if (!hasImages) {
     return (
-      <AspectRatio ratio={7 / 4} w='full'>
+      <AspectRatio ratio={PROJECT_ASPECT_RATIO} w='full'>
         <VStack
           position='relative'
           w='full'
@@ -37,7 +39,7 @@ const SimpleSliderBlock = ({ sliders }: SimpleSliderBlockProps) => {
   const firstImage = sliders[0];
 
   return (
-    <AspectRatio ratio={7 / 4} w='full'>
+    <AspectRatio ratio={PROJECT_ASPECT_RATIO} w='full'>
       <Box
         position='relative'
         w='full'

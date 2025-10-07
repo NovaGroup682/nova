@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { PROJECT_ASPECT_RATIO } from 'constant';
 import Image from 'next/image';
 
 import { AspectRatio, Text } from '@chakra-ui/react';
@@ -32,7 +33,7 @@ const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} minH={500}>
-      <AspectRatio ratio={7 / 4} w='full'>
+      <AspectRatio ratio={PROJECT_ASPECT_RATIO} w='full'>
         <Image
           sizes='(max-width: 450px) 270px, (max-width: 900px) 500px, 700px'
           style={{

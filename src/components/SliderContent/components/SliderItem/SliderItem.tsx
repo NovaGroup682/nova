@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { PROJECT_ASPECT_RATIO } from 'constant';
 import Image from 'next/image';
 
 import { AspectRatio, Box, Spinner } from '@chakra-ui/react';
@@ -40,7 +41,7 @@ const SliderItem = ({ src, onClick, isFirst = false }: SliderItemProps) => {
 
   return (
     <AspectRatio
-      ratio={7 / 4}
+      ratio={PROJECT_ASPECT_RATIO}
       w='full'
       // boxShadow={{
       //   base: 'inset 0px -90px 40px -20px rgba(0, 0, 0, 0.42)',

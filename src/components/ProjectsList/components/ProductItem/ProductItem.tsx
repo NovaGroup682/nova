@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useState } from 'react';
-import { paths } from 'constant';
+import { paths, PROJECT_ASPECT_RATIO } from 'constant';
 import projects from 'constant/projects';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -46,7 +46,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
 
   return (
     <Link href={`${paths.project}/${project.id}`}>
-      <AspectRatio ratio={7 / 4}>
+      <AspectRatio ratio={PROJECT_ASPECT_RATIO}>
         <VStack
           position='relative'
           w='full'
@@ -71,7 +71,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
           )}
 
           <Image
-            sizes='(max-width: 450px) 270px, 500px'
+            sizes='(max-width: 450px) 470px,  (max-width: 900px) 700px, 100%'
             style={{
               objectFit: 'cover',
               objectPosition: 'center',

@@ -87,7 +87,7 @@ const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
         gap={2}
         w='full'
         mt={4}
-        px={BASE_HORIZONTAL_PADINGS}
+        px='10px'
         pb={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
       >
         {projectItems}

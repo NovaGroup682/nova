@@ -101,15 +101,24 @@ const Modal = ({
             <IconButton
               display={{ base: 'flex', md: isCloseBtnShow ? 'flex' : 'none' }}
               aria-label='Close modal'
-              borderRadius='50%'
               position='fixed'
               right='40px'
               top='40px'
               bg='white'
               color='white'
-              _hover={{ bg: 'rgba(255, 255, 255, 0.2)' }}
+              _hover={{
+                background: 'grey',
+                borderRadius: '4px',
+                '& svg': {
+                  fill: 'white',
+                  background: 'grey',
+                  borderRadius: '4px',
+                  transition: 'all 0.5s ease'
+                }
+              }}
               onClick={onClose}
               zIndex={10001}
+              animation='fade-in 0.3s ease-out'
             >
               <CloseIcon fill='gray.400' />
             </IconButton>

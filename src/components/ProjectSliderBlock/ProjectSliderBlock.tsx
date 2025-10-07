@@ -3,7 +3,7 @@
 import { useMemo, useRef, useState } from 'react';
 import Bath from '@assets/icons/bath.svg';
 import Bed from '@assets/icons/bed-front.svg';
-import { paths } from 'constant';
+import { paths, PROJECT_ASPECT_RATIO } from 'constant';
 import projects from 'constant/projects';
 import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -113,7 +113,7 @@ const ProjectSliderBlock = () => {
     <AspectRatio
       display='flex'
       flexDirection='column'
-      ratio={7 / 4}
+      ratio={PROJECT_ASPECT_RATIO}
       mt={8}
       mb={{ base: 4, md: 8 }}
       h='full'

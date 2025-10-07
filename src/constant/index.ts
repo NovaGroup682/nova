@@ -62,6 +62,8 @@ export const GOOGLE_LINK = 'https://drive.google.com/uc?export=view&id=';
 
 export const maxWidth = 1920;
 
+export const PROJECT_ASPECT_RATIO = 1920 / 1240;
+
 export const BASE_HORIZONTAL_PADINGS = {
   base: '16px',
   sm: '32px',
