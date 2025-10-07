@@ -24,3 +24,4 @@ export { default as StickyContactButton } from './StickyContactButton';
 export { default as SocialLinksBlock } from './SocialLinksBlock';
 export { PrivacyPolicyCheckbox } from './PrivacyPolicyCheckbox';
 export { BackgroundImageWithLoader } from './BackgroundImageWithLoader';
+export { default as BackgroundVideoWithLoader } from './BackgroundVideoWithLoader';

@@ -139,6 +139,8 @@ const content = {
       'современные каменные дома',
       'в рамках вашего бюджета'
     ],
+    videoSrc: bodyLink + '/main_page/mainVideo.mp4',
+    videoCover: bodyLink + '/main_page/mainVideoCover.png',
     mainImgBg: bodyLink + '/main_page/main.jpg',
     mainPopupBg: bodyLink + '/main_page/main-popup-background.png',
     slider: {

@@ -9,7 +9,7 @@ import content from 'content';
 
 import {
   AnimatedBlock,
-  BackgroundImageWithLoader,
+  BackgroundVideoWithLoader,
   BlurText,
   ContactBlock,
   MainProjectDescription,
@@ -91,9 +91,10 @@ const Home = () => (
       }}
     />
     <VStack gap={0} w='full' position='relative'>
-      <BackgroundImageWithLoader
-        src={content.main.mainImgBg}
-        alt='Nova Group - Фоновая иллюстрация'
+      <BackgroundVideoWithLoader
+        videoSrc={content.main.videoSrc}
+        posterSrc={content.main.videoCover}
+        alt='Nova Group - Фоновое видео'
         position='absolute'
         w='full'
         h='100vh'
