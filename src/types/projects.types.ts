@@ -1,9 +1,9 @@
 export enum ProjectSize {
-  xs = 'xs',
-  s = 's',
-  m = 'm',
-  l = 'l',
-  xl = 'xl'
+  xs = 'xs', // < 100
+  s = 's', // 100 - 149
+  m = 'm', // 150 - 179
+  l = 'l', // 180 - 220
+  xl = 'xl' // > 220
 }
 
 export type ProjectItemVariantType = {

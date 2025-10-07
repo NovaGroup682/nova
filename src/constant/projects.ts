@@ -325,6 +325,57 @@ const projects: ProjectItemType[] = [
     ]
   },
   {
+    id: 'nova-12',
+    name: 'Nova-12',
+    beds: 1,
+    baths: 1,
+    areaType: ProjectSize.s,
+    floor: 1,
+    projectPrice: 60000,
+    price: 0,
+    sliders: [bodyLink + '/projects/nova-12/nova12-1.jpg'],
+    implementationCost: {
+      shell: 0,
+      insulatedShell: 0,
+      facade: 0,
+      interiorFinishes: 0
+    },
+    variants: [
+      {
+        area: 132,
+        constructionArea: 0,
+        layouts: [bodyLink + '/projects/nova-12/nova12-floor-1.jpg']
+      }
+    ]
+  },
+  {
+    id: 'nova-13',
+    name: 'Nova-13',
+    beds: 1,
+    baths: 1,
+    areaType: ProjectSize.m,
+    floor: 1,
+    projectPrice: 60000,
+    price: 0,
+    sliders: [
+      bodyLink + '/projects/nova-13/nova13-1.jpg',
+      bodyLink + '/projects/nova-13/nova13-2.jpg'
+    ],
+    implementationCost: {
+      shell: 0,
+      insulatedShell: 0,
+      facade: 0,
+      interiorFinishes: 0
+    },
+    variants: [
+      {
+        area: 101.61,
+        constructionArea: 0,
+        layouts: []
+      }
+    ]
+  },
+  {
     id: 'nova-86',
     name: 'Nova-86',
     beds: 0,
@@ -419,6 +470,165 @@ const projects: ProjectItemType[] = [
           bodyLink + '/projects/nova-99/nova99-floor-1.jpg',
           bodyLink + '/projects/nova-99/nova99-floor-2.jpg'
         ]
+      }
+    ]
+  },
+  {
+    id: 'nova-274',
+    name: 'Nova-274',
+    beds: 0,
+    baths: 0,
+    areaType: ProjectSize.xl,
+    floor: 2,
+    projectPrice: 60000,
+    price: 0,
+    sliders: [bodyLink + '/projects/nova-274/nova274-1.jpg'],
+    implementationCost: {
+      shell: 0,
+      insulatedShell: 0,
+      facade: 0,
+      interiorFinishes: 0
+    },
+    variants: [
+      {
+        area: 260,
+        constructionArea: 0,
+        layouts: [
+          bodyLink + '/projects/nova-274/nova274-floor-1.jpg',
+          bodyLink + '/projects/nova-274/nova274-floor-2.jpg'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'nova-296',
+    name: 'Nova-296',
+    beds: 0,
+    baths: 0,
+    areaType: ProjectSize.m,
+    floor: 2,
+    projectPrice: 60000,
+    price: 0,
+    sliders: [bodyLink + '/projects/nova-296/nova296-1.jpg'],
+    implementationCost: {
+      shell: 0,
+      insulatedShell: 0,
+      facade: 0,
+      interiorFinishes: 0
+    },
+    variants: [
+      {
+        area: 159,
+        constructionArea: 0,
+        layouts: [
+          bodyLink + '/projects/nova-296/nova296-floor-1.jpg',
+          bodyLink + '/projects/nova-296/nova296-floor-2.jpg'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'nova-341',
+    name: 'Nova-341',
+    beds: 0,
+    baths: 0,
+    areaType: ProjectSize.s,
+    floor: 1,
+    projectPrice: 60000,
+    price: 0,
+    sliders: [bodyLink + '/projects/nova-341/nova341-1.jpg'],
+    implementationCost: {
+      shell: 0,
+      insulatedShell: 0,
+      facade: 0,
+      interiorFinishes: 0
+    },
+    variants: [
+      {
+        area: 130,
+        constructionArea: 0,
+        layouts: [bodyLink + '/projects/nova-341/nova341-floor-1.jpg']
+      }
+    ]
+  },
+  {
+    id: 'nova-374',
+    name: 'Nova-374',
+    beds: 0,
+    baths: 0,
+    areaType: ProjectSize.l,
+    floor: 2,
+    projectPrice: 60000,
+    price: 0,
+    sliders: [bodyLink + '/projects/nova-374/nova374-1.jpg'],
+    implementationCost: {
+      shell: 0,
+      insulatedShell: 0,
+      facade: 0,
+      interiorFinishes: 0
+    },
+    variants: [
+      {
+        area: 188,
+        constructionArea: 0,
+        layouts: [
+          bodyLink + '/projects/nova-374/nova374-floor-1.jpg',
+          bodyLink + '/projects/nova-374/nova374-floor-2.jpg'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'nova-423',
+    name: 'Nova-423',
+    beds: 0,
+    baths: 0,
+    areaType: ProjectSize.xl,
+    floor: 2,
+    projectPrice: 60000,
+    price: 0,
+    sliders: [
+      bodyLink + '/projects/nova-423/nova423-1.jpg',
+      bodyLink + '/projects/nova-423/nova423-2.jpg'
+    ],
+    implementationCost: {
+      shell: 0,
+      insulatedShell: 0,
+      facade: 0,
+      interiorFinishes: 0
+    },
+    variants: [
+      {
+        area: 277,
+        constructionArea: 0,
+        layouts: [
+          bodyLink + '/projects/nova-423/nova423-floor-1.jpg',
+          bodyLink + '/projects/nova-423/nova423-floor-2.jpg'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'nova-427',
+    name: 'Nova-427',
+    beds: 0,
+    baths: 0,
+    areaType: ProjectSize.s,
+    floor: 1,
+    projectPrice: 60000,
+    price: 0,
+    sliders: [bodyLink + '/projects/nova-427/nova427-1.jpg'],
+    implementationCost: {
+      shell: 0,
+      insulatedShell: 0,
+      facade: 0,
+      interiorFinishes: 0
+    },
+    variants: [
+      {
+        area: 110,
+        constructionArea: 0,
+        layouts: [bodyLink + '/projects/nova-427/nova427-floor-1.jpg']
       }
     ]
   }

@@ -38,12 +38,12 @@ export const PROJECT_SIZES = [
   //   label: '< 100',
   //   value: ProjectSize.xs
   // },
-  // {
-  //   label: '100 - 125',
-  //   value: ProjectSize.s
-  // },
   {
-    label: '150 - 180',
+    label: '100 - 149',
+    value: ProjectSize.s
+  },
+  {
+    label: '150 - 179',
     value: ProjectSize.m
   },
   {
