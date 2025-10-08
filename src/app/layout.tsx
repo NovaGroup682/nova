@@ -90,8 +90,17 @@ export const metadata: Metadata = {
   },
   icons: [
     { rel: 'icon', url: favIcon.src, sizes: '32x32', type: 'image/x-icon' },
-    { rel: 'icon', url: '/assets/logo_small.svg', sizes: 'any', type: 'image/svg+xml' },
-    { rel: 'apple-touch-icon', url: '/assets/logo_small.svg', sizes: '180x180' },
+    {
+      rel: 'icon',
+      url: '/assets/logo_small.svg',
+      sizes: 'any',
+      type: 'image/svg+xml'
+    },
+    {
+      rel: 'apple-touch-icon',
+      url: '/assets/logo_small.svg',
+      sizes: '180x180'
+    },
     { rel: 'shortcut icon', url: favIcon.src },
     { rel: 'mask-icon', url: '/assets/logo_small.svg', color: '#000000' }
   ],

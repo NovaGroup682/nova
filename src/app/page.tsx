@@ -106,7 +106,7 @@ const Home = () => (
         priority
         sizes='100vw'
         objectFit='cover'
-        objectPosition='right'
+        objectPosition='center center'
       />
 
       <VStack gap={0} w='full' maxW={maxWidth} px={BASE_HORIZONTAL_PADINGS}>
