@@ -135,7 +135,7 @@ const BackgroundVideoWithLoader = ({
           fill
           style={{
             objectFit,
-            objectPosition,
+            objectPosition: 'center center',
             opacity: isImageLoading ? 0.75 : 1,
             filter: 'blur(1px)',
             transition: 'opacity 0.5s ease-in-out, filter 0.5s ease-in-out'
@@ -185,7 +185,7 @@ const BackgroundVideoWithLoader = ({
             width: '100%',
             height: '100%',
             objectFit,
-            objectPosition,
+            objectPosition: 'center center',
             opacity: showVideo ? 1 : 0,
             transition: 'opacity 0.5s ease-in-out'
           }}
