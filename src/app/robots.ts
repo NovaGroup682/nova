@@ -1,6 +1,5 @@
-import { MetadataRoute } from 'next';
-
 import config from 'config';
+import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -15,4 +14,3 @@ export default function robots(): MetadataRoute.Robots {
     host: config.metadata.domen
   };
 }
-
