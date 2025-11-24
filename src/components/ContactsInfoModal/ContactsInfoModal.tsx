@@ -3,7 +3,7 @@
 import Telegram from '@assets/icons/telegram.svg';
 import Whatsapp from '@assets/icons/whatsapp.svg';
 
-import { Box, Flex, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
 
 import { usePrivacyPolicyCookie } from 'hooks';
 
@@ -93,7 +93,7 @@ const ContactsInfoModal = ({ isOpen, onClose }: ContactsInfoModalProps) => {
             Icon={Telegram}
           />
         </Flex>
-        {/* <Text
+        <Text
           fontSize={{
             base: '24px',
             md: '28px'
@@ -103,7 +103,7 @@ const ContactsInfoModal = ({ isOpen, onClose }: ContactsInfoModalProps) => {
           textAlign='center'
           w='full'
         >
-          Строительный отдел
+          Позвоните нам
         </Text>
 
         <Flex
@@ -118,58 +118,16 @@ const ContactsInfoModal = ({ isOpen, onClose }: ContactsInfoModalProps) => {
             md: 0
           }}
         >
-          <VStack gap={0}>
-            <Text
-              textAlign='center'
-              fontSize='16px'
-              fontWeight='600'
-              color='gray.700'
-              mb={{ base: 0, md: 2 }}
-            >
-              Телефон
-            </Text>
-            <Link
-              href={`tel:${content.contacts.phone}`}
-              fontSize='18px'
-              color='blue.600'
-              _hover={{ textDecoration: 'underline' }}
-              textAlign='center'
-            >
-              {content.contacts.salesDepartmentPhone}
-            </Link>
-          </VStack>
-
-          <VStack gap={0}>
-            <Text
-              textAlign='center'
-              fontSize='16px'
-              fontWeight='600'
-              color='gray.700'
-              mb={{ base: 0, md: 2 }}
-            >
-              Электронная почта
-            </Text>
-            <Link
-              href={`mailto:${content.contacts.salesDepartmentEmail}`}
-              fontSize='18px'
-              color='blue.600'
-              _hover={{ textDecoration: 'underline' }}
-              textAlign='center'
-            >
-              {content.contacts.salesDepartmentEmail}
-            </Link>
-          </VStack>
+          <Link
+            href={`tel:${content.contacts.salesDepartmentPhone.replace(/\s|-/g, '')}`}
+            fontSize='18px'
+            color='black'
+            _hover={{ textDecoration: 'underline' }}
+            textAlign='center'
+          >
+            {content.contacts.salesDepartmentPhone}
+          </Link>
         </Flex>
-        <Flex w='full' justifyContent='center' flexDirection='row' gap={4}>
-          <SocialButton
-            href={content.contacts.constructionDepartment.whatsapp}
-            Icon={Whatsapp}
-          />
-          <SocialButton
-            href={content.contacts.constructionDepartment.telegram}
-            Icon={Telegram}
-          />
-        </Flex> */}
       </VStack>
     </Modal>
   );

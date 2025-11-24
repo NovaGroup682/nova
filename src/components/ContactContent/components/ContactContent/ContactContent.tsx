@@ -6,6 +6,8 @@ import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
 
 import { Flex, Link, Text, VStack } from '@chakra-ui/react';
 
+import content from 'content';
+
 import { SocialLinksBlock } from 'components';
 import { SocialButton } from 'ui';
 import { Map } from '../Map';
@@ -172,6 +174,46 @@ const ContactContent = ({
       flexDirection='column'
       gap={4}
     >
+      <Flex gap={4}>
+        <Text
+          fontWeight={400}
+          as='h3'
+          fontSize={{
+            base: '20px',
+            md: '24px'
+          }}
+          lineHeight={{
+            base: '20px',
+            md: '24px'
+          }}
+          color='gray.600'
+          whiteSpace='nowrap'
+        >
+          Позвоните нам:
+        </Text>
+        <Link
+          href={`tel:${content.contacts.salesDepartmentPhone.replace(/\s|-/g, '')}`}
+          w='full'
+          cursor='pointer'
+        >
+          <Text
+            fontWeight={400}
+            as='h3'
+            color='black'
+            fontSize={{
+              base: '20px',
+              md: '22px'
+            }}
+            lineHeight={{
+              base: '20px',
+              md: '24px'
+            }}
+            whiteSpace='nowrap'
+          >
+            {content.contacts.salesDepartmentPhone}
+          </Text>
+        </Link>
+      </Flex>
       <Flex gap={4}>
         <Text
           fontWeight={400}

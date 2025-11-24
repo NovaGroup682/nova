@@ -110,7 +110,7 @@ const Footer = () => (
             {content.contacts.email}
           </Link>
           <Link
-            href={`tel:${content.contacts.salesDepartmentPhone}`}
+            href={`tel:${content.contacts.salesDepartmentPhone.replace(/\s|-/g, '')}`}
             fontSize={{
               base: '12px',
               md: '14px'
