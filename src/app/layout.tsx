@@ -123,8 +123,12 @@ const RootLayout = ({
         <ScrollToTopButton />
         <StickyContactButton />
       </Providers>
-      <Analytics />
-      <SpeedInsights />
+      {process.env.VERCEL && (
+        <>
+          <Analytics />
+          <SpeedInsights />
+        </>
+      )}
     </body>
   </html>
 );
