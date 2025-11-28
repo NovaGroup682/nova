@@ -1,30 +1,22 @@
-# Используем официальный Node.js slim образ
 FROM node:20-slim
 
-# Рабочая директория
 WORKDIR /app
 
-# Установка системных зависимостей
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
+# 1. Устанавливаем системные утилиты
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Копируем package.json и package-lock.json
+# 2. Копируем package.json
 COPY package*.json ./
 
-# Устанавливаем зависимости
+# 3. Устанавливаем npm зависимости
 RUN npm install --legacy-peer-deps
 
-# Копируем все файлы проекта
+# 4. Копируем весь проект
 COPY . .
 
-# Делаем production билд
+# 5. Сборка проекта
 RUN npm run build
 
-# Время выполнения: используем порт из переменной окружения Timeweb
-ENV PORT=3000
-EXPOSE $PORT
-
-# Запуск приложения в продакшн режиме с нужным портом
-CMD ["sh", "-c", "npm start -p $PORT"]
-
+EXPOSE 3000
+CMD ["npm", "start"]
