@@ -1,29 +1,30 @@
+# Используем официальный Node.js slim образ
 FROM node:20-slim
 
 # Рабочая директория
 WORKDIR /app
 
-# Переменная окружения для Timeweb
-ENV PORT 8080
-
-# Системные зависимости
-RUN apt-get update && apt-get install -y --no-install-recommends curl \
+# Установка системных зависимостей
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Копируем package.json
+# Копируем package.json и package-lock.json
 COPY package*.json ./
 
-# Устанавливаем зависимости через npm (правильно)
+# Устанавливаем зависимости
 RUN npm install --legacy-peer-deps
 
-# Копируем остальной проект
+# Копируем все файлы проекта
 COPY . .
 
-# Собираем Next.js
+# Делаем production билд
 RUN npm run build
 
-# Экспонируем порт
-EXPOSE 8080
+# Время выполнения: используем порт из переменной окружения Timeweb
+ENV PORT=3000
+EXPOSE $PORT
 
-# Запуск
-CMD ["npm", "start"]
+# Запуск приложения в продакшн режиме с нужным портом
+CMD ["sh", "-c", "npm start -p $PORT"]
+
