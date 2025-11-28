@@ -2,21 +2,24 @@ FROM node:20-slim
 
 WORKDIR /app
 
-# 1. Устанавливаем системные утилиты
+# Устанавливаем curl и другие системные утилиты
 RUN apt-get update && apt-get install -y --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/*
 
-# 2. Копируем package.json
+# Копируем package.json и package-lock.json
 COPY package*.json ./
 
-# 3. Устанавливаем npm зависимости
+# Устанавливаем Node зависимости
 RUN npm install --legacy-peer-deps
 
-# 4. Копируем весь проект
+# Копируем весь проект
 COPY . .
 
-# 5. Сборка проекта
+# Собираем проект
 RUN npm run build
 
+# Указываем порт
 EXPOSE 3000
+
+# Запускаем приложение
 CMD ["npm", "start"]
