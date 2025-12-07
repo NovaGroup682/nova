@@ -18,6 +18,8 @@ import { SliderBlockWrapper } from 'components/ProductContent/components/SliderB
 const findProjectById = (id: string): ProjectItemType | null =>
   projects.find((item) => String(item.id) === id) || null;
 
+export const dynamic = 'force-static';
+
 export const generateMetadata = async ({
   params
 }: {

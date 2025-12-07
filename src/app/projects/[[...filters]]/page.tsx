@@ -7,6 +7,14 @@ import { ProjectSearchKeys } from 'types';
 
 import { ProjectsFilter, ProjectsList, SearchInput } from 'components';
 
+export const dynamic = 'force-static';
+
+export function generateStaticParams() {
+  // Since filters are handled via query parameters, not path parameters,
+  // we only need to generate the base path
+  return [{ filters: [] }];
+}
+
 export const metadata = {
   title: 'Проекты современных каменных домов | Nova Group',
   description:

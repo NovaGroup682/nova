@@ -92,83 +92,85 @@ const nextConfig: NextConfig = {
     };
 
     return config;
-  },
-
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY'
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block'
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
-          }
-        ]
-      },
-      {
-        source: '/assets/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      },
-      {
-        source: '/_next/static/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      },
-      {
-        source: '/_next/static/css/(.*)',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'text/css; charset=utf-8'
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      },
-      {
-        source: '/_next/static/chunks/(.*)',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/javascript; charset=utf-8'
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      }
-    ];
-  },
-
-  async redirects() {
-    return [
-      {
-        source: '/home',
-        destination: '/',
-        permanent: true
-      }
-    ];
   }
+
+  // Headers and redirects don't work with output: 'export'
+  // They need to be configured at the hosting/server level for static exports
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/(.*)',
+  //       headers: [
+  //         {
+  //           key: 'X-Frame-Options',
+  //           value: 'DENY'
+  //         },
+  //         {
+  //           key: 'X-XSS-Protection',
+  //           value: '1; mode=block'
+  //         },
+  //         {
+  //           key: 'Referrer-Policy',
+  //           value: 'origin-when-cross-origin'
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       source: '/assets/(.*)',
+  //       headers: [
+  //         {
+  //           key: 'Cache-Control',
+  //           value: 'public, max-age=31536000, immutable'
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       source: '/_next/static/(.*)',
+  //       headers: [
+  //         {
+  //           key: 'Cache-Control',
+  //           value: 'public, max-age=31536000, immutable'
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       source: '/_next/static/css/(.*)',
+  //       headers: [
+  //         {
+  //           key: 'Content-Type',
+  //           value: 'text/css; charset=utf-8'
+  //         },
+  //         {
+  //           key: 'Cache-Control',
+  //           value: 'public, max-age=31536000, immutable'
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       source: '/_next/static/chunks/(.*)',
+  //       headers: [
+  //         {
+  //           key: 'Content-Type',
+  //           value: 'application/javascript; charset=utf-8'
+  //         },
+  //         {
+  //           key: 'Cache-Control',
+  //           value: 'public, max-age=31536000, immutable'
+  //         }
+  //       ]
+  //     }
+  //   ];
+  // },
+
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/home',
+  //       destination: '/',
+  //       permanent: true
+  //     }
+  //   ];
+  // }
 };
 
 export default nextConfig;
