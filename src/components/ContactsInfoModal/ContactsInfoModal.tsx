@@ -109,6 +109,7 @@ const ContactsInfoModal = ({ isOpen, onClose }: ContactsInfoModalProps) => {
         <Flex
           w='full'
           justifyContent='space-around'
+          alignItems='center'
           flexDirection={{
             base: 'column',
             md: 'row'

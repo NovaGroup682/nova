@@ -19,7 +19,6 @@ const {
   metadata: {
     title,
     description,
-    favIcon,
     keywords,
     ogTitle,
     ogDescription,
@@ -89,20 +88,43 @@ export const metadata: Metadata = {
     site: '@novagroup'
   },
   icons: [
-    { rel: 'icon', url: favIcon.src, sizes: '32x32', type: 'image/x-icon' },
     {
       rel: 'icon',
-      url: '/assets/logo_small.svg',
+      url: new URL('/favicon.ico', canonical).toString(),
+      sizes: 'any'
+    },
+    {
+      rel: 'icon',
+      url: new URL('/assets/favicon.ico', canonical).toString(),
+      sizes: '32x32',
+      type: 'image/x-icon'
+    },
+    {
+      rel: 'icon',
+      url: new URL('/assets/favicon.ico', canonical).toString(),
+      sizes: '16x16',
+      type: 'image/x-icon'
+    },
+    {
+      rel: 'icon',
+      url: new URL('/assets/logo_small.svg', canonical).toString(),
       sizes: 'any',
       type: 'image/svg+xml'
     },
     {
       rel: 'apple-touch-icon',
-      url: '/assets/logo_small.svg',
+      url: new URL('/assets/logo_small.svg', canonical).toString(),
       sizes: '180x180'
     },
-    { rel: 'shortcut icon', url: favIcon.src },
-    { rel: 'mask-icon', url: '/assets/logo_small.svg', color: '#000000' }
+    {
+      rel: 'shortcut icon',
+      url: new URL('/favicon.ico', canonical).toString()
+    },
+    {
+      rel: 'mask-icon',
+      url: new URL('/assets/logo_small.svg', canonical).toString(),
+      color: '#000000'
+    }
   ],
   manifest: '/manifest.json'
 };
