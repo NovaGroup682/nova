@@ -165,6 +165,29 @@ const ProjectsFilter = () => {
   }, [searchParams, router]);
 
   useEffect(() => {
+    const areaParam = searchParams.get(ProjectSearchKeys.area) || '';
+    const floorsParam = searchParams.get(ProjectSearchKeys.floors);
+    const minPriceParam = searchParams.get(ProjectSearchKeys.minPrice) || '';
+
+    if (areaParam !== area) {
+      setArea(areaParam);
+    }
+
+    const floorsArray = floorsParam ? floorsParam.split(',').map(Number) : [];
+    const floorsChanged =
+      floorsArray.length !== floors.length ||
+      floorsArray.some((f, i) => f !== floors[i]);
+    if (floorsChanged) {
+      setFloors(floorsArray);
+    }
+
+    if (minPriceParam !== minPrice) {
+      setMinPrice(minPriceParam);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
+
+  useEffect(() => {
     const cleanup = updateUrlWithDebounce((params) => {
       if (minPrice) {
         params.set(ProjectSearchKeys.minPrice, parseFormattedNumber(minPrice));

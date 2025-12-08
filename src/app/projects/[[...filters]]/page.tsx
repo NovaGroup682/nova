@@ -3,8 +3,6 @@ import projects from 'constant/projects';
 
 import { Flex, Text, VStack } from '@chakra-ui/react';
 
-import { ProjectSearchKeys } from 'types';
-
 import { ProjectsFilter, ProjectsList, SearchInput } from 'components';
 
 export const dynamic = 'force-static';
@@ -47,13 +45,7 @@ export const metadata = {
   }
 };
 
-const ProjectsPage = async ({
-  searchParams
-}: {
-  searchParams: Promise<Record<ProjectSearchKeys, string>>;
-}) => {
-  const filters = await searchParams;
-
+const ProjectsPage = () => {
   return (
     <VStack
       gap={0}
@@ -98,7 +90,7 @@ const ProjectsPage = async ({
         </Flex>
         <ProjectsFilter />
       </VStack>
-      <ProjectsList projects={projects} filters={filters} />
+      <ProjectsList projects={projects} />
     </VStack>
   );
 };

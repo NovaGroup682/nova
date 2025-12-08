@@ -1,6 +1,7 @@
 'use client';
 
 import { memo, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { BASE_HORIZONTAL_PADINGS } from 'constant';
 
 import { Box, SimpleGrid } from '@chakra-ui/react';
@@ -11,12 +12,22 @@ import { ProductItem } from './components';
 
 interface ProjectsListProps {
   projects: ProjectItemType[];
-  filters: Record<ProjectSearchKeys, string>;
 }
 
-const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
-  const memoizedFilters = useMemo(() => filters, [filters]);
-
+const ProjectsList = ({ projects }: ProjectsListProps) => {
+  const searchParams = useSearchParams();
+  
+  const memoizedFilters = useMemo(() => {
+    const filters: Record<ProjectSearchKeys, string> = {
+      [ProjectSearchKeys.area]: searchParams.get(ProjectSearchKeys.area) || '',
+      [ProjectSearchKeys.floors]: searchParams.get(ProjectSearchKeys.floors) || '',
+      [ProjectSearchKeys.minPrice]: searchParams.get(ProjectSearchKeys.minPrice) || '',
+      [ProjectSearchKeys.maxPrice]: searchParams.get(ProjectSearchKeys.maxPrice) || '',
+      [ProjectSearchKeys.projectName]: searchParams.get(ProjectSearchKeys.projectName) || ''
+    };
+    return filters;
+  }, [searchParams]);
+  
   const filteredProjects = useMemo(
     () =>
       projects.filter((project) => {
@@ -25,8 +36,8 @@ const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
         }
 
         if (memoizedFilters.floors?.length) {
-          const projectFloor = String(project.floor);
-          if (!memoizedFilters.floors.includes(projectFloor)) {
+          const floorsArray = memoizedFilters.floors.split(',').map(Number);
+          if (!floorsArray.includes(project.floor)) {
             return false;
           }
         }

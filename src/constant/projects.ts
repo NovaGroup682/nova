@@ -371,7 +371,9 @@ const projects: ProjectItemType[] = [
       {
         area: 101.61,
         constructionArea: 0,
-        layouts: []
+        layouts: [
+          bodyLink + '/projects/nova-13/nova13-floor-1.jpg',
+        ]
       }
     ]
   },
@@ -470,6 +472,30 @@ const projects: ProjectItemType[] = [
           bodyLink + '/projects/nova-99/nova99-floor-1.jpg',
           bodyLink + '/projects/nova-99/nova99-floor-2.jpg'
         ]
+      }
+    ]
+  },
+  {
+    id: 'nova-109',
+    name: 'Nova-109',
+    beds: 0,
+    baths: 0,
+    areaType: ProjectSize.xl,
+    floor: 2,
+    projectPrice: 60000,
+    price: 0,
+    sliders: [bodyLink + '/projects/nova-109/nova109-1.jpg'],
+    implementationCost: {
+      shell: 0,
+      insulatedShell: 0,
+      facade: 0,
+      interiorFinishes: 0
+    },
+    variants: [
+      {
+        area: 309,
+        constructionArea: 0,
+        layouts: [bodyLink + '/projects/nova-109/nova109-floor-1.jpg']
       }
     ]
   },
