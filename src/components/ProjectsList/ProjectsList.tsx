@@ -1,8 +1,8 @@
 'use client';
 
 import { memo, useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { BASE_HORIZONTAL_PADINGS } from 'constant';
+import { useSearchParams } from 'next/navigation';
 
 import { Box, SimpleGrid } from '@chakra-ui/react';
 
@@ -16,18 +16,22 @@ interface ProjectsListProps {
 
 const ProjectsList = ({ projects }: ProjectsListProps) => {
   const searchParams = useSearchParams();
-  
+
   const memoizedFilters = useMemo(() => {
     const filters: Record<ProjectSearchKeys, string> = {
       [ProjectSearchKeys.area]: searchParams.get(ProjectSearchKeys.area) || '',
-      [ProjectSearchKeys.floors]: searchParams.get(ProjectSearchKeys.floors) || '',
-      [ProjectSearchKeys.minPrice]: searchParams.get(ProjectSearchKeys.minPrice) || '',
-      [ProjectSearchKeys.maxPrice]: searchParams.get(ProjectSearchKeys.maxPrice) || '',
-      [ProjectSearchKeys.projectName]: searchParams.get(ProjectSearchKeys.projectName) || ''
+      [ProjectSearchKeys.floors]:
+        searchParams.get(ProjectSearchKeys.floors) || '',
+      [ProjectSearchKeys.minPrice]:
+        searchParams.get(ProjectSearchKeys.minPrice) || '',
+      [ProjectSearchKeys.maxPrice]:
+        searchParams.get(ProjectSearchKeys.maxPrice) || '',
+      [ProjectSearchKeys.projectName]:
+        searchParams.get(ProjectSearchKeys.projectName) || ''
     };
     return filters;
   }, [searchParams]);
-  
+
   const filteredProjects = useMemo(
     () =>
       projects.filter((project) => {

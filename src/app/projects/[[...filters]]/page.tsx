@@ -45,54 +45,52 @@ export const metadata = {
   }
 };
 
-const ProjectsPage = () => {
-  return (
+const ProjectsPage = () => (
+  <VStack
+    gap={0}
+    w='full'
+    position='relative'
+    justifyContent='flex-start'
+    alignItems='center'
+    flex={1}
+  >
     <VStack
-      gap={0}
+      gap={4}
       w='full'
-      position='relative'
-      justifyContent='flex-start'
-      alignItems='center'
-      flex={1}
+      maxW={maxWidth}
+      px={BASE_HORIZONTAL_PADINGS}
+      pt={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
+      mb={4}
     >
-      <VStack
-        gap={4}
+      <Flex
         w='full'
-        maxW={maxWidth}
-        px={BASE_HORIZONTAL_PADINGS}
-        pt={{ base: '16px', sm: '32px', md: '40px', lg: '60px' }}
-        mb={4}
+        justifyContent='space-between'
+        alignItems='center'
+        flexDir={{
+          base: 'column',
+          md: 'row'
+        }}
+        gap={4}
       >
-        <Flex
-          w='full'
-          justifyContent='space-between'
-          alignItems='center'
-          flexDir={{
-            base: 'column',
-            md: 'row'
+        <Text
+          as='h1'
+          fontSize={{
+            base: '24px',
+            md: '34px'
           }}
-          gap={4}
+          lineHeight={{
+            base: '30px',
+            md: '52px'
+          }}
         >
-          <Text
-            as='h1'
-            fontSize={{
-              base: '24px',
-              md: '34px'
-            }}
-            lineHeight={{
-              base: '30px',
-              md: '52px'
-            }}
-          >
-            Проекты современных каменных домов
-          </Text>
-          <SearchInput />
-        </Flex>
-        <ProjectsFilter />
-      </VStack>
-      <ProjectsList projects={projects} />
+          Проекты современных каменных домов
+        </Text>
+        <SearchInput />
+      </Flex>
+      <ProjectsFilter />
     </VStack>
-  );
-};
+    <ProjectsList projects={projects} />
+  </VStack>
+);
 
 export default ProjectsPage;
