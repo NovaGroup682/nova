@@ -4,7 +4,7 @@ import { memo, useMemo } from 'react';
 import { BASE_HORIZONTAL_PADINGS } from 'constant';
 import { useSearchParams } from 'next/navigation';
 
-import { Box, SimpleGrid } from '@chakra-ui/react';
+import { Box, SimpleGrid, Text } from '@chakra-ui/react';
 
 import { ProjectItemType, ProjectSearchKeys } from 'types';
 
@@ -85,12 +85,47 @@ const ProjectsList = ({ projects }: ProjectsListProps) => {
 
   const resultsCount = filteredProjects.length;
 
+  const hasAppliedFilters = useMemo(
+    () => Object.values(memoizedFilters).some((value) => value),
+    [memoizedFilters]
+  );
+
   return (
-    <Box w='full'>
-      {memoizedFilters.projectName && (
-        <Box px={BASE_HORIZONTAL_PADINGS} mb={2} color='gray.600' fontSize='sm'>
-          Найдено проектов: {resultsCount}
+    <Box
+      w='full'
+      h='full'
+      flex={1}
+      flexDir='column'
+      justifyContent='center'
+      alignItems='center'
+      display='flex'
+    >
+      {hasAppliedFilters && filteredProjects.length === 0 ? (
+        <Box
+          px={BASE_HORIZONTAL_PADINGS}
+          display='flex'
+          flexDir='column'
+          flex={1}
+          justifyContent='center'
+          alignItems='center'
+          h='full'
+          mb={2}
+          color='gray.600'
+          fontSize='sm'
+        >
+          <Text>По заданным фильтрам проекты не найдены</Text>
         </Box>
+      ) : (
+        memoizedFilters.projectName && (
+          <Box
+            px={BASE_HORIZONTAL_PADINGS}
+            mb={2}
+            color='gray.600'
+            fontSize='sm'
+          >
+            Найдено проектов: {resultsCount}
+          </Box>
+        )
       )}
 
       <SimpleGrid
