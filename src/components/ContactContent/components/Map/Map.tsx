@@ -22,7 +22,7 @@ const Map = ({ address, coordinates }: MapProps) => (
       justifyContent='space-between'
       flexDirection={{
         base: 'column',
-        md: 'row'
+        lg: 'row'
       }}
       gap={2}
     >
@@ -38,7 +38,7 @@ const Map = ({ address, coordinates }: MapProps) => (
           md: '24px'
         }}
       >
-        {address}
+        {address.join(', ')}
       </Text>
       <Text
         fontWeight={400}
