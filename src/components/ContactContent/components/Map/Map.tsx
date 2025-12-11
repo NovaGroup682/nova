@@ -1,8 +1,14 @@
 'use client';
 
-import { Box, Flex, Text, VStack } from '@chakra-ui/react';
+import { lazy, Suspense } from 'react';
 
-import { YandexMap } from 'components';
+import { Box, Flex, Skeleton, Text, VStack } from '@chakra-ui/react';
+
+const LazyYandexMap = lazy(() =>
+  import('components').then((module) => ({
+    default: module.YandexMap
+  }))
+);
 
 interface MapProps {
   address: string[];
@@ -56,12 +62,16 @@ const Map = ({ address, coordinates }: MapProps) => (
       </Text>
     </Flex>
     <Box w='full' h={{ base: '250px', md: '350px' }} py={2}>
-      <YandexMap
-        address={address}
-        coordinates={coordinates}
-        height='100%'
-        width='100%'
-      />
+      <Suspense
+        fallback={<Skeleton height='100%' width='100%' borderRadius='8px' />}
+      >
+        <LazyYandexMap
+          address={address}
+          coordinates={coordinates}
+          height='100%'
+          width='100%'
+        />
+      </Suspense>
     </Box>
   </VStack>
 );

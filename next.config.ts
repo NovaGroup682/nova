@@ -42,6 +42,7 @@ const nextConfig: NextConfig = {
     imageSizes: [
       16, 32, 48, 64, 96, 128, 256, 384, 512, 640, 750, 828, 1080, 1200, 1920
     ],
+    qualities: [70, 75, 80, 90, 100],
     minimumCacheTTL: 31536000, // 1 year cache
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
