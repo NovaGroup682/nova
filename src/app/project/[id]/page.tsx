@@ -1,4 +1,4 @@
-import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
+import { BASE_HORIZONTAL_PADINGS, bodyLink, maxWidth } from 'constant';
 import projects from 'constant/projects';
 
 import { Flex, Show, Text, VStack } from '@chakra-ui/react';
@@ -45,7 +45,8 @@ export const generateMetadata = async ({
       siteName: 'Nova Group',
       images: [
         {
-          url: project.sliders?.[0] || '/assets/images/main_page/main.jpg',
+          url:
+            project.sliders?.[0] || bodyLink + '/projects/nova-1/nova1-1.jpg',
           width: 1200,
           height: 630,
           alt: `Проект дома ${project.name} - Nova Group`,
@@ -59,7 +60,9 @@ export const generateMetadata = async ({
       card: 'summary_large_image',
       title: `Проект дома ${project.name} | Nova Group`,
       description: `Проект дома ${project.name}. Площадь: ${project.variants[0]?.area}м². Цена: ${formatCurrency(project.projectPrice)}.`,
-      images: [project.sliders?.[0] || '/assets/images/main_page/main.jpg']
+      images: [
+        project.sliders?.[0] || bodyLink + '/projects/nova-1/nova1-1.jpg'
+      ]
     }
   };
 };

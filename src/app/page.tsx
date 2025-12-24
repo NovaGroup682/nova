@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import config from 'config';
-import { BASE_HORIZONTAL_PADINGS, maxWidth, paths } from 'constant';
+import { BASE_HORIZONTAL_PADINGS, bodyLink, maxWidth, paths } from 'constant';
 import type { Metadata } from 'next';
 
 import { For, Skeleton, Text, VStack } from '@chakra-ui/react';
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: 'Nova Group',
     images: [
       {
-        url: '/assets/images/main_page/main.jpg',
+        url: bodyLink + '/main_page/main.jpg',
         width: 1200,
         height: 630,
         alt: 'Nova Group - Главная страница'
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: 'Nova Group - Главная',
     description:
       'Проектирование, строительство и отделка жилых и коммерческих объектов',
-    images: ['/assets/images/main_page/main.jpg']
+    images: [bodyLink + '/main_page/main.jpg']
   },
   alternates: {
     canonical: config.metadata.domen

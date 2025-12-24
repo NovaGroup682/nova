@@ -1,4 +1,5 @@
 import Favicon from '@assets/favicon.ico';
+import { bodyLink } from 'constant';
 
 import { ConfigType } from 'types';
 
@@ -16,7 +17,7 @@ const config: ConfigType = {
     ogTitle: 'Nova Group - Проектирование и строительство современных домов',
     ogDescription:
       'Строительная компания Nova Group. Проектируем и строим современные каменные дома в рамках вашего бюджета. Типовые решения с продуманной планировкой.',
-    ogImage: '/assets/images/main_page/main.jpg',
+    ogImage: bodyLink + '/main_page/main.jpg',
     ogType: 'website',
     twitterCard: 'summary_large_image',
     viewport: 'width=device-width, initial-scale=1',

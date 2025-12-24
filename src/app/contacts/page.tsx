@@ -1,3 +1,4 @@
+import { bodyLink } from 'constant';
 import type { Metadata } from 'next';
 
 import { VStack } from '@chakra-ui/react';
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     siteName: 'Nova Group',
     images: [
       {
-        url: '/assets/images/main_page/main.jpg',
+        url: bodyLink + '/main_page/main.jpg',
         width: 1200,
         height: 630,
         alt: 'Контакты Nova Group - Строительная компания',
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     title: 'Контакты | Nova Group - Строительная компания',
     description:
       'Контактная информация Nova Group. Адрес: Москва, Очаковское ш., д.34. Телефон: +7 985 999-46-00.',
-    images: ['/assets/images/main_page/main.jpg']
+    images: [bodyLink + '/main_page/main.jpg']
   }
 };
 

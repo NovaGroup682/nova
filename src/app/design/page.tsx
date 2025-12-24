@@ -1,4 +1,4 @@
-import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
+import { BASE_HORIZONTAL_PADINGS, bodyLink, maxWidth } from 'constant';
 import type { Metadata } from 'next';
 
 import { Box, Text, VStack } from '@chakra-ui/react';
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: 'Nova Group',
     images: [
       {
-        url: '/assets/images/design_page/main_background.jpg',
+        url: bodyLink + '/design_page/main_background.jpg',
         width: 1200,
         height: 630,
         alt: 'Индивидуальное проектирование домов - Nova Group',
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: 'Индивидуальное проектирование домов | Nova Group',
     description:
       'Индивидуальное проектирование современных домов. Создаем дом с нуля под ваш стиль жизни, участок и бюджет.',
-    images: ['/assets/images/design_page/main_background.jpg']
+    images: [bodyLink + '/design_page/main_background.jpg']
   }
 };
 

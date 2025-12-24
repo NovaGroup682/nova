@@ -1,4 +1,4 @@
-import { BASE_HORIZONTAL_PADINGS } from 'constant';
+import { BASE_HORIZONTAL_PADINGS, bodyLink } from 'constant';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: 'Nova Group',
     images: [
       {
-        url: '/assets/images/services_page/main_img.jpg',
+        url: bodyLink + '/services_page/main_img.jpg',
         width: 1200,
         height: 630,
         alt: 'Услуги строительной компании Nova Group',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: 'Услуги строительной компании | Nova Group',
     description:
       'Полный спектр строительных услуг: проектирование, строительство, отделка. Прозрачная смета, контроль качества, гарантия на работы.',
-    images: ['/assets/images/services_page/main_img.jpg']
+    images: [bodyLink + '/services_page/main_img.jpg']
   }
 };
 

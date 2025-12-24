@@ -70,3 +70,5 @@ export const BASE_HORIZONTAL_PADINGS = {
   md: '60px',
   lg: '120px'
 };
+
+export const bodyLink = `https://s3.twcstorage.ru/b8b3226e-baadd101-b3d7-4fa8-aaef-b2200792d45c`;

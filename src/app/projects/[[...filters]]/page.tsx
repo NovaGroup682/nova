@@ -1,4 +1,4 @@
-import { BASE_HORIZONTAL_PADINGS, maxWidth } from 'constant';
+import { BASE_HORIZONTAL_PADINGS, bodyLink, maxWidth } from 'constant';
 import projects from 'constant/projects';
 
 import { Flex, Text, VStack } from '@chakra-ui/react';
@@ -21,7 +21,7 @@ export const metadata = {
     siteName: 'Nova Group',
     images: [
       {
-        url: '/assets/images/main_page/main.jpg',
+        url: bodyLink + '/main_page/main.jpg',
         width: 1200,
         height: 630,
         alt: 'Проекты домов Nova Group - Современные каменные дома',
@@ -35,7 +35,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Проекты домов | Nova Group',
     description: 'Каталог проектов современных каменных домов от Nova Group',
-    images: ['/assets/images/main_page/main.jpg']
+    images: [bodyLink + '/main_page/main.jpg']
   }
 };
 
