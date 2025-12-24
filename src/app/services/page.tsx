@@ -1,12 +1,12 @@
 import { BASE_HORIZONTAL_PADINGS, bodyLink } from 'constant';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 
-import { AspectRatio, Flex, VStack } from '@chakra-ui/react';
+import { Flex, VStack } from '@chakra-ui/react';
 
 import content from 'content';
 
 import { BlurText, ContactUs, ServicesList } from 'components';
+import { OptimizedImage } from 'components/ServiceContent/components';
 
 export const metadata: Metadata = {
   title: 'Услуги строительной компании | Nova Group',
@@ -105,31 +105,20 @@ const Services = async () => {
         >
           <ServicesList services={services.servicesList} />
 
-          <AspectRatio
+          <OptimizedImage
+            src={services.mainImg}
+            alt='Услуги главная'
             ratio={2 / 3}
-            w='full'
-            position='relative'
+            priority
+            sizes='(max-width: 450px) 400px, (max-width: 768px) 768px, (max-width: 1200px) 1200px'
+            borderRadius='12px'
             maxH='75vh'
             minW='40%'
-            borderRadius='12px'
-            overflow='hidden'
-            display={{ base: 'none', md: 'block' }}
             maxW='400px'
-          >
-            <Image
-              src={services.mainImg}
-              alt='Услуги главная'
-              fill
-              priority
-              style={{
-                objectFit: 'cover',
-                transition: 'opacity 0.3s ease'
-              }}
-              sizes='(max-width: 450px) 400px, (max-width: 768px) 768px, (max-width: 1200px) 1200px'
-              placeholder='blur'
-              blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
-            />
-          </AspectRatio>
+            display={{ base: 'none', md: 'block' }}
+            maxRetries={3}
+            retryDelay={2000}
+          />
         </Flex>
 
         <ContactUs />

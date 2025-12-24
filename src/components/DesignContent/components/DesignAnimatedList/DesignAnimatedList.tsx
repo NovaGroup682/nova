@@ -3,7 +3,14 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
-import { AspectRatio, Box, Flex, Text, VStack } from '@chakra-ui/react';
+import {
+  AspectRatio,
+  Box,
+  Flex,
+  Spinner,
+  Text,
+  VStack
+} from '@chakra-ui/react';
 
 interface CarouselItem {
   label: string;
@@ -19,9 +26,25 @@ const DesignAnimatedList = ({ list }: DesignAnimatedListProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [retryCount, setRetryCount] = useState<number>(0);
+  const [currentSrc, setCurrentSrc] = useState<string>(list[0]?.src || '');
+  const maxRetries = 3;
+  const retryDelay = 2000;
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollAccumulator = useRef(0);
+
+  // Сброс состояния загрузки при смене активного изображения
+  useEffect(() => {
+    const newSrc = list[activeIndex]?.src;
+    if (newSrc && newSrc !== currentSrc) {
+      setIsImageLoading(true);
+      setHasError(false);
+      setRetryCount(0);
+      setCurrentSrc(newSrc);
+    }
+  }, [activeIndex, list, currentSrc]);
 
   useEffect(() => {
     const handleWheelEvent = (e: WheelEvent) => {
@@ -59,6 +82,37 @@ const DesignAnimatedList = ({ list }: DesignAnimatedListProps) => {
       document.removeEventListener('wheel', handleWheelEvent);
     };
   }, [isHovered, list.length]);
+
+  const handleImageLoad = () => {
+    setIsImageLoading(false);
+    setHasError(false);
+  };
+
+  const handleImageError = () => {
+    setIsImageLoading(false);
+
+    if (retryCount < maxRetries) {
+      // Повторная попытка загрузки
+      const newRetryCount = retryCount + 1;
+      setRetryCount(newRetryCount);
+
+      setTimeout(() => {
+        setIsImageLoading(true);
+        const src = list[activeIndex]?.src || '';
+        // Добавляем timestamp для обхода кеша браузера
+        const separator = src.includes('?') ? '&' : '?';
+        setCurrentSrc(
+          `${src}${separator}_retry=${newRetryCount}&_t=${Date.now()}`
+        );
+      }, retryDelay);
+    } else {
+      setHasError(true);
+      console.warn(
+        `Failed to load image after ${maxRetries} retries:`,
+        list[activeIndex]?.src
+      );
+    }
+  };
 
   return (
     <Flex
@@ -176,23 +230,90 @@ const DesignAnimatedList = ({ list }: DesignAnimatedListProps) => {
           borderRadius='12px'
           overflow='hidden'
         >
-          <Image
-            src={list[activeIndex]?.src}
-            alt={list[activeIndex]?.label}
-            fill
-            priority
-            style={{
-              objectFit: 'contain',
-              objectPosition: 'right',
-              transition: 'opacity 0.3s ease',
-              filter: isImageLoading ? 'blur(10px)' : 'none'
-            }}
-            sizes='(max-width: 450px) 300px, (max-width: 1200px) 720px, 1200px'
-            onLoad={() => setIsImageLoading(false)}
-            onError={() => setIsImageLoading(false)}
-            placeholder='blur'
-            blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
-          />
+          <>
+            {/* Индикатор загрузки */}
+            {isImageLoading && !hasError && (
+              <Box
+                position='absolute'
+                top='50%'
+                left='50%'
+                transform='translate(-50%, -50%)'
+                zIndex={2}
+              >
+                <Spinner size='xl' color='gray.600' />
+              </Box>
+            )}
+
+            {/* Фон во время загрузки */}
+            {isImageLoading && (
+              <Box
+                position='absolute'
+                top={0}
+                left={0}
+                right={0}
+                bottom={0}
+                bg='gray.100'
+                zIndex={0}
+              />
+            )}
+
+            {/* Сообщение об ошибке */}
+            {hasError && (
+              <Box
+                position='absolute'
+                top='50%'
+                left='50%'
+                transform='translate(-50%, -50%)'
+                zIndex={2}
+                textAlign='center'
+                color='gray.500'
+                fontSize='sm'
+                px={4}
+              >
+                Не удалось загрузить изображение
+                {retryCount > 0 && (
+                  <Box mt={2} fontSize='xs' color='gray.400'>
+                    Попыток: {retryCount}/{maxRetries}
+                  </Box>
+                )}
+              </Box>
+            )}
+
+            {/* Изображение */}
+            {!hasError && currentSrc && (
+              <Image
+                src={currentSrc}
+                alt={list[activeIndex]?.label || ''}
+                fill
+                priority
+                style={{
+                  objectFit: 'contain',
+                  objectPosition: 'right',
+                  transition: 'opacity 0.3s ease',
+                  filter: isImageLoading ? 'blur(10px)' : 'none',
+                  opacity: isImageLoading ? 0 : 1
+                }}
+                sizes='(max-width: 450px) 300px, (max-width: 1200px) 720px, 1200px'
+                placeholder='blur'
+                blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+              />
+            )}
+
+            {/* Фон при ошибке */}
+            {hasError && (
+              <Box
+                position='absolute'
+                top={0}
+                left={0}
+                right={0}
+                bottom={0}
+                bg='gray.100'
+                zIndex={1}
+              />
+            )}
+          </>
         </AspectRatio>
       </Flex>
     </Flex>

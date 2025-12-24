@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CloseIcon from '@assets/icons/circle-xmark.svg';
 import Image from 'next/image';
 
@@ -9,6 +9,7 @@ import {
   Box,
   Flex,
   IconButton,
+  Spinner,
   Text,
   useBreakpointValue,
   VStack
@@ -45,8 +46,21 @@ const ArchitecturalBlock = ({
   carousel
 }: ArchitecturalBlockProps) => {
   const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [retryCount, setRetryCount] = useState<number>(0);
+  const [currentSrc, setCurrentSrc] = useState<string>(src);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
   const isMobile = useBreakpointValue({ base: true, lg: false });
+  const maxRetries = 3;
+  const retryDelay = 2000;
+
+  useEffect(() => {
+    // Сброс состояния при изменении src
+    setIsImageLoading(true);
+    setHasError(false);
+    setRetryCount(0);
+    setCurrentSrc(src);
+  }, [src]);
 
   const openVideoModal = () => {
     setIsVideoModalOpen(true);
@@ -54,6 +68,33 @@ const ArchitecturalBlock = ({
 
   const closeVideoModal = () => {
     setIsVideoModalOpen(false);
+  };
+
+  const handleImageLoad = () => {
+    setIsImageLoading(false);
+    setHasError(false);
+  };
+
+  const handleImageError = () => {
+    setIsImageLoading(false);
+
+    if (retryCount < maxRetries) {
+      // Повторная попытка загрузки
+      const newRetryCount = retryCount + 1;
+      setRetryCount(newRetryCount);
+
+      setTimeout(() => {
+        setIsImageLoading(true);
+        // Добавляем timestamp для обхода кеша браузера
+        const separator = src.includes('?') ? '&' : '?';
+        setCurrentSrc(
+          `${src}${separator}_retry=${newRetryCount}&_t=${Date.now()}`
+        );
+      }, retryDelay);
+    } else {
+      setHasError(true);
+      console.warn(`Failed to load image after ${maxRetries} retries:`, src);
+    }
   };
 
   return (
@@ -155,20 +196,89 @@ const ArchitecturalBlock = ({
           overflow='hidden'
           display={{ base: 'none', md: 'block' }}
         >
-          <Image
-            src={src}
-            alt={title}
-            fill
-            priority
-            style={{
-              objectFit: 'cover',
-              transition: 'opacity 0.3s ease',
-              filter: isImageLoading ? 'blur(10px)' : 'none'
-            }}
-            sizes='(max-width: 450px) 400px, 600px'
-            onLoad={() => setIsImageLoading(false)}
-            onError={() => setIsImageLoading(false)}
-          />
+          <Box position='relative' w='full' h='full'>
+            {/* Индикатор загрузки */}
+            {isImageLoading && !hasError && (
+              <Box
+                position='absolute'
+                top='50%'
+                left='50%'
+                transform='translate(-50%, -50%)'
+                zIndex={2}
+              >
+                <Spinner size='xl' color='gray.600' />
+              </Box>
+            )}
+
+            {/* Фон во время загрузки */}
+            {isImageLoading && (
+              <Box
+                position='absolute'
+                top={0}
+                left={0}
+                right={0}
+                bottom={0}
+                bg='gray.100'
+                zIndex={0}
+              />
+            )}
+
+            {/* Сообщение об ошибке */}
+            {hasError && (
+              <Box
+                position='absolute'
+                top='50%'
+                left='50%'
+                transform='translate(-50%, -50%)'
+                zIndex={2}
+                textAlign='center'
+                color='gray.500'
+                fontSize='sm'
+                px={4}
+              >
+                Не удалось загрузить изображение
+                {retryCount > 0 && (
+                  <Box mt={2} fontSize='xs' color='gray.400'>
+                    Попыток: {retryCount}/{maxRetries}
+                  </Box>
+                )}
+              </Box>
+            )}
+
+            {/* Изображение */}
+            {!hasError && (
+              <Image
+                src={currentSrc}
+                alt={title}
+                fill
+                priority
+                style={{
+                  objectFit: 'cover',
+                  transition: 'opacity 0.3s ease',
+                  filter: isImageLoading ? 'blur(10px)' : 'none',
+                  opacity: isImageLoading ? 0 : 1
+                }}
+                sizes='(max-width: 450px) 400px, 600px'
+                placeholder='blur'
+                blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+              />
+            )}
+
+            {/* Фон при ошибке */}
+            {hasError && (
+              <Box
+                position='absolute'
+                top={0}
+                left={0}
+                right={0}
+                bottom={0}
+                bg='gray.100'
+                zIndex={1}
+              />
+            )}
+          </Box>
         </AspectRatio>
       </Flex>
 

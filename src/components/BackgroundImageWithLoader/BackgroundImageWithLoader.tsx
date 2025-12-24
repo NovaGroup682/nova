@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import { Box, BoxProps, Spinner } from '@chakra-ui/react';
@@ -13,6 +13,8 @@ interface BackgroundImageWithLoaderProps extends BoxProps {
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
   objectPosition?: string;
   blurDataURL?: string;
+  maxRetries?: number;
+  retryDelay?: number;
 }
 
 const BackgroundImageWithLoader = ({
@@ -23,18 +25,48 @@ const BackgroundImageWithLoader = ({
   objectFit = 'cover',
   objectPosition = 'center',
   blurDataURL = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==',
+  maxRetries = 3,
+  retryDelay = 2000,
   ...boxProps
 }: BackgroundImageWithLoaderProps) => {
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+  const [currentSrc, setCurrentSrc] = useState(src);
+
+  useEffect(() => {
+    // Сброс состояния при изменении src
+    setIsImageLoading(true);
+    setHasError(false);
+    setRetryCount(0);
+    setCurrentSrc(src);
+  }, [src]);
 
   const handleImageLoad = () => {
     setIsImageLoading(false);
+    setHasError(false);
   };
 
   const handleImageError = () => {
     setIsImageLoading(false);
-    setHasError(true);
+
+    if (retryCount < maxRetries) {
+      // Повторная попытка загрузки
+      const newRetryCount = retryCount + 1;
+      setRetryCount(newRetryCount);
+
+      setTimeout(() => {
+        setIsImageLoading(true);
+        // Добавляем timestamp для обхода кеша браузера
+        const separator = src.includes('?') ? '&' : '?';
+        setCurrentSrc(
+          `${src}${separator}_retry=${newRetryCount}&_t=${Date.now()}`
+        );
+      }, retryDelay);
+    } else {
+      setHasError(true);
+      console.warn(`Failed to load image after ${maxRetries} retries:`, src);
+    }
   };
 
   return (
@@ -72,7 +104,7 @@ const BackgroundImageWithLoader = ({
 
       {!hasError && (
         <Image
-          src={src}
+          src={currentSrc}
           alt={alt}
           fill
           style={{

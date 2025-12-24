@@ -36,11 +36,32 @@ const SliderModal = ({
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+  const [imageErrors, setImageErrors] = useState<
+    Record<
+      number,
+      {
+        hasError: boolean;
+        retryCount: number;
+        currentSrc: string;
+      }
+    >
+  >({});
   const [isZoomed, setIsZoomed] = useState(false);
   const [hasDragged, setHasDragged] = useState(false);
   const isMobile = useBreakpointValue({ base: true, lg: false }) ?? true;
+  const maxRetries = 3;
+  const retryDelay = 2000;
 
   const hasMultipleImages = images.length > 1;
+
+  const getImageSrc = useCallback((imageSrc: string) => {
+    try {
+      return getSafeImageUrl(imageSrc);
+    } catch (error) {
+      console.error('Error processing image URL:', error);
+      return imageSrc;
+    }
+  }, []);
 
   const handleSlideChange = useCallback((swiper: SwiperType) => {
     setCurrentIndex(swiper.activeIndex);
@@ -48,11 +69,64 @@ const SliderModal = ({
 
   const handleImageLoad = useCallback((index: number) => {
     setLoadedImages((prev) => new Set(prev).add(index));
+    setImageErrors((prev) => ({
+      ...prev,
+      [index]: {
+        ...prev[index],
+        hasError: false
+      }
+    }));
   }, []);
 
-  const handleImageError = useCallback((index: number) => {
-    setLoadedImages((prev) => new Set(prev).add(index));
-  }, []);
+  const handleImageError = useCallback(
+    (index: number, imageSrc: string) => {
+      setLoadedImages((prev) => new Set(prev).add(index));
+
+      const errorState = imageErrors[index] || {
+        hasError: false,
+        retryCount: 0,
+        currentSrc: imageSrc
+      };
+
+      if (errorState.retryCount < maxRetries) {
+        // Повторная попытка загрузки
+        const newRetryCount = errorState.retryCount + 1;
+        const processedSrc = getImageSrc(imageSrc);
+        const separator = processedSrc.includes('?') ? '&' : '?';
+        const newSrc = `${processedSrc}${separator}_retry=${newRetryCount}&_t=${Date.now()}`;
+
+        setImageErrors((prev) => ({
+          ...prev,
+          [index]: {
+            hasError: false,
+            retryCount: newRetryCount,
+            currentSrc: newSrc
+          }
+        }));
+
+        setTimeout(() => {
+          setLoadedImages((prev) => {
+            const newSet = new Set(prev);
+            newSet.delete(index);
+            return newSet;
+          });
+        }, retryDelay);
+      } else {
+        setImageErrors((prev) => ({
+          ...prev,
+          [index]: {
+            ...prev[index],
+            hasError: true
+          }
+        }));
+        console.warn(
+          `Failed to load slide image after ${maxRetries} retries:`,
+          imageSrc
+        );
+      }
+    },
+    [imageErrors, maxRetries, retryDelay, getImageSrc]
+  );
 
   const handleImageClick = useCallback(
     (e: React.MouseEvent) => {
@@ -72,9 +146,21 @@ const SliderModal = ({
     if (isOpen) {
       setCurrentIndex(initialIndex);
       setLoadedImages(new Set()); // Сбрасываем загруженные изображения
+      setImageErrors({}); // Сбрасываем ошибки
       setIsZoomed(false); // Сбрасываем состояние зума
       setHasDragged(false); // Сбрасываем состояние drag
       document.body.style.overflow = 'hidden';
+
+      // Инициализируем состояние для всех изображений
+      const initialErrors: typeof imageErrors = {};
+      images.forEach((imageSrc, index) => {
+        initialErrors[index] = {
+          hasError: false,
+          retryCount: 0,
+          currentSrc: getImageSrc(imageSrc)
+        };
+      });
+      setImageErrors(initialErrors);
 
       // Инициализируем Swiper с правильным индексом
       if (swiper && swiper.activeIndex !== initialIndex) {
@@ -87,7 +173,7 @@ const SliderModal = ({
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, initialIndex, swiper]);
+  }, [isOpen, initialIndex, swiper, images, getImageSrc]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -128,15 +214,6 @@ const SliderModal = ({
       document.removeEventListener('wheel', handleWheel);
     };
   }, [isOpen]);
-
-  const getImageSrc = (imageSrc: string) => {
-    try {
-      return getSafeImageUrl(imageSrc);
-    } catch (error) {
-      console.error('Error processing image URL:', error);
-      return imageSrc;
-    }
-  };
 
   if (!isOpen || images.length === 0) return null;
 
@@ -195,6 +272,12 @@ const SliderModal = ({
           {images.map((imageSrc, index) => {
             const isImageLoaded = loadedImages.has(index);
             const isCurrentSlide = index === currentIndex;
+            const errorState = imageErrors[index] || {
+              hasError: false,
+              retryCount: 0,
+              currentSrc: getImageSrc(imageSrc)
+            };
+            const displaySrc = errorState.currentSrc || getImageSrc(imageSrc);
 
             return (
               <SwiperSlide key={index} style={{ width: '100%' }}>
@@ -206,7 +289,7 @@ const SliderModal = ({
                   alignItems='center'
                   justifyContent='center'
                 >
-                  {!isImageLoaded && isCurrentSlide && (
+                  {!isImageLoaded && isCurrentSlide && !errorState.hasError && (
                     <Box
                       position='absolute'
                       top='50%'
@@ -218,29 +301,52 @@ const SliderModal = ({
                     </Box>
                   )}
 
-                  <Image
-                    src={getImageSrc(imageSrc)}
-                    alt={`Slide ${index + 1}`}
-                    width={1920}
-                    height={Math.round(1920 / aspectRatio)}
-                    style={{
-                      objectFit: 'contain',
-                      objectPosition: 'center',
-                      opacity: isImageLoaded ? 1 : 0,
-                      transition: 'opacity 0.3s ease-in-out',
-                      cursor: 'zoom-in',
-                      width: '100%',
-                      height: '100%'
-                    }}
-                    priority={index === initialIndex}
-                    sizes='100vw'
-                    quality={100}
-                    onLoad={() => handleImageLoad(index)}
-                    onError={() => handleImageError(index)}
-                    onClick={handleImageClick}
-                    placeholder='blur'
-                    blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
-                  />
+                  {errorState.hasError && (
+                    <Box
+                      position='absolute'
+                      top='50%'
+                      left='50%'
+                      transform='translate(-50%, -50%)'
+                      zIndex={1}
+                      textAlign='center'
+                      color='white'
+                      fontSize='sm'
+                      px={4}
+                    >
+                      Не удалось загрузить изображение
+                      {errorState.retryCount > 0 && (
+                        <Box mt={2} fontSize='xs' opacity={0.8}>
+                          Попыток: {errorState.retryCount}/{maxRetries}
+                        </Box>
+                      )}
+                    </Box>
+                  )}
+
+                  {!errorState.hasError && (
+                    <Image
+                      src={displaySrc}
+                      alt={`Slide ${index + 1}`}
+                      width={1920}
+                      height={Math.round(1920 / aspectRatio)}
+                      style={{
+                        objectFit: 'contain',
+                        objectPosition: 'center',
+                        opacity: isImageLoaded ? 1 : 0,
+                        transition: 'opacity 0.3s ease-in-out',
+                        cursor: 'zoom-in',
+                        width: '100%',
+                        height: '100%'
+                      }}
+                      priority={index === initialIndex}
+                      sizes='100vw'
+                      quality={100}
+                      onLoad={() => handleImageLoad(index)}
+                      onError={() => handleImageError(index, imageSrc)}
+                      onClick={handleImageClick}
+                      placeholder='blur'
+                      blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
+                    />
+                  )}
                 </Box>
               </SwiperSlide>
             );

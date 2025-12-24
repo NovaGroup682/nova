@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { PROJECT_ASPECT_RATIO } from 'constant';
 import Image from 'next/image';
 
@@ -19,23 +19,54 @@ interface SliderItemProps {
 const SliderItem = ({ src, onClick, isFirst = false }: SliderItemProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+  const [currentSrc, setCurrentSrc] = useState('');
+  const maxRetries = 3;
+  const retryDelay = 2000;
 
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
-
-  const handleImageError = () => {
-    setIsLoading(false);
-    setHasError(true);
-    console.warn('Failed to load image:', src);
-  };
-
-  const getImageSrc = () => {
+  const getImageSrc = useCallback(() => {
     try {
       return getSafeImageUrl(src);
     } catch (error) {
       console.error('Error processing image URL:', error);
       return src;
+    }
+  }, [src]);
+
+  useEffect(() => {
+    // Инициализация src при монтировании или изменении
+    const imageSrc = getImageSrc();
+    setIsLoading(true);
+    setHasError(false);
+    setRetryCount(0);
+    setCurrentSrc(imageSrc);
+  }, [src, getImageSrc]);
+
+  const handleImageLoad = () => {
+    setIsLoading(false);
+    setHasError(false);
+  };
+
+  const handleImageError = () => {
+    setIsLoading(false);
+
+    if (retryCount < maxRetries) {
+      // Повторная попытка загрузки
+      const newRetryCount = retryCount + 1;
+      setRetryCount(newRetryCount);
+
+      setTimeout(() => {
+        setIsLoading(true);
+        const imageSrc = getImageSrc();
+        // Добавляем timestamp для обхода кеша браузера
+        const separator = imageSrc.includes('?') ? '&' : '?';
+        setCurrentSrc(
+          `${imageSrc}${separator}_retry=${newRetryCount}&_t=${Date.now()}`
+        );
+      }, retryDelay);
+    } else {
+      setHasError(true);
+      console.warn(`Failed to load image after ${maxRetries} retries:`, src);
     }
   };
 
@@ -60,9 +91,9 @@ const SliderItem = ({ src, onClick, isFirst = false }: SliderItemProps) => {
 
         {hasError && <ImageErrorFallback />}
 
-        {!hasError && (
+        {!hasError && currentSrc && (
           <Image
-            src={getImageSrc()}
+            src={currentSrc}
             alt='Background'
             fill
             style={{
