@@ -12,7 +12,6 @@ import {
   Collapsible,
   Flex,
   Skeleton,
-  Spinner,
   Text,
   useDisclosure,
   VStack
@@ -31,28 +30,47 @@ interface ProductItemProps {
 const ProductItem = ({ project }: ProductItemProps) => {
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [retryCount, setRetryCount] = useState(0);
-  const [currentSrc, setCurrentSrc] = useState(
-    getSafeImageUrl(project.sliders[0])
-  );
+  const imageSrc = getSafeImageUrl(project.sliders[0]);
+
   const {
     open: isHovered,
     onOpen: onMouseEnter,
     onClose: onMouseLeave
   } = useDisclosure();
   const { isTouch } = useIsTouchDevice();
-  const maxRetries = 3;
-  const retryDelay = 2000;
 
   useEffect(() => {
     // Сброс состояния при изменении проекта
-    const firstSlider = project.sliders[0];
-    const newSrc = getSafeImageUrl(firstSlider);
     setIsImageLoading(true);
     setHasError(false);
-    setRetryCount(0);
-    setCurrentSrc(newSrc);
-  }, [project.sliders]);
+
+    // Проверяем, загружено ли изображение из кеша браузера
+    const img = new window.Image();
+    let isMounted = true;
+
+    img.onload = () => {
+      if (isMounted) {
+        setIsImageLoading(false);
+      }
+    };
+
+    img.onerror = () => {
+      // Ошибка будет обработана компонентом Image через onError
+    };
+
+    img.src = imageSrc;
+
+    // Если изображение уже загружено (из кеша), onload может не сработать
+    if (img.complete && img.naturalWidth > 0) {
+      setIsImageLoading(false);
+    }
+
+    return () => {
+      isMounted = false;
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [project.id, imageSrc]);
 
   const handleImageLoad = () => {
     setIsImageLoading(false);
@@ -61,28 +79,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
 
   const handleImageError = () => {
     setIsImageLoading(false);
-
-    if (retryCount < maxRetries) {
-      // Повторная попытка загрузки
-      const newRetryCount = retryCount + 1;
-      setRetryCount(newRetryCount);
-
-      setTimeout(() => {
-        setIsImageLoading(true);
-        const src = getSafeImageUrl(project.sliders[0]);
-        // Добавляем timestamp для обхода кеша браузера
-        const separator = src.includes('?') ? '&' : '?';
-        setCurrentSrc(
-          `${src}${separator}_retry=${newRetryCount}&_t=${Date.now()}`
-        );
-      }, retryDelay);
-    } else {
-      setHasError(true);
-      console.warn(
-        `Failed to load project image after ${maxRetries} retries:`,
-        project.sliders[0]
-      );
-    }
+    setHasError(true);
   };
 
   return (
@@ -119,20 +116,6 @@ const ProductItem = ({ project }: ProductItemProps) => {
             />
           )}
 
-          {/* Индикатор загрузки при повторных попытках */}
-          {isImageLoading && !hasError && (
-            <Box
-              position='absolute'
-              top='50%'
-              left='50%'
-              transform='translate(-50%, -50%)'
-              zIndex={2}
-            >
-              <Spinner size='xl' color='white' />
-            </Box>
-          )}
-
-          {/* Сообщение об ошибке */}
           {hasError && (
             <Box
               position='absolute'
@@ -146,17 +129,12 @@ const ProductItem = ({ project }: ProductItemProps) => {
               px={4}
             >
               Не удалось загрузить изображение
-              {retryCount > 0 && (
-                <Box mt={2} fontSize='xs' color='gray.400'>
-                  Попыток: {retryCount}/{maxRetries}
-                </Box>
-              )}
             </Box>
           )}
 
-          {/* Изображение */}
           {!hasError && (
             <Image
+              key={`${project.id}-${imageSrc}`}
               sizes='(max-width: 450px) 470px,  (max-width: 900px) 700px, 100%'
               style={{
                 objectFit: 'cover',
@@ -166,7 +144,7 @@ const ProductItem = ({ project }: ProductItemProps) => {
                 opacity: isImageLoading ? 0 : 1
               }}
               fill
-              src={currentSrc}
+              src={imageSrc}
               alt={`${project.name} - проект дома`}
               onLoad={handleImageLoad}
               onError={handleImageError}

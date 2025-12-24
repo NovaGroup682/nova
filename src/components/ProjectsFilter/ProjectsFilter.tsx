@@ -61,18 +61,19 @@ const ProjectsFilter = () => {
   );
 
   const handleAreaSelect = useCallback(
-    (selectedArea: string | ProjectSize) => {
-      setArea(selectedArea);
+    (selectedArea: string | ProjectSize | undefined) => {
+      const normalizedArea = selectedArea || '';
+      setArea(normalizedArea);
 
       const params = new URLSearchParams(searchParams);
       const oldValue = searchParams.get(ProjectSearchKeys.area) || '';
-      const newValue = selectedArea.toString();
+      const newValue = normalizedArea.toString();
 
       if (!hasValueChanged(oldValue, newValue)) {
         return;
       }
 
-      if (selectedArea) {
+      if (normalizedArea) {
         params.set(ProjectSearchKeys.area, newValue);
       } else {
         params.delete(ProjectSearchKeys.area);
@@ -163,6 +164,16 @@ const ProjectsFilter = () => {
 
     router.push(`${paths.projects}?${newParamsString}`, { scroll: false });
   }, [searchParams, router]);
+
+  useEffect(() => {
+    const areaParam = searchParams.get(ProjectSearchKeys.area) || '';
+    setArea((prevArea) => {
+      if (prevArea !== areaParam) {
+        return areaParam;
+      }
+      return prevArea;
+    });
+  }, [searchParams]);
 
   useEffect(() => {
     const cleanup = updateUrlWithDebounce((params) => {

@@ -12,7 +12,7 @@ import {
 import { ProjectSize } from 'types';
 
 interface ProjectsFilterProps {
-  onSelect: (type: string | ProjectSize) => void;
+  onSelect: (type: string | ProjectSize | undefined) => void;
   list: {
     label: string;
     value: string | ProjectSize;
@@ -27,7 +27,10 @@ const Select = ({ list, onSelect, value }: ProjectsFilterProps) => {
   );
 
   const onChange = useCallback(
-    (a: ValueChangeDetails) => onSelect(a.value[0]),
+    (a: ValueChangeDetails) => {
+      const selectedValue = a.value[0];
+      onSelect(selectedValue);
+    },
     [onSelect]
   );
 

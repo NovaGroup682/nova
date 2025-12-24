@@ -70,9 +70,18 @@ const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
 
   const resultsCount = filteredProjects.length;
 
+  const hasActiveFilters = useMemo(
+    () =>
+      Object.values(filters).some(
+        (value) =>
+          value !== undefined && value !== null && String(value).trim() !== ''
+      ),
+    [filters]
+  );
+
   return (
     <Box w='full'>
-      {memoizedFilters.projectName && (
+      {hasActiveFilters && (
         <Box px={BASE_HORIZONTAL_PADINGS} mb={2} color='gray.600' fontSize='sm'>
           Найдено проектов: {resultsCount}
         </Box>
