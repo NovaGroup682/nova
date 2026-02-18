@@ -54,3 +54,33 @@ Projects data is loaded via `getProjects()` (cached per request and with revalid
 ## Deploy
 
 Optimized for [Vercel](https://vercel.com). Connect the repo and deploy; set env vars in the dashboard if using the contact form.
+
+### Update on Timeweb
+
+1. SSH into the server:
+   ```bash
+   ssh root@46.***.**.***
+   ```
+   Enter password when prompted.
+
+2. Go to project and pull latest:
+   ```bash
+   cd /var/www/nova
+   git pull origin main
+   ```
+
+3. If dependencies changed, reinstall:
+   ```bash
+   rm -rf node_modules package-lock.json
+   npm install
+   ```
+
+4. Build (with increased memory for Node):
+   ```bash
+   NODE_OPTIONS="--max-old-space-size=1536" npm run build
+   ```
+
+5. Restart the app:
+   ```bash
+   pm2 restart all
+   ```
