@@ -1,15 +1,10 @@
 import { cache } from 'react';
 import { PROJECTS_JSON_URL } from 'constant';
-import { unstable_cache } from 'next/cache';
 
 import { ProjectItemType, ProjectSize } from 'types';
 
 const isValidAreaType = (v: string): v is ProjectSize =>
   Object.values(ProjectSize).includes(v as ProjectSize);
-
-const FETCH_CACHE_TAG = 'projects';
-/** 0 = всегда свежие данные с PROJECTS_JSON_URL; для кэша на 1 час укажите 3600 */
-const REVALIDATE_SECONDS = 60;
 
 async function fetchProjectsFromSource(): Promise<ProjectItemType[]> {
   const res = await fetch(PROJECTS_JSON_URL, {
@@ -41,10 +36,4 @@ async function fetchProjectsFromSource(): Promise<ProjectItemType[]> {
   });
 }
 
-const getCachedProjects = unstable_cache(
-  fetchProjectsFromSource,
-  [FETCH_CACHE_TAG],
-  { revalidate: REVALIDATE_SECONDS, tags: [FETCH_CACHE_TAG] }
-);
-
-export const getProjects = cache(getCachedProjects);
+export const getProjects = cache(fetchProjectsFromSource);
