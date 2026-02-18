@@ -34,7 +34,6 @@ const SliderItem = ({ src, onClick, isFirst = false }: SliderItemProps) => {
   }, [src]);
 
   useEffect(() => {
-    // Инициализация src при монтировании или изменении
     const imageSrc = getImageSrc();
     setIsLoading(true);
     setHasError(false);
@@ -51,14 +50,12 @@ const SliderItem = ({ src, onClick, isFirst = false }: SliderItemProps) => {
     setIsLoading(false);
 
     if (retryCount < maxRetries) {
-      // Повторная попытка загрузки
       const newRetryCount = retryCount + 1;
       setRetryCount(newRetryCount);
 
       setTimeout(() => {
         setIsLoading(true);
         const imageSrc = getImageSrc();
-        // Добавляем timestamp для обхода кеша браузера
         const separator = imageSrc.includes('?') ? '&' : '?';
         setCurrentSrc(
           `${imageSrc}${separator}_retry=${newRetryCount}&_t=${Date.now()}`

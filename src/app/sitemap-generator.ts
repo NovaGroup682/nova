@@ -1,6 +1,5 @@
 import config from 'config';
-import projects from 'constant/projects';
-import { MetadataRoute } from 'next';
+import { getProjects } from 'lib/projects';
 
 interface SitemapItem {
   url: string;
@@ -16,7 +15,8 @@ interface SitemapItem {
   priority: number;
 }
 
-export function generateSitemap(): SitemapItem[] {
+export async function generateSitemap(): Promise<SitemapItem[]> {
+  const projects = await getProjects();
   const baseUrl = config.metadata.domen;
   const currentDate = new Date();
 
@@ -148,8 +148,4 @@ export function generateSitemap(): SitemapItem[] {
   ];
 
   return [...staticPages, ...projectPages, ...filterPages];
-}
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  return generateSitemap();
 }

@@ -71,7 +71,6 @@ const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
     <Modal isOpen={isOpen} onClose={onClose} minH={500}>
       <AspectRatio ratio={PROJECT_ASPECT_RATIO} w='full' position='relative'>
         <>
-          {/* Индикатор загрузки */}
           {isImageLoading && !hasError && (
             <Box
               position='absolute'
@@ -84,7 +83,6 @@ const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
             </Box>
           )}
 
-          {/* Фон во время загрузки */}
           {isImageLoading && (
             <Box
               position='absolute'
@@ -97,7 +95,6 @@ const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
             />
           )}
 
-          {/* Сообщение об ошибке */}
           {hasError && (
             <Box
               position='absolute'
@@ -119,7 +116,6 @@ const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
             </Box>
           )}
 
-          {/* Изображение */}
           {!hasError && currentSrc && (
             <Image
               sizes='(max-width: 450px) 270px, (max-width: 900px) 500px, 700px'
@@ -140,7 +136,6 @@ const EstimateModal = ({ project, isOpen, onClose }: EstimateModalProps) => {
             />
           )}
 
-          {/* Фон при ошибке */}
           {hasError && (
             <Box
               position='absolute'

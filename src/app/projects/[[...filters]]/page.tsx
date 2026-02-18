@@ -1,5 +1,5 @@
 import { BASE_HORIZONTAL_PADINGS, bodyLink, maxWidth } from 'constant';
-import projects from 'constant/projects';
+import { getProjects } from 'lib/projects';
 
 import { Flex, Text, VStack } from '@chakra-ui/react';
 
@@ -44,7 +44,7 @@ const ProjectsPage = async ({
 }: {
   searchParams: Promise<Record<ProjectSearchKeys, string>>;
 }) => {
-  const filters = await searchParams;
+  const [filters, projects] = await Promise.all([searchParams, getProjects()]);
 
   return (
     <VStack

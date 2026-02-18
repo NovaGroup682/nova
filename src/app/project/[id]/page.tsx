@@ -1,5 +1,5 @@
 import { BASE_HORIZONTAL_PADINGS, bodyLink, maxWidth } from 'constant';
-import projects from 'constant/projects';
+import { getProjects } from 'lib/projects';
 
 import { Flex, Show, Text, VStack } from '@chakra-ui/react';
 
@@ -15,7 +15,10 @@ import {
 } from 'components';
 import { SliderBlockWrapper } from 'components/ProductContent/components/SliderBlock';
 
-const findProjectById = (id: string): ProjectItemType | null =>
+const findProjectById = (
+  projects: ProjectItemType[],
+  id: string
+): ProjectItemType | null =>
   projects.find((item) => String(item.id) === id) || null;
 
 export const generateMetadata = async ({
@@ -24,7 +27,8 @@ export const generateMetadata = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  const project = findProjectById(id);
+  const projects = await getProjects();
+  const project = findProjectById(projects, id);
 
   if (!project) {
     return {
@@ -67,18 +71,14 @@ export const generateMetadata = async ({
   };
 };
 
-export const generateStaticParams = async () =>
-  projects.map((project) => ({
-    id: String(project.id)
-  }));
-
 const ProjectPageContent = async ({
   params
 }: {
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  const project = findProjectById(id);
+  const projects = await getProjects();
+  const project = findProjectById(projects, id);
 
   if (!project) {
     return (

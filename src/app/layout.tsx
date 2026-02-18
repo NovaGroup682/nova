@@ -1,5 +1,3 @@
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import config from 'config';
 import type { Metadata } from 'next';
 
@@ -12,6 +10,7 @@ import {
   StickyContactButton
 } from 'components';
 import Providers from './providers';
+import { VercelAnalyticsDynamic } from './VercelAnalyticsDynamic';
 
 import 'styles/global.css';
 
@@ -123,12 +122,7 @@ const RootLayout = ({
         <ScrollToTopButton />
         <StickyContactButton />
       </Providers>
-      {process.env.VERCEL && (
-        <>
-          <Analytics />
-          <SpeedInsights />
-        </>
-      )}
+      <VercelAnalyticsDynamic />
     </body>
   </html>
 );

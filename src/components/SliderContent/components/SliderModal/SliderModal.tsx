@@ -89,7 +89,6 @@ const SliderModal = ({
       };
 
       if (errorState.retryCount < maxRetries) {
-        // Повторная попытка загрузки
         const newRetryCount = errorState.retryCount + 1;
         const processedSrc = getImageSrc(imageSrc);
         const separator = processedSrc.includes('?') ? '&' : '?';
@@ -145,13 +144,12 @@ const SliderModal = ({
   useEffect(() => {
     if (isOpen) {
       setCurrentIndex(initialIndex);
-      setLoadedImages(new Set()); // Сбрасываем загруженные изображения
-      setImageErrors({}); // Сбрасываем ошибки
-      setIsZoomed(false); // Сбрасываем состояние зума
-      setHasDragged(false); // Сбрасываем состояние drag
+      setLoadedImages(new Set());
+      setImageErrors({});
+      setIsZoomed(false);
+      setHasDragged(false);
       document.body.style.overflow = 'hidden';
 
-      // Инициализируем состояние для всех изображений
       const initialErrors: typeof imageErrors = {};
       images.forEach((imageSrc, index) => {
         initialErrors[index] = {
@@ -162,7 +160,6 @@ const SliderModal = ({
       });
       setImageErrors(initialErrors);
 
-      // Инициализируем Swiper с правильным индексом
       if (swiper && swiper.activeIndex !== initialIndex) {
         swiper.slideTo(initialIndex, 0);
       }
@@ -202,7 +199,6 @@ const SliderModal = ({
     const handleWheel = (e: WheelEvent) => {
       if (!isOpen) return;
 
-      // Предотвращаем закрытие модала при прокрутке колесиком
       e.stopPropagation();
     };
 
@@ -373,7 +369,6 @@ const SliderModal = ({
         )}
       </Box>
 
-      {/* Компонент зума */}
       <ImageZoom
         isOpen={isZoomed}
         onClose={handleZoomClose}

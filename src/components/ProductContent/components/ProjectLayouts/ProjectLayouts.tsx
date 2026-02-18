@@ -35,7 +35,6 @@ const ProjectLayouts = ({ label, area, plans }: ProjectLayoutsProps) => {
     index: number;
   } | null>(null);
 
-  // Отслеживаем состояние загрузки для каждого плана
   const [imageStates, setImageStates] = useState<
     Record<
       number,
@@ -56,7 +55,6 @@ const ProjectLayouts = ({ label, area, plans }: ProjectLayoutsProps) => {
     [plans]
   );
 
-  // Инициализируем состояние для всех планов
   useEffect(() => {
     setImageStates((prev) => {
       const newStates = { ...prev };
@@ -255,7 +253,6 @@ const ProjectLayouts = ({ label, area, plans }: ProjectLayoutsProps) => {
 
                 return (
                   <>
-                    {/* Индикатор загрузки */}
                     {imageState.isLoading && !imageState.hasError && (
                       <Box
                         position='absolute'
@@ -268,7 +265,6 @@ const ProjectLayouts = ({ label, area, plans }: ProjectLayoutsProps) => {
                       </Box>
                     )}
 
-                    {/* Сообщение об ошибке */}
                     {imageState.hasError && (
                       <Box
                         position='absolute'
@@ -290,7 +286,6 @@ const ProjectLayouts = ({ label, area, plans }: ProjectLayoutsProps) => {
                       </Box>
                     )}
 
-                    {/* Изображение */}
                     {!imageState.hasError && imageState.currentSrc && (
                       <Image
                         src={imageState.currentSrc}
@@ -314,7 +309,6 @@ const ProjectLayouts = ({ label, area, plans }: ProjectLayoutsProps) => {
                       />
                     )}
 
-                    {/* Фон при ошибке */}
                     {imageState.hasError && (
                       <Box
                         position='absolute'

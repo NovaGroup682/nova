@@ -1,13 +1,13 @@
-/* Оптимизированные глобальные стили */
+/* Global styles */
 
-/* Основные стили */
+/* Base styles */
 .main-project-description {
   position: absolute;
   bottom: 0px;
   width: 100%;
 }
 
-/* Оптимизированные анимации с will-change */
+/* Animations with will-change */
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -51,7 +51,7 @@
   will-change: transform;
 }
 
-/* Оптимизированные пульсации */
+/* Pulse animations */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -116,7 +116,7 @@
   will-change: transform, box-shadow;
 }
 
-/* Оптимизация для мобильных устройств */
+/* Mobile optimization */
 .image-modal-container {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
@@ -132,19 +132,19 @@
   scrollbar-width: none;
 }
 
-/* Оптимизация скролла для мобильных */
+/* Mobile scroll optimization */
 @media (max-width: 768px) {
   .image-modal-container {
     scroll-behavior: auto;
   }
 
-  /* Оптимизация производительности для мобильных */
+  /* Mobile performance */
   * {
     -webkit-tap-highlight-color: transparent;
   }
 }
 
-/* Оптимизированные стили Swiper */
+/* Swiper styles */
 .swiper-pagination {
   position: relative !important;
   bottom: auto !important;
@@ -166,7 +166,7 @@
   background-color: #000000 !important;
 }
 
-/* Стили для Swiper модального окна */
+/* Swiper modal */
 .swiper-modal {
   height: 100% !important;
   width: 100% !important;
@@ -207,7 +207,7 @@
   cursor: not-allowed !important;
 }
 
-/* Стили для зума в Swiper */
+/* Swiper zoom */
 .swiper-zoom-container {
   width: 100% !important;
   height: 100% !important;
@@ -222,7 +222,7 @@
   object-fit: contain !important;
 }
 
-/* Стили для модального зума */
+/* Slider modal zoom */
 .slider-modal-zoom-container {
   position: fixed !important;
   top: 0 !important;
@@ -257,7 +257,7 @@
   }
 }
 
-/* Оптимизированные стили автозаполнения */
+/* Autofill styles */
 .contact-input:-internal-autofill-selected {
   background-color: #52525b !important;
   color: white !important;
@@ -271,7 +271,7 @@
   -webkit-box-shadow: 0 0 0 1000px #52525b inset !important;
 }
 
-/* Дополнительные оптимизации производительности */
+/* Performance */
 * {
   box-sizing: border-box;
 }
@@ -286,14 +286,14 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Оптимизация для изображений */
+/* Images */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* Оптимизация для анимаций */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -305,13 +305,13 @@ img {
   }
 }
 
-/* Оптимизация для фокуса */
+/* Focus */
 *:focus {
   /* outline: 2px solid #3182ce; */
   /* outline-offset: 2px; */
 }
 
-/* Оптимизация для печати */
+/* Print */
 @media print {
   * {
     background: transparent !important;

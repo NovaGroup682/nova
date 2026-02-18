@@ -101,7 +101,6 @@ const SimpleSliderBlock = ({ sliders }: SimpleSliderBlockProps) => {
         }}
       >
         <>
-          {/* Индикатор загрузки */}
           {isImageLoading && !hasError && (
             <Box
               position='absolute'
@@ -114,7 +113,6 @@ const SimpleSliderBlock = ({ sliders }: SimpleSliderBlockProps) => {
             </Box>
           )}
 
-          {/* Фон во время загрузки */}
           {isImageLoading && (
             <Box
               position='absolute'
@@ -127,7 +125,6 @@ const SimpleSliderBlock = ({ sliders }: SimpleSliderBlockProps) => {
             />
           )}
 
-          {/* Сообщение об ошибке */}
           {hasError && (
             <Box
               position='absolute'
@@ -149,7 +146,6 @@ const SimpleSliderBlock = ({ sliders }: SimpleSliderBlockProps) => {
             </Box>
           )}
 
-          {/* Изображение */}
           {!hasError && currentSrc && (
             <Image
               src={currentSrc}
@@ -170,7 +166,6 @@ const SimpleSliderBlock = ({ sliders }: SimpleSliderBlockProps) => {
             />
           )}
 
-          {/* Фон при ошибке */}
           {hasError && (
             <Box
               position='absolute'

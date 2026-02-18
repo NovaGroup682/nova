@@ -1,6 +1,6 @@
 import config from 'config';
-import projects from 'constant/projects';
 
+import { ProjectItemType } from 'types';
 import content from 'content';
 
 export const organizationStructuredData = {
@@ -43,7 +43,7 @@ export const websiteStructuredData = {
   }
 };
 
-export const generateProjectsStructuredData = () =>
+export const generateProjectsStructuredData = (projects: ProjectItemType[]) =>
   projects.map((project) => ({
     '@context': 'https://schema.org',
     '@type': 'Product',

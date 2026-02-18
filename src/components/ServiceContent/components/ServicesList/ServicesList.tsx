@@ -110,7 +110,6 @@ const ServicesList = ({ services }: ServicesListProps) => {
                     }
                   }}
                 >
-                  {/* Header с label */}
                   <Box
                     w='full'
                     px={{
@@ -159,7 +158,6 @@ const ServicesList = ({ services }: ServicesListProps) => {
                     </HStack>
                   </Box>
 
-                  {/* Collapsible content с list */}
                   <AnimatePresence>
                     {openItems.has(index) && (
                       <motion.div

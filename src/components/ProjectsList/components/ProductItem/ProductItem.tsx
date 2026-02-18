@@ -2,7 +2,6 @@
 
 import { memo, useEffect, useState } from 'react';
 import { paths, PROJECT_ASPECT_RATIO } from 'constant';
-import projects from 'constant/projects';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -25,9 +24,10 @@ import { ProjectItemType } from 'types';
 
 interface ProductItemProps {
   project: ProjectItemType;
+  isFirst?: boolean;
 }
 
-const ProductItem = ({ project }: ProductItemProps) => {
+const ProductItem = ({ project, isFirst = false }: ProductItemProps) => {
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const imageSrc = getSafeImageUrl(project.sliders[0]);
@@ -40,11 +40,9 @@ const ProductItem = ({ project }: ProductItemProps) => {
   const { isTouch } = useIsTouchDevice();
 
   useEffect(() => {
-    // Сброс состояния при изменении проекта
     setIsImageLoading(true);
     setHasError(false);
 
-    // Проверяем, загружено ли изображение из кеша браузера
     const img = new window.Image();
     let isMounted = true;
 
@@ -54,13 +52,10 @@ const ProductItem = ({ project }: ProductItemProps) => {
       }
     };
 
-    img.onerror = () => {
-      // Ошибка будет обработана компонентом Image через onError
-    };
+    img.onerror = () => {};
 
     img.src = imageSrc;
 
-    // Если изображение уже загружено (из кеша), onload может не сработать
     if (img.complete && img.naturalWidth > 0) {
       setIsImageLoading(false);
     }
@@ -148,8 +143,8 @@ const ProductItem = ({ project }: ProductItemProps) => {
               alt={`${project.name} - проект дома`}
               onLoad={handleImageLoad}
               onError={handleImageError}
-              loading={project.name === projects[0].name ? 'eager' : 'lazy'}
-              priority={project.name === projects[0].name}
+              loading={isFirst ? 'eager' : 'lazy'}
+              priority={isFirst}
               placeholder='blur'
               blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
             />

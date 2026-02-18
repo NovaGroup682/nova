@@ -4,7 +4,6 @@ import { useMemo, useRef, useState } from 'react';
 import Bath from '@assets/icons/bath.svg';
 import Bed from '@assets/icons/bed-front.svg';
 import { paths, PROJECT_ASPECT_RATIO } from 'constant';
-import projects from 'constant/projects';
 import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Swiper as SwiperType } from 'swiper';
@@ -21,23 +20,20 @@ import {
   Text
 } from '@chakra-ui/react';
 
+import { ProjectItemType } from 'types';
 import content from 'content';
 
 import { SliderItem, SliderNavigation } from 'components/SliderContent';
 
-const ProjectSliderBlock = () => {
+interface ProjectSliderBlockProps {
+  projects: ProjectItemType[];
+}
+
+const ProjectSliderBlock = ({ projects: sliders }: ProjectSliderBlockProps) => {
   const swiperRef = useRef<SwiperType>(null);
   const router = useRouter();
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  const sliders = useMemo(
-    () =>
-      projects.filter((project) =>
-        content.main.projectsSliders.includes(project.id)
-      ),
-    []
-  );
 
   const navigationDots = useMemo(
     () =>

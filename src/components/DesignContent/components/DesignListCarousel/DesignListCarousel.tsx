@@ -22,7 +22,6 @@ interface DesignListCarouselProps {
 }
 
 const DesignListCarousel = ({ list = [] }: DesignListCarouselProps) => {
-  // Отслеживаем состояние загрузки для каждого слайда отдельно
   const [imageStates, setImageStates] = useState<
     Record<
       number,
@@ -38,7 +37,6 @@ const DesignListCarousel = ({ list = [] }: DesignListCarouselProps) => {
   const maxRetries = 3;
   const retryDelay = 2000;
 
-  // Инициализируем состояние для всех изображений при монтировании или изменении списка
   useEffect(() => {
     setImageStates((prev) => {
       const newStates = { ...prev };
@@ -76,7 +74,6 @@ const DesignListCarousel = ({ list = [] }: DesignListCarouselProps) => {
     if (!state) return;
 
     if (state.retryCount < maxRetries) {
-      // Повторная попытка загрузки
       const newRetryCount = state.retryCount + 1;
       setImageStates((prev) => ({
         ...prev,
@@ -153,7 +150,6 @@ const DesignListCarousel = ({ list = [] }: DesignListCarouselProps) => {
                     overflow='hidden'
                   >
                     <>
-                      {/* Индикатор загрузки */}
                       {imageState.isLoading && !imageState.hasError && (
                         <Box
                           position='absolute'
@@ -166,7 +162,6 @@ const DesignListCarousel = ({ list = [] }: DesignListCarouselProps) => {
                         </Box>
                       )}
 
-                      {/* Сообщение об ошибке */}
                       {imageState.hasError && (
                         <Box
                           position='absolute'
@@ -188,7 +183,6 @@ const DesignListCarousel = ({ list = [] }: DesignListCarouselProps) => {
                         </Box>
                       )}
 
-                      {/* Изображение */}
                       {!imageState.hasError && imageState.currentSrc && (
                         <Image
                           src={imageState.currentSrc}

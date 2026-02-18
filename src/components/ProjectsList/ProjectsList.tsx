@@ -62,8 +62,8 @@ const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
 
   const projectItems = useMemo(
     () =>
-      filteredProjects.map((project) => (
-        <ProductItem project={project} key={project.id} />
+      filteredProjects.map((project, index) => (
+        <ProductItem project={project} key={project.id} isFirst={index === 0} />
       )),
     [filteredProjects]
   );

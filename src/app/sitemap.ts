@@ -2,6 +2,6 @@ import { MetadataRoute } from 'next';
 
 import { generateSitemap } from './sitemap-generator';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return generateSitemap();
 }

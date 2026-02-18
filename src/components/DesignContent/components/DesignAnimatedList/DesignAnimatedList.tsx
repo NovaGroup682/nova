@@ -35,7 +35,6 @@ const DesignAnimatedList = ({ list }: DesignAnimatedListProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollAccumulator = useRef(0);
 
-  // Сброс состояния загрузки при смене активного изображения
   useEffect(() => {
     const newSrc = list[activeIndex]?.src;
     if (newSrc && newSrc !== currentSrc) {
@@ -92,14 +91,12 @@ const DesignAnimatedList = ({ list }: DesignAnimatedListProps) => {
     setIsImageLoading(false);
 
     if (retryCount < maxRetries) {
-      // Повторная попытка загрузки
       const newRetryCount = retryCount + 1;
       setRetryCount(newRetryCount);
 
       setTimeout(() => {
         setIsImageLoading(true);
         const src = list[activeIndex]?.src || '';
-        // Добавляем timestamp для обхода кеша браузера
         const separator = src.includes('?') ? '&' : '?';
         setCurrentSrc(
           `${src}${separator}_retry=${newRetryCount}&_t=${Date.now()}`
@@ -231,7 +228,6 @@ const DesignAnimatedList = ({ list }: DesignAnimatedListProps) => {
           overflow='hidden'
         >
           <>
-            {/* Индикатор загрузки */}
             {isImageLoading && !hasError && (
               <Box
                 position='absolute'
@@ -244,7 +240,6 @@ const DesignAnimatedList = ({ list }: DesignAnimatedListProps) => {
               </Box>
             )}
 
-            {/* Фон во время загрузки */}
             {isImageLoading && (
               <Box
                 position='absolute'
@@ -257,7 +252,6 @@ const DesignAnimatedList = ({ list }: DesignAnimatedListProps) => {
               />
             )}
 
-            {/* Сообщение об ошибке */}
             {hasError && (
               <Box
                 position='absolute'
@@ -279,7 +273,6 @@ const DesignAnimatedList = ({ list }: DesignAnimatedListProps) => {
               </Box>
             )}
 
-            {/* Изображение */}
             {!hasError && currentSrc && (
               <Image
                 src={currentSrc}
@@ -301,7 +294,6 @@ const DesignAnimatedList = ({ list }: DesignAnimatedListProps) => {
               />
             )}
 
-            {/* Фон при ошибке */}
             {hasError && (
               <Box
                 position='absolute'

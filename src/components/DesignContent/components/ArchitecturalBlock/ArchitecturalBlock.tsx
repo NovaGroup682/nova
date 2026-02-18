@@ -55,7 +55,6 @@ const ArchitecturalBlock = ({
   const retryDelay = 2000;
 
   useEffect(() => {
-    // Сброс состояния при изменении src
     setIsImageLoading(true);
     setHasError(false);
     setRetryCount(0);
@@ -79,13 +78,11 @@ const ArchitecturalBlock = ({
     setIsImageLoading(false);
 
     if (retryCount < maxRetries) {
-      // Повторная попытка загрузки
       const newRetryCount = retryCount + 1;
       setRetryCount(newRetryCount);
 
       setTimeout(() => {
         setIsImageLoading(true);
-        // Добавляем timestamp для обхода кеша браузера
         const separator = src.includes('?') ? '&' : '?';
         setCurrentSrc(
           `${src}${separator}_retry=${newRetryCount}&_t=${Date.now()}`
@@ -197,7 +194,6 @@ const ArchitecturalBlock = ({
           display={{ base: 'none', md: 'block' }}
         >
           <Box position='relative' w='full' h='full'>
-            {/* Индикатор загрузки */}
             {isImageLoading && !hasError && (
               <Box
                 position='absolute'
@@ -210,7 +206,6 @@ const ArchitecturalBlock = ({
               </Box>
             )}
 
-            {/* Фон во время загрузки */}
             {isImageLoading && (
               <Box
                 position='absolute'
@@ -223,7 +218,6 @@ const ArchitecturalBlock = ({
               />
             )}
 
-            {/* Сообщение об ошибке */}
             {hasError && (
               <Box
                 position='absolute'
@@ -245,7 +239,6 @@ const ArchitecturalBlock = ({
               </Box>
             )}
 
-            {/* Изображение */}
             {!hasError && (
               <Image
                 src={currentSrc}
@@ -266,7 +259,6 @@ const ArchitecturalBlock = ({
               />
             )}
 
-            {/* Фон при ошибке */}
             {hasError && (
               <Box
                 position='absolute'

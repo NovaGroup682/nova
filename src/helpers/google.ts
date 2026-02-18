@@ -1,6 +1,6 @@
 /**
- * Возвращает URL без изменений
- * @deprecated Функция оставлена для обратной совместимости, но больше не обрабатывает Google Drive
+ * Returns URL unchanged.
+ * @deprecated Kept for backward compatibility; no longer handles Google Drive.
  */
 export const getGoogleDriveDirectLink = (url: string): string => {
   if (!url || typeof url !== 'string') {
@@ -10,8 +10,8 @@ export const getGoogleDriveDirectLink = (url: string): string => {
 };
 
 /**
- * Возвращает URL без изменений
- * @deprecated Функция оставлена для обратной совместимости, но больше не обрабатывает Google Drive
+ * Returns URL unchanged.
+ * @deprecated Kept for backward compatibility; no longer handles Google Drive.
  */
 export const getGoogleDriveVideoEmbedLink = (url: string): string => {
   if (!url || typeof url !== 'string') {
@@ -21,8 +21,8 @@ export const getGoogleDriveVideoEmbedLink = (url: string): string => {
 };
 
 /**
- * Возвращает URL без изменений
- * @deprecated Функция оставлена для обратной совместимости, но больше не обрабатывает Google Drive
+ * Returns URL unchanged.
+ * @deprecated Kept for backward compatibility; no longer handles Google Drive.
  */
 export const getSafeImageUrl = (url: string): string => {
   if (!url || typeof url !== 'string') {

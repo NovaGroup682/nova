@@ -40,7 +40,6 @@ const OptimizedImage = ({
   const [currentSrc, setCurrentSrc] = useState(src);
 
   useEffect(() => {
-    // Сброс состояния при изменении src
     setIsLoading(true);
     setHasError(false);
     setRetryCount(0);
@@ -56,13 +55,11 @@ const OptimizedImage = ({
     setIsLoading(false);
 
     if (retryCount < maxRetries) {
-      // Повторная попытка загрузки
       const newRetryCount = retryCount + 1;
       setRetryCount(newRetryCount);
 
       setTimeout(() => {
         setIsLoading(true);
-        // Добавляем timestamp для обхода кеша браузера
         const separator = src.includes('?') ? '&' : '?';
         setCurrentSrc(
           `${src}${separator}_retry=${newRetryCount}&_t=${Date.now()}`
@@ -90,7 +87,6 @@ const OptimizedImage = ({
       maxW={maxW}
     >
       <Box position='relative' w='full' h='full'>
-        {/* Индикатор загрузки */}
         {isLoading && !hasError && (
           <Box
             position='absolute'
@@ -104,7 +100,6 @@ const OptimizedImage = ({
           </Box>
         )}
 
-        {/* Фон во время загрузки */}
         {isLoading && (
           <Box
             position='absolute'
@@ -117,7 +112,6 @@ const OptimizedImage = ({
           />
         )}
 
-        {/* Сообщение об ошибке */}
         {hasError && (
           <Box
             position='absolute'
@@ -140,7 +134,6 @@ const OptimizedImage = ({
           </Box>
         )}
 
-        {/* Изображение */}
         {!hasError && (
           <Image
             src={currentSrc}
@@ -161,7 +154,6 @@ const OptimizedImage = ({
           />
         )}
 
-        {/* Фон при ошибке */}
         {hasError && (
           <Box
             position='absolute'

@@ -35,7 +35,6 @@ const BackgroundImageWithLoader = ({
   const [currentSrc, setCurrentSrc] = useState(src);
 
   useEffect(() => {
-    // Сброс состояния при изменении src
     setIsImageLoading(true);
     setHasError(false);
     setRetryCount(0);
@@ -51,13 +50,11 @@ const BackgroundImageWithLoader = ({
     setIsImageLoading(false);
 
     if (retryCount < maxRetries) {
-      // Повторная попытка загрузки
       const newRetryCount = retryCount + 1;
       setRetryCount(newRetryCount);
 
       setTimeout(() => {
         setIsImageLoading(true);
-        // Добавляем timestamp для обхода кеша браузера
         const separator = src.includes('?') ? '&' : '?';
         setCurrentSrc(
           `${src}${separator}_retry=${newRetryCount}&_t=${Date.now()}`
