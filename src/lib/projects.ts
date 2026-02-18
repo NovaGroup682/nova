@@ -8,7 +8,8 @@ const isValidAreaType = (v: string): v is ProjectSize =>
   Object.values(ProjectSize).includes(v as ProjectSize);
 
 const FETCH_CACHE_TAG = 'projects';
-const REVALIDATE_SECONDS = 3600; // 1 hour
+/** 0 = всегда свежие данные с PROJECTS_JSON_URL; для кэша на 1 час укажите 3600 */
+const REVALIDATE_SECONDS = 60;
 
 async function fetchProjectsFromSource(): Promise<ProjectItemType[]> {
   const res = await fetch(PROJECTS_JSON_URL, {
